@@ -1,0 +1,1351 @@
+{
+ "version": 1,
+ "updated": "2026-09-30",
+ "pins": {
+  "c2majrp": {
+   "n": "Puddicombe Estate Winery",
+   "lat": 43.204894,
+   "lng": -79.633693
+  },
+  "cpj2jvr": {
+   "n": "KIN Vineyards",
+   "lat": 45.354638,
+   "lng": -76.052334
+  },
+  "cndditp": {
+   "n": "Adamo Estate Winery",
+   "lat": 43.964564,
+   "lng": -80.042009
+  },
+  "c8bmavy": {
+   "n": "Gallucci Winery",
+   "lat": 43.992053,
+   "lng": -79.262352
+  },
+  "c9m4zt4": {
+   "n": "Holland Marsh Wineries",
+   "lat": 44.056407,
+   "lng": -79.560486
+  },
+  "c8u2v28": {
+   "n": "Magnotta Winery (Vaughan)",
+   "lat": 43.79781,
+   "lng": -79.542799
+  },
+  "ccxjjf7": {
+   "n": "Burning Kiln Winery",
+   "lat": 42.688436,
+   "lng": -80.352328
+  },
+  "cabgw16": {
+   "n": "Smoke & Gamble – Frisky Beaver",
+   "lat": 42.78071,
+   "lng": -80.23885
+  },
+  "c16q5h0": {
+   "n": "Front Road Cellars",
+   "lat": 42.67112,
+   "lng": -80.39059
+  },
+  "c6diou0": {
+   "n": "2nd Streetlight Estate Winery",
+   "lat": 43.685485,
+   "lng": -81.630528
+  },
+  "ckbq77n": {
+   "n": "Alton Farms Estate Winery",
+   "lat": 43.049787,
+   "lng": -82.040661
+  },
+  "ctk8abd": {
+   "n": "Dark Horse Estate Winery",
+   "lat": 43.311097,
+   "lng": -81.731003
+  },
+  "cj30nm1": {
+   "n": "Bella Terra Vineyards",
+   "lat": 43.217753,
+   "lng": -79.101926
+  },
+  "cm1fcxp": {
+   "n": "Big Head Wines",
+   "lat": 43.188059,
+   "lng": -79.10847
+  },
+  "c17u1c4": {
+   "n": "Byland Estate Winery",
+   "lat": 43.211103,
+   "lng": -79.109227
+  },
+  "c205pnf": {
+   "n": "Caroline Cellars",
+   "lat": 43.219112,
+   "lng": -79.097501
+  },
+  "c2ktra4": {
+   "n": "Château des Charmes",
+   "lat": 43.155929,
+   "lng": -79.125097
+  },
+  "cngxemk": {
+   "n": "Colaneri Estate Winery",
+   "lat": 43.162778,
+   "lng": -79.1375
+  },
+  "cocg3hw": {
+   "n": "De Simone Vineyards",
+   "lat": 43.198697,
+   "lng": -79.151614
+  },
+  "cdqg5a8": {
+   "n": "Frogpond Farm Organic Winery",
+   "lat": 43.199939,
+   "lng": -79.071437
+  },
+  "ctgr0i": {
+   "n": "The Hare Wine Co.",
+   "lat": 43.195039,
+   "lng": -79.156175
+  },
+  "c7uail1": {
+   "n": "Jackson-Triggs Niagara Estate",
+   "lat": 43.244208,
+   "lng": -79.091902
+  },
+  "cjux7va": {
+   "n": "Joseph’s Estate Wines",
+   "lat": 43.232408,
+   "lng": -79.107879
+  },
+  "cgnqd7d": {
+   "n": "Konzelmann Estate Winery",
+   "lat": 43.250177,
+   "lng": -79.141405
+  },
+  "crcsf59": {
+   "n": "Lailey Winery",
+   "lat": 43.231791,
+   "lng": -79.063125
+  },
+  "cxylmu1": {
+   "n": "Lakeview Wine Co.",
+   "lat": 43.20547,
+   "lng": -79.142712
+  },
+  "cq64u6u": {
+   "n": "Marynissen Estates",
+   "lat": 43.205764,
+   "lng": -79.072173
+  },
+  "c8qfdvy": {
+   "n": "NOMAD at Hinterbrook Winery",
+   "lat": 43.249491,
+   "lng": -79.135844
+  },
+  "c75ipz7": {
+   "n": "Niagara College Teaching Winery",
+   "lat": 43.150451,
+   "lng": -79.165647
+  },
+  "cmmcrwj": {
+   "n": "Palatine Hills Estate Winery",
+   "lat": 43.244021,
+   "lng": -79.150673
+  },
+  "cow66tx": {
+   "n": "Pillitteri Estates Winery",
+   "lat": 43.229247,
+   "lng": -79.113986
+  },
+  "cl37gal": {
+   "n": "Queenston Mile Vineyard",
+   "lat": 43.165013,
+   "lng": -79.125267
+  },
+  "cowury1": {
+   "n": "Ravine Vineyard Estate Winery",
+   "lat": 43.160296,
+   "lng": -79.103212
+  },
+  "cyrov1i": {
+   "n": "Reif Estate Winery",
+   "lat": 43.217341,
+   "lng": -79.061081
+  },
+  "cmvh0qj": {
+   "n": "Riverview Cellars Estate Winery",
+   "lat": 43.205833,
+   "lng": -79.059444
+  },
+  "cyjerjq": {
+   "n": "Small Talk Vineyards & Shiny Apple Cider",
+   "lat": 43.223863,
+   "lng": -79.171489
+  },
+  "cammt9q": {
+   "n": "Southbrook Organic Vineyards",
+   "lat": 43.189591,
+   "lng": -79.16145
+  },
+  "c9gnynu": {
+   "n": "Stratus Wines",
+   "lat": 43.240814,
+   "lng": -79.096719
+  },
+  "ciezwnx": {
+   "n": "Strewn Winery",
+   "lat": 43.252401,
+   "lng": -79.125784
+  },
+  "cqlnb6u": {
+   "n": "Trius Winery & Restaurant",
+   "lat": 43.212526,
+   "lng": -79.133507
+  },
+  "c2y73lj": {
+   "n": "Two Sisters Vineyards",
+   "lat": 43.240208,
+   "lng": -79.069003
+  },
+  "c17gnsb": {
+   "n": "Wayne Gretzky Estates Winery & Distillery",
+   "lat": 43.211195,
+   "lng": -79.134957
+  },
+  "cxsgm3v": {
+   "n": "Lundy Manor Wine Cellars",
+   "lat": 43.086036,
+   "lng": -79.167785
+  },
+  "c9rrw2c": {
+   "n": "Monastery Cellars",
+   "lat": 43.074151,
+   "lng": -79.082836
+  },
+  "cnztwyq": {
+   "n": "Black Prince Winery",
+   "lat": 43.998974,
+   "lng": -77.16634
+  },
+  "ctixlig": {
+   "n": "Broken Stone Winery",
+   "lat": 44.001142,
+   "lng": -77.387228
+  },
+  "ceonsk": {
+   "n": "Casa-Dea Estates Winery",
+   "lat": 43.949572,
+   "lng": -77.442026
+  },
+  "cfp3w7p": {
+   "n": "Closson Chase",
+   "lat": 43.999137,
+   "lng": -77.392851
+  },
+  "cb9cjyh": {
+   "n": "Harwood Estate Vineyards",
+   "lat": 43.972125,
+   "lng": -77.470186
+  },
+  "chpyobm": {
+   "n": "Huff Estates Winery",
+   "lat": 44.01494,
+   "lng": -77.289028
+  },
+  "cmuugq3": {
+   "n": "Karlo Estates Winery",
+   "lat": 43.9671,
+   "lng": -77.371935
+  },
+  "cxvvfgf": {
+   "n": "Keint-he Winery and Vineyards",
+   "lat": 43.940672,
+   "lng": -77.397527
+  },
+  "cmabuxu": {
+   "n": "Six Dots Winery",
+   "lat": 43.996781,
+   "lng": -77.402394
+  },
+  "cnictyx": {
+   "n": "Redtail Vineyards",
+   "lat": 43.973752,
+   "lng": -77.526687
+  },
+  "cd0q6w": {
+   "n": "Sandbanks Estate Winery",
+   "lat": 43.937585,
+   "lng": -77.416019
+  },
+  "ca5kkm5": {
+   "n": "Stanners Vineyard",
+   "lat": 43.974504,
+   "lng": -77.450533
+  },
+  "csl4hcs": {
+   "n": "Sugarbush Vineyards",
+   "lat": 43.991887,
+   "lng": -77.347905
+  },
+  "c74o1m7": {
+   "n": "Trail Estate Winery",
+   "lat": 43.979022,
+   "lng": -77.418677
+  },
+  "cd5lvba": {
+   "n": "Traynor Family Vineyard",
+   "lat": 43.971765,
+   "lng": -77.442386
+  },
+  "c64bu23": {
+   "n": "Waupoos Estates Winery",
+   "lat": 44.014572,
+   "lng": -76.971706
+  },
+  "c20x7h5": {
+   "n": "Colio Estate Wines",
+   "lat": 42.040578,
+   "lng": -82.915918
+  },
+  "cqd1e1p": {
+   "n": "Dancing Swallows Vineyard",
+   "lat": 42.063259,
+   "lng": -83.005126
+  },
+  "cv4n7mf": {
+   "n": "Mastronardi Estate Winery",
+   "lat": 42.061047,
+   "lng": -82.689632
+  },
+  "crb7e6w": {
+   "n": "Muscedere Vineyards",
+   "lat": 42.088453,
+   "lng": -82.922092
+  },
+  "cj6ygso": {
+   "n": "Pelee Island Winery",
+   "lat": 42.036816,
+   "lng": -82.721499
+  },
+  "caidor9": {
+   "n": "Pelee Island Winery Pavilion",
+   "lat": 41.754661,
+   "lng": -82.68645
+  },
+  "ctjy2f9": {
+   "n": "Sprucewood Shores Estate Winery",
+   "lat": 42.022186,
+   "lng": -83.005727
+  },
+  "cjcwyel": {
+   "n": "13th Street Winery",
+   "lat": 43.152206,
+   "lng": -79.313264
+  },
+  "cqd32qf": {
+   "n": "180 Estate Winery",
+   "lat": 43.15877,
+   "lng": -79.368005
+  },
+  "cvpcjhr": {
+   "n": "Back 10 Cellars",
+   "lat": 43.158611,
+   "lng": -79.43
+  },
+  "c6e6c3g": {
+   "n": "Cave Spring Cellars (Winery)",
+   "lat": 43.149671,
+   "lng": -79.370197
+  },
+  "c8k2t07": {
+   "n": "Cave Spring Cellars (Vineyard)",
+   "lat": 43.155574,
+   "lng": -79.449137
+  },
+  "c74dgq1": {
+   "n": "Calamus Estate Winery",
+   "lat": 43.130233,
+   "lng": -79.378961
+  },
+  "c54vsi": {
+   "n": "Cloudsley Cellars",
+   "lat": 43.145448,
+   "lng": -79.392371
+  },
+  "cg1l3wb": {
+   "n": "Cornerstone Estate Winery",
+   "lat": 43.171828,
+   "lng": -79.446697
+  },
+  "cmnoans": {
+   "n": "Creekside Estate Winery",
+   "lat": 43.152439,
+   "lng": -79.333128
+  },
+  "ce2b36": {
+   "n": "Domaine Queylus",
+   "lat": 43.078225,
+   "lng": -79.401848
+  },
+  "caspqum": {
+   "n": "Featherstone Estate Winery",
+   "lat": 43.140119,
+   "lng": -79.394313
+  },
+  "chhifa2": {
+   "n": "Flat Rock Cellars",
+   "lat": 43.12617,
+   "lng": -79.359483
+  },
+  "ck848bq": {
+   "n": "The Foreign Affair Winery",
+   "lat": 43.190171,
+   "lng": -79.397206
+  },
+  "caj819a": {
+   "n": "GreenLane Estate Winery",
+   "lat": 43.157888,
+   "lng": -79.411857
+  },
+  "cdutwug": {
+   "n": "Harbour Estates Winery",
+   "lat": 43.173892,
+   "lng": -79.361366
+  },
+  "co8ckm0": {
+   "n": "Henry of Pelham Family Estate",
+   "lat": 43.108808,
+   "lng": -79.295717
+  },
+  "c5as4ce": {
+   "n": "Hernder Estate Wines",
+   "lat": 43.11803,
+   "lng": -79.302745
+  },
+  "c6vytmq": {
+   "n": "Hernder on 4th",
+   "lat": 43.155713,
+   "lng": -79.27688
+  },
+  "cv5v2ge": {
+   "n": "Hidden Bench Estate Winery",
+   "lat": 43.158906,
+   "lng": -79.492348
+  },
+  "c2ht370": {
+   "n": "Honsberger Estate Winery",
+   "lat": 43.158388,
+   "lng": -79.362591
+  },
+  "cdav6pm": {
+   "n": "Kacaba Vineyards & Winery",
+   "lat": 43.151286,
+   "lng": -79.400556
+  },
+  "ctac1yq": {
+   "n": "King’s Court Estate Winery",
+   "lat": 43.149072,
+   "lng": -79.307748
+  },
+  "ckehxdr": {
+   "n": "Leaning Post Wines",
+   "lat": 43.206947,
+   "lng": -79.631216
+  },
+  "cv51ls4": {
+   "n": "Legends Estates Winery",
+   "lat": 43.194466,
+   "lng": -79.477587
+  },
+  "cp9c28b": {
+   "n": "Locust Lane Estate Winery",
+   "lat": 43.153953,
+   "lng": -79.491084
+  },
+  "clxsqwy": {
+   "n": "London Born Wine Company",
+   "lat": 43.153971,
+   "lng": -79.414011
+  },
+  "chb6zeb": {
+   "n": "Megalomaniac Wines",
+   "lat": 43.149729,
+   "lng": -79.413604
+  },
+  "ceq3qx9": {
+   "n": "Magnotta Winery (Beamsville)",
+   "lat": 43.184681,
+   "lng": -79.476211
+  },
+  "c3uglnt": {
+   "n": "Mountain Road Wine Company",
+   "lat": 43.153087,
+   "lng": -79.478229
+  },
+  "cjqvgyl": {
+   "n": "The Organized Crime Winery",
+   "lat": 43.156506,
+   "lng": -79.494929
+  },
+  "cuizp1s": {
+   "n": "Ridge Road Estate Winery",
+   "lat": 43.196595,
+   "lng": -79.660537
+  },
+  "cdep835": {
+   "n": "Ridgepoint Wines",
+   "lat": 43.147849,
+   "lng": -79.413664
+  },
+  "c3dk1xb": {
+   "n": "Rosewood Winery & Meadery",
+   "lat": 43.16675,
+   "lng": -79.500635
+  },
+  "c4zgrw1": {
+   "n": "Royal DeMaria Wines",
+   "lat": 43.177984,
+   "lng": -79.413075
+  },
+  "c3baimj": {
+   "n": "Thirty Bench Wine Makers",
+   "lat": 43.166012,
+   "lng": -79.495658
+  },
+  "cjy3rbn": {
+   "n": "Vieni Estates Wine & Spirits",
+   "lat": 43.134589,
+   "lng": -79.451752
+  },
+  "ccwj7fa": {
+   "n": "Villa Romana Estate Winery",
+   "lat": 43.160741,
+   "lng": -79.463114
+  },
+  "c9lo5rw": {
+   "n": "Vineland Estates Winery",
+   "lat": 43.142781,
+   "lng": -79.405446
+  },
+  "c8lsacb": {
+   "n": "Mission Hill Family Estate",
+   "lat": 49.835117,
+   "lng": -119.586714
+  },
+  "cqzvb0p": {
+   "n": "Quails’ Gate Winery",
+   "lat": 49.842719,
+   "lng": -119.566452
+  },
+  "c3bjapn": {
+   "n": "CedarCreek Estate Winery",
+   "lat": 49.78959,
+   "lng": -119.541104
+  },
+  "cpmbrgp": {
+   "n": "Summerhill Pyramid Winery",
+   "lat": 49.806391,
+   "lng": -119.501365
+  },
+  "clbu6a8": {
+   "n": "Gray Monk Estate Winery",
+   "lat": 50.052958,
+   "lng": -119.441955
+  },
+  "c15kuvj": {
+   "n": "Tinhorn Creek Vineyards",
+   "lat": 49.150165,
+   "lng": -119.591051
+  },
+  "c8bvcx5": {
+   "n": "Blue Mountain Vineyard & Cellars",
+   "lat": 49.313147,
+   "lng": -119.53121
+  },
+  "co6c4x6": {
+   "n": "Painted Rock Estate Winery",
+   "lat": 49.497008,
+   "lng": -119.566714
+  },
+  "cgj67hj": {
+   "n": "Poplar Grove Winery",
+   "lat": 49.533639,
+   "lng": -119.566685
+  },
+  "cuosuu9": {
+   "n": "Averill Creek Vineyard",
+   "lat": 48.812398,
+   "lng": -123.764929
+  },
+  "cnhrx2t": {
+   "n": "Gaspereau Vineyards",
+   "lat": 45.06888,
+   "lng": -64.357105
+  },
+  "cyz03p9": {
+   "n": "Luckett Vineyards",
+   "lat": 45.0721,
+   "lng": -64.295753
+  },
+  "cltq2li": {
+   "n": "Benjamin Bridge",
+   "lat": 45.06633,
+   "lng": -64.374279
+  },
+  "ci3enez": {
+   "n": "L’Acadie Vineyards",
+   "lat": 45.066783,
+   "lng": -64.332114
+  },
+  "cpjt9ra": {
+   "n": "Domaine de Grand Pré",
+   "lat": 45.10162,
+   "lng": -64.307863
+  },
+  "c4x8xrs": {
+   "n": "Domaine Pinnacle",
+   "lat": 45.026758,
+   "lng": -72.784632
+  },
+  "cmlq36h": {
+   "n": "Vignoble de l’Orpailleur",
+   "lat": 45.109574,
+   "lng": -72.859042
+  },
+  "culaufz": {
+   "n": "Domaine Le Clos Jordanne",
+   "lat": 43.164524,
+   "lng": -79.500314
+  },
+  "cjjmiif": {
+   "n": "Atlantis Niagara Wines",
+   "lat": 43.171302,
+   "lng": -79.452693
+  },
+  "cmr29sz": {
+   "n": "Cattail Creek Estate Winery",
+   "lat": 43.200922,
+   "lng": -79.13665
+  },
+  "c15j7zb": {
+   "n": "Crown Bench Estates",
+   "lat": 43.144855,
+   "lng": -79.464093
+  },
+  "c6dv8x1": {
+   "n": "De Moura Winery",
+   "lat": 43.187924,
+   "lng": -79.165647
+  },
+  "ch3jayk": {
+   "n": "De Sousa Wine Cellars",
+   "lat": 43.141043,
+   "lng": -79.457925
+  },
+  "c2bagdf": {
+   "n": "Fielding Estate Winery",
+   "lat": 43.153696,
+   "lng": -79.494281
+  },
+  "cex3wlr": {
+   "n": "Five Row Craft Wine",
+   "lat": 43.163938,
+   "lng": -79.108807
+  },
+  "cq1v49b": {
+   "n": "G. Marquis",
+   "lat": 43.177265,
+   "lng": -79.477419
+  },
+  "c8pwua8": {
+   "n": "The Good Earth Vineyard & Winery",
+   "lat": 43.176325,
+   "lng": -79.48931
+  },
+  "clnlue7": {
+   "n": "The Ice House Winery",
+   "lat": 43.178124,
+   "lng": -79.062079
+  },
+  "cjqkq7y": {
+   "n": "Kew Vineyards",
+   "lat": 43.160372,
+   "lng": -79.4613
+  },
+  "cgsm5c0": {
+   "n": "Maple Grove Estate Winery",
+   "lat": 43.188091,
+   "lng": -79.42892
+  },
+  "cl84tqk": {
+   "n": "Pearl Morissette Estate Winery",
+   "lat": 43.154723,
+   "lng": -79.356897
+  },
+  "c9ngdkd": {
+   "n": "Redstone Winery",
+   "lat": 43.1596,
+   "lng": -79.437332
+  },
+  "cv04bpi": {
+   "n": "Reimer Vineyards Winery",
+   "lat": 43.211181,
+   "lng": -79.078765
+  },
+  "cyaubld": {
+   "n": "Rennie Estate Winery",
+   "lat": 43.148558,
+   "lng": -79.382324
+  },
+  "cstw0u1": {
+   "n": "Stone Eagle Winery",
+   "lat": 43.242158,
+   "lng": -79.097075
+  },
+  "cvc7t5v": {
+   "n": "Domaine le Clos Jordanne",
+   "lat": 43.164524,
+   "lng": -79.500314
+  },
+  "cwl31d": {
+   "n": "Merit Brewing",
+   "lat": 43.259504,
+   "lng": -79.867998
+  },
+  "cvi3mcr": {
+   "n": "Collective Arts Brewing",
+   "lat": 43.270972,
+   "lng": -79.853191
+  },
+  "cj96ao3": {
+   "n": "Grain & Grit Beer Co.",
+   "lat": 43.256722,
+   "lng": -79.931635
+  },
+  "cols0ys": {
+   "n": "Shawn & Ed Brewing Co.",
+   "lat": 43.265681,
+   "lng": -79.957667
+  },
+  "comsy4d": {
+   "n": "Clifford Brewing Co.",
+   "lat": 43.242798,
+   "lng": -79.768343
+  },
+  "cd7ft7z": {
+   "n": "Barrel Heart Brewing",
+   "lat": 43.266444,
+   "lng": -79.958308
+  },
+  "ct2jafu": {
+   "n": "Brewers Blackbird",
+   "lat": 43.227927,
+   "lng": -79.97627
+  },
+  "cs2f94o": {
+   "n": "Lock Street Brewing Company",
+   "lat": 43.202259,
+   "lng": -79.266549
+  },
+  "cjof6be": {
+   "n": "Niagara Oast House Brewers",
+   "lat": 43.240161,
+   "lng": -79.098797
+  },
+  "cvulrcg": {
+   "n": "Silversmith Brewing Company",
+   "lat": 43.222257,
+   "lng": -79.121394
+  },
+  "cxx4dbd": {
+   "n": "Taps On Queen Brewhouse and Grill",
+   "lat": 43.106308,
+   "lng": -79.070945
+  },
+  "ce3phc0": {
+   "n": "The Exchange Brewery",
+   "lat": 43.255069,
+   "lng": -79.070989
+  },
+  "czd92x5": {
+   "n": "The Merchant Ale House",
+   "lat": 43.156822,
+   "lng": -79.245047
+  },
+  "csgfx3": {
+   "n": "Niagara College Teaching Brewery",
+   "lat": 43.150407,
+   "lng": -79.165771
+  },
+  "cskwo4k": {
+   "n": "Cold Break Brewing",
+   "lat": 43.146211,
+   "lng": -79.255731
+  },
+  "c3hnbye": {
+   "n": "Bench Brewing Company",
+   "lat": 43.15849,
+   "lng": -79.423838
+  },
+  "cz5gva8": {
+   "n": "Steam Whistle Brewing",
+   "lat": 43.640667,
+   "lng": -79.385711
+  },
+  "cxnd7xy": {
+   "n": "Bellwoods Brewery",
+   "lat": 43.647069,
+   "lng": -79.42008
+  },
+  "c9jyecg": {
+   "n": "Henderson Brewing Co.",
+   "lat": 43.653802,
+   "lng": -79.445566
+  },
+  "c5mn360": {
+   "n": "Great Lakes Brewery",
+   "lat": 43.622776,
+   "lng": -79.504799
+  },
+  "csghy38": {
+   "n": "Mill Street Brewery",
+   "lat": 43.650442,
+   "lng": -79.358275
+  },
+  "c8dvmbp": {
+   "n": "Junction Craft Brewing",
+   "lat": 43.673266,
+   "lng": -79.478649
+  },
+  "coq0smv": {
+   "n": "Nickel Brook Brewery",
+   "lat": 43.368213,
+   "lng": -79.798375
+  },
+  "c984nwx": {
+   "n": "Cameron's Brewing Company",
+   "lat": 43.474846,
+   "lng": -79.676945
+  },
+  "cr5mx0y": {
+   "n": "Old Credit Brewing Co.",
+   "lat": 43.549733,
+   "lng": -79.593357
+  },
+  "cuaplgd": {
+   "n": "Left Field Brewery",
+   "lat": 43.673791,
+   "lng": -79.330468
+  },
+  "cjxnlcg": {
+   "n": "Blood Brothers Brewing",
+   "lat": 43.66989,
+   "lng": -79.436606
+  },
+  "ckql7hu": {
+   "n": "Rorschach Brewing Co.",
+   "lat": 43.663536,
+   "lng": -79.319925
+  },
+  "cykd8no": {
+   "n": "Black Oak Brewing Co.",
+   "lat": 43.613208,
+   "lng": -79.515528
+  },
+  "c7hwiaf": {
+   "n": "Halo Brewery",
+   "lat": 43.661791,
+   "lng": -79.446463
+  },
+  "cc1mt72": {
+   "n": "Muddy York Brewing Co.",
+   "lat": 43.71241,
+   "lng": -79.312173
+  },
+  "cgb636c": {
+   "n": "Indie Alehouse Brewing Co.",
+   "lat": 43.665658,
+   "lng": -79.46536
+  },
+  "cymdjc7": {
+   "n": "Rainhard Brewing Company",
+   "lat": 43.672864,
+   "lng": -79.478702
+  },
+  "cr9n2qp": {
+   "n": "Flora Hall Brewing",
+   "lat": 45.410857,
+   "lng": -75.693297
+  },
+  "c2tkzhj": {
+   "n": "Overflow Brewing Company",
+   "lat": 45.375996,
+   "lng": -75.670226
+  },
+  "cp3slq0": {
+   "n": "Kingston Brewing Company",
+   "lat": 44.229229,
+   "lng": -76.48127
+  },
+  "cgmzf43": {
+   "n": "Daft Brewing",
+   "lat": 44.238679,
+   "lng": -76.506208
+  },
+  "ckhvccg": {
+   "n": "MacKinnon Brothers Brewing",
+   "lat": 44.201468,
+   "lng": -76.79557
+  },
+  "cwazhlh": {
+   "n": "Anderson Craft Ales",
+   "lat": 42.998143,
+   "lng": -81.217695
+  },
+  "cmu5vh7": {
+   "n": "Godspeed Brewery",
+   "lat": 43.672479,
+   "lng": -79.319419
+  },
+  "c47zvp3": {
+   "n": "Burdock Brewery",
+   "lat": 43.653887,
+   "lng": -79.402142
+  },
+  "cvvv0e6": {
+   "n": "Amsterdam Brewing Company",
+   "lat": 43.706389,
+   "lng": -79.356887
+  },
+  "cpybih3": {
+   "n": "Kichesippi Beer Co.",
+   "lat": 45.318088,
+   "lng": -75.844185
+  },
+  "c5gb7b6": {
+   "n": "Muskoka Brewery",
+   "lat": 44.999008,
+   "lng": -79.320282
+  },
+  "cia6u3o": {
+   "n": "Waterloo Brewing",
+   "lat": 43.470722,
+   "lng": -80.45136
+  },
+  "cqe531b": {
+   "n": "Abe Erb Brewing Co.",
+   "lat": 43.464584,
+   "lng": -80.522364
+  },
+  "cw4duoh": {
+   "n": "Forty Creek Distillery",
+   "lat": 43.203056,
+   "lng": -79.583056
+  },
+  "cc2adg5": {
+   "n": "Dillon's Small Batch Distillers",
+   "lat": 43.18922,
+   "lng": -79.445782
+  },
+  "crvz5ig": {
+   "n": "Limited Distilling",
+   "lat": 43.216045,
+   "lng": -79.125781
+  },
+  "cpjbz74": {
+   "n": "Spirit of York Distillery Co.",
+   "lat": 43.650405,
+   "lng": -79.359771
+  },
+  "cqerdur": {
+   "n": "Reid's Distillery",
+   "lat": 43.655541,
+   "lng": -79.340548
+  },
+  "cxwk778": {
+   "n": "North Spirit Distillery",
+   "lat": 43.75263,
+   "lng": -79.541393
+  },
+  "c89l742": {
+   "n": "Nickel 9 Distillery",
+   "lat": 43.670734,
+   "lng": -79.464571
+  },
+  "ct5ki21": {
+   "n": "Spirit Tree Estate Cidery",
+   "lat": 43.757858,
+   "lng": -79.942488
+  },
+  "c8xjqis": {
+   "n": "Revel Cider Co.",
+   "lat": 43.546793,
+   "lng": -80.276747
+  },
+  "cpfygaa": {
+   "n": "Duntroon Cyder House",
+   "lat": 44.411262,
+   "lng": -80.194489
+  },
+  "cyia47r": {
+   "n": "Thornbury Craft Co.",
+   "lat": 44.55969,
+   "lng": -80.445988
+  },
+  "cltgtuo": {
+   "n": "Ironwood Cider House",
+   "lat": 43.252547,
+   "lng": -79.120301
+  },
+  "cw5903o": {
+   "n": "East Street Cider Co.",
+   "lat": 43.742839,
+   "lng": -81.705071
+  },
+  "cprakf1": {
+   "n": "16 Mile Cellar",
+   "lat": 43.140414,
+   "lng": -79.327442
+  },
+  "cihlkg5": {
+   "n": "Alvento Winery",
+   "lat": 43.171019,
+   "lng": -79.376181
+  },
+  "cxftd1q": {
+   "n": "Amanda’s Vineyards",
+   "lat": 44.012549,
+   "lng": -77.034053
+  },
+  "c5g7lum": {
+   "n": "Aquanova Brewing Co.",
+   "lat": 43.258048,
+   "lng": -79.892186
+  },
+  "cpg1s6w": {
+   "n": "Between the Lines Winery",
+   "lat": 43.193614,
+   "lng": -79.105279
+  },
+  "c85ptkg": {
+   "n": "2027 Cellars",
+   "lat": 43.148578,
+   "lng": -79.382351
+  },
+  "cr43tpq": {
+   "n": "Stoney Ridge Estate Winery",
+   "lat": 43.196622,
+   "lng": -79.660571
+  },
+  "cjhyiar": {
+   "n": "Applewood Farm & Winery",
+   "lat": 44.20327,
+   "lng": -78.969441
+  },
+  "cpg5c1x": {
+   "n": "Beau's All Natural Brewing Company",
+   "lat": 45.516903,
+   "lng": -74.637244
+  },
+  "c78ozi5": {
+   "n": "Blue Grouse Estate Winery",
+   "lat": 48.724074,
+   "lng": -123.650177
+  },
+  "ctt3vko": {
+   "n": "Burrowing Owl Estate Winery",
+   "lat": 49.101389,
+   "lng": -119.533056
+  },
+  "cu7h560": {
+   "n": "Coffin Ridge Boutique Winery",
+   "lat": 44.663372,
+   "lng": -80.77569
+  },
+  "cucfd69": {
+   "n": "Commisso Estate Winery",
+   "lat": 43.152017,
+   "lng": -79.514861
+  },
+  "cc4pxwk": {
+   "n": "Cooper’s Hawk Vineyards",
+   "lat": 42.026848,
+   "lng": -82.849574
+  },
+  "cneoft5": {
+   "n": "Cornerfield Wine Co.",
+   "lat": 43.494981,
+   "lng": -81.69605
+  },
+  "cykljkm": {
+   "n": "Coyote's Run Estate Winery",
+   "lat": 43.169729,
+   "lng": -79.119307
+  },
+  "cv80a8": {
+   "n": "CREW – Colchester Ridge Estate Winery",
+   "lat": 41.98544,
+   "lng": -82.922554
+  },
+  "c6uyebr": {
+   "n": "Daniel Lenko Estate Winery",
+   "lat": 43.169989,
+   "lng": -79.489242
+  },
+  "cotgudy": {
+   "n": "Domaine Vagners",
+   "lat": 43.243304,
+   "lng": -79.128374
+  },
+  "c1x3d9": {
+   "n": "Dominion City Brewing Co.",
+   "lat": 45.457051,
+   "lng": -75.585758
+  },
+  "cwcxqk4": {
+   "n": "Fairweather Brewing Co.",
+   "lat": 43.255244,
+   "lng": -79.931812
+  },
+  "c722ybb": {
+   "n": "Ferox by Fabian Reis",
+   "lat": 43.235506,
+   "lng": -79.111521
+  },
+  "c1hv9de": {
+   "n": "Forked River Brewing Company",
+   "lat": 43.010344,
+   "lng": -81.175685
+  },
+  "cnfs7mp": {
+   "n": "Georgian Hills Vineyards",
+   "lat": 44.499666,
+   "lng": -80.426869
+  },
+  "cjud8sc": {
+   "n": "Grange of Prince Edward Vineyard & Winery",
+   "lat": 43.992802,
+   "lng": -77.412507
+  },
+  "ctk98hi": {
+   "n": "Hamilton Distillery Company",
+   "lat": 43.256686,
+   "lng": -79.870107
+  },
+  "cgsj19": {
+   "n": "Hester Creek Estate Winery",
+   "lat": 49.143309,
+   "lng": -119.596898
+  },
+  "cycjyfn": {
+   "n": "Hounds of Erie Winery",
+   "lat": 42.609103,
+   "lng": -80.598319
+  },
+  "c4pi8v4": {
+   "n": "Icellars Estate Winery",
+   "lat": 43.173218,
+   "lng": -79.121389
+  },
+  "ckr065y": {
+   "n": "Inasphere Wines",
+   "lat": 42.678532,
+   "lng": -80.370174
+  },
+  "cgnttz": {
+   "n": "Inniskillin Niagara Estate Winery",
+   "lat": 43.210576,
+   "lng": -79.063958
+  },
+  "chpf8vt": {
+   "n": "Jost Vineyards",
+   "lat": 45.796363,
+   "lng": -63.377348
+  },
+  "coptudu": {
+   "n": "Lighthall Vineyards",
+   "lat": 43.891388,
+   "lng": -77.122753
+  },
+  "c58fqpk": {
+   "n": "Maelstrom Winery",
+   "lat": 43.584921,
+   "lng": -81.489381
+  },
+  "cetvltf": {
+   "n": "Malivoire Wine Company",
+   "lat": 43.157835,
+   "lng": -79.438518
+  },
+  "ccs76lg": {
+   "n": "MatildaSword Distillers",
+   "lat": 43.25534,
+   "lng": -79.86834
+  },
+  "c484dw9": {
+   "n": "Nk’Mip Cellars",
+   "lat": 49.038409,
+   "lng": -119.433423
+  },
+  "cy875u9": {
+   "n": "Norman Hardie Winery & Vineyard",
+   "lat": 43.955551,
+   "lng": -77.444281
+  },
+  "cs96mkt": {
+   "n": "North 42 Degrees Estate Winery",
+   "lat": 41.986108,
+   "lng": -82.91919
+  },
+  "clbf0si": {
+   "n": "Oxley Estate Winery",
+   "lat": 41.992779,
+   "lng": -82.887022
+  },
+  "czb4v26": {
+   "n": "Paglione Estate Winery",
+   "lat": 41.999083,
+   "lng": -82.868066
+  },
+  "ctbkrrj": {
+   "n": "Peninsula Ridge Estates Winery",
+   "lat": 43.177194,
+   "lng": -79.508701
+  },
+  "cycdqbj": {
+   "n": "Polonée Distillery",
+   "lat": 43.148503,
+   "lng": -79.269056
+  },
+  "ca4upd4": {
+   "n": "Pommies Cider Co.",
+   "lat": 43.860567,
+   "lng": -79.718915
+  },
+  "cp0a9vo": {
+   "n": "Rockway Vineyards",
+   "lat": 43.125896,
+   "lng": -79.319001
+  },
+  "c8f3oz7": {
+   "n": "Rosehall Run",
+   "lat": 43.951535,
+   "lng": -77.448632
+  },
+  "cbbzwm7": {
+   "n": "Schatz Winery by Hessenland Inn",
+   "lat": 43.421336,
+   "lng": -81.70559
+  },
+  "cbo7kuh": {
+   "n": "Spy Cider House & Distillery",
+   "lat": 44.513068,
+   "lng": -80.450338
+  },
+  "ciskvp2": {
+   "n": "Sue-Ann Staff Estate Winery",
+   "lat": 43.121447,
+   "lng": -79.355383
+  },
+  "ceqif48": {
+   "n": "The County Cider Company",
+   "lat": 44.021235,
+   "lng": -76.962284
+  },
+  "c7zf4zf": {
+   "n": "The Duxbury Cider Co.",
+   "lat": 44.644107,
+   "lng": -80.652136
+  },
+  "co94gm": {
+   "n": "The Roost Wine Co.",
+   "lat": 44.439295,
+   "lng": -80.442331
+  },
+  "cwcmzcz": {
+   "n": "Three Dog Winery",
+   "lat": 44.128919,
+   "lng": -77.116004
+  },
+  "cot4zrt": {
+   "n": "Viewpointe Estate Winery",
+   "lat": 41.985496,
+   "lng": -82.914907
+  },
+  "cjxm097": {
+   "n": "Vivace Estate Winery",
+   "lat": 42.118393,
+   "lng": -83.037155
+  },
+  "cq7frkw": {
+   "n": "Wending Home Estate Vineyards & Winery",
+   "lat": 43.14719,
+   "lng": -79.317406
+  },
+  "cnued3p": {
+   "n": "West Avenue Cider House",
+   "lat": 43.369954,
+   "lng": -79.981573
+  },
+  "cahhsrm": {
+   "n": "Willow Springs Winery",
+   "lat": 43.981836,
+   "lng": -79.273107
+  },
+  "cqupl92": {
+   "n": "Windrush Estate Winery",
+   "lat": 44.049634,
+   "lng": -79.941899
+  },
+  "cg6t46f": {
+   "n": "1 Mill Road Winery",
+   "lat": 49.598636,
+   "lng": -119.60116
+  },
+  "c8fyhdv": {
+   "n": "1st R.O.W. Estate Winery",
+   "lat": 49.051257,
+   "lng": -122.696692
+  },
+  "c6ugemj": {
+   "n": "3Benches Estate Winery",
+   "lat": 49.210031,
+   "lng": -119.79287
+  },
+  "ca362fg": {
+   "n": "40 Knots Winery",
+   "lat": 49.737186,
+   "lng": -124.931957
+  },
+  "cy7oio2": {
+   "n": "50th Parallel Estate",
+   "lat": 50.129363,
+   "lng": -119.448282
+  },
+  "cthjm5v": {
+   "n": "8th Generation Vineyard",
+   "lat": 49.575862,
+   "lng": -119.630918
+  },
+  "cb36sk5": {
+   "n": "99 South Vineyards",
+   "lat": 49.0777,
+   "lng": -122.820806
+  },
+  "c1zdqjm": {
+   "n": "A Sunday in August",
+   "lat": 48.901278,
+   "lng": -123.521109
+  },
+  "co9tdjn": {
+   "n": "Aasha Wines",
+   "lat": 49.54392,
+   "lng": -119.56793
+  },
+  "cy5893g": {
+   "n": "Adega on 45th Estate Winery",
+   "lat": 49.03417,
+   "lng": -119.433264
+  }
+ }
+}
