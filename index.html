@@ -2154,10 +2154,9 @@ function provOf(w){
   w._prov=c;w._provSrc=(w.address||'')+(w.area||'');
   return c;
 }
-/* your province: the one you picked, else where you are, else Ontario */
-function evProvince(){
-  if(S.evProv)return S.evProv;
-  try{var v=localStorage.getItem(EVPKEY);if(v){S.evProv=v;return v}}catch(e){}
+/* how far afield to show events: near you (by distance), a wine region, a province, or all of Canada.
+   Stored as 'r50' / 'r100' / 'r200' (km from you), 'a:<region>', a province code like 'ON', or 'all'. */
+function userProvince(){
   if(S.me){
     var best=null,bd=1e9;
     S.wineries.forEach(function(w){if(!hasCoord(w))return;var d=haversineKm(S.me,w);if(d<bd){bd=d;best=w}});
@@ -2166,19 +2165,61 @@ function evProvince(){
   }
   return 'ON';
 }
+function evProvince(){
+  var v=S.evProv;
+  if(!v){try{v=localStorage.getItem(EVPKEY)||''}catch(e){}if(v)S.evProv=v}
+  if(!v)return S.me?'r100':userProvince();
+  if(/^r\d+$/.test(v)&&!S.me)return userProvince(); /* no location right now: fall back to your province */
+  return v;
+}
 function setEvProvince(p){S.evProv=p;try{localStorage.setItem(EVPKEY,p)}catch(e){}}
-function eventInProv(e,p){if(p==='all')return true;return provOf(winery(e.wid))===p}
+function eventInProv(e,p){
+  if(p==='all')return true;
+  var w=winery(e.wid);if(!w)return false;
+  if(/^r\d+$/.test(p)){var km=+p.slice(1);return !!(S.me&&hasCoord(w)&&haversineKm(S.me,w)<=km)}
+  if(p.indexOf('a:')===0)return (w.area||'')===p.slice(2);
+  return provOf(w)===p;
+}
+function scopeLabel(p){
+  if(p==='all')return 'All of Canada';
+  if(/^r\d+$/.test(p))return 'Within '+p.slice(1)+' km of you';
+  if(p.indexOf('a:')===0)return p.slice(2).replace(/,\s*[A-Z]{2}$/,'');
+  return provName(p);
+}
 function evProvHTML(){
-  var p=evProvince(),today=todayStr(),counts={};
-  S.events.forEach(function(e){if(e.date<today)return;var c=provOf(winery(e.wid));if(c)counts[c]=(counts[c]||0)+1});
-  var opts=PROVS.filter(function(x){return counts[x[0]]||x[0]===p}).map(function(x){return '<option value="'+x[0]+'"'+(p===x[0]?' selected':'')+'>'+x[1]+(counts[x[0]]?' ('+counts[x[0]]+')':'')+'</option>'}).join('');
-  var all=0;Object.keys(counts).forEach(function(k){all+=counts[k]});
-  return '<div class="evprov"><label for="evProv">Events in</label><select id="evProv">'+opts+'<option value="all"'+(p==='all'?' selected':'')+'>All of Canada ('+all+')</option></select></div>';
+  var p=evProvince(),today=todayStr(),up=S.events.filter(function(e){return e.date>=today});
+  var count=function(sc){return up.filter(function(e){return eventInProv(e,sc)}).length};
+  var opt=function(sc,label){var n=count(sc);return '<option value="'+esc(sc)+'"'+(p===sc?' selected':'')+'>'+esc(label)+' ('+n+')</option>'};
+  var h='';
+  if(S.me)h+='<optgroup label="Near you">'+opt('r50','Within 50 km')+opt('r100','Within 100 km')+opt('r200','Within 200 km')+'</optgroup>';
+  /* wine regions in your province (or the one you're looking at) that have events */
+  var prov=/^[A-Z]{2}$/.test(p)?p:(p.indexOf('a:')===0?provOf({area:p.slice(2),address:''}):userProvince());
+  var areas={};up.forEach(function(e){var w=winery(e.wid);if(w&&provOf(w)===prov&&w.area)areas[w.area]=(areas[w.area]||0)+1});
+  var al=Object.keys(areas).sort();
+  if(p.indexOf('a:')===0&&al.indexOf(p.slice(2))<0)al.push(p.slice(2));
+  if(al.length)h+='<optgroup label="Regions in '+esc(provName(prov))+'">'+al.map(function(a){return opt('a:'+a,a.replace(/,\s*[A-Z]{2}$/,''))}).join('')+'</optgroup>';
+  var pc={};up.forEach(function(e){var c=provOf(winery(e.wid));if(c)pc[c]=1});
+  h+='<optgroup label="Provinces">'+PROVS.filter(function(x){return pc[x[0]]||x[0]===p}).map(function(x){return opt(x[0],x[1])}).join('')+'</optgroup>'+opt('all','All of Canada');
+  return '<div class="evprov"><label for="evProv">Events</label><select id="evProv">'+h+'</select></div>'+
+    (!S.me?'<p class="note" style="margin:-4px 0 10px"><button class="link" data-action="ev-locate">Use my location</button> to see events near you.</p>':'');
+}
+/* the next step out: 50 → 100 → 200 km → your province → all of Canada */
+function nextScope(p){
+  if(p==='r50')return 'r100';if(p==='r100')return 'r200';
+  if(p==='r200'||p.indexOf('a:')===0)return /^r/.test(p)?userProvince():provOf({area:p.slice(2),address:''})||userProvince();
+  if(p==='all')return '';
+  return 'all';
 }
 function evMoreHTML(){
   var p=evProvince();if(p==='all'||S.fWinery!=='all')return '';
-  var today=todayStr(),n=S.events.filter(function(e){return e.date>=today&&(S.fType==='all'||e.type===S.fType)&&!eventInProv(e,p)}).length;
-  return n?'<div class="evmore"><button class="btn" data-action="ev-allcanada">Show events across Canada ('+n+' more)</button></div>':'';
+  var today=todayStr(),base=S.events.filter(function(e){return e.date>=today&&(S.fType==='all'||e.type===S.fType)});
+  var nx=nextScope(p);
+  while(nx){
+    var more=base.filter(function(e){return eventInProv(e,nx)&&!eventInProv(e,p)}).length;
+    if(more)return '<div class="evmore"><button class="btn" data-action="ev-scope" data-val="'+esc(nx)+'">Show more: '+esc(scopeLabel(nx))+' ('+more+' more)</button></div>';
+    nx=nextScope(nx);
+  }
+  return '';
 }
 function filteredEvents(){
   var p=S.fWinery==='all'?evProvince():'all';
@@ -3110,14 +3151,14 @@ function homeHTML(){
 }
 function eventsHTML(){
   var evp=evProvince();
-  var opts='<option value="all">All places</option>'+S.wineries.filter(function(w){return evp==='all'||provOf(w)===evp||w.id===S.fWinery}).sort(function(a,b){return a.name.localeCompare(b.name)}).map(function(w){return '<option value="'+w.id+'"'+(S.fWinery===w.id?' selected':'')+'>'+esc(w.name)+'</option>'}).join('');
+  var opts='<option value="all">All places</option>'+S.wineries.filter(function(w){return evp==='all'||w.id===S.fWinery||eventInProv({wid:w.id},evp)}).sort(function(a,b){return a.name.localeCompare(b.name)}).map(function(w){return '<option value="'+w.id+'"'+(S.fWinery===w.id?' selected':'')+'>'+esc(w.name)+'</option>'}).join('');
   var topts='<option value="all">All types</option>'+TYPES.map(function(t){return '<option'+(S.fType===t?' selected':'')+'>'+t+'</option>'}).join('');
   var h=evProvHTML()+'<div class="filters"><select id="fWinery" aria-label="Filter by winery">'+opts+'</select><select id="fType" aria-label="Filter by event type">'+topts+'</select>'+
     '<div class="seg" role="group" aria-label="View"><button data-action="mode" data-mode="month" aria-pressed="'+(S.evMode==='month')+'">Month</button><button data-action="mode" data-mode="list" aria-pressed="'+(S.evMode==='list')+'">List</button></div></div>';
   var evs=filteredEvents();
   if(S.evMode==='list'){
     var up=evs.filter(function(e){return e.date>=todayStr()}).sort(cmpEv);
-    if(!up.length)return h+'<div class="empty"><p>No upcoming events '+(evp==='all'||S.fWinery!=='all'?'match these filters':'in '+provName(evp)+' match these filters')+'.</p>'+(isOwner()?'<button class="btn primary" data-action="add">'+I.plus+'<span>Add event</span></button>':'')+'</div>'+evMoreHTML();
+    if(!up.length)return h+'<div class="empty"><p>No upcoming events '+(evp==='all'||S.fWinery!=='all'?'match these filters':(/^r/.test(evp)?scopeLabel(evp).toLowerCase():'in '+scopeLabel(evp))+' match these filters')+'.</p>'+(isOwner()?'<button class="btn primary" data-action="add">'+I.plus+'<span>Add event</span></button>':'')+'</div>'+evMoreHTML();
     var out='',last='';
     up.forEach(function(e){
       var mk=parseYmd(e.date).toLocaleDateString(undefined,{month:'long',year:'numeric'});
@@ -6028,6 +6069,8 @@ document.addEventListener('click',function(ev){
     case 'shop-stop':SHOP.stop=true;break;
     case 'shop-reset':if(confirm('Read every winery shop again? Wines already in the catalogue are updated, not duplicated.')){try{localStorage.removeItem(SHOPKEY)}catch(e){}SHOP.msg='';renderSheet()}break;
     case 'off-run':offImport();break;
+    case 'ev-scope':setEvProvince(t.dataset.val);S.fWinery='all';render();window.scrollTo(0,0);break;
+    case 'ev-locate':locate(function(){render()});break;
     case 'ev-allcanada':setEvProvince('all');S.fWinery='all';render();window.scrollTo(0,0);break;
     case 'ev-find':evFindAll();break;
     case 'ev-stop':EVF.stop=true;break;
