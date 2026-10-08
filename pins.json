@@ -1,0 +1,5860 @@
+{
+ "version": 2,
+ "updated": "2026-10-08",
+ "pins": {
+  "c2majrp": {
+   "n": "Puddicombe Estate Winery",
+   "g": "ChIJLWTguGGkLIgR9Ai6OnwmQ5g",
+   "w": "https://puddicombefarms.com/",
+   "ws": 1
+  },
+  "cpj2jvr": {
+   "n": "KIN Vineyards",
+   "g": "ChIJx3pN3Hn40UwRAK0AjgCSApM",
+   "w": "https://kinvineyards.com/",
+   "ws": 1
+  },
+  "cndditp": {
+   "n": "Adamo Estate Winery",
+   "g": "ChIJt7UDkif-KogR2LN46TWx7IQ",
+   "w": "https://adamoestate.com/",
+   "ws": 1
+  },
+  "c8bmavy": {
+   "n": "Gallucci Winery",
+   "g": "ChIJu6FRCuku1YkRPIlK94BGftc",
+   "w": "https://gallucciwinery.com/",
+   "ws": 1
+  },
+  "c9m4zt4": {
+   "n": "Holland Marsh Wineries",
+   "g": "ChIJJ8LjZArQKogR2wpIcKn2xMc"
+  },
+  "c8u2v28": {
+   "n": "Magnotta Winery (Vaughan)",
+   "g": "ChIJ2eZxBJovK4gRBvh0F4AwRg8"
+  },
+  "ccxjjf7": {
+   "n": "Burning Kiln Winery",
+   "g": "ChIJOfqYiPnHLYgRVTjKAkjQz2Q",
+   "w": "https://www.burningkilnwinery.ca/",
+   "ws": 1
+  },
+  "cabgw16": {
+   "n": "Smoke & Gamble – Frisky Beaver",
+   "g": "ChIJSwFnweZSLIgRYmzk_PP1MLc",
+   "w": "https://smokegamble-friskybeaver.com/",
+   "ws": 1
+  },
+  "c16q5h0": {
+   "n": "Front Road Cellars",
+   "g": "ChIJCVZ0ieq2LYgRQRAIkE3JjuI"
+  },
+  "c6diou0": {
+   "n": "2nd Streetlight Estate Winery",
+   "g": "ChIJ6UI48FXbKIgRkRpKCrDWzm8",
+   "w": "https://www.2ndstreetlightwines.ca/",
+   "ws": 1
+  },
+  "ckbq77n": {
+   "n": "Alton Farms Estate Winery",
+   "g": "ChIJJaM9BQBwL4gRa7DnBM7GUgE",
+   "w": "https://altonfarmsestatewinery.com/",
+   "ws": 1
+  },
+  "cj30nm1": {
+   "n": "Bella Terra Vineyards",
+   "g": "ChIJN5BbID9Z04kRfndIbALt4CA",
+   "w": "https://bellaterravineyards.ca/",
+   "ws": 1
+  },
+  "cm1fcxp": {
+   "n": "Big Head Wines",
+   "g": "ChIJkez_Si1f04kR7SHkI16dMB0",
+   "w": "https://bigheadwines.ca/",
+   "ws": 1
+  },
+  "c17u1c4": {
+   "n": "Byland Estate Winery",
+   "g": "ChIJebXH3rRe04kRSDn23VqfQgw",
+   "w": "https://www.bylandestatewinery.com/",
+   "ws": 1
+  },
+  "c205pnf": {
+   "n": "Caroline Cellars",
+   "g": "ChIJP4F6lMVe04kRJhe-XI7Hqaw",
+   "w": "https://www.carolinecellars.com/",
+   "ws": 1
+  },
+  "c2ktra4": {
+   "n": "Château des Charmes",
+   "g": "ChIJvUNawAFb04kRUch4Ui5chak"
+  },
+  "cngxemk": {
+   "n": "Colaneri Estate Winery",
+   "g": "ChIJC_fObENc04kRlpQShq-27p8",
+   "w": "https://www.colaneriwines.com/",
+   "ws": 1
+  },
+  "cocg3hw": {
+   "n": "De Simone Vineyards",
+   "g": "ChIJDed7t9Vb04kR1YDf2wFsx8Y",
+   "w": "https://www.desimonevineyards.com/",
+   "ws": 1
+  },
+  "cdqg5a8": {
+   "n": "Frogpond Farm Organic Winery",
+   "g": "ChIJB1_g94Ve04kRLCiD0l8VkIE",
+   "w": "https://www.frogpondfarm.ca/",
+   "ws": 1
+  },
+  "ctgr0i": {
+   "n": "The Hare Wine Co.",
+   "g": "ChIJrWPCLyta04kRgCL1zUOjVHY",
+   "w": "https://theharewineco.com/",
+   "ws": 1
+  },
+  "c7uail1": {
+   "n": "Jackson-Triggs Niagara Estate",
+   "g": "ChIJLUAQsz1f04kRIE-8yxtnLV8"
+  },
+  "cjux7va": {
+   "n": "Joseph’s Estate Wines",
+   "g": "ChIJ3wdvoipf04kReqknd52LxN4",
+   "w": "https://www.josephsestatewines.com/",
+   "ws": 1
+  },
+  "cgnqd7d": {
+   "n": "Konzelmann Estate Winery",
+   "g": "ChIJkSMJK-xY04kRJPootH8cj8w"
+  },
+  "crcsf59": {
+   "n": "Lailey Winery",
+   "g": "ChIJA1Mpmalf04kR-wwuQrQXqlw"
+  },
+  "cxylmu1": {
+   "n": "Lakeview Wine Co.",
+   "g": "ChIJH7v-M2VZ04kRLhXPaueDlOo",
+   "w": "https://www.lakeviewwineco.com/",
+   "ws": 1
+  },
+  "cq64u6u": {
+   "n": "Marynissen Estates",
+   "g": "ChIJg0k5JnFf04kRrq2AnLgMb9M"
+  },
+  "c8qfdvy": {
+   "n": "NOMAD at Hinterbrook Winery",
+   "g": "ChIJ-8QvketY04kRdrDdqg6-p4w"
+  },
+  "c75ipz7": {
+   "n": "Niagara College Teaching Winery",
+   "g": "ChIJlVITJ_Ba04kRxAMTl5QsGyM"
+  },
+  "cmmcrwj": {
+   "n": "Palatine Hills Estate Winery",
+   "g": "ChIJ120Ox_lY04kRw-YPAOxcq_g",
+   "w": "https://www.palatinehillsestatewinery.com/",
+   "ws": 1
+  },
+  "cow66tx": {
+   "n": "Pillitteri Estates Winery",
+   "g": "ChIJ7SJglytZ04kRQxO-4xqRpu0"
+  },
+  "cl37gal": {
+   "n": "Queenston Mile Vineyard",
+   "g": "ChIJcR-L7ABb04kR97mjFr2w4Qc",
+   "w": "https://www.queenstonmilevineyard.com/",
+   "ws": 1
+  },
+  "cowury1": {
+   "n": "Ravine Vineyard Estate Winery",
+   "g": "ChIJjaV2835c04kRrtmPib08qbc"
+  },
+  "cyrov1i": {
+   "n": "Reif Estate Winery",
+   "g": "ChIJZRrd6lle04kR0RS5p91LYYE"
+  },
+  "cmvh0qj": {
+   "n": "Riverview Cellars Estate Winery",
+   "g": "ChIJu32tLWFe04kRmr2zSoWDPwY"
+  },
+  "cyjerjq": {
+   "n": "Small Talk Vineyards & Shiny Apple Cider",
+   "g": "ChIJx3UEZQhZ04kR46_x4DvE9gw",
+   "w": "https://shinyapplecider.com/",
+   "ws": 1
+  },
+  "cammt9q": {
+   "n": "Southbrook Organic Vineyards",
+   "g": "ChIJm30pcDBa04kRnPZTDHlc7vE"
+  },
+  "c9gnynu": {
+   "n": "Stratus Wines",
+   "g": "ChIJj3WiVCVf04kRVoEGrzetBlw"
+  },
+  "ciezwnx": {
+   "n": "Strewn Winery",
+   "g": "ChIJa5tPZsdY04kRAhj4dU7AtUU"
+  },
+  "cqlnb6u": {
+   "n": "Trius Winery & Restaurant",
+   "g": "ChIJx097NGpZ04kRL-cqcvMAsHI"
+  },
+  "c2y73lj": {
+   "n": "Two Sisters Vineyards",
+   "g": "ChIJk5F0Zgxf04kRkzFiwNqCvE8"
+  },
+  "c17gnsb": {
+   "n": "Wayne Gretzky Estates Winery & Distillery",
+   "g": "ChIJLXoF4HBf04kRAxZWyzHjBhE"
+  },
+  "cxsgm3v": {
+   "n": "Lundy Manor Wine Cellars",
+   "g": "ChIJ8RpN3AlF04kRvpbgIGOtfwc",
+   "w": "https://lundymanor.ca/",
+   "ws": 1
+  },
+  "c9rrw2c": {
+   "n": "Monastery Cellars",
+   "g": "ChIJl3JjH6FD04kRnr-IyrwMNj8"
+  },
+  "cnztwyq": {
+   "n": "Black Prince Winery",
+   "g": "ChIJpbxHk-vK14kRrbrbuKYYL_o",
+   "w": "https://www.blackprincewine.com/",
+   "ws": 1
+  },
+  "ctixlig": {
+   "n": "Broken Stone Winery",
+   "g": "ChIJiw7pXwc41okR_brKUJYtLJc",
+   "w": "https://www.brokenstonewinery.com/",
+   "ws": 1
+  },
+  "ceonsk": {
+   "n": "Casa-Dea Estates Winery",
+   "g": "ChIJ89DE0e1G1okRvnL0c-MGNZA"
+  },
+  "cfp3w7p": {
+   "n": "Closson Chase",
+   "g": "ChIJ7z1LqVPK14kRjRGSBz6yZOI"
+  },
+  "cb9cjyh": {
+   "n": "Harwood Estate Vineyards",
+   "g": "ChIJWTBR1dRG1okRz9GtJfiP6ck",
+   "w": "https://harwood.blog/",
+   "ws": 1
+  },
+  "chpyobm": {
+   "n": "Huff Estates Winery",
+   "g": "ChIJA8HVzHU21okR-31815yfDNA"
+  },
+  "cmuugq3": {
+   "n": "Karlo Estates Winery",
+   "g": "ChIJnc1F53tI1okRdKq-ICegFzI"
+  },
+  "cxvvfgf": {
+   "n": "Keint-he Winery and Vineyards",
+   "g": "ChIJ7z1LqVPK14kRzuAjWGtUi58",
+   "w": "https://www.keint-he.ca/",
+   "ws": 1
+  },
+  "cmabuxu": {
+   "n": "Lacey Estates Winery",
+   "g": "ChIJdVFE3IxH1okRdOZxnVG9oS8"
+  },
+  "cnictyx": {
+   "n": "Redtail Vineyards",
+   "g": "ChIJYx83Scc91okRZPj_OJNz0Nw",
+   "w": "https://redtailvineyards.com/",
+   "ws": 1
+  },
+  "cd0q6w": {
+   "n": "Sandbanks Estate Winery",
+   "g": "ChIJyUdaIXtG1okR2KR8-84yF7E"
+  },
+  "ca5kkm5": {
+   "n": "Stanners Vineyard",
+   "g": "ChIJ4zp0JJtI1okRMLNFiqCimHI",
+   "w": "https://www.stannersvineyard.ca/",
+   "ws": 1
+  },
+  "csl4hcs": {
+   "n": "Sugarbush Vineyards",
+   "g": "ChIJoW5VJyRI1okR_QQxZCPY65E",
+   "w": "https://sugarbushvineyards.ca/",
+   "ws": 1
+  },
+  "c74o1m7": {
+   "n": "Trail Estate Winery",
+   "g": "ChIJa14HX69H1okR0kzAbGVquuQ",
+   "w": "https://trailestate.com/",
+   "ws": 1
+  },
+  "cd5lvba": {
+   "n": "Traynor Family Vineyard",
+   "g": "ChIJkQP52R1H1okRdc-0okbzBOU",
+   "w": "https://traynorvineyard.com/",
+   "ws": 1
+  },
+  "c64bu23": {
+   "n": "Waupoos Estates Winery",
+   "g": "ChIJZSMgKWTG14kR3F0gnpDq9mc"
+  },
+  "c20x7h5": {
+   "n": "Colio Estate Wines",
+   "g": "ChIJO9MfdXIgO4gRDsi3805Ma0Y"
+  },
+  "cqd1e1p": {
+   "n": "Dancing Swallows Vineyard",
+   "g": "ChIJGaWsPYwjO4gR2I6hEhIzXgw",
+   "w": "https://www.dancing-swallows.com/",
+   "ws": 1
+  },
+  "cv4n7mf": {
+   "n": "Mastronardi Estate Winery",
+   "g": "ChIJJb4ZJADDOogR1ZqcCvlWirQ",
+   "w": "https://mastronardiwines.com/",
+   "ws": 1
+  },
+  "crb7e6w": {
+   "n": "Muscedere Vineyards",
+   "g": "ChIJf4iedrggO4gRkmjBx4F21s8"
+  },
+  "cj6ygso": {
+   "n": "Pelee Island Winery",
+   "g": "ChIJXf1Pk9zCOogRXNwXzc1XVOU"
+  },
+  "caidor9": {
+   "n": "Pelee Island Winery Pavilion",
+   "g": "ChIJ979-79n2OogRtdQxw3to9NA"
+  },
+  "ctjy2f9": {
+   "n": "Sprucewood Shores Estate Winery",
+   "g": "ChIJYbrwLKgYO4gRRsi-kOQQEV0",
+   "w": "https://www.sprucewoodshores.com/",
+   "ws": 1
+  },
+  "cqd32qf": {
+   "n": "180 Estate Winery",
+   "g": "ChIJpcmpVLhS04kRScWDzOMl91Y"
+  },
+  "cvpcjhr": {
+   "n": "Back 10 Cellars",
+   "g": "ChIJ5XJHxJytLIgRM0GOyfAP1Ng",
+   "w": "https://www.back10cellars.com/",
+   "ws": 1
+  },
+  "c6e6c3g": {
+   "n": "Cave Spring Cellars (Winery)",
+   "ig": "cavespringvineyard",
+   "g": "ChIJx8oXdK9S04kRvZIbKuRyyWQ"
+  },
+  "c8k2t07": {
+   "n": "Cave Spring Cellars (Vineyard)",
+   "g": "ChIJx9NpL4mtLIgRkTrINbXVXWk"
+  },
+  "c54vsi": {
+   "n": "Cloudsley Cellars",
+   "g": "ChIJQUCNCAitLIgR-AgwmZc22Zc",
+   "w": "https://cloudsleycellars.com/",
+   "ws": 1
+  },
+  "cg1l3wb": {
+   "n": "Cornerstone Estate Winery",
+   "g": "ChIJFeByD7-tLIgR_8N4TL7IGL8",
+   "w": "https://cornerstone-estate-winery.wheree.com/",
+   "ws": 1
+  },
+  "cmnoans": {
+   "n": "Creekside Estate Winery",
+   "g": "ChIJ3370E71S04kRPJ-LsLfhAV0"
+  },
+  "ce2b36": {
+   "n": "Domaine Queylus",
+   "g": "ChIJ0xoeSV2zLIgRGXtnOUceZDI"
+  },
+  "caspqum": {
+   "n": "Featherstone Estate Winery",
+   "g": "ChIJldsx8qWyLIgRj4gZAlkLp-s"
+  },
+  "chhifa2": {
+   "n": "Flat Rock Cellars",
+   "g": "ChIJIXOLk0FN04kRfmmvJWDhLVA"
+  },
+  "ck848bq": {
+   "n": "The Foreign Affair Winery",
+   "g": "ChIJVwgFe9ysLIgRjzCF2VVYeZ8",
+   "w": "https://foreignaffairwinery.com/",
+   "ws": 1
+  },
+  "caj819a": {
+   "n": "GreenLane Estate Winery",
+   "g": "ChIJH3DA-EOtLIgRwlXe4GD-HMU",
+   "w": "https://www.greenlanewinery.com/",
+   "ws": 1
+  },
+  "cdutwug": {
+   "n": "Harbour Estates Winery",
+   "ig": "harbourestateswinery",
+   "g": "ChIJG24GSdxS04kRN2Dl3nVmWKQ"
+  },
+  "co8ckm0": {
+   "n": "Henry of Pelham Family Estate",
+   "g": "ChIJgUN7mdlN04kRanSbZ9LvJJg"
+  },
+  "c5as4ce": {
+   "n": "Hernder Estate Wines",
+   "g": "ChIJ-5j0F-hN04kRQRko2BKrJw8",
+   "w": "https://hernder.com/",
+   "ws": 1
+  },
+  "c6vytmq": {
+   "n": "Hernder on 4th",
+   "g": "ChIJ8eWakIxR04kRnFgNO6aHndo"
+  },
+  "cv5v2ge": {
+   "n": "Hidden Bench Estate Winery",
+   "g": "ChIJAbtgah-uLIgRTMSu1Ozjl3U"
+  },
+  "c2ht370": {
+   "n": "Honsberger Estate Winery",
+   "g": "ChIJs67C2L5S04kR9XuotVs2YYQ",
+   "w": "https://www.honsbergerestate.com/",
+   "ws": 1
+  },
+  "cdav6pm": {
+   "n": "Kacaba Vineyards & Winery",
+   "g": "ChIJr6VDE12tLIgRRyQn3LJTdlI",
+   "w": "https://kacaba.com/",
+   "ws": 1
+  },
+  "ctac1yq": {
+   "n": "King’s Court Estate Winery",
+   "g": "ChIJB-ILKxJS04kRmJ6Nk6hnfMQ",
+   "w": "https://kingscourtestatewinery.ca/",
+   "ws": 1
+  },
+  "ckehxdr": {
+   "n": "Leaning Post Wines",
+   "g": "ChIJFVysuWGkLIgRGQItAWm0zSg",
+   "w": "https://leaningpostwines.com/",
+   "ws": 1
+  },
+  "cv51ls4": {
+   "n": "Legends Estates Winery",
+   "g": "ChIJpZP0l4auLIgR3gmra5xL450",
+   "w": "https://legendsestates.com/",
+   "ws": 1
+  },
+  "clxsqwy": {
+   "n": "London Born Wine Company",
+   "g": "ChIJObM838ixLIgRJFzvy2S_roY",
+   "w": "https://londonbornwines.com/",
+   "ws": 1
+  },
+  "chb6zeb": {
+   "n": "Megalomaniac Wines",
+   "g": "ChIJw14mt2StLIgRFPfZ4kBPrkU"
+  },
+  "ceq3qx9": {
+   "n": "Magnotta Winery (Beamsville)",
+   "g": "ChIJtVhq73uuLIgRdM81ebGHFVc"
+  },
+  "cjqvgyl": {
+   "n": "The Organized Crime Winery",
+   "g": "ChIJOVHB5yCuLIgRfZWjyAsrdvk",
+   "w": "https://www.organizedcrimewinery.com/",
+   "ws": 1
+  },
+  "cuizp1s": {
+   "n": "Ridge Road Estate Winery",
+   "g": "ChIJRfIGYm-jLIgRECQxQhfKfRg"
+  },
+  "cdep835": {
+   "n": "Ridgepoint Wines",
+   "g": "ChIJl5sMVmOtLIgRJj6l4oa-MbA",
+   "w": "https://ridgepointwines.com/",
+   "ws": 1
+  },
+  "c3dk1xb": {
+   "n": "Rosewood Winery & Meadery",
+   "g": "ChIJP1COqDuuLIgR29bhA62_T3g"
+  },
+  "c4zgrw1": {
+   "n": "Royal DeMaria Wines",
+   "g": "ChIJxZIOpAStLIgR_5Zr5-2q7SY",
+   "w": "https://www.royaldemaria.com/",
+   "ws": 1
+  },
+  "c3baimj": {
+   "n": "Thirty Bench Wine Makers",
+   "g": "ChIJhfXV7DyuLIgRH6RXPAXD3qs"
+  },
+  "cjy3rbn": {
+   "n": "Vieni Estates Wine & Spirits",
+   "g": "ChIJA0mtkRSyLIgRMGmvLxhI6i0"
+  },
+  "ccwj7fa": {
+   "n": "Villa Romana Estate Winery",
+   "g": "ChIJhUlnheqtLIgRY6e5ShRlUsg",
+   "w": "https://www.villaromana.ca/",
+   "ws": 1
+  },
+  "c9lo5rw": {
+   "n": "Vineland Estates Winery",
+   "g": "ChIJb1Yp5J-yLIgROd-XUcshWnA"
+  },
+  "c8lsacb": {
+   "n": "Mission Hill Family Estate",
+   "g": "ChIJe2V9iqeKfVMR-X7iao0hItk"
+  },
+  "cqzvb0p": {
+   "n": "Quails’ Gate Winery",
+   "g": "ChIJmTQ2bLqKfVMRk-X8yI0J188"
+  },
+  "c3bjapn": {
+   "n": "CedarCreek Estate Winery",
+   "g": "ChIJxZT-wvN1glQRkTDwFD282Oc"
+  },
+  "cpmbrgp": {
+   "n": "Summerhill Pyramid Winery",
+   "g": "ChIJs9uPb0eKfVMR3qwS3mLw70M"
+  },
+  "clbu6a8": {
+   "n": "Gray Monk Estate Winery",
+   "g": "ChIJQYJmFHHvfVMRvIUGEYyt8Ho"
+  },
+  "c15kuvj": {
+   "n": "Tinhorn Creek Vineyards",
+   "g": "ChIJqV5K0zfqglQRC34Q5PO-nQU"
+  },
+  "c8bvcx5": {
+   "n": "Blue Mountain Vineyard & Cellars",
+   "g": "ChIJxzn4X2KNglQRCogkVUqj0RE"
+  },
+  "co6c4x6": {
+   "n": "Painted Rock Estate Winery",
+   "g": "ChIJkwti3uCLglQRTLEzsX5SA6M"
+  },
+  "cgj67hj": {
+   "n": "Poplar Grove Winery",
+   "g": "ChIJwQgq2dpiglQRVNwFk33-JBc"
+  },
+  "cuosuu9": {
+   "n": "Averill Creek Vineyard",
+   "g": "ChIJI6ykldlOj1QRDOB9dzSJwtc"
+  },
+  "cnhrx2t": {
+   "n": "Gaspereau Vineyards",
+   "g": "ChIJj6HWNuRUWEsRB6xxaRtm51Y"
+  },
+  "cyz03p9": {
+   "n": "Luckett Vineyards",
+   "g": "ChIJJe_ml86qWUsR0S2Hhf9_gok"
+  },
+  "cltq2li": {
+   "n": "Benjamin Bridge",
+   "g": "ChIJ7zL2DGBUWEsRisbeH-phmeM"
+  },
+  "ci3enez": {
+   "n": "L’Acadie Vineyards",
+   "g": "ChIJdyJIz9lUWEsRHlT7cJRJrxg"
+  },
+  "cpjt9ra": {
+   "n": "Domaine de Grand Pré",
+   "g": "ChIJg8YD8l5VWEsRFTW20hy5YOY"
+  },
+  "cmlq36h": {
+   "n": "Vignoble de l’Orpailleur",
+   "g": "ChIJ9-YeRZflyUwROWvUDs3hn_Q"
+  },
+  "cjjmiif": {
+   "n": "Atlantis Niagara Wines",
+   "g": "ChIJp5LqfzSsLIgR9r5pu7ROO5Y",
+   "w": "https://atlantisniagara.com/",
+   "ws": 1
+  },
+  "ch3jayk": {
+   "n": "De Sousa Wine Cellars",
+   "g": "ChIJv_eBOgCzLIgRYHtdK2Y0hcM",
+   "w": "https://www.desousavineyards.com/",
+   "ws": 1
+  },
+  "c2bagdf": {
+   "n": "Fielding Estate Winery",
+   "g": "ChIJGxdXqN-xLIgRvQKlufbDo38"
+  },
+  "cex3wlr": {
+   "n": "Five Row Craft Wine",
+   "g": "ChIJZUcDHXhc04kRRlHjiIXRh6w",
+   "w": "https://www.fiverows.com/",
+   "ws": 1
+  },
+  "cq1v49b": {
+   "n": "G. Marquis",
+   "ig": "thebutcherandbanker",
+   "g": "ChIJ9VUIBHSuLIgRF0zYuOaNDxs",
+   "w": "https://www.gmarquis.com/",
+   "ws": 1
+  },
+  "c8pwua8": {
+   "n": "The Good Earth Vineyard & Winery",
+   "g": "ChIJm2BstG6uLIgRYnYyuDrVIOA"
+  },
+  "clnlue7": {
+   "n": "The Ice House Winery",
+   "g": "ChIJVZWlA19e04kRaPcQBRUA4dM"
+  },
+  "cjqkq7y": {
+   "n": "Kew Vineyards",
+   "g": "ChIJpcXQTeWtLIgRMopoFMDlSbg"
+  },
+  "cgsm5c0": {
+   "n": "Maple Grove Estate Winery",
+   "ig": "legendsestateswinery",
+   "g": "ChIJFeByD7-tLIgR_8N4TL7IGL8"
+  },
+  "cl84tqk": {
+   "n": "Pearl Morissette Estate Winery",
+   "g": "ChIJ-XU2cQBT04kRJIvtJRZfQBo"
+  },
+  "c9ngdkd": {
+   "n": "Redstone Winery",
+   "g": "ChIJldFexJqtLIgRgQ3GK4truQA"
+  },
+  "cv04bpi": {
+   "n": "Reimer Vineyards Winery",
+   "ig": "squarespace",
+   "g": "ChIJL_M0-15e04kR8HB28bMhY8w",
+   "w": "https://www.reimervineyards.ca/",
+   "ws": 1
+  },
+  "cyaubld": {
+   "n": "Rennie Estate Winery",
+   "g": "ChIJk8JJJJCtLIgRMMN9CFlshdk",
+   "w": "http://rennieestatewinery.com/",
+   "ws": 1
+  },
+  "cstw0u1": {
+   "n": "Stone Eagle Winery",
+   "ig": "stoneeaglewinerynotl",
+   "g": "ChIJ-6MUTv1f04kRRScIZcWeIgM"
+  },
+  "cvc7t5v": {
+   "n": "Domaine le Clos Jordanne",
+   "g": "ChIJLaiBqWyuLIgR4J0br_2rI_k",
+   "w": "https://www.leclosjordanne.com/",
+   "ws": 1
+  },
+  "cwl31d": {
+   "n": "Merit Brewing",
+   "g": "ChIJF2jJHISbLIgRBxUAajhVN-U"
+  },
+  "cvi3mcr": {
+   "n": "Collective Arts Brewing",
+   "g": "ChIJk2zdwnKcLIgRGZChEIs-rYk"
+  },
+  "cj96ao3": {
+   "n": "Grain & Grit Beer Co.",
+   "g": "ChIJdfmSFrqELIgR2cwpRWuuYBk"
+  },
+  "cols0ys": {
+   "n": "Shawn & Ed Brewing Co.",
+   "g": "ChIJ7UseMoSELIgR2UavprdBwtc"
+  },
+  "comsy4d": {
+   "n": "Clifford Brewing Co.",
+   "g": "ChIJGdcAl8aYLIgR8-LyAzJuKQ0"
+  },
+  "cd7ft7z": {
+   "n": "Barrel Heart Brewing",
+   "g": "ChIJXdh0ZKWJLIgRjvWbIUQeloY"
+  },
+  "ct2jafu": {
+   "n": "Brewers Blackbird",
+   "g": "ChIJU9l6LxmFLIgRsKZOMlPtRJ4"
+  },
+  "cs2f94o": {
+   "n": "Lock Street Brewing Company",
+   "g": "ChIJAeqRNDZR04kRXW-8o-qEQ5w"
+  },
+  "cjof6be": {
+   "n": "Niagara Oast House Brewers",
+   "g": "ChIJyzmA8y9f04kR6OdUdMAUfDI"
+  },
+  "cvulrcg": {
+   "n": "Silversmith Brewing Company",
+   "g": "ChIJIVV5hDpZ04kRMIs1ke65gtQ"
+  },
+  "cxx4dbd": {
+   "n": "Taps On Queen Brewhouse and Grill",
+   "g": "ChIJNW08Ji9D04kR_fVJJu58Dqo",
+   "w": "https://www.tapsbeer.ca/",
+   "ws": 1
+  },
+  "ce3phc0": {
+   "n": "The Exchange Brewery",
+   "g": "ChIJT33BJ3Ff04kR0kLU_OKQsTE"
+  },
+  "czd92x5": {
+   "n": "The Merchant Ale House",
+   "g": "ChIJ-brWKrNR04kRRt-s-Zh0-lc"
+  },
+  "csgfx3": {
+   "n": "Niagara College Teaching Brewery",
+   "g": "ChIJNdrSJ_ta04kRTZ8nzjBcfww"
+  },
+  "cskwo4k": {
+   "n": "Cold Break Brewing",
+   "g": "ChIJJ2opsAtR04kRFZrXCMnuBlI"
+  },
+  "c3hnbye": {
+   "n": "Bench Brewing Company",
+   "g": "ChIJYdQkv3etLIgRJncVQ8e23QA"
+  },
+  "cz5gva8": {
+   "n": "Steam Whistle Brewing",
+   "g": "ChIJ7-ghWTE1K4gRLK1qk255dCk"
+  },
+  "cxnd7xy": {
+   "n": "Bellwoods Brewery",
+   "g": "ChIJfZ_ToP40K4gRdv1rlP_LNk0"
+  },
+  "c9jyecg": {
+   "n": "Henderson Brewing Co.",
+   "g": "ChIJ6TMrWUg0K4gRcjXJ87y3MTY"
+  },
+  "c5mn360": {
+   "n": "Great Lakes Brewery",
+   "g": "ChIJNxxL4i82K4gR3hLeIICsAkc"
+  },
+  "csghy38": {
+   "n": "Mill Street Brewery",
+   "g": "ChIJxfxeij3L1IkRELVCqKZW4KE"
+  },
+  "c8dvmbp": {
+   "n": "Junction Craft Brewing",
+   "g": "ChIJ69vRRxk0K4gRpgzgRObxnA8"
+  },
+  "coq0smv": {
+   "n": "Nickel Brook Brewery",
+   "g": "ChIJqY9nBd1hK4gRa5o4OOxKtfw"
+  },
+  "c984nwx": {
+   "n": "Cameron's Brewing Company",
+   "g": "ChIJSbDfnctcK4gRuACXz1u_I88"
+  },
+  "cr5mx0y": {
+   "n": "Old Credit Brewing Co.",
+   "g": "ChIJX5mcTndGK4gRUyS5qhTfG-4"
+  },
+  "cuaplgd": {
+   "n": "Left Field Brewery",
+   "g": "ChIJafJ5YX_M1IkR6hQtWDVee_Y"
+  },
+  "cjxnlcg": {
+   "n": "Blood Brothers Brewing",
+   "g": "ChIJwRr8kWU0K4gRrr9MFXyUeIM"
+  },
+  "ckql7hu": {
+   "n": "Rorschach Brewing Co.",
+   "g": "ChIJu2zGP47L1IkR7lBjRGKohGc"
+  },
+  "cykd8no": {
+   "n": "Black Oak Brewing Co.",
+   "ig": "ontariobrews",
+   "g": "ChIJT5d-YtU3K4gRGdT8R4dC4j0"
+  },
+  "c7hwiaf": {
+   "n": "Halo Brewery",
+   "g": "ChIJY5tzjUA0K4gRJ2vtNpoEH0c"
+  },
+  "cc1mt72": {
+   "n": "Muddy York Brewing Co.",
+   "g": "ChIJo0p3csrN1IkRsP1dKISRd-o"
+  },
+  "cgb636c": {
+   "n": "Indie Alehouse Brewing Co.",
+   "g": "ChIJL0vu7SE0K4gREwxLUM4dYrs"
+  },
+  "cymdjc7": {
+   "n": "Rainhard Brewing Company",
+   "g": "ChIJ1Wf9eKQ2K4gRQgtM7cuZ8AE"
+  },
+  "cr9n2qp": {
+   "n": "Flora Hall Brewing",
+   "g": "ChIJdc4Ju7EFzkwR6Rcafo2N76E"
+  },
+  "c2tkzhj": {
+   "n": "Overflow Brewing Company",
+   "g": "ChIJg0jQBwcHzkwRSGfKjoi3P6g"
+  },
+  "cp3slq0": {
+   "n": "Kingston Brewing Company",
+   "g": "ChIJDWPGNvmq0kwR9UB6zRMi0-k"
+  },
+  "cgmzf43": {
+   "n": "Daft Brewing",
+   "ig": "daftbrewingco",
+   "g": "ChIJ58K1Kkar0kwRxRkIN0Bnj8o"
+  },
+  "ckhvccg": {
+   "n": "MacKinnon Brothers Brewing",
+   "g": "ChIJg-wollvg14kRBQFKS5hwIDE"
+  },
+  "cwazhlh": {
+   "n": "Anderson Craft Ales",
+   "g": "ChIJW8H064XtLogRoffAsS_YMRI"
+  },
+  "cmu5vh7": {
+   "n": "Godspeed Brewery",
+   "g": "ChIJSS4sE3bM1IkRSKOcEqMbRNc"
+  },
+  "c47zvp3": {
+   "n": "Burdock Brewery",
+   "g": "ChIJO75kGWA1K4gRV7i6IATPxLM"
+  },
+  "cvvv0e6": {
+   "n": "Amsterdam Brewing Company",
+   "g": "ChIJG3lFe-fM1IkRhjvIIKtGD6Q"
+  },
+  "c5gb7b6": {
+   "n": "Muskoka Brewery",
+   "g": "ChIJeXYBiU-EKk0RtMOH0ARyb0M"
+  },
+  "cia6u3o": {
+   "n": "Waterloo Brewing",
+   "g": "ChIJTboWTaqMK4gR7_HvJ9Mjqj4"
+  },
+  "cqe531b": {
+   "n": "Abe Erb Brewing Co.",
+   "g": "ChIJ7XmNWA30K4gRIgw2bPovOgM"
+  },
+  "cw4duoh": {
+   "n": "Forty Creek Distillery",
+   "g": "ChIJFxhC1KGlLIgRi6a7sMYI3WA"
+  },
+  "cc2adg5": {
+   "n": "Dillon's Small Batch Distillers",
+   "g": "ChIJU_Fq9UqsLIgRSTmRXbTWutg"
+  },
+  "crvz5ig": {
+   "n": "Limited Distilling",
+   "g": "ChIJi_D-MvZZ04kRd21BCNActXc"
+  },
+  "cpjbz74": {
+   "n": "Spirit of York Distillery Co.",
+   "g": "ChIJyaShuT3L1IkRlVPAGitWoxY"
+  },
+  "cqerdur": {
+   "n": "Reid's Distillery",
+   "g": "ChIJzQesp3TL1IkRgu4PCBHF92Y"
+  },
+  "cxwk778": {
+   "n": "North Spirit Distillery",
+   "g": "ChIJsWsf5YQxK4gRthxfsIlS7LQ",
+   "w": "https://north-spirit-distillery.myshopify.com/",
+   "ws": 1
+  },
+  "c89l742": {
+   "n": "Nickel 9 Distillery",
+   "g": "ChIJi9pyUxk0K4gRmZJiWtUskFQ"
+  },
+  "ct5ki21": {
+   "n": "Spirit Tree Estate Cidery",
+   "ig": "spirittreecider",
+   "g": "ChIJsc3NhY0PK4gRK9y4lrG_nkI"
+  },
+  "c8xjqis": {
+   "n": "Revel Cider Co.",
+   "ig": "revelcider",
+   "g": "ChIJQSoBcXWRK4gR2u_4fSO4F3Y"
+  },
+  "cpfygaa": {
+   "n": "Duntroon Cyder House",
+   "g": "ChIJUdPOlYVlKogRzQqq_KngRXg"
+  },
+  "cyia47r": {
+   "n": "Thornbury Craft Co.",
+   "g": "ChIJVSx6Gtd0KogRGlHQ2DRmG_k"
+  },
+  "cltgtuo": {
+   "n": "Ironwood Cider House",
+   "ig": "ironwoodcider",
+   "g": "ChIJz1TDAchY04kRAgl17kAbIVs"
+  },
+  "cw5903o": {
+   "n": "East Street Cider Co.",
+   "ig": "eaststreetciderco",
+   "g": "ChIJx4SAQtDDKIgR6geZISAmG5g"
+  },
+  "cprakf1": {
+   "n": "16 Mile Cellar",
+   "g": "ChIJFRq2EodN04kRmMmrGyZzADM",
+   "w": "https://16milecellar.com/",
+   "ws": 1
+  },
+  "cihlkg5": {
+   "n": "Alvento Winery",
+   "g": "ChIJoTO8bc1S04kRtMv5wyPlzis",
+   "w": "https://www.alvento.ca/",
+   "ws": 1
+  },
+  "cxftd1q": {
+   "n": "Amanda’s Vineyards",
+   "ig": "amandasvineyards",
+   "g": "ChIJ5dEaig7J14kRE0I0vlXzIm0",
+   "w": "https://www.amandasvineyards.com/",
+   "ws": 1
+  },
+  "c5g7lum": {
+   "n": "Aquanova Brewing Co.",
+   "ig": "aquanovabeer",
+   "g": "ChIJza32AECbLIgRb7E2GJVuZqk"
+  },
+  "cpg1s6w": {
+   "n": "Between the Lines Winery",
+   "g": "ChIJs5Tx2gFc04kRrHTfRcwBLR4"
+  },
+  "c85ptkg": {
+   "n": "2027 Cellars",
+   "g": "ChIJxUrT2kxN04kRdfJY5wvaAKg"
+  },
+  "cr43tpq": {
+   "n": "Stoney Ridge Estate Winery",
+   "g": "ChIJNcRFYlOtLIgRBq8pqdLs3A4",
+   "w": "https://stoney-ridge-estate-winery.stcatharinesdirect.ca/",
+   "ws": 1
+  },
+  "cjhyiar": {
+   "n": "Applewood Farm & Winery",
+   "ig": "fruitwines",
+   "g": "ChIJGQCIlgQr1YkRtzxZJFhWEOU"
+  },
+  "cpg5c1x": {
+   "n": "Beau's All Natural Brewing Company",
+   "g": "ChIJs6fOs57rzkwRsqKjUsNoTBU"
+  },
+  "c78ozi5": {
+   "n": "Blue Grouse Estate Winery",
+   "g": "ChIJc2PzDyJEj1QRr6XgJZmPk8w"
+  },
+  "ctt3vko": {
+   "n": "Burrowing Owl Estate Winery",
+   "g": "ChIJN7QMELbDglQRE2MKphytI_Q"
+  },
+  "cu7h560": {
+   "n": "Coffin Ridge Boutique Winery",
+   "g": "ChIJbyNHuApVK00RC8eD1mGAlak",
+   "w": "https://www.coffinridge.ca/",
+   "ws": 1
+  },
+  "cucfd69": {
+   "n": "Commisso Estate Winery",
+   "g": "ChIJG1vuOcWxLIgRcWfrNLGOUs8",
+   "w": "https://www.commisso.ca/",
+   "ws": 1
+  },
+  "cc4pxwk": {
+   "n": "Cooper’s Hawk Vineyards",
+   "g": "ChIJJZFGcDzeOogRVdP9AeHy0mY",
+   "w": "https://coopershawkvineyards.com/",
+   "ws": 1
+  },
+  "cneoft5": {
+   "n": "Cornerfield Wine Co.",
+   "g": "ChIJITkV8xvNKIgRhqG9sHA4NvM",
+   "w": "https://cornerfield-wine-company.wheree.com/",
+   "ws": 1
+  },
+  "cv80a8": {
+   "n": "CREW – Colchester Ridge Estate Winery",
+   "g": "ChIJx2fOwM4fO4gRd2oZQ3-RXX8",
+   "w": "https://colchesterridge.com/",
+   "ws": 1
+  },
+  "c6uyebr": {
+   "n": "Daniel Lenko Estate Winery",
+   "g": "ChIJW8kyVxSuLIgRbWgUw4ptdZk",
+   "w": "http://www.daniellenko.com/",
+   "ws": 1
+  },
+  "c1x3d9": {
+   "n": "Dominion City Brewing Co.",
+   "g": "ChIJU3SVOTAQzkwRfOC9aKfdWB0"
+  },
+  "cwcxqk4": {
+   "n": "Fairweather Brewing Co.",
+   "g": "ChIJf0lG7bmELIgRVK0tYpWXFBk"
+  },
+  "c722ybb": {
+   "n": "Ferox by Fabian Reis",
+   "g": "ChIJZZWLV2pZ04kRsb8qlmi_6jo",
+   "w": "https://www.ferox.ca/",
+   "ws": 1
+  },
+  "c1hv9de": {
+   "n": "Forked River Brewing Company",
+   "g": "ChIJNWkmPTjtLogRycQ23llzev8"
+  },
+  "cnfs7mp": {
+   "n": "Georgian Hills Vineyards",
+   "g": "ChIJsSV-6dt7KogRSZb0-b47o8U",
+   "w": "https://georgianhillsvineyards.ca/",
+   "ws": 1
+  },
+  "cjud8sc": {
+   "n": "Grange of Prince Edward Vineyard & Winery",
+   "g": "ChIJ3aaakZBH1okRIJAYuIiaE90",
+   "w": "https://www.grangewinery.com/",
+   "ws": 1
+  },
+  "ctk98hi": {
+   "n": "Hamilton Distillery Company",
+   "g": "ChIJCW7P0SGbLIgRsWihJ5FTLXo"
+  },
+  "cgsj19": {
+   "n": "Hester Creek Estate Winery",
+   "g": "ChIJp-7eJNvpglQRDstcEdM1_FU"
+  },
+  "cycjyfn": {
+   "n": "Hounds of Erie Winery",
+   "g": "ChIJa_ZN91TFLYgR9BrBypvtE3E",
+   "w": "https://www.houndsoferiewinery.com/",
+   "ws": 1
+  },
+  "c4pi8v4": {
+   "n": "Icellars Estate Winery",
+   "g": "ChIJGc4Gb5Jb04kRH9lUFbqbh60",
+   "w": "https://icellars.ca/",
+   "ws": 1
+  },
+  "ckr065y": {
+   "n": "Inasphere Wines",
+   "g": "ChIJ6UerWLO2LYgRfSKuCcU8jkI",
+   "w": "https://inaspherewines.ca/",
+   "ws": 1
+  },
+  "cgnttz": {
+   "n": "Inniskillin Niagara Estate Winery",
+   "g": "ChIJVZWlA19e04kRaPcQBRUA4dM"
+  },
+  "chpf8vt": {
+   "n": "Jost Vineyards",
+   "g": "ChIJlTYEjN3cXksRpJU-L97J02I"
+  },
+  "coptudu": {
+   "n": "Lighthall Vineyards",
+   "g": "ChIJq4YChvSz14kRmoaGAVrWE3g",
+   "w": "https://www.lighthallvineyards.com/",
+   "ws": 1
+  },
+  "c58fqpk": {
+   "n": "Maelstrom Winery",
+   "g": "ChIJo_cQU7IpKYgRVmXI5y0rtPw",
+   "w": "https://www.maelstromwinery.ca/",
+   "ws": 1
+  },
+  "cetvltf": {
+   "n": "Malivoire Wine Company",
+   "g": "ChIJZfCfwY-tLIgRAvio-ZGhdJE"
+  },
+  "ccs76lg": {
+   "n": "MatildaSword Distillers",
+   "g": "ChIJCW7P0SGbLIgRsWihJ5FTLXo",
+   "w": "https://matildaswordgin.com/",
+   "ws": 1
+  },
+  "c484dw9": {
+   "n": "Nk’Mip Cellars",
+   "g": "ChIJGzt82tDFglQRjRiwo2lLs_w"
+  },
+  "cy875u9": {
+   "n": "Norman Hardie Winery & Vineyard",
+   "g": "ChIJC7mGbexG1okRm-s47aehzFY"
+  },
+  "cs96mkt": {
+   "n": "North 42 Degrees Estate Winery",
+   "g": "ChIJKy3roc8fO4gR_lmYpAH8ty0"
+  },
+  "clbf0si": {
+   "n": "Oxley Estate Winery",
+   "g": "ChIJuXfyRD_gOogRRwL87OX2bXY",
+   "w": "https://oxleyestatewinery.com/",
+   "ws": 1
+  },
+  "czb4v26": {
+   "n": "Paglione Estate Winery",
+   "g": "ChIJE8HVxGDgOogRfJhB_dkF7z4",
+   "w": "https://paglioneestatewinery.com/",
+   "ws": 1
+  },
+  "ctbkrrj": {
+   "n": "Peninsula Ridge Estates Winery",
+   "g": "ChIJgcuL1E6uLIgRqdFswtLEEJQ",
+   "w": "https://peninsularidge.com/",
+   "ws": 1
+  },
+  "cycdqbj": {
+   "n": "Polonée Distillery",
+   "g": "ChIJCUqufOhR04kRpFhoZ6VcJDA",
+   "w": "https://polonee.com/",
+   "ws": 1
+  },
+  "ca4upd4": {
+   "n": "Pommies Cider Co.",
+   "ig": "pommiescider",
+   "g": "ChIJsc3NhY0PK4gRK9y4lrG_nkI"
+  },
+  "cp0a9vo": {
+   "n": "Rockway Vineyards",
+   "g": "ChIJnfWjmZFN04kREsc3foRwrRo",
+   "w": "https://rockwaywine.ca/",
+   "ws": 1
+  },
+  "c8f3oz7": {
+   "n": "Rosehall Run",
+   "g": "ChIJkYYylOpG1okR5WcLu2z2H4s"
+  },
+  "cbbzwm7": {
+   "n": "Schatz Winery by Hessenland Inn",
+   "g": "ChIJfxepNRoyL4gRTc7w9bZ9h8Q",
+   "w": "https://www.hessenland.com/",
+   "ws": 1
+  },
+  "cbo7kuh": {
+   "n": "Spy Cider House & Distillery",
+   "g": "ChIJORtNQh1zKogRJdq_FKS1Kjo"
+  },
+  "ciskvp2": {
+   "n": "Sue-Ann Staff Estate Winery",
+   "g": "ChIJ2co_rBRN04kRbV0DESc646Y",
+   "w": "https://www.sue-annstaff.com/",
+   "ws": 1
+  },
+  "ceqif48": {
+   "n": "The County Cider Company",
+   "ig": "countycider",
+   "g": "ChIJczwff4fG14kRXInWEvff_mQ"
+  },
+  "c7zf4zf": {
+   "n": "The Duxbury Cider Co.",
+   "g": "ChIJl_ak6-NSK00RhNauMRKmSPw"
+  },
+  "cwcmzcz": {
+   "n": "Three Dog Winery",
+   "g": "ChIJew54LA7S14kRsJfPX5nNpoo",
+   "w": "https://www.threedogwine.com/",
+   "ws": 1
+  },
+  "cot4zrt": {
+   "n": "Viewpointe Estate Winery",
+   "g": "ChIJPz0Y4K8fO4gRjiFbXFX2q-8",
+   "w": "https://www.viewpointewinery.com/",
+   "ws": 1
+  },
+  "cjxm097": {
+   "n": "Vivace Estate Winery",
+   "g": "ChIJGUXTkIkkO4gR0gIv9d1-n4c",
+   "w": "https://www.vivaceestatewinery.com/",
+   "ws": 1
+  },
+  "cq7frkw": {
+   "n": "Wending Home Estate Vineyards & Winery",
+   "g": "ChIJ5Udm9m1S04kRu3BG4OZEITc",
+   "w": "https://wendinghome.ca/",
+   "ws": 1
+  },
+  "cnued3p": {
+   "n": "West Avenue Cider House",
+   "g": "ChIJUyC2Hb59K4gRnP-AIHM-7CU"
+  },
+  "cahhsrm": {
+   "n": "Willow Springs Winery",
+   "g": "ChIJnSUbjrou1YkRyN__0Kt0ey4",
+   "w": "https://www.willowspringswinery.com/",
+   "ws": 1
+  },
+  "cqupl92": {
+   "n": "Windrush Estate Winery",
+   "g": "ChIJRyL07mr7KogR54VBOV1T04M",
+   "w": "https://windrushestatewinery.com/",
+   "ws": 1
+  },
+  "cg6t46f": {
+   "n": "1 Mill Road Winery",
+   "g": "ChIJW4shEMZ7glQRYJFdide2TUs"
+  },
+  "c8fyhdv": {
+   "n": "1st R.O.W. Estate Winery",
+   "g": "ChIJ91Fh6p7FhVQRufpDRO351-s"
+  },
+  "c6ugemj": {
+   "n": "3Benches Estate Winery",
+   "ig": "winesofbc",
+   "g": "ChIJVeMjsP7lglQRYi08joD0T4Q"
+  },
+  "ca362fg": {
+   "n": "40 Knots Winery",
+   "g": "ChIJs_w7Nx4SiFQRq1R4gT6Vn5w"
+  },
+  "cy7oio2": {
+   "n": "50th Parallel Estate",
+   "g": "ChIJqdY4C5nmfVMRFECLMfQ2uHg"
+  },
+  "cthjm5v": {
+   "n": "8th Generation Vineyard",
+   "g": "ChIJPbrT8m9yglQRJ0TjA0XS1n0"
+  },
+  "cb36sk5": {
+   "n": "99 South Vineyards",
+   "g": "ChIJve54SjnbhVQRXG1H1UIWt3E"
+  },
+  "c1zdqjm": {
+   "n": "A Sunday in August",
+   "g": "ChIJQQ3Y_K1bj1QRRZuR9x9AIAc"
+  },
+  "co9tdjn": {
+   "n": "Aasha Wines",
+   "g": "ChIJec9UMldjglQRiWaOb-11fFk"
+  },
+  "cy5893g": {
+   "n": "Adega on 45th Estate Winery",
+   "g": "ChIJRWjGvcTFglQRjjj59hFZNZ8"
+  },
+  "ci8qe8o": {
+   "n": "Peller Estates Winery & Restaurant",
+   "g": "ChIJUQZrWqdf04kRCKhLt_rGu-s"
+  },
+  "ch1vcyh": {
+   "n": "Westcott Vineyards",
+   "g": "ChIJ2fGifRVN04kRMJ9sVIqrCzY",
+   "w": "https://www.westcottvineyards.com/",
+   "ws": 1
+  },
+  "ce43jej": {
+   "n": "Maleta Estate Winery",
+   "g": "ChIJowlQXFRa04kRJAW8wbwlb50"
+  },
+  "cq5lo05": {
+   "n": "Royal City Brewing Co.",
+   "g": "ChIJrQ1h_BqbK4gRr6cwDV7eAHc"
+  },
+  "c6kjjjz": {
+   "n": "Wellington Brewery",
+   "g": "ChIJz-xsWNWPK4gRbqrqOrr9R8M"
+  },
+  "clino6": {
+   "n": "Side Launch Brewing Company",
+   "g": "ChIJI_Q6MSN6KogRoc-f6mytA8g"
+  },
+  "cwyy659": {
+   "n": "MacLean’s Beer",
+   "g": "ChIJB1PC0wh8KogRV5ePXAjJDAA",
+   "fx": 1,
+   "ig": "macleansales",
+   "w": "https://macleansbeer.com/",
+   "ws": 1
+  },
+  "cfj3btp": {
+   "n": "Black Bellows Brewing Co.",
+   "g": "ChIJWzYKxRR7KogRhnf6O6PuVeU"
+  },
+  "cuhbbfj": {
+   "n": "Midtown Brewing Company",
+   "g": "ChIJCwxQXLUJK4gRLRIb8blDZkc"
+  },
+  "cas7evt": {
+   "n": "Parsons Brewing Company",
+   "g": "ChIJJ7gozYTL14kRXx7jCgAGnM4"
+  },
+  "cdsgrfc": {
+   "n": "Walkerville Brewery",
+   "g": "ChIJn26rJbksO4gR0L0tK1ikA2k"
+  },
+  "c5lh1b6": {
+   "n": "Flying Monkeys Craft Brewery",
+   "g": "ChIJvSmgYi6jKogRUEc2Qjskavw"
+  },
+  "cihr210": {
+   "n": "33 Acres Brewing Company",
+   "g": "ChIJ8-9z9eBzhlQRrFZDlPTIfTw"
+  },
+  "cjmbxxi": {
+   "n": "Parallel 49 Brewing Company",
+   "g": "ChIJ4S1x8xlxhlQRE8HG0PL5H8Y"
+  },
+  "ch7i3p7": {
+   "n": "Brasserie Dieu du Ciel!",
+   "g": "ChIJ0UdVjNUbyUwRAGNwVsdkuiU"
+  },
+  "c1si72q": {
+   "n": "100 Acre Brewing Company",
+   "ig": "100acrebrewingco",
+   "g": "ChIJp_-SnFDz1YkRAVMJ4ILntQk",
+   "w": "https://100acrebrewingco.com/",
+   "ws": 1
+  },
+  "cveupyj": {
+   "n": "4EST Brewery",
+   "ig": "bulles_et_bieres",
+   "g": "ChIJq6q6UMnwLogR1DiFlEI4rWE",
+   "w": "https://4estbrewery.com/",
+   "ws": 1
+  },
+  "cvjfia4": {
+   "n": "All My Friends Beer Co.",
+   "ig": "amf.beer",
+   "g": "ChIJC13DKVw11okRZ6ct9bpF8z0",
+   "w": "https://amfbeer.com/",
+   "ws": 1
+  },
+  "cfqck5z": {
+   "n": "All or Nothing Brewhouse",
+   "ig": "allornothingbh",
+   "g": "ChIJmSFoYkEd1YkRPXoJa4TmchI",
+   "w": "https://www.allornothing.beer/",
+   "ws": 1
+  },
+  "cjjv1zq": {
+   "n": "Aurum Brewing Company",
+   "ig": "drinkaurum",
+   "g": "ChIJJ2jJ_nc91okRWxHV6wIc3Wc",
+   "w": "https://drinkaurum.com/",
+   "ws": 1
+  },
+  "ckju0l9": {
+   "n": "Badlands Brewing Company",
+   "ig": "badlandsbrewing",
+   "g": "ChIJl-tpiccRK4gRF_ZE-ENDlbE",
+   "w": "https://www.badlandsbrewing.ca/",
+   "ws": 1
+  },
+  "cm6j2jf": {
+   "n": "Banded Goose Brewing Company",
+   "ig": "bgbrewing",
+   "g": "ChIJQde2CCPdOogRX3Vmkuwt-yM",
+   "w": "https://www.bandedgoosebrewing.com/",
+   "ws": 1
+  },
+  "c9he6y5": {
+   "n": "BeerLab! London",
+   "ig": "beerlabldnon",
+   "g": "ChIJeb-48szxLogRVQqx9JRvPr8",
+   "w": "https://www.londonbeerlab.com/",
+   "ws": 1
+  },
+  "c8u82j6": {
+   "n": "Bickford Brewing",
+   "ig": "bickfordbrewingco",
+   "g": "ChIJEdsveQA1K4gR23GmQr2Zw8A",
+   "w": "https://bickfordbrewing.ca/",
+   "ws": 1
+  },
+  "cqepqri": {
+   "n": "Bicycle Craft Brewery",
+   "ig": "bicyclecraftbrewery",
+   "g": "ChIJy1ccMnIPzkwRoO65LDwdCOg",
+   "w": "https://bicyclecraftbrewery.ca/",
+   "ws": 1
+  },
+  "cxl9sm9": {
+   "n": "Beyond The Pale Brewing Co.",
+   "ig": "btpbrewing",
+   "g": "ChIJzZXd7j0EzkwRsoRqRb7fJCU",
+   "w": "https://btpshop.ca/",
+   "ws": 1
+  },
+  "cwvb78x": {
+   "n": "Big Rig Brewery",
+   "ig": "bigrigkitchen",
+   "g": "ChIJJx1unNIAzkwRwL9u_gXdjnU",
+   "w": "https://bigrigbrew.com/",
+   "ws": 1
+  },
+  "ct5xdjo": {
+   "n": "Black Gold Brewery",
+   "ig": "black.gold.brewery",
+   "g": "ChIJ9ySHzqaBL4gRMh6nBSIFtHc",
+   "w": "https://blackgold.beer/",
+   "ws": 1
+  },
+  "cn06hjg": {
+   "n": "Block 3 Brewing Co.",
+   "ig": "shopify",
+   "g": "ChIJIX5KpfHxK4gRDLBKi5uSd2o",
+   "w": "https://blockthreebrewing.com/",
+   "ws": 1
+  },
+  "cpuwo41": {
+   "n": "Bobcaygeon Brewing Company",
+   "ig": "bobcaygeonbeer",
+   "g": "ChIJg_3jxlON1YkR85SblZXqIsY",
+   "w": "https://bobcaygeonbrewing.ca/",
+   "ws": 1
+  },
+  "cf8uooz": {
+   "n": "Boshkung Brewing Co.",
+   "ig": "boshkungbrewing",
+   "g": "ChIJSX_6WWAO1UwR-UHX5F7N28g",
+   "w": "https://boshkungbrewing.com/",
+   "ws": 1
+  },
+  "c625eio": {
+   "n": "Brauwerk Hoffman – Rockland",
+   "ig": "brauwerk_hoffman_rockland",
+   "g": "ChIJF-Ons0VrzkwRjEInjNzH6Yk",
+   "w": "https://brauwerkhoffman.ca/",
+   "ws": 1
+  },
+  "cjx5t5o": {
+   "n": "Bridge Masters Brewing Co.",
+   "ig": "wix",
+   "g": "ChIJR_t_J0p70kwRxx4DfLYb2EI",
+   "w": "https://www.bridgemastersbrewing.com/",
+   "ws": 1
+  },
+  "c4m640n": {
+   "n": "Broadhead Brewery",
+   "ig": "broadheadbeer",
+   "g": "ChIJb_d3_sEHzkwRScu8-Y6igow"
+  },
+  "cx10do9": {
+   "n": "Broken Rail Brewing",
+   "ig": "brokenrailbrewing",
+   "g": "ChIJn589UGS5LogRaM9nAitDTWs",
+   "w": "https://www.brokenrail.ca/",
+   "ws": 1
+  },
+  "cnlf3vd": {
+   "n": "C’est What Durham Brewing Company",
+   "ig": "cestwhatdurham",
+   "g": "ChIJczZFdlre1IkRqKKea1dWPDw",
+   "w": "https://www.cestwhatdurham.com/",
+   "ws": 1
+  },
+  "cfmqetf": {
+   "n": "Calabogie Brewing",
+   "ig": "calabogiebrewingco",
+   "g": "ChIJZQbDWB8iVUARwquiy0cKsTs",
+   "w": "https://calabogiebrewing.com/",
+   "ws": 1
+  },
+  "c7l9h47": {
+   "n": "Canvas Brewing Co.",
+   "ig": "canvasbrewing",
+   "g": "ChIJR9lMSTJyKk0R3xQxyzxjuJg",
+   "w": "https://canvasbrewing.com/",
+   "ws": 1
+  },
+  "cbbpd62": {
+   "n": "Caps Off Brewing",
+   "ig": "capsoffbrewing",
+   "g": "ChIJAbyra7dfLogRmodnBmunHKk",
+   "w": "https://capsoffbrewing.com/",
+   "ws": 1
+  },
+  "css7zai": {
+   "n": "Cold Bear Brewing Co.",
+   "ig": "coldbearbrewco",
+   "g": "ChIJn0CLfEeL0UwR4R5URd7qe80",
+   "w": "https://coldbear.ca/",
+   "ws": 1
+  },
+  "cv956da": {
+   "n": "Common Good Beer Co.",
+   "ig": "leanpizzatoronto",
+   "g": "ChIJYZVH1RjS1IkR957Y1O_r9PI",
+   "w": "https://commongoodbeer.com/",
+   "ws": 1
+  },
+  "cd3a9yp": {
+   "n": "Cool Beer Brewing Ltd.",
+   "ig": "coolbeverageco",
+   "g": "ChIJJ9-BAyw2K4gRM-AsH7z73a4",
+   "w": "https://www.coolbeer.com/",
+   "ws": 1
+  },
+  "ct64bvw": {
+   "n": "Couchiching Craft Brewing Company",
+   "ig": "couchichingbrewing",
+   "g": "ChIJU5ygeTypKk0R-uq2gCOUCQQ",
+   "w": "https://www.couchichingbrewing.com/",
+   "ws": 1
+  },
+  "cbc4xt6": {
+   "n": "Cowbell Brewing Co.",
+   "ig": "cowbellbrewing",
+   "g": "ChIJXzNmjtojKYgRxlWK8yfBMY8",
+   "w": "https://cowbellbrewing.com/",
+   "ws": 1
+  },
+  "cy9m7ac": {
+   "n": "Cured Craft Brewing Co.",
+   "ig": "curedcraftbrewing",
+   "g": "ChIJW78ZD0_BOogRPtdMYgaszqo",
+   "w": "https://www.curedcraftbrewing.com/",
+   "ws": 1
+  },
+  "c9m082c": {
+   "n": "Dog House Brewing Company",
+   "ig": "doghousebrewingcompany",
+   "g": "ChIJ_xrUGjDN1kwRo6p6X00MgWc",
+   "w": "https://www.doghousebrewingcompany.ca/",
+   "ws": 1
+  },
+  "cbecrn9": {
+   "n": "Equals Brewing Company",
+   "ig": "equalsbrewingco",
+   "g": "ChIJ71Pj8DCTLogRM3USg2VFxI4",
+   "w": "https://www.equalsbrewing.com/",
+   "ws": 1
+  },
+  "cgw8at4": {
+   "n": "Farm League Brewing",
+   "ig": "farmleaguebrewing",
+   "g": "ChIJfZZvKRx3LIgRF5M-NWE2MgA",
+   "w": "https://www.farmleaguebrewing.com/",
+   "ws": 1
+  },
+  "cmjhpub": {
+   "n": "Fenelon Falls Brewing Co.",
+   "ig": "fenelonfallsbrewing",
+   "g": "ChIJK7k2mtUv1UwRsnajLmZPfgs",
+   "w": "https://fenelonfallsbrewingco.com/",
+   "ws": 1
+  },
+  "c37czpd": {
+   "n": "Fixed Gear Brewing Co.",
+   "ig": "fixed_gear_brewing",
+   "g": "ChIJPxLVGE-FK4gRZi5lsSubb7c",
+   "w": "https://fixedgearbrewing.com/",
+   "ws": 1
+  },
+  "cs7wbdf": {
+   "n": "Focal Brewing Co.",
+   "ig": "focalbrewingco",
+   "g": "ChIJA5AkeCwH1okRX7LYu-Y_4G4",
+   "w": "https://www.focalbrewingco.ca/",
+   "ws": 1
+  },
+  "ccmcjdk": {
+   "n": "Foundry Brewing",
+   "ig": "foundrytavern",
+   "g": "ChIJfy10xSB3LIgRRwWXNDcpB-s"
+  },
+  "ccllysy": {
+   "n": "Four Fathers Brewing Co.",
+   "ig": "4fathersbrewing",
+   "g": "ChIJOZDWwOeIK4gRqx30f6GlEMs",
+   "w": "https://fourfathersbrewing.ca/",
+   "ws": 1
+  },
+  "cwi6hrt": {
+   "n": "Frank Brewing Co.",
+   "ig": "frankbrewingco",
+   "g": "ChIJZ4-tD0LVOogRumfSJ-jNhWs",
+   "w": "https://frankbeer.ca/",
+   "ws": 1
+  },
+  "c1xr1cf": {
+   "n": "Full Beard Brewing Co.",
+   "ig": "fullbeardbrewing",
+   "g": "ChIJQ2iTt-GlPE0RXwdlk5m72Iw",
+   "w": "https://fullbeardbrewing.com/",
+   "ws": 1
+  },
+  "c5o4szd": {
+   "n": "Gateway City Brewery",
+   "ig": "gatewaycitybrewery",
+   "g": "ChIJ88tAWlYBKU0RjTn_H9RZlFk",
+   "w": "https://gatewaycity.ca/",
+   "ws": 1
+  },
+  "cyrlu5p": {
+   "n": "Gather Brewery & Glassworks",
+   "ig": "gatherbreweryandglassworks",
+   "g": "ChIJV0jvuxuRzUwRrauNbkSeS1U",
+   "w": "https://www.gatherbreweryandglassworks.com/",
+   "ws": 1
+  },
+  "cyk87b7": {
+   "n": "Glasstown Brewing Company",
+   "ig": "glasstown_brewingco",
+   "g": "ChIJAdAvKfhdJYgRU7pm-sgnVmI",
+   "w": "https://www.glasstownbrewingco.ca/",
+   "ws": 1
+  },
+  "ctqpqz5": {
+   "n": "Grand River Brewery",
+   "ig": "magnottawinery",
+   "g": "ChIJ2eZxBJovK4gRBvh0F4AwRg8"
+  },
+  "czaan64": {
+   "n": "Granite Brewery",
+   "ig": "granitebrewery",
+   "g": "ChIJg8Owuy8zK4gRmZs4gV69ztk",
+   "w": "https://granitebrewery.ca/",
+   "ws": 1
+  },
+  "cmi5ae7": {
+   "n": "Haliburton Highlands Brewery",
+   "ig": "hhbrewing",
+   "g": "ChIJGfeu5Hmm1UwRmy7Qv_7iWkY",
+   "w": "https://www.haliburtonhighlandsbrewing.ca/",
+   "ws": 1
+  },
+  "c4qh82p": {
+   "n": "Imperial City Brew House",
+   "ig": "imperialcitybrew",
+   "g": "ChIJxUtiJz6DJYgRG5VK7_f7zfc",
+   "w": "https://www.imperialcitybrew.com/",
+   "ws": 1
+  },
+  "cejj4kc": {
+   "n": "Jobsite Brewing Co.",
+   "ig": "jobsitebrewing",
+   "g": "ChIJA0xD3xmtLogRXpIjRZ9Pu84",
+   "w": "https://www.jobsitebrewing.ca/",
+   "ws": 1
+  },
+  "clu6yot": {
+   "n": "Kick and Push Brewing Company",
+   "ig": "kapbrewing",
+   "g": "ChIJ__GKo7n30kwRz_rHBqiFm1g",
+   "w": "https://kapbrewing.ca/",
+   "ws": 1
+  },
+  "cni1hur": {
+   "n": "Lake of Bays Brewing Co.",
+   "ig": "lb_brewing",
+   "g": "ChIJk1ZuQ7aA1UwR8ULqgLSYhAo",
+   "w": "https://lakeofbaysbrewing.ca/",
+   "ws": 1
+  },
+  "cfz43pf": {
+   "n": "Lake of the Woods Brewing Company",
+   "ig": "lowbrewco",
+   "g": "ChIJm4jxAIEIvlIRtuAEgaCZEnw",
+   "w": "https://www.lowbrewco.com/",
+   "ws": 1
+  },
+  "cq6u11m": {
+   "n": "Lightcaster Brewery",
+   "ig": "lightcasterbrewery",
+   "g": "ChIJl9UxxDwD1YkRn9mmJTdFT6o",
+   "w": "https://lightcasterbrewery.com/",
+   "ws": 1
+  },
+  "cl4da47": {
+   "n": "London Brewing Co-operative",
+   "ig": "londonbrewingca",
+   "g": "ChIJ9fkv2oXtLogRF372OZGz86s",
+   "w": "https://www.londonbrewing.ca/",
+   "ws": 1
+  },
+  "cidcz75": {
+   "n": "Market Brewing",
+   "ig": "marketbrewing",
+   "g": "ChIJeeL_vJvNKogRuWuxPH_mDUU",
+   "w": "https://www.marketbrewingco.com/",
+   "ws": 1
+  },
+  "cq9wkfr": {
+   "n": "Mascot Brewery",
+   "ig": "mascotbrewery",
+   "g": "ChIJy-vRIi03K4gRQvgho6xVSW4",
+   "w": "https://mascotbrewery.com/",
+   "ws": 1
+  },
+  "cbyeq8v": {
+   "n": "Matron Fine Beer",
+   "ig": "matronfinebeer",
+   "g": "ChIJUaW2zHxL1okRspaa6fF06co",
+   "w": "https://matronfinebeer.ca/",
+   "ws": 1
+  },
+  "cl29ti7": {
+   "n": "Meyers Creek Brewing Company",
+   "ig": "meyerscreekbrewing",
+   "g": "ChIJ90pPvYEl1okR0zgI6PiRRwM",
+   "w": "https://www.meyerscreekbrewing.ca/",
+   "ws": 1
+  },
+  "c2uqyid": {
+   "n": "Miski Brewing",
+   "ig": "miskibrewing",
+   "g": "ChIJJYbkAK69KogRZz53HfEfcQY",
+   "w": "https://miskibrewing.com/",
+   "ws": 1
+  },
+  "ckwbj7g": {
+   "n": "Mudtown Station Brewery & Restaurant",
+   "ig": "mudtownstation",
+   "g": "ChIJ3SqLcaT9KYgRy4womQuNsek",
+   "w": "https://www.mudtownstation.ca/",
+   "ws": 1
+  },
+  "ce19oq0": {
+   "n": "Natterjack Brewing Company",
+   "ig": "natterjackbrewingcompany",
+   "g": "ChIJp59pfZ61L4gRsx773xq3ZeI",
+   "w": "https://natterjackbrewing.ca/",
+   "ws": 1
+  },
+  "c8qizrz": {
+   "n": "Newark Brewing Co.",
+   "ig": "newarkbrewing",
+   "g": "ChIJP3SBa06vLIgRBZBtcwMAKIw",
+   "w": "https://www.newarkbrewing.com/",
+   "ws": 1
+  },
+  "c99wrar": {
+   "n": "Northern Superior Brewing Co.",
+   "ig": "northernsuperiorbrewingco",
+   "g": "ChIJJ469P084Nk0RrEPQ6fT-jlc",
+   "w": "https://northernsuperior.org/",
+   "ws": 1
+  },
+  "ciopg8o": {
+   "n": "Old Flame Brewing Co.",
+   "ig": "oldflamebrewery",
+   "g": "ChIJFb3GyBMU1YkR-8gK14jkvDc",
+   "w": "https://oldflamebrewingco.ca/",
+   "ws": 1
+  },
+  "ck5jq44": {
+   "n": "Outspoken Brewing",
+   "ig": "outspokenbrewing",
+   "g": "ChIJcVyx98o5Nk0RGjCpHBOO9Us",
+   "w": "https://www.outspokenbrewing.com/",
+   "ws": 1
+  },
+  "cwv89el": {
+   "n": "Perth Brewery",
+   "ig": "perthbrewery",
+   "g": "ChIJU7aL8o160kwRB3OuMSQNj3o",
+   "w": "https://perthbrewery.ca/",
+   "ws": 1
+  },
+  "cpandl6": {
+   "n": "Prince Eddy’s Brewing Company",
+   "ig": "princeeddysbrewing",
+   "g": "ChIJp_DdLarL14kRwd0mHqmxRyc",
+   "w": "https://princeeddys.store/",
+   "ws": 1
+  },
+  "cmy5n7n": {
+   "n": "Quayle’s Brewery",
+   "ig": "quaylesbrewery",
+   "g": "ChIJUUkzqbyxKk0RNfFTeW6QwWo",
+   "w": "https://quaylesbrewery.ca/",
+   "ws": 1
+  },
+  "cvil986": {
+   "n": "Railway City Brewing Co.",
+   "ig": "railwaycitybrewing",
+   "g": "ChIJAf1QSUJeLogRo5y4ThbMpLc",
+   "w": "http://railwaycitybrewing.com/",
+   "ws": 1
+  },
+  "cqr6992": {
+   "n": "Ramblin’ Road Brewery Farm",
+   "ig": "ramblinroadbeer",
+   "g": "ChIJowKAMfE2LIgRWhEU1wM3wko",
+   "w": "https://m.ramblinroad.ca/",
+   "ws": 1
+  },
+  "codrivw": {
+   "n": "Red Barn Brewing Company",
+   "ig": "redbarnbrewingcompany",
+   "g": "ChIJkZ_YtqP9L4gR9kqFn-qlnic",
+   "w": "https://www.redbarnbrewing.com/",
+   "ws": 1
+  },
+  "cs08v40": {
+   "n": "Refined Fool Brewing Co.",
+   "ig": "refinedfool",
+   "g": "ChIJn-F0kG2DJYgRnhlRKpEhhxM",
+   "w": "https://www.refinedfool.com/",
+   "ws": 1
+  },
+  "c4vy4io": {
+   "n": "Rouge River Brewing",
+   "ig": "rougeriverbrewery",
+   "g": "ChIJe-P5bD7W1IkR1YLHSE901-M",
+   "w": "https://rougeriverbrewingcompany.com/",
+   "ws": 1
+  },
+  "c74167i": {
+   "n": "Sassy Britches Brewing Co.",
+   "ig": "sassybritchesbrewing",
+   "g": "ChIJVcxT-e5pLIgRc7TNKS1pQBY"
+  },
+  "c6709r8": {
+   "n": "Sawdust City Brewing",
+   "ig": "sawdustcitybeer",
+   "g": "ChIJraT-E_qaKk0RceWwXFn9C7c",
+   "w": "https://sawdustcitybeer.com/",
+   "ws": 1
+  },
+  "c72dkom": {
+   "n": "Slake Brewing",
+   "ig": "slakebrewing",
+   "g": "ChIJrzzomBDL14kRXxTOEN3kEN4",
+   "w": "https://slakebrewing.com/",
+   "ws": 1
+  },
+  "c4dcpuu": {
+   "n": "Sons of Kent Brewing Company",
+   "ig": "sonsofkent",
+   "g": "ChIJ1Xum31b4L4gR1hZH5pRwDyA",
+   "w": "https://www.sonsofkent.com/",
+   "ws": 1
+  },
+  "ce501vo": {
+   "n": "Soo Falls Brewing Company",
+   "ig": "soofallsbrewingco",
+   "g": "ChIJazYnTAA5Nk0RYZwaieqnUQI",
+   "w": "https://soofallsbrewery.com/",
+   "ws": 1
+  },
+  "cfllztk": {
+   "n": "Spark Beer",
+   "ig": "spark.beer",
+   "g": "ChIJL1iVH_gFzkwRDuH2m-g_R7M",
+   "w": "https://spark.beer/",
+   "ws": 1
+  },
+  "c378fgv": {
+   "n": "Split Rail Brewing Company",
+   "ig": "splitrailbrewingco",
+   "g": "ChIJIYTB1FgoMk0RCPDgQufWyAY",
+   "w": "https://splitrailmanitoulin.com/",
+   "ws": 1
+  },
+  "cdvxl9h": {
+   "n": "Stack Brewing",
+   "ig": "stackbrewing",
+   "g": "ChIJlfbhcxABL00Rnp3um69Euk8",
+   "w": "https://stackbrewing.ca/",
+   "ws": 1
+  },
+  "crf7bvz": {
+   "n": "Steel Wheel Brewery",
+   "ig": "steelwheelbrewery",
+   "g": "ChIJDw9gxOpkLIgR7PjvLg-sUys",
+   "w": "https://steelwheel.ca/",
+   "ws": 1
+  },
+  "c6jaemc": {
+   "n": "Stonehooker Brewing Company",
+   "ig": "stonehookerbeer",
+   "g": "ChIJI-qhSyhGK4gRbxl_BSDoH-M",
+   "w": "https://www.stonehooker.com/",
+   "ws": 1
+  },
+  "c76r7u7": {
+   "n": "Stonepicker Brewery",
+   "g": "ChIJSwhBoRNvL4gRb5ZT4rgs0vk"
+  },
+  "cyjtwwx": {
+   "n": "Stray Dog Brewing Company",
+   "ig": "straydogbrewingco",
+   "g": "ChIJE1rmnOoTzkwRllkb6pWG33U",
+   "w": "https://straydogbrewing.ca/",
+   "ws": 1
+  },
+  "cfr05b2": {
+   "n": "The Second Wedge Brewing Co.",
+   "ig": "foundrykitchen",
+   "g": "ChIJFUL3LVk51YkRCB0FLhgT_UM",
+   "w": "https://thesecondwedge.ca/",
+   "ws": 1
+  },
+  "clfprs1": {
+   "n": "Three Sheets Brewing",
+   "ig": "threesheetscraftbrewing",
+   "g": "ChIJ3Xw_ks7JKYgRVClPPpMcflM",
+   "w": "https://threesheetsbrewing.ca/",
+   "ws": 1
+  },
+  "cjlfb9z": {
+   "n": "Tooth and Nail Brewing Company",
+   "ig": "toothandnailbeer",
+   "g": "ChIJT_28uDgEzkwRHTRNezw9L9A",
+   "w": "https://toothandnailbeer.com/",
+   "ws": 1
+  },
+  "co8mqrb": {
+   "n": "Top Dog Brewing Company",
+   "ig": "topdogbrew",
+   "g": "ChIJsQzWt_3DOogR0yAa-W3lgkk",
+   "w": "https://topdogbrew.ca/",
+   "ws": 1
+  },
+  "c83gcv5": {
+   "n": "Torched Brewing",
+   "ig": "torchedbrewing",
+   "g": "ChIJ-UCkjTw7L4gRa0uVTjBAIoQ",
+   "w": "https://torchedbrewing.com/",
+   "ws": 1
+  },
+  "ciue6xg": {
+   "n": "Trestle Brewing Company",
+   "ig": "trestlebrewery",
+   "g": "ChIJXXzPnJG6K00RBHRNomtALNc",
+   "w": "https://trestlebrewing.com/",
+   "ws": 1
+  },
+  "con3wy2": {
+   "n": "True History Brewing",
+   "ig": "truehistorybrewing",
+   "g": "ChIJk740iHQ1K4gRQzVe6mGfL7M",
+   "w": "https://truehistorybeer.com/",
+   "ws": 1
+  },
+  "cuebcpe": {
+   "n": "Upper Thames Brewing Co.",
+   "ig": "upperthamesbrewing",
+   "g": "ChIJjWJMySwfLIgR7CGaXoKrJ8w",
+   "w": "https://upperthamesbrewing.ca/",
+   "ws": 1
+  },
+  "cjj5qc1": {
+   "n": "Vimy Brewing Company",
+   "ig": "food_without_borders_ott",
+   "g": "ChIJDUHDuzcEzkwRP4D-u9MaEIk",
+   "w": "https://www.vimybrewing.ca/",
+   "ws": 1
+  },
+  "cov07zq": {
+   "n": "Wave Maker Craft Brewery",
+   "ig": "wavemakerbrew",
+   "g": "ChIJH0h0JF-JK4gR5rsg2qBBsRM",
+   "w": "https://wavemakerbrewery.com/",
+   "ws": 1
+  },
+  "clbr6nc": {
+   "n": "Whiprsnapr Brewing Co.",
+   "g": "ChIJHagLgKIAzkwRlkpc-eHR2to",
+   "w": "https://www.whiprsnaprbrewingco.com/",
+   "ws": 1
+  },
+  "cty4efj": {
+   "n": "Whiskeyjack Beer Company",
+   "ig": "whiskeyjackbeerco",
+   "g": "ChIJYTDvyjFvJk0RayNxNp1WHMQ",
+   "w": "https://www.whiskeyjackbeer.ca/",
+   "ws": 1
+  },
+  "cu6kr2b": {
+   "n": "Whitewater Brewing Company",
+   "ig": "whitewaterbrewingco",
+   "g": "ChIJmRxR0N9s0UwRUZ1VZj16Ups"
+  },
+  "c727c0y": {
+   "n": "Willibald Farm Distillery & Brewery",
+   "ig": "drinkwillibald",
+   "g": "ChIJKSn54xBzLIgR1bVmGCC83KI",
+   "w": "https://www.drinkwillibald.com/",
+   "ws": 1
+  },
+  "cl98p1d": {
+   "n": "Windmill Brewery",
+   "ig": "windmillbrewery",
+   "g": "ChIJ5fg_zN6rzUwRGTXWdYCh1rg",
+   "w": "https://windmill.beer/",
+   "ws": 1
+  },
+  "cww5d4k": {
+   "n": "Wishbone Brewing",
+   "ig": "wishbonebrews",
+   "g": "ChIJ4WAPyx1FLIgRQA8XzwPs1Lw",
+   "w": "https://www.wishbonebrews.com/",
+   "ws": 1
+  },
+  "c7gjzr1": {
+   "n": "Blue Mountain Brewing Co.",
+   "ig": "bluemountainbrewingco",
+   "g": "ChIJ7y05qpB1KogRV4FxNaLclwk",
+   "w": "https://bluemountainbrewingco.com/",
+   "ws": 1
+  },
+  "ckxpneu": {
+   "n": "Magnotta Brewery",
+   "ig": "magnottawinery",
+   "g": "ChIJ2eZxBJovK4gRBvh0F4AwRg8",
+   "w": "https://magnottabrewery.com/",
+   "ws": 1
+  },
+  "ca83106": {
+   "n": "Niagara Brewing Company",
+   "ig": "niagarabrewingcompany",
+   "g": "ChIJWZAagxlD04kRzchnfvQhRaI",
+   "w": "https://niagarabrewingcompany.com/",
+   "ws": 1
+  },
+  "c27anvf": {
+   "n": "The Grove Brewing Company",
+   "ig": "kingston_brew_pub",
+   "g": "ChIJDWPGNvmq0kwR9UB6zRMi0-k",
+   "w": "https://mygrovebrewhouse.com/",
+   "ws": 1
+  },
+  "cjz7sm2": {
+   "n": "Town Brewery",
+   "ig": "townbrewery",
+   "g": "ChIJmTLUyP3h1IkRArt5na2B464",
+   "w": "https://townbrewery.ca/",
+   "ws": 1
+  },
+  "ch7nqre": {
+   "n": "Maclean’s Ales Inc.",
+   "ig": "macleansales"
+  },
+  "crl6waa": {
+   "n": "Quetico Brewing Company",
+   "ig": "thewanigan",
+   "g": "ChIJwVkF0smHo1IR7iIsebLuoCI",
+   "w": "https://www.queticobrewingcompany.com/",
+   "ws": 1
+  },
+  "c87ey19": {
+   "n": "33 Brewing Experiment",
+   "ig": "33acresbrewing",
+   "g": "ChIJDXwc1vxzhlQRc5P8lnlzJCQ"
+  },
+  "c3b9q1j": {
+   "n": "3 Dogs Brewing",
+   "ig": "3dogsbrewing",
+   "g": "ChIJjaMYTHzDhVQR5nZDpaBL3Ac",
+   "w": "https://www.3dogsbrewing.ca/",
+   "ws": 1
+  },
+  "cwidudr": {
+   "n": "4 Mile Brewing",
+   "ig": "4milebrewingco",
+   "g": "ChIJv1xCmSZzj1QRJtjJHZIi0LQ"
+  },
+  "ck3nq4p": {
+   "n": "Abandoned Rail Brewing Co.",
+   "ig": "abandonedrailbrewco",
+   "g": "ChIJcUt-JDRjglQR-mD82CnlV4A",
+   "w": "https://arbrewco.com/",
+   "ws": 1
+  },
+  "chxyywo": {
+   "n": "Ace Brewing",
+   "ig": "acebrewingcompany",
+   "g": "ChIJc3oGF7kViFQRReEBIpfSx2U",
+   "w": "https://acebrewing.ca/",
+   "ws": 1
+  },
+  "catgaj9": {
+   "n": "A-FRAME Brewing",
+   "ig": "aframebrewing",
+   "g": "ChIJWfWLslr4hlQRQUnKlF6YW7k",
+   "w": "https://www.aframebrewing.com/",
+   "ws": 1
+  },
+  "c4yopw0": {
+   "n": "Alberni Brewing Co.",
+   "ig": "albernibrewing",
+   "g": "ChIJv3OeWD73iFQRgooTA6pZWAw",
+   "w": "https://albernibrewingcompany.ca/",
+   "ws": 1
+  },
+  "c96famt": {
+   "n": "Angry Hen Brewing",
+   "ig": "angryhenbrewing",
+   "g": "ChIJjSGsY0ppe1MRzPjejqZqCz4",
+   "w": "https://angryhenbrewing.com/",
+   "ws": 1
+  },
+  "cfmfhx9": {
+   "n": "Backcountry Brewing",
+   "ig": "backcountrybrewing",
+   "g": "ChIJMfFiM1H4hlQRv7L0vYx2meE",
+   "w": "https://www.backcountrybrewing.com/",
+   "ws": 1
+  },
+  "chwgxxh": {
+   "n": "Backroads Brewing Company",
+   "ig": "backroadsbrewing",
+   "g": "ChIJKSIM36W2fFMRQU_1YO4g0HU",
+   "w": "https://backroadsbrewing.com/",
+   "ws": 1
+  },
+  "crc3z2": {
+   "n": "Backroads Brewing – Osoyoos",
+   "ig": "backroadsbrewing",
+   "g": "ChIJI6G5xxPFglQRLSwqZlFyFk4",
+   "w": "https://backroadsbrewing.com/",
+   "ws": 1
+  },
+  "cljv1zb": {
+   "n": "Bad Dog Brewing",
+   "ig": "baddogbrewingco",
+   "g": "ChIJBSXZG9kaj1QRK3rNWKJ3_yY",
+   "w": "https://www.baddogbrewing.ca/",
+   "ws": 1
+  },
+  "ctnlwuv": {
+   "n": "Barkerville Brewing",
+   "ig": "barkervillebeer",
+   "g": "ChIJTx6oEwAPh1MRHoadqCTuMNU",
+   "w": "https://barkervillebeer.com/",
+   "ws": 1
+  },
+  "c507x5z": {
+   "n": "Barley Mill Brew Pub",
+   "ig": "barleymillpubpenticton",
+   "g": "ChIJWScpIZWJglQR7-vPV_MVllI",
+   "w": "https://www.barleymillpub.com/",
+   "ws": 1
+  },
+  "ct57n7h": {
+   "n": "Barley Station Brew Pub",
+   "ig": "barleystation",
+   "g": "ChIJeWeU7Qf1flMR6PuPALBKbOA"
+  },
+  "cs0hmrp": {
+   "n": "Barn Owl Brewing",
+   "ig": "barnowlbrew",
+   "g": "ChIJ9Zv-pNmLfVMRN3_QAmbkAe0",
+   "w": "https://www.barnowlbrewing.ca/",
+   "ws": 1
+  },
+  "cpwmjh": {
+   "n": "Barnside Brewing",
+   "ig": "barnsidebrewing",
+   "g": "ChIJv2qlmGvfhVQRgFImVfipGog",
+   "w": "https://barnsidebrewing.ca/",
+   "ws": 1
+  },
+  "c5r32nm": {
+   "n": "Bayview Brewing Company",
+   "ig": "bayviewbrewing",
+   "g": "ChIJq172bmitiFQRTMn98Ll0Q8Q"
+  },
+  "crdmhbm": {
+   "n": "Beach Fire Brewing",
+   "ig": "beachfirebrewing",
+   "g": "ChIJUXO26hevYlQRQQkwSJor7oM",
+   "w": "https://beachfirebrewing.ca/",
+   "ws": 1
+  },
+  "c4ovo69": {
+   "n": "Beacon Brewing",
+   "ig": "beacon.brewing",
+   "g": "ChIJycRMkOFnj1QR6sxX0-Vlowc",
+   "w": "https://beaconbrewing.ca/",
+   "ws": 1
+  },
+  "c2836c6": {
+   "n": "Beard’s Brewing",
+   "ig": "beards.brewing",
+   "g": "ChIJD4pUNpI2klMRyNrojP1a15A",
+   "w": "https://www.beardsbrewing.ca/",
+   "ws": 1
+  },
+  "cns78z1": {
+   "n": "Beere Brewing Company",
+   "ig": "beerebrewingco",
+   "g": "ChIJ73lUQ1JwhlQRklBeXyfwvv4",
+   "w": "https://www.beerebrewing.com/",
+   "ws": 1
+  },
+  "c9xgbco": {
+   "n": "Beva Brewing & Blending",
+   "ig": "bevabrewing",
+   "g": "ChIJZVTJmVFxhlQRXen3iMjGHt4",
+   "w": "https://www.bevabrewing.ca/",
+   "ws": 1
+  },
+  "c72h9db": {
+   "n": "Black Kettle Brewing",
+   "ig": "blackkettlebrewing",
+   "g": "ChIJTfoa7MpxhlQRPNYeSnPchvI",
+   "w": "https://www.blackkettlebrewing.com/",
+   "ws": 1
+  },
+  "c8yw33x": {
+   "n": "BNA Brewing Co. – Kelowna",
+   "ig": "bnabrewing",
+   "g": "ChIJU8_-SV_zfVMRyzs2b6C4Kps",
+   "w": "https://www.bnabrewing.com/",
+   "ws": 1
+  },
+  "cvwb1ln": {
+   "n": "BNA Brewing Co. – Vernon",
+   "ig": "bnabrewing",
+   "g": "ChIJHzVViN_YfVMR2jFMLZJkFzU"
+  },
+  "cttmq2t": {
+   "n": "Bomber Brewing",
+   "ig": "bomberbrewing",
+   "g": "ChIJLbqGBRVxhlQR0gqm395It_c",
+   "w": "https://bomberbrewing.com/",
+   "ws": 1
+  },
+  "c7hbfao": {
+   "n": "Brassneck Brewery",
+   "ig": "brassneckbrew",
+   "g": "ChIJh5IG619xhlQRC2qFug3XR8Y",
+   "w": "https://brassneck.ca/",
+   "ws": 1
+  },
+  "cjgkpo9": {
+   "n": "Brewing August",
+   "ig": "brewingaugust",
+   "g": "ChIJD2LiYXFxhlQRfK9tJsUPZRk",
+   "w": "https://brewingaugust.com/",
+   "ws": 1
+  },
+  "c7jkch": {
+   "n": "Bridge Brewing Company",
+   "ig": "bridgebrewcrew",
+   "g": "ChIJ67olRJtwhlQR_VR0S96yej4",
+   "w": "https://www.bridgebrewing.com/",
+   "ws": 1
+  },
+  "cmjvp7m": {
+   "n": "Bright Eye Brewing",
+   "ig": "brighteyebrewing",
+   "g": "ChIJwSnULBjTf1MROgEQG__Y-KU",
+   "w": "https://www.brighteyebrewing.com/",
+   "ws": 1
+  },
+  "c3c7032": {
+   "n": "Brookswood Brewing Co.",
+   "ig": "brookswoodbrewingco",
+   "g": "ChIJiYUUSkTPhVQRDfLgVd0Y-l8",
+   "w": "https://brookswoodbrewing.com/",
+   "ws": 1
+  },
+  "c35zt3n": {
+   "n": "Buffalo Rouge Brewing",
+   "ig": "buffalo.rouge.brewing",
+   "g": "ChIJx-qLJdnzfVMR4iHvoKqnBpk"
+  },
+  "c3h29ok": {
+   "n": "Camp Beer Co.",
+   "ig": "campbeerco",
+   "g": "ChIJbdOmv0bRhVQRGSFHIn2KbUM",
+   "w": "https://www.campbeer.ca/",
+   "ws": 1
+  },
+  "cclsekl": {
+   "n": "Cannery Brewing",
+   "ig": "cannerybrewing",
+   "g": "ChIJGzE8gd2JglQRjxNqSlCQCkk",
+   "w": "https://cannerybrewing.com/",
+   "ws": 1
+  },
+  "cfk6vg6": {
+   "n": "Cask and Cleaver Brewing",
+   "ig": "caskandcleaver",
+   "g": "ChIJfY-38d9tgFMRF29VCOVpqM0",
+   "w": "https://www.caskandcleaver.com/",
+   "ws": 1
+  },
+  "cjyml59": {
+   "n": "Category 12 Brewing",
+   "ig": "c12beer",
+   "g": "ChIJOzLKV_Juj1QR7yR2qDX27gs",
+   "w": "https://www.category12beer.com/",
+   "ws": 1
+  },
+  "co7qquo": {
+   "n": "Checkerhead Brewing",
+   "ig": "checkerheadbrewing",
+   "g": "ChIJ13ZsKRQdj1QRCA0CqrXvNJ0",
+   "w": "https://www.checkerheadbrewing.com/",
+   "ws": 1
+  },
+  "cih4rja": {
+   "n": "Coast Mountain Brewing",
+   "ig": "coastmountainbeer",
+   "g": "ChIJV3Qwz1I9h1QRnRKJghKgbVw",
+   "w": "https://www.coastmountainbrewing.com/",
+   "ws": 1
+  },
+  "c8nlvb": {
+   "n": "Container Brewing",
+   "ig": "containerbrewing",
+   "g": "ChIJow5AEGtxhlQRkHg2-erMH-s",
+   "w": "https://drinkcontainer.beer/",
+   "ws": 1
+  },
+  "ciukva7": {
+   "n": "Copper Brewing Co.",
+   "ig": "copperbrewing",
+   "g": "ChIJwcLqoIqNfVMRFdV0hiMmvbs",
+   "w": "https://copperbrewingco.com/",
+   "ws": 1
+  },
+  "csy8zf5": {
+   "n": "Craig Street Brewing",
+   "g": "ChIJoUFII1lPj1QRZpxtDIs5DE8",
+   "w": "https://csbrewery.ca/",
+   "ws": 1
+  },
+  "cb95u24": {
+   "n": "Cumberland Brewing Company",
+   "ig": "cumberlandbrewingcompany",
+   "g": "ChIJgf_uukkViFQR5Juv3kBd1sc",
+   "w": "https://cumberlandbrewing.com/",
+   "ws": 1
+  },
+  "chue56g": {
+   "n": "Cutwater Brewing and Lounge",
+   "ig": "cutwaterbrewery",
+   "g": "ChIJV750FuDvfVMRxxHhJouIiww",
+   "w": "https://www.cutwaterbrewing.com/",
+   "ws": 1
+  },
+  "c100vpr": {
+   "n": "Dageraad Brewing",
+   "ig": "popular",
+   "g": "ChIJkyUvUCt4hlQRrnIySefoEPo",
+   "w": "https://dageraadbrewing.com/",
+   "ws": 1
+  },
+  "cnj0vth": {
+   "n": "Deadfall Brewing Company",
+   "ig": "deadfallbrewco",
+   "g": "ChIJb2MPUe2ZiFMRci-md9vZsm8",
+   "w": "https://www.deadfallbrewing.com/",
+   "ws": 1
+  },
+  "cigyfh1": {
+   "n": "Dead Frog Brewery",
+   "ig": "deadfrogbrewery",
+   "g": "ChIJy959zY_MhVQRUVlvBhv2o3g",
+   "w": "https://www.deadfrog.ca/",
+   "ws": 1
+  },
+  "cng0zl0": {
+   "n": "Deadhead Brew Co.",
+   "ig": "deadheadbrewco",
+   "g": "ChIJyb7CF4FFj1QRbWLzbHImP2Y",
+   "w": "https://deadheadbrew.co/",
+   "ws": 1
+  },
+  "ch3mi36": {
+   "n": "Detonate Brewing Company",
+   "ig": "detonatebrewing",
+   "g": "ChIJhYht4SgLglQRkuPxT0ptPIE",
+   "w": "https://www.detonatebrew.com/",
+   "ws": 1
+  },
+  "c7uc0d": {
+   "n": "Devil’s Bath Brewing",
+   "ig": "devilsbathbrewingco",
+   "g": "ChIJyS2RwHF5Y1QRx-L5szcQLto",
+   "w": "https://devilsbathbrewing.ca/",
+   "ws": 1
+  },
+  "cor38o0": {
+   "n": "Dog Mountain Brewing",
+   "ig": "andmanrocks",
+   "g": "ChIJU4Htw_b3iFQRP8XdKmUC6OQ",
+   "w": "https://dogmountainbrew.com/",
+   "ws": 1
+  },
+  "clpnn4g": {
+   "n": "Driftwood Brewery",
+   "ig": "driftwoodbrewery",
+   "g": "ChIJwyqnanxzj1QR7Lx4kVxauGo",
+   "w": "https://driftwoodbeer.ca/",
+   "ws": 1
+  },
+  "cn82d3h": {
+   "n": "East Vancouver Brewing Company",
+   "ig": "eastvanbrewing",
+   "g": "ChIJRSiiiBVxhlQRzQymByrAcbQ",
+   "w": "https://www.eastvanbrewing.com/",
+   "ws": 1
+  },
+  "cr4deum": {
+   "n": "Empty Keg Brew House",
+   "g": "ChIJe86cEjmRgVQRbNdl8Q5XG38",
+   "ig": "emptykegbrewhouse",
+   "w": "https://www.emptykegbrewhouse.ca/",
+   "ws": 1
+  },
+  "calnsqr": {
+   "n": "Encore Brewing Company",
+   "ig": "encorebeer",
+   "g": "ChIJsy_ghxnZZFMR-fuAsMMeeXQ",
+   "w": "https://www.encorebrewing.ca/",
+   "ws": 1
+  },
+  "ce5myzg": {
+   "n": "Faculty Brewing Co.",
+   "ig": "facultybrewing",
+   "g": "ChIJoWDqymFxhlQRnZeT-3SwVdI",
+   "w": "https://www.facultybrewing.com/",
+   "ws": 1
+  },
+  "ceoc3rr": {
+   "n": "Farm Country Brewing",
+   "ig": "farmcountrybrewco",
+   "g": "ChIJMS4oWcfPhVQRAZm5-MkkNUM",
+   "w": "https://farmcountrybrewing.com/",
+   "ws": 1
+  },
+  "c9zcurv": {
+   "n": "Farmhouse Abby",
+   "ig": "farmhousebrewingco",
+   "g": "ChIJC19tr-dLhFQRb4wRFjF4-Lo"
+  },
+  "c5ndfmk": {
+   "n": "Farmhouse Brewing Co.",
+   "ig": "farmhousebrewingco",
+   "g": "ChIJdaFvI1dHhFQRbhI-9R93TOs",
+   "w": "https://farmhousebrewing.co/",
+   "ws": 1
+  },
+  "cyj57mk": {
+   "n": "Fern + Cedar Brewing",
+   "ig": "fernandcedarbrewing",
+   "g": "ChIJE879pf6PiFQR4fS5VAaC5s0",
+   "w": "https://fernandcedar.ca/",
+   "ws": 1
+  },
+  "c9c5vlb": {
+   "n": "Fernie Brewing Co.",
+   "ig": "ferniebrewingco",
+   "g": "ChIJp5Mf1OZrZVMRuGe_2QoBrD8",
+   "w": "https://ferniebrewing.com/",
+   "ws": 1
+  },
+  "cua4sqm": {
+   "n": "Field House Brewing – Chilliwack",
+   "ig": "fieldhousebrewing",
+   "g": "ChIJPwud2KRBhFQRrIEvWVdWP6I",
+   "w": "https://fieldhousebrewing.beer/",
+   "ws": 1
+  },
+  "ccci4o2": {
+   "n": "Field House Brewing – Abbotsford",
+   "ig": "fieldhousebrewing",
+   "g": "ChIJZ-Gd_JpKhFQRmbm-ugbAFE4",
+   "w": "https://fieldhousebrewing.beer/",
+   "ws": 1
+  },
+  "cpeeq8h": {
+   "n": "Firehall Brewery",
+   "ig": "firehallbrewery",
+   "g": "ChIJv1ie3TfqglQRCyZbOKQz9eM",
+   "w": "https://www.firehallbrewery.com/",
+   "ws": 1
+  },
+  "c7sz0mq": {
+   "n": "Fisher Peak Brewing",
+   "ig": "theheidout",
+   "g": "ChIJK5OgNTPfZFMR10vEWyOIc-o",
+   "w": "https://www.fisherpeakbrewing.com/",
+   "ws": 1
+  },
+  "c1krrg0": {
+   "n": "Five Roads Brewing",
+   "ig": "fiveroadsbrewingco",
+   "g": "ChIJId6EDE3RhVQR2sYjIi95coc"
+  },
+  "cxpv6im": {
+   "n": "Foamers’ Folly Brewing",
+   "ig": "foamersfollybrewing",
+   "g": "ChIJb_eZYkfUhVQRJN_wjEiuom0",
+   "w": "https://foamersfolly.ca/",
+   "ws": 1
+  },
+  "cqed56z": {
+   "n": "Four Winds Beach House & Brewery",
+   "ig": "fourwindsbrewco",
+   "g": "ChIJb8FXdLnnhVQR5wbLrwH_ua8",
+   "w": "https://fourwindsbrewing.ca/",
+   "ws": 1
+  },
+  "cpkrexw": {
+   "n": "Four Winds Brewing Co.",
+   "ig": "fourwindsbrewco",
+   "g": "ChIJZRCfNqzfhVQRnZQLx8RuhhU",
+   "w": "https://fourwindsbrewing.ca/",
+   "ws": 1
+  },
+  "c2aemvc": {
+   "n": "Fox Mountain Brewing Co.",
+   "ig": "fox.mountain.brewing",
+   "g": "ChIJb-1oCT-jgFMRs59DuuOtKo4",
+   "w": "https://www.foxmountainbeer.com/",
+   "ws": 1
+  },
+  "cwi76qj": {
+   "n": "Freddy’s Brewpub",
+   "ig": "o1",
+   "g": "ChIJ1QEMNUqNfVMRHLcobtzCIFU"
+  },
+  "cx9dym8": {
+   "n": "Fuggles Beer",
+   "ig": "fugglesbeer",
+   "g": "ChIJc5_ynXPghVQRAEBvAv7p3BI",
+   "w": "https://www.fugglesbeer.com/",
+   "ws": 1
+  },
+  "cwwjm2": {
+   "n": "Giant’s Head Brewing",
+   "ig": "giantshead_brewing",
+   "g": "ChIJ7-dT-YtlglQRURnTnXPi0wU",
+   "w": "https://www.giantsheadbrewing.ca/",
+   "ws": 1
+  },
+  "cjw7yxq": {
+   "n": "Gladstone Brewing",
+   "ig": "gladstonebrewingco",
+   "g": "ChIJv2hKN_UTiFQR-u06nECNShM",
+   "w": "https://www.gladstonebrewing.ca/",
+   "ws": 1
+  },
+  "cj2dm5w": {
+   "n": "Grey Fox Brewing",
+   "g": "ChIJbasG1o3vfVMRNeTk07pa-Vc",
+   "w": "https://www.greyfoxbrewing.com/",
+   "ws": 1
+  },
+  "cemsz6v": {
+   "n": "Grist & Mash Brewery",
+   "ig": "gristandmash",
+   "g": "ChIJLag0G9jVZFMRAb6vgtD3h4w"
+  },
+  "c2w2llh": {
+   "n": "Herald Street Brew Works",
+   "ig": "heraldstbw",
+   "g": "ChIJ-z-mobZ1j1QRHg9RSsorwOY",
+   "w": "https://www.heraldstreet.com/",
+   "ws": 1
+  },
+  "c8ptnou": {
+   "n": "Highway 97 Brewery",
+   "g": "ChIJz-i1IQ1iglQR6Owuit1jchs",
+   "w": "https://hwy97brewery.com/",
+   "ws": 1
+  },
+  "cdhnoui": {
+   "n": "Hop Creek Brewing",
+   "ig": "eathopcreek",
+   "g": "ChIJ7y1WSB_5hlQRyvJT04vqSVE",
+   "w": "https://hopcreekfarms.com/",
+   "ws": 1
+  },
+  "ckcq73o": {
+   "n": "Hornby Island Brewing Company",
+   "ig": "hornbyislandbrewingco",
+   "g": "ChIJgXwXceBliFQREK7Tg65-p8Y",
+   "w": "https://hornbyislandbrewing.ca/",
+   "ws": 1
+  },
+  "cg2y1q1": {
+   "n": "House of Lager Brewing Company",
+   "ig": "houseoflager",
+   "g": "ChIJOWiG7z75hlQR_R-L2_I7v74",
+   "w": "https://www.houseoflagerbrewing.com/",
+   "ws": 1
+  },
+  "ckkxgqw": {
+   "n": "Howe Sound Brewing",
+   "ig": "howesoundbrewing",
+   "g": "ChIJdRbLsRD4hlQRp-b5Ba1XQuo",
+   "w": "https://www.howesound.com/",
+   "ws": 1
+  },
+  "cod1vd": {
+   "n": "Hoyne Brewing",
+   "ig": "hoynebrewing",
+   "g": "ChIJEQnaP3xzj1QRM1BEb36e08c",
+   "w": "https://hoynebrewing.ca/",
+   "ws": 1
+  },
+  "c6bnbk7": {
+   "n": "Île Sauvage Brewing",
+   "ig": "ilesauvagebrewing",
+   "g": "ChIJL7dVaHlzj1QRTWN-eX1RVRQ",
+   "w": "https://ilesauvage.com/",
+   "ws": 1
+  },
+  "c9dozjh": {
+   "n": "Invermere Brewing Co.",
+   "ig": "invermerebrewing",
+   "g": "ChIJHShcz-BnelMRGYAUlXGYoeg",
+   "w": "https://invermerebrewing.com/",
+   "ws": 1
+  },
+  "cttsalr": {
+   "n": "Iron Road Brewing",
+   "ig": "ironroadbrewing",
+   "g": "ChIJyeQoWGAsflMRuhxniJICFpY",
+   "w": "https://www.ironroadbrewing.ca/",
+   "ws": 1
+  },
+  "crgb9m4": {
+   "n": "Jackknife Brewing",
+   "ig": "jackknifemenu",
+   "g": "ChIJseKqwjzzfVMRvXA0RNO8_hg",
+   "w": "https://jackknifebrewing.ambassador.ai/",
+   "ws": 1
+  },
+  "cyg1moy": {
+   "n": "Kelowna Beer Institute",
+   "ig": "kelownabeerinstitute",
+   "w": "https://kelownabeerinstitute.com/",
+   "ws": 1,
+   "lat": 49.888,
+   "lng": -119.4995,
+   "m": 1
+  },
+  "cftn0rd": {
+   "n": "Kettle River Brewing Co.",
+   "ig": "kettleriverbrew",
+   "g": "ChIJEVBDRFzzfVMRLeGnAC-Z7qU",
+   "w": "https://www.kettleriverbrewing.ca/",
+   "ws": 1
+  },
+  "cdj84nz": {
+   "n": "La Cerveceria Astilleros",
+   "ig": "lacerveceriaastilleros",
+   "g": "ChIJC5o8RMFxhlQRmOiXliayrvM",
+   "w": "https://cerveceria-astilleros.com/",
+   "ws": 1
+  },
+  "c3aifmp": {
+   "n": "Lakesider Brewing Co.",
+   "g": "ChIJ3_hoIX31fVMRaIfRNROBb3Q",
+   "ig": "lakesiderbeer",
+   "w": "https://lakesiderbrewing.com/",
+   "ws": 1
+  },
+  "c98eebn": {
+   "n": "Land & Sea Brewing",
+   "ig": "landandseabeer",
+   "g": "ChIJQa7M77UTiFQRdZr89tEmH4g",
+   "w": "https://www.landandseabrewing.ca/",
+   "ws": 1
+  },
+  "cwn1d58": {
+   "n": "Lillooet Brewing Company",
+   "ig": "lillooetbeer",
+   "g": "ChIJA-BxauyLgFQR0wiIt0zWrrA",
+   "w": "https://lillooetbrewing.com/",
+   "ws": 1
+  },
+  "c8rr34i": {
+   "n": "Locality Brewing",
+   "g": "ChIJr5_4FLbNhVQRm5DMnm7goRQ",
+   "w": "https://www.localitybrewing.ca/",
+   "ws": 1
+  },
+  "cerbzuu": {
+   "n": "Longwood Brewery on Boxwood Road",
+   "ig": "longwoodbrewery",
+   "g": "ChIJ2XrtqTGiiFQR3muu7vFu2-w",
+   "w": "https://www.longwoodbeer.com/",
+   "ws": 1
+  },
+  "c62e55r": {
+   "n": "Longwood Brew Pub & Restaurant",
+   "ig": "longwoodbrewpub",
+   "g": "ChIJiVwfALGYiFQRK1nGKlNYLdU",
+   "w": "https://longwoodbrewpubrestaurant.restaurants-us.com/",
+   "ws": 1
+  },
+  "ccxkfrk": {
+   "n": "LoveShack Libations",
+   "ig": "loveshacklibations_brewing",
+   "g": "ChIJF1GyKHeJiFQR6W--Dggfux4",
+   "w": "https://loveshacklibations.com/",
+   "ws": 1
+  },
+  "cs9dl18": {
+   "n": "Luppolo Brewing Company",
+   "ig": "luppolo_brewing",
+   "g": "ChIJUXG8GWtxhlQRs4D_Vz6KVAk",
+   "w": "https://www.luppolobrewing.ca/",
+   "ws": 1
+  },
+  "cz7yixo": {
+   "n": "Main St. Brewing",
+   "ig": "mainstreetbeer",
+   "g": "ChIJVRfsn19xhlQRz8RcxJPGDPU",
+   "w": "https://www.mainstreetbeer.ca/",
+   "ws": 1
+  },
+  "cypkn96": {
+   "n": "Mariner Brewing",
+   "ig": "marinerbeer",
+   "g": "ChIJ5djFj854hlQRGCw6qPkUe3o",
+   "w": "https://www.marinerbrewing.ca/",
+   "ws": 1
+  },
+  "crf8e3g": {
+   "n": "Mighty Peace Brewing",
+   "ig": "mightypeacebrewing",
+   "g": "ChIJd8aT6ZE2klMRl014P4IVHeA",
+   "w": "https://www.mightypeacebrewing.com/",
+   "ws": 1
+  },
+  "c9dqj4m": {
+   "n": "Mile Zero Brewing",
+   "ig": "milezerobrewingca",
+   "g": "ChIJf-mg3-4Jj1QRrfYNC00qwi0",
+   "w": "https://www.milezerobrewing.ca/",
+   "ws": 1
+  },
+  "cc7gdqz": {
+   "n": "Mountainview Brewing",
+   "ig": "mtnviewbrewing",
+   "g": "ChIJFWyHg_v1g1QRxpwBAM87sGA",
+   "w": "https://mountainviewbrewing.ca/",
+   "ws": 1
+  },
+  "cnz303d": {
+   "n": "Mount Arrowsmith Brewing",
+   "ig": "mabrewing",
+   "g": "ChIJfZg1tVCFiFQRMoymZN-Bd9U",
+   "w": "https://arrowsmithbrewing.com/",
+   "ws": 1
+  },
+  "cinn35w": {
+   "n": "Mt. Begbie Brewing",
+   "ig": "mtbegbiebeer",
+   "g": "ChIJf9pVfA83eVMRvB41UhLwi5w"
+  },
+  "ctp5hkk": {
+   "n": "Nakusp Brewing Company",
+   "ig": "nakuspbrewingco",
+   "g": "ChIJ8dJkYJ1xfFMR9cvQmXkJJ7Q",
+   "w": "https://www.nakuspbrewing.ca/",
+   "ws": 1
+  },
+  "cml1ec0": {
+   "n": "Neighbourhood Brewing",
+   "ig": "nbhdbeer",
+   "g": "ChIJY5h1OnxjglQRX1oyNv9DhY8",
+   "w": "https://neighbourhoodbrewing.com/",
+   "ws": 1
+  },
+  "cqtqoyc": {
+   "n": "Nelson Brewing Company",
+   "ig": "nelsonbrewingcompany",
+   "g": "ChIJBWtb6ae2fFMRAuY1AXVclPw",
+   "w": "https://nelsonbrewing.com/",
+   "ws": 1
+  },
+  "car8t9s": {
+   "n": "North Point Brewing",
+   "ig": "northpointbrewing",
+   "g": "ChIJjV0RvwlxhlQRbj9m4rm6EII",
+   "w": "https://www.northpointbrewing.com/",
+   "ws": 1
+  },
+  "cwwbtjq": {
+   "n": "Off The Rail Brewing Co.",
+   "ig": "offtherailbeer",
+   "g": "ChIJ_0Bj3xRxhlQR92iSWFFLwmk",
+   "w": "https://offtherailbrewing.com/",
+   "ws": 1
+  },
+  "cal1ohu": {
+   "n": "Old Yale Brewing – Abbotsford",
+   "ig": "oldyalebrewing",
+   "g": "ChIJF3WGh0xLhFQRw0fLBUa-WRQ",
+   "w": "https://www.oldyalebrewing.com/",
+   "ws": 1
+  },
+  "cw1l8wu": {
+   "n": "Old Yale Brewing – Chilliwack",
+   "ig": "oldyalebrewing",
+   "g": "ChIJlSEHq-NDhFQRHI80FrvkkSk",
+   "w": "https://www.oldyalebrewing.com/",
+   "ws": 1
+  },
+  "cncp33i": {
+   "n": "Over Time Beer Works",
+   "ig": "overtimebeer",
+   "g": "ChIJSfLCCfrUZFMRGpTmaSq1uaA",
+   "w": "https://www.overtimebeer.ca/",
+   "ws": 1
+  },
+  "cm3coic": {
+   "n": "Patina Brewing Co.",
+   "ig": "patinabrewing",
+   "g": "ChIJIabL_DN5hlQRqmpjDO2HihY",
+   "w": "https://patinabrewing.com/",
+   "ws": 1
+  },
+  "cn67w7l": {
+   "n": "Pemberton Brewing",
+   "ig": "pembertonbrewingco",
+   "g": "ChIJm06ZV9s0h1QRvMh9IrvUyKA",
+   "w": "https://www.pembertonbrewing.ca/",
+   "ws": 1
+  },
+  "ce45up6": {
+   "n": "Persephone Brewing Company",
+   "ig": "persephonebrewing",
+   "g": "ChIJ58-0PZg_hlQR2mYXtdtKOLg",
+   "w": "https://www.persephonebrewing.com/",
+   "ws": 1
+  },
+  "cinahj": {
+   "n": "Phillips Brewing & Malting",
+   "ig": "phillipsbeer",
+   "g": "ChIJNSg5Pmhzj1QROlX1DD5Wxps",
+   "w": "https://www.phillipsbeer.com/",
+   "ws": 1
+  },
+  "ckcsvmt": {
+   "n": "Poco Brothers Brewing Co.",
+   "g": "ChIJh6CLUpbXhVQR7e1wOGfsv40",
+   "ig": "hastingsmillbrewingco"
+  },
+  "cbdfw71": {
+   "n": "Post & Row Brewing Co.",
+   "ig": "postandrow",
+   "g": "ChIJKbpnZlCZkVMRQ9B0nL5P3Z0",
+   "w": "https://postandrow.ca/",
+   "ws": 1
+  },
+  "c3wsyur": {
+   "n": "Powell Brewery",
+   "ig": "powellbeer",
+   "g": "ChIJ8d6cpxBxhlQRfK0TULeZq2g",
+   "w": "https://www.powellbeer.com/",
+   "ws": 1
+  },
+  "ch0knvc": {
+   "n": "RAD Brewing",
+   "ig": "radbrewcomox",
+   "g": "ChIJ4w4PgE0TiFQRDvvh4lxaB5U",
+   "w": "https://radbrewco.com/",
+   "ws": 1
+  },
+  "cpl75ic": {
+   "n": "Radium Brewing",
+   "ig": "radiumbrewing",
+   "g": "ChIJt6AYuR5velMROazwQysqSXM",
+   "w": "https://www.radiumbrewing.ca/",
+   "ws": 1
+  },
+  "cifozcf": {
+   "n": "Railside Brewing",
+   "ig": "railsidebrewingkelowna",
+   "g": "ChIJu5SEW-zzfVMRLs2cZZSnqOE",
+   "w": "https://railsidebrewing.ca/",
+   "ws": 1
+  },
+  "cz6gykc": {
+   "n": "R&B Brewing",
+   "ig": "rbbrewing",
+   "g": "ChIJFw7ZEGBxhlQRbkip7_rmQxo",
+   "w": "https://www.randbbrewing.com/",
+   "ws": 1
+  },
+  "c7yoyom": {
+   "n": "Red Arrow Brewing",
+   "ig": "redarrowbeer",
+   "g": "ChIJyWZZzO5Fj1QRH6vJ4hIfNkg",
+   "w": "https://redarrowbeer.ca/",
+   "ws": 1
+  },
+  "c3qegs2": {
+   "n": "Red Bird Brewing",
+   "ig": "redbirdbeer",
+   "g": "ChIJ1ZMJO1zzfVMRFlW6B0mdbd0",
+   "w": "https://www.redbirdbrewing.com/",
+   "ws": 1
+  },
+  "cvzgigz": {
+   "n": "Red Collar Brewing",
+   "ig": "redcollarbrewing",
+   "g": "ChIJg-AIHqstflMROGenQoz5UbE",
+   "w": "https://www.redcollar.ca/",
+   "ws": 1
+  },
+  "cmpjiow": {
+   "n": "Revystoked Brewing Company",
+   "ig": "revystoked",
+   "g": "ChIJM9o0CbI3eVMRjwvH28Uug7o",
+   "w": "https://www.revystoked.com/",
+   "ws": 1
+  },
+  "c7536xp": {
+   "n": "Rewind Beer Co.",
+   "ig": "rewindbeerco",
+   "g": "ChIJcwowAbN5hlQR_b4D4cqcTQE",
+   "w": "https://rewindbeer.com/",
+   "ws": 1
+  },
+  "cd175os": {
+   "n": "Ricochet Brewing and Taphouse",
+   "ig": "bcaletrail",
+   "g": "ChIJAW5tTnX3flMRZNj5hy5MrWA",
+   "w": "https://ricochetbrewing.com/",
+   "ws": 1
+  },
+  "ca87p84": {
+   "n": "Rossland Beer Company",
+   "ig": "rosslandbeerco",
+   "g": "ChIJyRp7dZHaYlMReTcOZiRvVZk",
+   "w": "https://rosslandbeer.com/",
+   "ws": 1
+  },
+  "c618lhd": {
+   "n": "Rumpus Beer Co.",
+   "ig": "rumpus_taplist",
+   "g": "ChIJr7KwNf83eVMR4YVPKOCDbvI",
+   "w": "https://www.rumpusbeerco.com/",
+   "ws": 1
+  },
+  "cb791ba": {
+   "n": "Rusted Rake Brewing",
+   "ig": "lesthehouseguy",
+   "g": "ChIJeVWBND6aiFQRMdZKl-LOzUQ"
+  },
+  "c1351ng": {
+   "n": "Rustic Reel Brewing Co.",
+   "ig": "rusticreel",
+   "g": "ChIJBfHk2QTzfVMRa2ejxTtIJM0",
+   "w": "https://rusticreel.com/",
+   "ws": 1
+  },
+  "ceu5lbl": {
+   "n": "Serious Brewing Company",
+   "ig": "seriousbrewingcompany",
+   "g": "ChIJnalP6tpTj1QRKRjpe5ku7Qk"
+  },
+  "ceagmkz": {
+   "n": "Shaketown Brewing",
+   "ig": "shaketownbeer",
+   "g": "ChIJcw_PCjBxhlQRTr6AjkzvAOA",
+   "w": "https://shaketownbrewing.com/",
+   "ws": 1
+  },
+  "cessdo9": {
+   "n": "Sherwood Mountain Brewhouse",
+   "ig": "sherwoodmountainbrewhouse",
+   "g": "ChIJbVDwI_SZdFQRvHVviJTahes",
+   "w": "https://www.sherwoodmountain.beer/",
+   "ws": 1
+  },
+  "cp3e00b": {
+   "n": "Sidekick Brewing",
+   "ig": "sidekickbrewing",
+   "g": "ChIJtYU3sMtHhFQRPGbA4xpCxLY",
+   "w": "https://www.sidekickbrewing.com/",
+   "ws": 1
+  },
+  "crlkb4c": {
+   "n": "Side Quest Brewing Co.",
+   "g": "ChIJO99vJ47VhVQRGOVICFxjs3s",
+   "w": "https://sidequestbrewing.ca/",
+   "ws": 1
+  },
+  "cnalcan": {
+   "n": "Silverstar Brewing Company",
+   "ig": "silverstarbrewing",
+   "g": "ChIJE9R165bZfVMRhEaUloMOaoo"
+  },
+  "c92m1kl": {
+   "n": "Slow Hand Beer Company",
+   "ig": "slowhandbeer",
+   "g": "ChIJZY5rxj9xhlQR6XfiumuplI0",
+   "w": "https://www.slowhandbeer.com/",
+   "ws": 1
+  },
+  "cpbbv9": {
+   "n": "Small Gods Brewing",
+   "ig": "smallgodsbrewing",
+   "g": "ChIJZVTyafxnj1QR4hzDhRGHgZU",
+   "w": "https://smallgods.ca/",
+   "ws": 1
+  },
+  "crbbcpg": {
+   "n": "Smithers Brewing Company",
+   "ig": "smithersbrewing",
+   "g": "ChIJ_Q_I62IJdVQRaEG0BoYjawU",
+   "w": "https://smithersbrewing.com/",
+   "ws": 1
+  },
+  "cvqensi": {
+   "n": "Smugglers Trail Caskworks",
+   "ig": "smugglerstrail",
+   "g": "ChIJvwuJ2KPPhVQRtZxzkIyjdBg",
+   "w": "https://smugglerstrailcask.com/",
+   "ws": 1
+  },
+  "c12rspe": {
+   "n": "Sooke Oceanside Brewery",
+   "ig": "sookebrew",
+   "g": "ChIJkdIrdJgPj1QRJ7lt0lQ26MM",
+   "w": "https://www.sookeoceansidebrewery.com/",
+   "ws": 1
+  },
+  "cj630yt": {
+   "n": "Spinnakers Brewpub",
+   "ig": "spinnakersbrewpub",
+   "g": "ChIJ8UwCKJ50j1QRykJnBrbQRM0",
+   "w": "https://www.spinnakers.com/",
+   "ws": 1
+  },
+  "ch4m00z": {
+   "n": "Steamworks Brew Pub",
+   "ig": "steamworksbeer",
+   "g": "ChIJNXC5QXhxhlQRaqLfMpShR-k"
+  },
+  "cfk3zv9": {
+   "n": "Steamworks Burnaby Brewery & Taproom",
+   "ig": "steamworksbeer",
+   "g": "ChIJl5V96yVxhlQR7qWve-u8UHQ"
+  },
+  "c68kwi4": {
+   "n": "Steel & Oak Brewing",
+   "ig": "steelandoak",
+   "g": "ChIJNX84k3vYhVQRv8Jpfh_DJMA",
+   "w": "https://www.steelandoak.ca/",
+   "ws": 1
+  },
+  "ccjtlgf": {
+   "n": "Storm Brewing",
+   "ig": "stormbrewing",
+   "g": "ChIJzUaT0RZxhlQR391Xa27Iklo",
+   "w": "https://www.stormbrewing.org/",
+   "ws": 1
+  },
+  "c7rimhu": {
+   "n": "Strange Fellows Brewing",
+   "ig": "strangefellowsbrewing",
+   "g": "ChIJpwbgtEFxhlQRE-QxNGY40wo",
+   "w": "https://strangefellowsbrewing.com/",
+   "ws": 1
+  },
+  "casgft1": {
+   "n": "Strathcona Beer Co.",
+   "ig": "strathconabeer",
+   "g": "ChIJ5RKyJG1xhlQRCRMrZwEMF6o",
+   "w": "https://strathconabeer.com/",
+   "ws": 1
+  },
+  "c3mkmwt": {
+   "n": "Strathcona North",
+   "ig": "strathconabeer",
+   "g": "ChIJ_Tr1jwJxhlQRGATBGtYhTks"
+  },
+  "c1yqnrw": {
+   "n": "Superflux Beer Co.",
+   "g": "ChIJ0wQb_bFxhlQR8_3KkEW69Ww",
+   "ig": "superfluxbeer",
+   "w": "https://www.superfluxbeer.com/",
+   "ws": 1
+  },
+  "cy083q8": {
+   "n": "Swift Brewing Company",
+   "ig": "swiftbeer",
+   "g": "ChIJP_iHpR91j1QRJBim7ZpksZI",
+   "w": "https://swiftbrewing.ca/",
+   "ws": 1
+  },
+  "cg3tqr8": {
+   "n": "Switchback Brewing",
+   "ig": "switchbackbrewingcanada",
+   "g": "ChIJY17PelnThVQRrhmto4KOstA",
+   "w": "https://www.switchbackbrewco.com/",
+   "ws": 1
+  },
+  "c9nyhlv": {
+   "n": "Tailout Brewing",
+   "ig": "tailoutbrewing",
+   "g": "ChIJ15_19ggrY1MRtBftutU8fJU",
+   "w": "https://tailoutbrewing.com/",
+   "ws": 1
+  },
+  "c4qv1py": {
+   "n": "Tapworks Brewing Company",
+   "ig": "tapworksbrewing",
+   "g": "ChIJd3ec6cU_hlQR_1dYfs2QBEE",
+   "w": "https://gibsonstapworks.com/",
+   "ws": 1
+  },
+  "cfb3fz9": {
+   "n": "Taylight Brewing",
+   "ig": "taylight_dt",
+   "g": "ChIJDTg_Co3VhVQRWV2G33F7PZw",
+   "w": "https://taylightbrewing.com/",
+   "ws": 1
+  },
+  "cpxs18p": {
+   "n": "The 101 Brewhouse + Distillery",
+   "ig": "the101gibsons",
+   "g": "ChIJVVUBRbQ_hlQRvUVgovgY9Ac"
+  },
+  "csuyfcs": {
+   "n": "The Beer Farmers",
+   "ig": "thebeerfarmers",
+   "g": "ChIJe2x38XlLh1QRCjJC6duYXA0",
+   "w": "https://www.thebeerfarmers.com/",
+   "ws": 1
+  },
+  "c1i14n2": {
+   "n": "The Hatching Post",
+   "ig": "thehatchingpost",
+   "g": "ChIJdy1xUXmLfVMRgCB6Lor-I5k",
+   "w": "https://hatchingpostbeer.com/",
+   "ws": 1
+  },
+  "caoqsmm": {
+   "n": "The Noble Pig Brewhouse",
+   "ig": "thenoblepigbrew",
+   "g": "ChIJs0nm_6stflMRgc4qmKO6qpc",
+   "w": "https://www.thenoblepig.ca/",
+   "ws": 1
+  },
+  "c96am85": {
+   "n": "The Office Brewery",
+   "ig": "theofficebrewery",
+   "g": "ChIJwf0dwxTzfVMRlksoATzo6r8",
+   "w": "https://www.officebrewery.ca/",
+   "ws": 1
+  },
+  "cxu3a9y": {
+   "n": "The Parkside Brewery",
+   "ig": "parksidebrewery",
+   "g": "ChIJiz3ACOJ4hlQRbQlY-GBo7ts",
+   "w": "https://www.theparksidebrewery.com/",
+   "ws": 1
+  },
+  "clxpilg": {
+   "n": "The Patch Brewery",
+   "ig": "thepatchbrewery",
+   "g": "ChIJzb9EUWHVhVQRpcAQHoq8ORc",
+   "w": "https://thepatchbrewery.com/",
+   "ws": 1
+  },
+  "ctjxd08": {
+   "n": "Three Lakes Brewing",
+   "ig": "threelakesbrewing",
+   "g": "ChIJaREaDqDtfVMRcN7S43qidXI",
+   "w": "https://threelakesbrewing.com/",
+   "ws": 1
+  },
+  "cfh4hx4": {
+   "n": "Tinhouse Brewing",
+   "ig": "tinhousebrewing",
+   "g": "ChIJx6DhQe7VhVQResk-r3oC4FI",
+   "w": "https://www.tinhousebrewing.ca/",
+   "ws": 1
+  },
+  "cbz1dpe": {
+   "n": "Tin Whistle Brewing",
+   "ig": "tinwhistlebrewing",
+   "g": "ChIJ1f-AHw1iglQR0xLquHl8JVM",
+   "w": "https://www.tinwhistlebrewery.com/",
+   "ws": 1
+  },
+  "cqm66ip": {
+   "n": "Tlell River Brewing Co.",
+   "ig": "tlellriverbrewing",
+   "g": "ChIJl5fh4UQvbVQRyMFNpWSmS4A",
+   "w": "https://www.kettleriverbrewing.ca/",
+   "ws": 1
+  },
+  "cfaowr5": {
+   "n": "Tofino Brewing Co.",
+   "ig": "tofinobrewco",
+   "g": "ChIJyzthr7SQiVQRmNgwOuBA1-A",
+   "w": "https://tofinobrewingco.com/",
+   "ws": 1
+  },
+  "ckzbndb": {
+   "n": "Townsite Brewing",
+   "ig": "townsitebrewing",
+   "g": "ChIJ-Yw9Ohnkh1QR0sV9kzFGCSM",
+   "w": "https://townsitebrewing.com/",
+   "ws": 1
+  },
+  "cdqd2sq": {
+   "n": "Trading Post Brewing",
+   "ig": "tradingpostbrewing",
+   "g": "ChIJ42eOUwDRhVQRudikCyz_Qbc",
+   "w": "https://www.tradingpostbrewing.com/",
+   "ws": 1
+  },
+  "c6b5pju": {
+   "n": "Train Wreck Brewing",
+   "ig": "trainwreckbrewingltd",
+   "g": "ChIJ9YHP8sx5hlQRlfkl-hoL9Nc",
+   "w": "https://trainwreckbrewing.ca/",
+   "ws": 1
+  },
+  "cn6124k": {
+   "n": "Trench Brewing & Distilling",
+   "ig": "trenchbrewing_distilling",
+   "g": "ChIJMeo4MOiYiFMRmcP_mHi3EeM",
+   "w": "https://www.trenchbrew.ca/",
+   "ws": 1
+  },
+  "ch2fegc": {
+   "n": "Twin City Brewing Co.",
+   "ig": "twincitybrewing",
+   "g": "ChIJcdZj3Bz3iFQRAvkXORERObM",
+   "w": "https://twincitybrewing.ca/",
+   "ws": 1
+  },
+  "c6ulat6": {
+   "n": "Two Peaks Brewing",
+   "ig": "twopeaksbrewing",
+   "g": "ChIJbUEgkjmbc1QR2tSeJdhq_90",
+   "w": "https://twopeaksbrewing.ca/",
+   "ws": 1
+  },
+  "cwnpf10": {
+   "n": "Ucluelet Brewing Company",
+   "ig": "uclueletbrewingco",
+   "g": "ChIJHzsxDr1ziVQRplBCFQArTW8",
+   "w": "https://www.uclueletbrewing.ca/",
+   "ws": 1
+  },
+  "cytaukr": {
+   "n": "Unleashed Brewing Co.",
+   "ig": "unleashedbrewingco",
+   "g": "ChIJ7fZnahjzfVMRs_Su1Dgq0To",
+   "w": "https://unleashedbrewing.ca/",
+   "ws": 1
+  },
+  "cpyr04o": {
+   "n": "Vancouver Island Brewing",
+   "ig": "whistlebuoybrewing",
+   "g": "ChIJL7dVaHlzj1QRTWN-eX1RVRQ",
+   "w": "https://www.vibrewing.com/",
+   "ws": 1
+  },
+  "ctl6tu8": {
+   "n": "Vice & Virtue Brewing",
+   "ig": "viceandvirtuebeer",
+   "g": "ChIJfVoNS1zzfVMRvkIV5mEYAWA",
+   "w": "https://www.viceandvirtuebrewing.ca/",
+   "ws": 1
+  },
+  "cinrxy3": {
+   "n": "Way Back Brew Co.",
+   "ig": "waybackbrewco",
+   "g": "ChIJ0TEDmePbhVQRcKjHgevNf2I",
+   "w": "https://www.waybackbrewco.com/",
+   "ws": 1
+  },
+  "cgi8ad0": {
+   "n": "Wheelhouse Brewing Company",
+   "ig": "wheelhousebeer",
+   "g": "ChIJi7Fo4WvVclQRNBPoIVUrLck",
+   "w": "https://www.wheelhousebrewing.com/",
+   "ws": 1
+  },
+  "cwanbx9": {
+   "n": "Whistle Buoy Brewing Co.",
+   "ig": "whistlebuoybrewing",
+   "g": "ChIJ61dBEBx1j1QRzxHNrrR-tQI",
+   "w": "https://whistlebuoybrewing.com/",
+   "ws": 1
+  },
+  "cs7w6rw": {
+   "n": "Whistler Brewing Company",
+   "ig": "whistlerbrewing",
+   "g": "ChIJYw2jzKwih1QR-Tw5H57pDIQ",
+   "w": "https://www.whistlerbeer.com/",
+   "ws": 1
+  },
+  "c3yfgn5": {
+   "n": "White Rock Beach Beer Company",
+   "ig": "wrbeachbeer",
+   "g": "ChIJRzQ3EHzDhVQR4tsKSXmhsl4",
+   "w": "http://whiterockbeachbeer.com/",
+   "ws": 1
+  },
+  "ckogeev": {
+   "n": "White Sails Brewing",
+   "ig": "whitesailsbrewing",
+   "g": "ChIJF2DZ316hiFQRAvOZsZn6g1s",
+   "w": "https://whitesailsbrewing.com/",
+   "ws": 1
+  },
+  "ct0ggzd": {
+   "n": "Whitetooth Brewing Co.",
+   "ig": "whitetoothbrew",
+   "g": "ChIJ_8FtJZy_eVMRRqORXH1Fjhs",
+   "w": "https://www.whitetoothbrewing.com/",
+   "ws": 1
+  },
+  "cg33p26": {
+   "n": "Wildeye Brewing",
+   "ig": "wildeyebrewing",
+   "g": "ChIJEX6HuPtxhlQR0ApQVM_tI3k",
+   "w": "https://www.wildeyebrewing.ca/",
+   "ws": 1
+  },
+  "cys0pa8": {
+   "n": "Wild North Brewing Co.",
+   "ig": "o1",
+   "g": "ChIJa4EwQRxjY1MRQpNmn1oS-9c",
+   "w": "https://www.wildnorthbrewery.ca/",
+   "ws": 1
+  },
+  "cvh0wst": {
+   "n": "Wolf Brewing Company",
+   "ig": "wolfbrewingcompany",
+   "g": "ChIJTQD5MxCkiFQR_TzWU6X4Cg8",
+   "w": "https://www.wolfbrewingcompany.com/",
+   "ws": 1
+  },
+  "cqsnprw": {
+   "n": "Yellow Dog Brewing",
+   "ig": "yellowdogbeer",
+   "g": "ChIJp60T8eF4hlQRsJQ1TXY3lc0",
+   "w": "https://yellowdogbeer.com/",
+   "ws": 1
+  },
+  "cjbz2q0": {
+   "n": "Yellow Dog Brewing – Penticton",
+   "ig": "yellowdogbeer",
+   "g": "ChIJBVhnh-BjglQREQ-HVBL7fZQ",
+   "w": "https://yellowdogbeer.com/",
+   "ws": 1
+  },
+  "ctlrhf7": {
+   "n": "Ancient Hill Estate Winery",
+   "g": "ChIJlZQXKgTtfVMRsGrJaaDqWdw",
+   "w": "https://ancienthillwinery.com/",
+   "ws": 1
+  },
+  "c6iegyx": {
+   "n": "Apricus Cellars",
+   "ig": "apricuscellars",
+   "w": "https://apricuscellars.com/",
+   "ws": 1
+  },
+  "cwacdkh": {
+   "n": "Arrowleaf Cellars",
+   "ig": "arrowleafcellars",
+   "g": "ChIJjxMxGe9y6lIRHd_N2-BIrtU",
+   "w": "https://www.arrowleafcellars.com/",
+   "ws": 1
+  },
+  "cisrny6": {
+   "n": "Azhadi Vineyards",
+   "ig": "azhadivineyards",
+   "w": "https://azhadivineyards.com/",
+   "ws": 1
+  },
+  "cvxoizg": {
+   "n": "Bartier Bros. Vineyard and Winery",
+   "ig": "bartierbros",
+   "g": "ChIJKdO_7AzCglQR00lVM6BbeEk",
+   "w": "https://bartierbros.com/",
+   "ws": 1
+  },
+  "cmb9imv": {
+   "n": "BC Wine Studio",
+   "ig": "bcwinestudio",
+   "g": "ChIJmSwQPZeSglQR46erJ5XOyx4",
+   "w": "https://bcwinestudio.ca/",
+   "ws": 1
+  },
+  "ckvzqyg": {
+   "n": "Bench 1775 Winery",
+   "ig": "bench1775winery",
+   "g": "ChIJSwX60C5jglQRBTIZ-BQmzIU",
+   "w": "https://www.bench1775.com/",
+   "ws": 1
+  },
+  "c8bambx": {
+   "n": "Black Hills Estate Winery",
+   "ig": "blackhillswinery",
+   "g": "ChIJbRL3Z0nCglQR6RiBa3GqibM",
+   "w": "https://www.blackhillswinery.com/",
+   "ws": 1
+  },
+  "crgkl3v": {
+   "n": "Black Market Wine Co.",
+   "ig": "blackmarketwineco",
+   "g": "ChIJB6DJBLKLglQRhaoWcdn4OqU",
+   "w": "https://blackmarketwine.ca/",
+   "ws": 1
+  },
+  "ctucp2b": {
+   "n": "Black Swift Vineyards",
+   "ig": "blackswiftvineyards",
+   "w": "https://blackswiftvineyards.com/",
+   "ws": 1
+  },
+  "cmgeqwt": {
+   "n": "Black Widow Winery",
+   "ig": "blackwidowwine",
+   "g": "ChIJG78e_ddiglQR7GSPfd9Non0",
+   "w": "https://www.blackwidowwinery.com/",
+   "ws": 1
+  },
+  "cgn52bq": {
+   "n": "Blasted Church Vineyards",
+   "ig": "blastedchurch",
+   "g": "ChIJocv8NT6MglQRvgbQEVc8b74",
+   "w": "https://blastedchurch.com/",
+   "ws": 1
+  },
+  "c7gv0m1": {
+   "n": "Bonamici Cellars",
+   "ig": "bonamicicellars",
+   "g": "ChIJrVPvgXuTglQRxN3lfw9dUKY",
+   "w": "https://www.bonamicicellars.com/",
+   "ws": 1
+  },
+  "c9g2l5h": {
+   "n": "Bordertown Vineyards & Estate Winery",
+   "ig": "bordertownwine",
+   "g": "ChIJC-DxgVLEglQRmZxwKfh9yto",
+   "w": "https://bordertownwinery.com/",
+   "ws": 1
+  },
+  "cwrt31v": {
+   "n": "Canter Cellars",
+   "ig": "cantercellars",
+   "w": "https://www.cantercellars.com/",
+   "ws": 1
+  },
+  "ci7c75q": {
+   "n": "Cassini Cellars",
+   "g": "ChIJr1LNDwDDglQRb1LJURJmgRg",
+   "w": "http://www.cassini.ca/",
+   "ws": 1
+  },
+  "c3fsemc": {
+   "n": "Castoro de Oro Estate Winery",
+   "g": "ChIJtR_hkarDglQRL1RqgSOaycs",
+   "w": "https://www.castorodeorowinery.com/",
+   "ws": 1
+  },
+  "cyjeonz": {
+   "n": "Chain Reaction Winery",
+   "ig": "chainreactionwine",
+   "g": "ChIJeQyxtD9jglQRyiqj7aySw8I",
+   "w": "https://www.chainreactionwine.com/",
+   "ws": 1
+  },
+  "cxnvffu": {
+   "n": "CheckMate Artisanal Winery",
+   "ig": "checkmatewinery",
+   "g": "ChIJ-bDyG3nCglQRmOmN4KmyXCE",
+   "w": "https://www.checkmatewinery.com/",
+   "ws": 1
+  },
+  "chymj30": {
+   "n": "Chronos Winery",
+   "ig": "chronoswine"
+  },
+  "chtud6c": {
+   "n": "Church & State Wines – Oliver",
+   "ig": "churchandstatewines",
+   "g": "ChIJOQcGuzfqglQRMAwLFIpUMJs",
+   "w": "https://churchandstatewines.com/",
+   "ws": 1
+  },
+  "cwittk6": {
+   "n": "",
+   "hc": 1
+  },
+  "cez0aff": {
+   "n": "Crescent Hill Winery",
+   "ig": "crescenthillwinery",
+   "g": "ChIJNdzU-JyJglQRtfWPjQ7LMfE",
+   "w": "https://crescenthillwinery.com/",
+   "ws": 1
+  },
+  "cj0ib4r": {
+   "n": "Crown & Thieves Winery",
+   "ig": "crownthieves",
+   "w": "https://crownthieves.com/",
+   "ws": 1
+  },
+  "cbd9r5j": {
+   "n": "Culmina Family Estate Winery",
+   "ig": "culminawinery",
+   "g": "ChIJ8wqDdnjCglQR7q3OI31Qwb0",
+   "w": "https://www.culmina.ca/",
+   "ws": 1
+  },
+  "cxj6pky": {
+   "n": "D’Angelo Estate Winery",
+   "ig": "dangeloestatewinery",
+   "g": "ChIJIwTUt8FiglQRHwuO7wzsQH0",
+   "w": "https://www.dangelowinery.com/",
+   "ws": 1
+  },
+  "c3o17ew": {
+   "n": "Da Silva Vineyards and Winery",
+   "ig": "user",
+   "g": "ChIJCx6_EqBjglQRdc-JbRS6wIQ",
+   "w": "https://dasilvavineyards.com/",
+   "ws": 1
+  },
+  "ct7yx6y": {
+   "n": "Daydreamer Wines",
+   "ig": "daydreamerwines",
+   "g": "ChIJnyTsQ8ViglQRxw0mJHOb14U",
+   "w": "https://daydreamerwines.ca/",
+   "ws": 1
+  },
+  "ct3b5j5": {
+   "n": "Deep Roots Winery",
+   "ig": "deeprootswinery",
+   "g": "ChIJRXspRKp8glQRIkfIEcg3g2w",
+   "w": "https://www.deeprootswinery.com/",
+   "ws": 1
+  },
+  "cvctp5i": {
+   "n": "Dirty Laundry Winery",
+   "ig": "dirtylaundrywinery",
+   "g": "ChIJEytU7HtkglQRK8WJFnnP_30"
+  },
+  "cqdozqp": {
+   "n": "Domaine Artema",
+   "ig": "domaineartemawinery",
+   "w": "https://www.domaineartema.ca/",
+   "ws": 1
+  },
+  "c7drw9f": {
+   "n": "Eau Vivre Winery – District Wine Village",
+   "ig": "districtwinevillage",
+   "g": "ChIJ8cb792frglQR3MuFYgWV0ME",
+   "w": "https://districtwinevillage.com/",
+   "ws": 1
+  },
+  "cdvxemw": {
+   "n": "Elephant Island Winery",
+   "ig": "elephantislwine",
+   "g": "ChIJmRExIEZ7glQRDF7IW9j2sXM",
+   "w": "https://elephantislandwine.com/",
+   "ws": 1
+  },
+  "cgcf17": {
+   "n": "Evolve Sparkling House",
+   "ig": "chronoswine",
+   "g": "ChIJ17CGVXtjglQRGJpJD86sGHw"
+  },
+  "cldc4or": {
+   "n": "Ex Nihilo Vineyards",
+   "ig": "exnihilowines",
+   "g": "ChIJF1vaHQvvfVMRY72f06orj5Q",
+   "w": "https://www.exnihilovineyards.com/",
+   "ws": 1
+  },
+  "c8zsoqp": {
+   "n": "Fairview Cellars",
+   "ig": "o1",
+   "g": "ChIJhQOQgZDpglQRh493Z3aPpwE",
+   "w": "https://www.fairviewcellars.ca/",
+   "ws": 1
+  },
+  "c9nfnqh": {
+   "n": "Foolish Wine",
+   "ig": "foolishwine",
+   "g": "ChIJ8yiaoV7rglQRnCJt7l92jqw",
+   "w": "https://www.foolishwine.com/",
+   "ws": 1
+  },
+  "co1hnp": {
+   "n": "Four Shadows Vineyard & Winery",
+   "ig": "fourshadowswinery",
+   "w": "https://fourshadowsvineyard.com/",
+   "ws": 1
+  },
+  "cojljr2": {
+   "n": "Fox & Archer Winery",
+   "ig": "foxandarcherwines",
+   "w": "https://foxandarcherwines.com/",
+   "ws": 1
+  },
+  "cyy0a7t": {
+   "n": "Garnet Valley Ranch Winery",
+   "ig": "okcrushpad",
+   "g": "ChIJ36KnBwBvglQRJzfoy6L5Z6g"
+  },
+  "c54xxoo": {
+   "n": "Gehringer Brothers Estate Winery",
+   "ig": "gbwines",
+   "g": "ChIJqV5K0zfqglQRSIwAOmBOHB8",
+   "w": "https://www.gehringerwines.ca/",
+   "ws": 1
+  },
+  "cpzdogf": {
+   "n": "Gneiss Wines",
+   "ig": "spectrawinery",
+   "w": "https://www.gneisswines.com/",
+   "ws": 1
+  },
+  "cycfm7t": {
+   "n": "Gold Hill Winery",
+   "ig": "goldhillwinery",
+   "g": "ChIJN-76dmTEglQRwsRoafpIiQY",
+   "w": "https://www.goldhillwinery.com/",
+   "ws": 1
+  },
+  "c5eku94": {
+   "n": "Grizzli Winery",
+   "ig": "grizzliwinery",
+   "g": "ChIJ7Whuji31fVMR_OnysdvEzg8",
+   "w": "https://www.grizzliwinery.com/",
+   "ws": 1
+  },
+  "cemhprz": {
+   "n": "Hainle Vineyards Estate Winery",
+   "ig": "hainlewinery",
+   "g": "ChIJX1mwQmlzglQRRfL_WclgGmk",
+   "w": "https://hainle.com/",
+   "ws": 1
+  },
+  "cvqzl40": {
+   "n": "Haywire Winery",
+   "ig": "haywirewine",
+   "g": "ChIJP-dZJj1lglQRYcH5Kxr0BV0",
+   "w": "https://haywirewinery.com/",
+   "ws": 1
+  },
+  "cpvua4v": {
+   "n": "Heaven’s Gate Estate Winery",
+   "ig": "heavensgatewinery",
+   "g": "ChIJp9YjkI5kglQRcwXWCeqKc3Q",
+   "w": "https://heavensgatewinery.com/",
+   "ws": 1
+  },
+  "cb14icv": {
+   "n": "Hidden Vines Family Estate Winery",
+   "ig": "hiddenvineswinery",
+   "w": "https://hiddenvines.ca/",
+   "ws": 1
+  },
+  "cbeuaqk": {
+   "n": "Hillside Winery",
+   "ig": "hillsidewinery",
+   "g": "ChIJfUfmAtpiglQRDFpmEatGVcI",
+   "w": "https://www.hillsidewinery.ca/",
+   "ws": 1
+  },
+  "ccs4kmr": {
+   "n": "Inniskillin Okanagan Vineyards",
+   "ig": "inniskillinwines",
+   "g": "ChIJQx9T4WXrglQRoESUgk-CrLM"
+  },
+  "cv4jcsl": {
+   "n": "Intersection Estate Winery",
+   "ig": "goxwine",
+   "g": "ChIJ63DT4-yDC0ERYbv5rPB1U_Y"
+  },
+  "c23jgbf": {
+   "n": "Intrigue Wines",
+   "ig": "intriguewines",
+   "g": "ChIJJbBp-GjvfVMR8CqXzDCA7cY",
+   "w": "https://www.intriguewines.com/",
+   "ws": 1
+  },
+  "cawt53q": {
+   "n": "Jackson-Triggs Okanagan Estate",
+   "ig": "jacksontriggs",
+   "g": "ChIJN9bRUmTrglQRJaCT8A5QgY4",
+   "w": "https://www.jacksontriggswinery.com/",
+   "ws": 1
+  },
+  "c14dsu5": {
+   "n": "JoieFarm",
+   "ig": "joiefarm",
+   "g": "ChIJoZAXnFd7glQR_D1BXSjJfO8",
+   "w": "https://joiefarm.com/",
+   "ws": 1
+  },
+  "cdyegn2": {
+   "n": "Kalala Organic Estate Winery",
+   "ig": "kalalawines",
+   "g": "ChIJHaso7yx1glQRxKP08W8-xwY",
+   "w": "https://www.kalala.ca/",
+   "ws": 1
+  },
+  "cq8v3z1": {
+   "n": "Kismet Estate Winery",
+   "ig": "kismetwines",
+   "g": "ChIJLf--11TCglQRGsUT1w5hKiI",
+   "w": "https://www.kismetestatewinery.com/",
+   "ws": 1
+  },
+  "ccee5u7": {
+   "n": "Lakeboat Vineyard & Winery",
+   "ig": "lakeboatwinery",
+   "w": "https://lakeboatwinery.com/",
+   "ws": 1
+  },
+  "capm0g7": {
+   "n": "Lake Breeze Vineyards",
+   "ig": "lakebreezevineyards",
+   "g": "ChIJjyu2vKp8glQRp2tiCm7tr4M",
+   "w": "https://www.lakebreeze.ca/",
+   "ws": 1
+  },
+  "c6dps10": {
+   "n": "Lakeside Cellars",
+   "ig": "lakesidecellars",
+   "g": "ChIJ0cjUstnFglQRi4c68fbqQkg",
+   "w": "https://lakesidecellars.ca/",
+   "ws": 1
+  },
+  "c1hszav": {
+   "n": "Lang Vineyards",
+   "ig": "langvineyards",
+   "g": "ChIJ-Vk17q58glQRJUTFsweED1I",
+   "w": "https://langvineyards.ca/",
+   "ws": 1
+  },
+  "cunjhie": {
+   "n": "Lariana Cellars",
+   "ig": "larianacellars",
+   "g": "ChIJDY7a337FglQRSgUh1GczQ9k"
+  },
+  "coacetg": {
+   "n": "LaStella Winery",
+   "ig": "levieuxpin",
+   "g": "ChIJbZ_lFGbEglQRLsHuo72dFhQ",
+   "w": "https://lastella.ca/",
+   "ws": 1
+  },
+  "ckv2w8e": {
+   "n": "Laughing Stock Vineyards",
+   "ig": "lfngwine",
+   "g": "ChIJzUrOktdiglQRYpNALNW3_5Y",
+   "w": "https://www.laughingstock.ca/",
+   "ws": 1
+  },
+  "cnn76sl": {
+   "n": "Le Vieux Pin Winery",
+   "ig": "levieuxpin",
+   "g": "ChIJS-ZjPQ_qglQRIvqIl4rfYcM",
+   "w": "https://levieuxpin.ca/",
+   "ws": 1
+  },
+  "ct7edpm": {
+   "n": "Lightning Rock Winery",
+   "ig": "lightningrockwinery",
+   "g": "ChIJ20AL895lglQR9IMlX0mbkQA",
+   "w": "https://lightningrockwinery.com/",
+   "ws": 1
+  },
+  "c70kbbr": {
+   "n": "Liquidity Wines",
+   "ig": "liquiditywines",
+   "g": "ChIJO0fBXISSglQRatgt7pnBKLA",
+   "w": "https://www.liquiditywines.com/",
+   "ws": 1
+  },
+  "chwcazn": {
+   "n": "Little Straw Vineyards Estate Winery",
+   "ig": "littlestrawvineyards",
+   "g": "ChIJwRA6qcyKfVMReagd7qzBSao",
+   "w": "https://littlestraw.bc.ca/",
+   "ws": 1
+  },
+  "cf2vutq": {
+   "n": "Lunessence Winery & Vineyard",
+   "ig": "lunessencewine",
+   "g": "ChIJQbCJuo5kglQRhEKkb5HENQQ",
+   "w": "https://lunessencewinery.com/",
+   "ws": 1
+  },
+  "cjzbw1r": {
+   "n": "Martin’s Lane Winery",
+   "ig": "martinslanewinery",
+   "g": "ChIJ_8lq2vN1glQRATm5B30b2OE",
+   "w": "https://www.martinslanewinery.com/",
+   "ws": 1
+  },
+  "cag4db4": {
+   "n": "Meyer Family Vineyards",
+   "ig": "mfvwines",
+   "g": "ChIJwUlScHGNglQRqyHrLlxrFuc"
+  },
+  "cr084o1": {
+   "n": "Modesta Winery",
+   "ig": "modestawinery",
+   "g": "ChIJefKsptV9glQR39AgO0SKLkw",
+   "w": "https://www.modestawinery.ca/",
+   "ws": 1
+  },
+  "ca4psep": {
+   "n": "Mayhem Wines",
+   "ig": "mayhemwine",
+   "w": "https://mayhemwines.com/",
+   "ws": 1
+  },
+  "cg119kk": {
+   "n": "Moon Curser Vineyards",
+   "ig": "mooncurservineyards",
+   "g": "ChIJW5A9qNvFglQRt2NAhu0qtUc",
+   "w": "https://www.mooncurser.com/",
+   "ws": 1
+  },
+  "c3ierr5": {
+   "n": "Moraine Estate Winery",
+   "ig": "morainewinery",
+   "g": "ChIJp_Xn2i5jglQRyZNR1oQJUTU",
+   "w": "https://www.morainewinery.com/",
+   "ws": 1
+  },
+  "cwxd87g": {
+   "n": "Mt. Boucherie Estate Winery",
+   "ig": "mtboucheriewine",
+   "g": "ChIJsXOhic2KfVMRXIqJFVUpD_M",
+   "w": "https://mtboucherie.com/",
+   "ws": 1
+  },
+  "cfb9jg": {
+   "n": "Niche Wine Company",
+   "ig": "nichewineco",
+   "g": "ChIJa0HjiK71fVMRLi305UmZYpE",
+   "w": "https://nichewinecompany.com/",
+   "ws": 1
+  },
+  "cnc00fl": {
+   "n": "Nighthawk Vineyards",
+   "ig": "nighthawkvineyards",
+   "g": "ChIJ_xoJaUrtglQRSNDSfbRM2V4",
+   "w": "https://nighthawkvineyards.com/",
+   "ws": 1
+  },
+  "cepyz5m": {
+   "n": "Noble Ridge Vineyard & Winery",
+   "ig": "nobleridgewinery",
+   "g": "ChIJt4YVGJqSglQRqW3b095NKgY",
+   "w": "https://www.nobleridge.com/",
+   "ws": 1
+  },
+  "cu5lrdw": {
+   "n": "Mythology Vineyard",
+   "ig": "mythologywines",
+   "w": "https://www.mythologyvineyard.ca/",
+   "ws": 1
+  },
+  "c1yylx0": {
+   "n": "Nostalgia Wines",
+   "ig": "nostalgiawines",
+   "g": "ChIJh84bwOLpglQRWgJNsY6DhQY",
+   "w": "https://nostalgiawines.ca/",
+   "ws": 1
+  },
+  "cyl4qld": {
+   "n": "Nagging Doubt Winery",
+   "ig": "naggingdoubt"
+  },
+  "cyyb07t": {
+   "n": "Observatory Wines",
+   "ig": "observatory_wines",
+   "g": "ChIJUbECFg9lglQRIXvUyL-CDp4",
+   "w": "https://www.observatorywines.ca/",
+   "ws": 1
+  },
+  "co39nda": {
+   "n": "Off The Grid Organic Winery",
+   "ig": "otgowinery",
+   "g": "ChIJ2SLB9ix1glQRNFh5Xt8fHt8",
+   "w": "https://www.offthegridorganicwinery.com/",
+   "ws": 1
+  },
+  "c12bmhi": {
+   "n": "O’Rourke’s Family Estate",
+   "ig": "orourkefamilyestate",
+   "g": "ChIJ0Yt0BuvlfVMR-xRdoMJkssg"
+  },
+  "c30piw5": {
+   "n": "Osoyoos Larose Estate Winery",
+   "ig": "osoyooslarose",
+   "g": "ChIJbZ_lFGbEglQRLsHuo72dFhQ",
+   "fx": 1,
+   "w": "https://osoyooslarose.com/",
+   "ws": 1
+  },
+  "c1v76go": {
+   "n": "Phantom Creek Estates",
+   "ig": "phantomcreek",
+   "g": "ChIJUXiZWa7DglQRM1dKcxj2-DY",
+   "w": "https://phantomcreekestates.com/",
+   "ws": 1
+  },
+  "cuxmcb1": {
+   "n": "Priest Creek Family Estate Winery",
+   "ig": "priestcreek",
+   "g": "ChIJ8YWUnUmLfVMRYKgWxUIrL4Y",
+   "w": "https://www.priestcreekwinery.com/",
+   "ws": 1
+  },
+  "cw535vc": {
+   "n": "Quinta Ferreira Estate Winery",
+   "ig": "quintaferreira",
+   "g": "ChIJ1eklmUbqglQRwlVaTQz72i4",
+   "w": "https://www.quintaferreira.com/",
+   "ws": 1
+  },
+  "cx44jz9": {
+   "n": "Peak Cellars",
+   "ig": "peakcellars",
+   "w": "https://peakcellars.com/",
+   "ws": 1
+  },
+  "chwz4f6": {
+   "n": "Red Barn Winery",
+   "ig": "redbarnwines",
+   "g": "ChIJ7VFcecHDglQR3ZmfswC7IoQ",
+   "w": "https://www.redbarn.wine/",
+   "ws": 1
+  },
+  "ct0z20l": {
+   "n": "Red Rooster Winery",
+   "ig": "redroosterwine",
+   "g": "ChIJZxQ2lcBiglQRKcAQxr-GUn0",
+   "w": "https://redroosterwinery.com/",
+   "ws": 1
+  },
+  "cprv4rx": {
+   "n": "River Stone Estate Winery",
+   "ig": "drinkriverstone",
+   "g": "ChIJK7a8IwvrglQRcp0lw7wbL84",
+   "w": "https://www.riverstoneestatewinery.ca/",
+   "ws": 1
+  },
+  "cxl2sbb": {
+   "n": "Road 13 Vineyards",
+   "ig": "road13vineyards",
+   "g": "ChIJxZl0k3zCglQRvq8PW3ooZT8",
+   "w": "https://www.road13vineyards.com/",
+   "ws": 1
+  },
+  "cfsc04c": {
+   "n": "Roche Wines",
+   "ig": "rochewines",
+   "g": "ChIJmxzqkYNiglQR04MD_tRcUCU"
+  },
+  "c9pukp5": {
+   "n": "Ruby Blues Winery",
+   "ig": "rubyblueswinery",
+   "g": "ChIJ3aCt6cBiglQRfNk6LR5F3Dg",
+   "w": "https://www.rubyblueswinery.ca/",
+   "ws": 1
+  },
+  "cfbt9zz": {
+   "n": "Rust Wine Co.",
+   "ig": "rustwine",
+   "g": "ChIJhcGYIGHCglQRDW7wjhdsgbA",
+   "w": "https://www.rustwine.com/",
+   "ws": 1
+  },
+  "cchwrsf": {
+   "n": "Sandhill Winery",
+   "ig": "sandhillwines",
+   "g": "ChIJvVSGGVzzfVMRNLHatS8WEPg",
+   "w": "https://www.sandhillwines.ca/",
+   "ws": 1
+  },
+  "c1ty57k": {
+   "n": "See Ya Later Ranch",
+   "ig": "sylranchwinery",
+   "g": "ChIJBfA-O31jglQRVK3Dq63cfGY"
+  },
+  "cbsj8q8": {
+   "n": "Serendipity Winery",
+   "ig": "serendipitywinery",
+   "g": "ChIJ21DQj1p7glQRxi7VPthSGZY",
+   "w": "https://www.serendipitywinery.com/",
+   "ws": 1
+  },
+  "cz9af2j": {
+   "n": "Silkscarf Winery",
+   "ig": "silkscarfwinery",
+   "g": "ChIJJeC3mY9kglQRejIRZof2A2s",
+   "w": "https://silkscarf-winery.com/",
+   "ws": 1
+  },
+  "ctlpj2j": {
+   "n": "Sperling Vineyards",
+   "ig": "sperlingvineyards",
+   "g": "ChIJrefbCWWLfVMRziN-KPR_4mU",
+   "w": "https://www.sperlingvineyards.com/",
+   "ws": 1
+  },
+  "cnv8qyl": {
+   "n": "SpearHead Winery",
+   "ig": "spearheadwinery",
+   "g": "ChIJp4KUVXiMfVMR5MpSv-6ellg",
+   "w": "https://www.spearheadwinery.com/",
+   "ws": 1
+  },
+  "c7iwkqu": {
+   "n": "St. Hubertus & Oak Bay Estate Winery",
+   "ig": "sthubertuswine",
+   "g": "ChIJl84RmAyKfVMRpzcaT1R4tA4",
+   "w": "https://my-site-100522-109224.square.site/",
+   "ws": 1
+  },
+  "c838lvm": {
+   "n": "Solvero Wines",
+   "ig": "solverowines",
+   "w": "https://solverowines.ca/",
+   "ws": 1
+  },
+  "cpwvyrb": {
+   "n": "Stag’s Hollow Winery & Vineyard",
+   "ig": "stags_hollow_winery",
+   "g": "ChIJB_CPzJiSglQR32BuV0dRC2A",
+   "w": "https://www.stagshollowwinery.com/",
+   "ws": 1
+  },
+  "cd4kpq4": {
+   "n": "Spacedog Wines",
+   "ig": "spacedogwines",
+   "w": "https://spacedogwines.com/",
+   "ws": 1
+  },
+  "cl6l0ok": {
+   "n": "Stoneboat Vineyards",
+   "ig": "stoneboatvineyards",
+   "g": "ChIJ4TjcBuDpglQRH-vy0X2n5pA",
+   "w": "https://stoneboatvineyards.com/",
+   "ws": 1
+  },
+  "c7rynvz": {
+   "n": "",
+   "hc": 1
+  },
+  "c3gxos8": {
+   "n": "Squeezed Wines",
+   "ig": "drinksqueezed",
+   "w": "https://www.squeezedwines.com/",
+   "ws": 1
+  },
+  "ceu58lx": {
+   "n": "SummerGate Winery",
+   "ig": "summergatewinery",
+   "g": "ChIJOaya7q1lglQRuaU5yNeVoYA",
+   "w": "https://summergate.ca/",
+   "ws": 1
+  },
+  "c5uytxr": {
+   "n": "Tantalus Vineyards",
+   "ig": "tantaluswine",
+   "g": "ChIJdaqDf5mLfVMRd5JcN9DWSYg",
+   "w": "https://tantalus.ca/",
+   "ws": 1
+  },
+  "cicxy5f": {
+   "n": "Terravista Vineyards",
+   "ig": "terravistavineyards",
+   "g": "ChIJI1JpOCljglQRHHKqZf9bQ_4",
+   "w": "https://www.terravistavineyards.com/",
+   "ws": 1
+  },
+  "cod7fy": {
+   "n": "The Hatch Winery",
+   "ig": "hatchwines",
+   "g": "ChIJuWICkreKfVMRDQNxKlmaaJk",
+   "w": "https://thehatchwines.com/",
+   "ws": 1
+  },
+  "c6ttt9a": {
+   "n": "The View Winery",
+   "ig": "theviewwinery",
+   "g": "ChIJZ_fzxn-MfVMRFQpxj5jJJvw",
+   "w": "https://theviewwinery.com/",
+   "ws": 1
+  },
+  "cta0866": {
+   "n": "Therapy Vineyards & Guest House",
+   "g": "ChIJ5y9qE1B7glQRBD5ZPWl35yY"
+  },
+  "cvns5tb": {
+   "n": "Thornhaven Estates Winery",
+   "ig": "thornhavenwinery",
+   "g": "ChIJOaE2IGJkglQRB1l9ccyEq3M",
+   "w": "https://www.thornhaven.com/",
+   "ws": 1
+  },
+  "ckavyuc": {
+   "n": "Tender Hope Winery",
+   "ig": "tenderhopewinery",
+   "w": "https://tenderhopewinery.com/",
+   "ws": 1
+  },
+  "cutxvbj": {
+   "n": "Three Sisters Winery",
+   "ig": "3sisterswinery",
+   "g": "ChIJr_psceSjDEERX6lh0dNVySk",
+   "w": "https://3sisterswinery.com/",
+   "ws": 1
+  },
+  "cxml95g": {
+   "n": "Tightrope Winery",
+   "ig": "tightropewinery",
+   "g": "ChIJMU8EPPqjDEERNlEj7Qhbvbs",
+   "w": "https://tightropewinery.ca/",
+   "ws": 1
+  },
+  "cofard6": {
+   "n": "Township 7 Vineyards & Winery – Okanagan",
+   "ig": "township7",
+   "g": "ChIJ-y2wzpBiglQRB7lJGaz6tMw"
+  },
+  "c775fl9": {
+   "n": "Upper Bench Estate Winery",
+   "ig": "upperbench",
+   "g": "ChIJ47ligYFiglQRdnjPwbzOXXQ",
+   "w": "https://upperbench.ca/",
+   "ws": 1
+  },
+  "cli71zl": {
+   "n": "vinAmité Cellars",
+   "ig": "vinamitecellars",
+   "g": "ChIJZZT1yPHpglQRlTGW-0Hrv4I",
+   "w": "https://vinamitecellars.com/",
+   "ws": 1
+  },
+  "ceyvgm8": {
+   "n": "Volcanic Hills Estate Winery",
+   "ig": "volcanichillswi",
+   "g": "ChIJ3SKoisyKfVMRR-GV-DRZrcc",
+   "w": "https://volcanichillswinery.com/",
+   "ws": 1
+  },
+  "c223u9k": {
+   "n": "Wild Goose Winery",
+   "ig": "wildgoosewine",
+   "g": "ChIJna2LEZ-SglQRALrfdYMIaMg",
+   "w": "https://wildgoosewinery.ca/",
+   "ws": 1
+  },
+  "c29iftb": {
+   "n": "Winemaker’s Cut",
+   "ig": "winemakers_cut",
+   "g": "ChIJncLxb6XrglQRzfzDP-HGzvY"
+  },
+  "c3ht8ij": {
+   "n": "Backyard Vineyards",
+   "ig": "backyardwines",
+   "g": "ChIJOSCcLtfOhVQRJv-_o37-fU0",
+   "w": "https://www.backyardvineyards.ca/",
+   "ws": 1
+  },
+  "c50oki9": {
+   "n": "Chaberton Estate Winery",
+   "ig": "chabertonestatewinery",
+   "g": "ChIJ66Eq-qfIhVQRWNGEPNPOsLU",
+   "w": "https://www.chabertonwinery.com/",
+   "ws": 1
+  },
+  "c2wgzcm": {
+   "n": "Vasanti Estate Winery",
+   "ig": "vasantiwines",
+   "w": "https://vasantiwines.com/",
+   "ws": 1
+  },
+  "cqci557": {
+   "n": "Glass House Estate Winery",
+   "ig": "glasshouseestatewinery",
+   "g": "ChIJ9VmNW2LIhVQR7twLDK3Nf44",
+   "w": "https://glasshouseestatewinery.com/",
+   "ws": 1
+  },
+  "conieo8": {
+   "n": "LuLu Island Winery",
+   "ig": "o1",
+   "g": "ChIJmUJSSmPfhVQR1i-o8sXxaMw",
+   "w": "https://www.luluislandwinery.com/",
+   "ws": 1
+  },
+  "cmqmdi6": {
+   "n": "Seaside Pearl Farmgate Winery",
+   "ig": "seasidepearl_winery",
+   "g": "ChIJhfQWwr00hFQRLHnDNGTgm1s",
+   "w": "https://seasidepearlwinery.ca/",
+   "ws": 1
+  },
+  "c6zgemp": {
+   "n": "Singletree Winery",
+   "ig": "singletreewine",
+   "g": "ChIJBS4c4aE0hFQRLFSZuxyNeDM",
+   "w": "https://singletreewinery.com/",
+   "ws": 1
+  },
+  "ck7bcxz": {
+   "n": "Waldhof Family Estate Winery",
+   "ig": "waldhofwine",
+   "w": "https://waldhofwine.ca/",
+   "ws": 1
+  },
+  "cu65w0y": {
+   "n": "Wesbert Winery",
+   "ig": "wesbertwinery",
+   "w": "https://www.wesbertwinery.com/",
+   "ws": 1
+  },
+  "c2eh3ve": {
+   "n": "Township 7 Vineyards & Winery – Langley",
+   "ig": "township7",
+   "g": "ChIJ8xdIWlXPhVQRVkEhSK0u8x8",
+   "w": "https://township7.com/",
+   "ws": 1
+  },
+  "cxnhln5": {
+   "n": "Bottega Wine Studio",
+   "ig": "bottegawinestudio",
+   "g": "ChIJV_Hd6lFkglQRTZvrAi-f1Rw",
+   "w": "https://bottegawinestudio.ca/",
+   "ws": 1
+  },
+  "cwnmwrm": {
+   "n": "Clos du Soleil Winery",
+   "ig": "closdusoleil",
+   "g": "ChIJIy7oTZ3lglQRv9hxEQpfmIg",
+   "w": "https://www.closdusoleil.ca/",
+   "ws": 1
+  },
+  "cuj7wzd": {
+   "n": "Corcelettes Estate Winery",
+   "ig": "corcelettes",
+   "g": "ChIJn7R7KG3mglQRA9s-PeA_Yfc",
+   "w": "https://www.corceletteswine.ca/",
+   "ws": 1
+  },
+  "cmeuh57": {
+   "n": "Crowsnest Vineyards",
+   "ig": "crowsnestvineyardscawston",
+   "g": "ChIJQdsgY_3lglQRL99nePsDaZQ",
+   "w": "https://crowsnestvineyards.com/",
+   "ws": 1
+  },
+  "cvsbdvy": {
+   "n": "Cannon Estate Winery",
+   "ig": "cannonwinery",
+   "w": "https://cannonwinery.ca/",
+   "ws": 1
+  },
+  "cy6oda3": {
+   "n": "EauVivre Winery",
+   "ig": "eauvivrewinery",
+   "g": "ChIJQdsgY_3lglQR5FTReYYJlaA",
+   "w": "https://eauvivre.com/",
+   "ws": 1
+  },
+  "cbd6r6h": {
+   "n": "Hugging Tree Winery",
+   "ig": "huggingtreewinery",
+   "g": "ChIJn_KWDqLdglQRTH9UY3XHCXg",
+   "w": "https://huggingtreewinery.com/",
+   "ws": 1
+  },
+  "clqkhlq": {
+   "n": "Country Vines Winery",
+   "ig": "countryvineswinery",
+   "w": "https://www.countryvines.ca/",
+   "ws": 1
+  },
+  "cqgr630": {
+   "n": "Liber Farm & Winery",
+   "ig": "liberfarmwinery",
+   "g": "ChIJMfcDhxrcglQRzplT5mgbl-w",
+   "w": "https://www.liberestates.com/",
+   "ws": 1
+  },
+  "c9qqrk8": {
+   "n": "Gate 22 Winery",
+   "ig": "gate22winery",
+   "w": "https://www.gate22winery.com/",
+   "ws": 1
+  },
+  "c1v4d5u": {
+   "n": "Little Farm Winery",
+   "ig": "littlefarmwine",
+   "g": "ChIJY4uNBuTlglQRHl86lkdJCnc",
+   "w": "https://littlefarmwinery.ca/",
+   "ws": 1
+  },
+  "cf90fjj": {
+   "n": "Orofino Vineyards",
+   "ig": "orofino_winery",
+   "g": "ChIJUW_t9_jlglQRqasX0fTGOGc",
+   "w": "https://www.orofinovineyards.com/",
+   "ws": 1
+  },
+  "cf5bvy9": {
+   "n": "Robin Ridge Winery",
+   "ig": "robinridgewinery",
+   "g": "ChIJJeoP1nTlglQRPxArCHmJq7o",
+   "w": "https://www.robinridgewinery.com/",
+   "ws": 1
+  },
+  "c9mehxb": {
+   "n": "Seven Stones Winery",
+   "ig": "sevenstoneswinery",
+   "g": "ChIJSSG8xxHmglQRVo9y-gH6R_g",
+   "w": "https://sevenstones.ca/",
+   "ws": 1
+  },
+  "c64mcu3": {
+   "n": "Vanessa Vineyard Estate Winery",
+   "ig": "vanessavnyrd",
+   "g": "ChIJ2dPp_oHdglQRoLdr5UyUb9o",
+   "w": "https://www.vanessavineyard.com/",
+   "ws": 1
+  },
+  "cb3vr28": {
+   "n": "Whispering Horse Winery",
+   "ig": "whisperinghorsewinery",
+   "w": "https://www.whisperinghorsewinery.com/",
+   "ws": 1
+  },
+  "cmze9in": {
+   "n": "Beaufort Vineyard & Estate Winery",
+   "ig": "beaufortwines",
+   "g": "ChIJeTeTSVYQiFQRRh3q6R4bFuc",
+   "w": "https://www.beaufortwines.ca/",
+   "ws": 1
+  },
+  "cnv1sdd": {
+   "n": "Church & State Wines – Victoria",
+   "ig": "churchandstatewines",
+   "g": "ChIJS_pMFpxuj1QRu6zy_CgfUOs",
+   "w": "https://churchandstatewines.com/",
+   "ws": 1
+  },
+  "ckol55w": {
+   "n": "Unsworth Vineyards",
+   "ig": "unsworthvineyards",
+   "g": "ChIJJ8SrAIxBj1QRM8UZRKmfH70",
+   "w": "https://www.unsworthvineyards.com/",
+   "ws": 1
+  },
+  "ccmrjxa": {
+   "n": "Baillie-Grohman Estate Winery",
+   "ig": "bailliegrohman",
+   "g": "ChIJ26uOcNViY1MR2Or7ZUrOQPo",
+   "w": "https://www.bailliegrohman.com/",
+   "ws": 1
+  },
+  "c9prrua": {
+   "n": "Monte Creek Winery",
+   "ig": "montecreekwinery",
+   "g": "ChIJHWurEg44flMRhVANdHLGvXc",
+   "w": "https://montecreekwinery.com/",
+   "ws": 1
+  },
+  "cr0mz2i": {
+   "n": "Privato Vineyard & Winery",
+   "ig": "privatowine",
+   "g": "ChIJ-8_AUMQrckERUZpGRv5C3Cc",
+   "w": "https://www.privato.ca/",
+   "ws": 1
+  },
+  "cns5cfi": {
+   "n": "Sagewood Winery",
+   "ig": "sagewoodwinery",
+   "g": "ChIJ6RrNnBA3flMRTj5LdsQhwO4",
+   "w": "https://sagewoodwinery.ca/",
+   "ws": 1
+  },
+  "cbrg8rt": {
+   "n": "Fort Berens Estate Winery",
+   "ig": "fortberens",
+   "g": "ChIJv0_FKEGKgFQRDFHRDEwysu0",
+   "w": "https://www.fortberens.ca/",
+   "ws": 1
+  },
+  "cztd8h": {
+   "n": "Celista Estate Winery",
+   "ig": "celistawine",
+   "g": "ChIJJ6QlLtX8flMR-qcClMr90qg",
+   "w": "https://www.celistawine.com/",
+   "ws": 1
+  },
+  "c8z45s1": {
+   "n": "Larch Hills Winery",
+   "ig": "larchhillswineryandvineyard",
+   "g": "ChIJBxvRL22LflMR_rQ-scaYEfE"
+  },
+  "cadufwl": {
+   "n": "Recline Ridge Vineyards & Winery",
+   "ig": "reclineridgewinery",
+   "g": "ChIJC-tBaXD3flMRxgzbvrndIFo",
+   "w": "https://reclineridgewinery.com/",
+   "ws": 1
+  },
+  "cvtzwfd": {
+   "n": "Sunnybrae Vineyards & Winery",
+   "ig": "sunnybraewinery",
+   "g": "ChIJAQAAAHBYflMRckRcyka6taA",
+   "w": "https://www.sunnybraewinery.com/",
+   "ws": 1
+  },
+  "c8autb1": {
+   "n": "Bridgeland Distillery",
+   "ig": "bridgelanddistillery",
+   "g": "ChIJzVCRYTZlcVMRxk8sbhQT41s",
+   "w": "https://bridgeland-distillery.square.site/",
+   "ws": 1
+  },
+  "cfljbv3": {
+   "n": "Confluence Distilling",
+   "ig": "confluence_distilling",
+   "g": "ChIJQ89_zO9xcVMRmttciMxkhF0",
+   "w": "https://confluencedistilling.ca/",
+   "ws": 1
+  },
+  "chk1isv": {
+   "n": "Invinity Winery",
+   "ig": "invinitysparklingwinehouse"
+  },
+  "c5kln8v": {
+   "n": "Copper Cork Distillery",
+   "ig": "coppercorkdistillery",
+   "g": "ChIJEZdiVu3tCVMRyUQ8xqFUs90",
+   "w": "https://www.coppercorkdistillery.ca/",
+   "ws": 1
+  },
+  "centaes": {
+   "n": "Deep Blue Distilleries",
+   "ig": "deepbluedistilleries",
+   "g": "ChIJaT5QjK4LhlQRn1TEKU9MmoM",
+   "w": "https://deepbluedistilleries.ca/",
+   "ws": 1
+  },
+  "cghnqqi": {
+   "n": "Distillerie Fils du Roy",
+   "ig": "distilleriefilsduroy2011",
+   "g": "ChIJYeph7oDOmEwRtxbZMlR94gA",
+   "w": "https://distilleriefilsduroy.com/",
+   "ws": 1
+  },
+  "cv1tms4": {
+   "n": "Eau Claire Distillery",
+   "ig": "eauclairedistillery",
+   "g": "ChIJb6PAg2KlcVMRkoHDp3lpUiE",
+   "w": "https://eauclairedistillery.ca/",
+   "ws": 1
+  },
+  "c9qlnjo": {
+   "n": "Glenora Distillers",
+   "g": "ChIJA3w7oRqFXUsRXJZ72XmeRxE"
+  },
+  "c9pcc0o": {
+   "n": "",
+   "hc": 1
+  },
+  "c625hcy": {
+   "n": "Baccata Ridge Winery",
+   "ig": "baccataridge",
+   "w": "https://baccataridgewinery.ca/",
+   "ws": 1
+  },
+  "chq8qbi": {
+   "n": "Ironworks Distillery",
+   "ig": "ironworksdistillery",
+   "g": "ChIJd98xtc5bV0sRNA9qEeYygow",
+   "w": "https://ironworksdistillery.com/",
+   "ws": 1
+  },
+  "cdxoy2v": {
+   "n": "",
+   "hc": 1
+  },
+  "c5kx5bm": {
+   "n": "Junction 56 Distillery",
+   "ig": "junction56distillery",
+   "g": "ChIJwUw5LPmtLogR2d-5heLxKkk",
+   "w": "https://www.junction56.ca/",
+   "ws": 1
+  },
+  "c8f7kww": {
+   "n": "King’s Lock Craft Distillery",
+   "ig": "kingslock",
+   "g": "ChIJR_jRSNmrzUwRvkIK9q7lBIQ",
+   "w": "https://www.klcraftdistillery.ca/",
+   "ws": 1
+  },
+  "c5kw6p5": {
+   "n": "Kinsip House of Fine Spirits",
+   "ig": "shopify",
+   "g": "ChIJSUdjxfM11okRVerKqvtCGJ8",
+   "w": "https://kinsip.ca/",
+   "ws": 1
+  },
+  "cueqz6o": {
+   "n": "Sage Hayward Vineyards",
+   "ig": "sagehaywardvineyards",
+   "w": "https://sagehaywardvineyards.com/",
+   "ws": 1
+  },
+  "co9fb4d": {
+   "n": "Krang Spirits",
+   "ig": "krangspirits",
+   "g": "ChIJ-W-wZINAcVMRbXJcI4JKdVM"
+  },
+  "c5dd6el": {
+   "n": "Last Best Brewing & Distilling",
+   "ig": "lastbestbrew",
+   "g": "ChIJtykfE-JvcVMRnIyX8rpE7RE",
+   "w": "https://lastbestbrewing.com/",
+   "ws": 1
+  },
+  "cc1hf0g": {
+   "n": "Last Mountain Distillery",
+   "ig": "lmdistillery",
+   "g": "ChIJMZw6GxsSHFMROKXEKz-vFSI",
+   "w": "https://lastmountaindistillery.com/",
+   "ws": 1
+  },
+  "c339r45": {
+   "n": "Last Straw Distillery",
+   "ig": "laststrawdistill",
+   "g": "ChIJ_x0A7gUvK4gR1sjIUZhSIJ4",
+   "w": "https://laststrawdistillery.com/",
+   "ws": 1
+  },
+  "cw2rcgi": {
+   "n": "LB Distillers",
+   "ig": "drinkluckybastard",
+   "g": "ChIJez6iJGv3BFMRz61LZPLlkhw"
+  },
+  "cl5y0tn": {
+   "n": "Long Table Distillery",
+   "ig": "longtabledistillery",
+   "g": "ChIJd96hT9JzhlQR1Nu-T2svQto",
+   "w": "https://longtabledistillery.com/",
+   "ws": 1
+  },
+  "cvjknbr": {
+   "n": "Myriad View Artisan Distillery",
+   "ig": "myriadviewdistillery",
+   "g": "ChIJS2JbKCcRXksR3M8SDSZEgaM",
+   "w": "https://myriadviewdistillery.ca/",
+   "ws": 1
+  },
+  "cdp0vbz": {
+   "n": "Nova Scotia Spirit Co.",
+   "ig": "drinkbluelobster",
+   "g": "ChIJi1CkDAAbXEsRJma8zIegn_k",
+   "w": "https://novascotiaspirits.com/",
+   "ws": 1
+  },
+  "cm8f237": {
+   "n": "Ogham Craft Spirits",
+   "ig": "sfrdistillery",
+   "g": "ChIJRTpgN-wB0kwRQmANyZtQ3cA"
+  },
+  "c46cngw": {
+   "n": "Okanagan Spirits Craft Distillery",
+   "ig": "okanaganspirits",
+   "g": "ChIJv6T2YN3YfVMRE2xuRr1vDyc",
+   "w": "https://okanaganspirits.com/",
+   "ws": 1
+  },
+  "cx0rocj": {
+   "n": "Old Order Distilling Co.",
+   "ig": "oldorderdistilling",
+   "g": "ChIJbR9CgnpiglQRMdK4Z5cffDU"
+  },
+  "cmgcctq": {
+   "n": "",
+   "hc": 1
+  },
+  "clzhdqs": {
+   "n": "Outlaw Trail Spirits",
+   "g": "ChIJb3VzqVoeHFMRH3zoJItmsSk",
+   "w": "https://www.outlawtrailspirits.com/",
+   "ws": 1
+  },
+  "cnndqiv": {
+   "n": "Park Distillery",
+   "ig": "parkdistillery",
+   "g": "ChIJFdpX7UXKcFMRtYriiTpmDts",
+   "w": "https://parkdistillery.com/",
+   "ws": 1
+  },
+  "c4bkqoh": {
+   "n": "",
+   "hc": 1
+  },
+  "ck8fnj5": {
+   "n": "RAW Distillery",
+   "ig": "rawspiritsab",
+   "g": "ChIJ46Fy6ZXFcFMRqler2ALiZjM",
+   "fx": 1
+  },
+  "cijon8e": {
+   "n": "",
+   "hc": 1
+  },
+  "c54ss2j": {
+   "n": "Rig Hand Distillery",
+   "ig": "righanddistillery",
+   "g": "ChIJP2wV6OD3n1MRX4TXgFYEigs",
+   "w": "https://righanddistillery.com/",
+   "ws": 1
+  },
+  "cimnm8o": {
+   "n": "Shelter Point Distillery",
+   "ig": "shelterpoint",
+   "g": "ChIJx6Zq2L4ciFQRyXuk-EEt9fs",
+   "w": "https://shelterpoint.ca/",
+   "ws": 1
+  },
+  "ckutwbw": {
+   "n": "Still Waters Distillery",
+   "ig": "buckhilldistilledspirits",
+   "g": "ChIJxaSKpR0vK4gROxkoe0olcxo",
+   "w": "https://stillwatersdistillery.com/",
+   "ws": 1
+  },
+  "ccmut3n": {
+   "n": "Strathcona Spirits Distillery",
+   "ig": "strathconaspirits",
+   "g": "ChIJaZ1u8w4ioFMR2Jl6O9yvSM0",
+   "w": "https://www.strathconaspirits.ca/",
+   "ws": 1
+  },
+  "cq5dm15": {
+   "n": "The Liberty Distillery",
+   "ig": "tldistillery",
+   "g": "ChIJkbey_85zhlQRAd4Ia0mQIvU",
+   "w": "https://thelibertydistillery.com/",
+   "ws": 1
+  },
+  "cxc42do": {
+   "n": "Tippa Distillery",
+   "ig": "eauclairedistillery",
+   "g": "ChIJLVNUWwyvcVMRQP45Pq-SIf8"
+  },
+  "ckan6es": {
+   "n": "Top Shelf Distillers",
+   "ig": "tsdistillers",
+   "g": "ChIJi5c0KzR60kwRTvQoOlzVwGo",
+   "w": "https://topshelfdistillers.com/",
+   "ws": 1
+  },
+  "c6xuu7v": {
+   "n": "Urban Distilleries",
+   "ig": "urban.distilleries",
+   "g": "ChIJzw5SbOH1fVMRL25ZU6PGXgM",
+   "w": "https://www.urban-distilleries.com/",
+   "ws": 1
+  },
+  "cvjdlys": {
+   "n": "Wayward Distillation House",
+   "ig": "waywarddistillery",
+   "g": "ChIJjYhd-oYUiFQROVvjsvzMAuQ"
+  },
+  "cbvefrp": {
+   "n": "Wild Life Distillery",
+   "ig": "wldspirits",
+   "g": "ChIJvRabra3FcFMRBDI2srKrX9U",
+   "w": "https://wildlifedistillery.ca/",
+   "ws": 1
+  },
+  "cc0474f": {
+   "n": "Yukon Shine Distillery",
+   "ig": "yukonbeer",
+   "g": "ChIJmb8kSZZEVFER5oNxUJWOwUE",
+   "w": "http://www.yukonshine.com/",
+   "ws": 1
+  },
+  "clmtsrd": {
+   "n": "Cirka Distilleries",
+   "ig": "cirka_distilleries",
+   "g": "ChIJJ9Ex35MQyUwRsCGY-K6VLNI",
+   "w": "https://cirkadistilleries.com/",
+   "ws": 1
+  },
+  "ciuru3f": {
+   "n": "Two Brewers Whisky – Yukon Brewing",
+   "ig": "twobrewerswhisky",
+   "g": "ChIJD8A6TpZEVFER2-PenVOFNJM",
+   "w": "https://www.twobrewerswhisky.com/",
+   "ws": 1
+  },
+  "ctzpdvc": {
+   "n": "Ampersand Distilling Co.",
+   "ig": "ampdistillingco",
+   "g": "ChIJzePv3ZFIj1QRErYk8MDpm4g",
+   "w": "https://ampersanddistilling.com/",
+   "ws": 1
+  },
+  "ctlsdwn": {
+   "n": "Arbutus Distillery",
+   "ig": "arbutusdistillery",
+   "g": "ChIJp81NvzKiiFQRtHwjiW142R4",
+   "w": "https://arbutusdistillery.com/",
+   "ws": 1
+  },
+  "cqd2umo": {
+   "n": "Sheringham Distillery",
+   "ig": "sheringhamdistillery",
+   "g": "ChIJM2qR7AAdj1QRKX64WJ90UKk",
+   "w": "https://www.sheringhamdistillery.com/",
+   "ws": 1
+  },
+  "cw83c8z": {
+   "n": "Stillhead Distillery",
+   "ig": "stillheaddistillery",
+   "g": "ChIJ2Xwr-e5Fj1QRsH7QIpcA0yg",
+   "w": "https://stillhead.ca/",
+   "ws": 1
+  },
+  "c8b2d1d": {
+   "n": "Victoria Distillers",
+   "ig": "vicdistillers",
+   "g": "ChIJ28bMeYFuj1QRT9GVc9rCKbQ",
+   "w": "https://victoriadistillers.com/",
+   "ws": 1
+  },
+  "c93ckxb": {
+   "n": "Taynton Bay Spirits",
+   "ig": "tayntonbayspirits",
+   "g": "ChIJQY7lCzFhelMRHj7hcvio444",
+   "w": "https://www.tayntonbayspirits.com/",
+   "ws": 1
+  },
+  "csoic2": {
+   "n": "",
+   "hc": 1
+  },
+  "cm8z272": {
+   "n": "Maple Leaf Spirits",
+   "ig": "mapleleafspirits",
+   "g": "ChIJ4d-eWuehDEERfwDW7F07nHs"
+  },
+  "c2ug6l0": {
+   "n": "Deep Cove Brewers and Distillers",
+   "ig": "deepcovecraft",
+   "g": "ChIJw8AK25pwhlQRFGxm6uE--bI"
+  },
+  "c1hz20y": {
+   "n": "Pemberton Distillery",
+   "g": "ChIJm06ZV9s0h1QRvMh9IrvUyKA",
+   "w": "https://pembertondistillery.rezgo.com/",
+   "ws": 1
+  },
+  "cadvot6": {
+   "n": "Tofino Craft Distillery",
+   "ig": "tofinodistillery",
+   "g": "ChIJXQlQVEuXiVQR3zvP-Rf-WtY",
+   "w": "https://tofinocraftdistillery.com/",
+   "ws": 1
+  },
+  "ckw4taf": {
+   "n": "1818 Farm & Cidery",
+   "ig": "1818farm_cidery",
+   "g": "ChIJqSCZp3YB0kwRsggOGj1ii2I"
+  },
+  "con949r": {
+   "n": "Archibald’s Orchard & Estate Winery",
+   "ig": "archibaldswinery",
+   "g": "ChIJuToUDZwI1YkRRiDMvJawfMA"
+  },
+  "chycshu": {
+   "n": "Brooker’s Cider",
+   "ig": "brookerscider",
+   "g": "ChIJNS97Gfbf00wR1TlR_wQaJg4"
+  },
+  "c5gg1zu": {
+   "n": "Carolinia Cider Co.",
+   "ig": "caroliniaciderco",
+   "g": "ChIJgZvQ-FHhOogRGMb9qjpByfI"
+  },
+  "c9am7kx": {
+   "n": "Dirty Dog Cider Co.",
+   "ig": "dirtydogcider",
+   "g": "ChIJuy4gqr_f1YkRXnPu7EsCO34",
+   "w": "https://dirtydogcider.com/",
+   "ws": 1
+  },
+  "chizuol": {
+   "n": "Farmgate Cider",
+   "ig": "farmgatecider",
+   "g": "ChIJddwZrCb10UwRdYsohqB80Y0"
+  },
+  "cxr0i1u": {
+   "n": "Generations Cider at Crunican Orchards",
+   "ig": "generationsciderco",
+   "g": "ChIJVVVVVQDuLogRnUGqCrXvouA"
+  },
+  "cyr45ld": {
+   "n": "Great Lakes Farms",
+   "ig": "greatlakesfarms",
+   "g": "ChIJUf2JcrdcLogRTzHlTVmyhDs"
+  },
+  "chpxw76": {
+   "n": "Heartwood Farm & Cidery",
+   "ig": "heartwoodcidery",
+   "g": "ChIJqRxxulGgK4gRaVClWMnT8uM"
+  },
+  "cynb0po": {
+   "n": "Heeman’s",
+   "ig": "heemans",
+   "g": "ChIJ_xbeewyTLogRXH76yf4LaVo"
+  },
+  "c7ide2z": {
+   "n": "Heritage Estate Winery & Cidery",
+   "ig": "heritageestatewinery",
+   "g": "ChIJT5HRanykKogR_izFrtBROIA"
+  },
+  "ckq3jjt": {
+   "n": "Howell Road Cider Co. at Brantview Apples",
+   "ig": "brantviewapples",
+   "g": "ChIJPQv_yYN6LIgRjCRi23XwkNg"
+  },
+  "cikck1k": {
+   "n": "Loch Mór Cider Co.",
+   "ig": "lochmorciderco",
+   "g": "ChIJMXZMCAdH1okR9LnUh25Oa34"
+  },
+  "ckaaj7f": {
+   "n": "Muskoka Lakes Farm & Winery",
+   "ig": "cranberry.ca",
+   "g": "ChIJb4Xl7ar2Kk0RT9Ox0vnbBhY"
+  },
+  "cwsi7tr": {
+   "n": "Rice Lake Hard Cider",
+   "ig": "ricelakehardcider",
+   "g": "ChIJpZjCEQzD1YkRaQ9VT1pb5Uk"
+  },
+  "ckknir1": {
+   "n": "Saunders Cider Co.",
+   "ig": "mark_the_cool_dad",
+   "g": "ChIJs1umi-n3zUwR6E3Fu8ukPkQ"
+  },
+  "c4w2zpm": {
+   "n": "Shiny Apple Cider",
+   "ig": "shinyapplecider",
+   "g": "ChIJx3UEZQhZ04kR46_x4DvE9gw"
+  },
+  "cw367uk": {
+   "n": "Slabtown Cider Co.",
+   "ig": "slabtowncider",
+   "g": "ChIJW_NkRyE71YkRQjq_pSxcnuM"
+  },
+  "c15in64": {
+   "n": "Slabtown Armoury",
+   "ig": "slabtowncider",
+   "g": "ChIJdYpPHeXTKogR9Ng1RLN4cbg"
+  },
+  "csn2rft": {
+   "n": "The Carlisle Cider Company",
+   "ig": "carlisleciderco",
+   "g": "ChIJq_86qIx9K4gR5KfNMUaQCjk"
+  },
+  "cf6ldq": {
+   "n": "Twin Pines Orchards & Cider House",
+   "ig": "twinpinesorchards",
+   "g": "ChIJ0dliZFoVL4gRZqpL0QvOUls"
+  },
+  "cpjljq8": {
+   "n": "Windswept Cider",
+   "ig": "windsweptcider",
+   "g": "ChIJ79bW-94LKogRc1w6R3aFnC4"
+  },
+  "c536sce": {
+   "n": "Woodfolk Cider",
+   "ig": "woodfolkcider",
+   "g": "ChIJP-9MexyxKk0RhX-JV-6CUkY"
+  },
+  "cbdrw03": {
+   "n": "Prairie Bears Cider Co.",
+   "ig": "prairiebearsciderco",
+   "g": "ChIJu848fm6fn1MRZN_t87jlqRQ",
+   "w": "https://prairiebearscider.ca/",
+   "ws": 1
+  },
+  "c15ke1g": {
+   "n": "Scrumpy Cider Company",
+   "ig": "scrumpycanadian",
+   "g": "ChIJ0YDnOOshoFMRsIzKh457RMU"
+  },
+  "cnfusf8": {
+   "n": "SunnyCider",
+   "ig": "sunnycider_ca",
+   "g": "ChIJ5TBlaPZlcVMRgwHsyBoSTDs",
+   "w": "https://www.sunnycider.ca/",
+   "ws": 1
+  },
+  "cwe422x": {
+   "n": "Uncommon Cider",
+   "ig": "uncommoncider",
+   "g": "ChIJrxYaLNBxcVMR4d1gP5em9Ys",
+   "w": "https://uncommoncider.com/",
+   "ws": 1
+  },
+  "cfjot5c": {
+   "n": "Wooden Gate Cider Co.",
+   "ig": "woodengatecider",
+   "g": "ChIJ3z3uAQTHwlIR52J79T1OTZ4",
+   "w": "https://www.woodengatecider.ca/",
+   "ws": 1
+  },
+  "ck6ehlx": {
+   "n": "Dead Horse Cider Co.",
+   "ig": "deadhorsecider",
+   "g": "ChIJaWYoq-lJwlIRQytzmV1k9XA",
+   "w": "https://www.deadhorsecider.com/",
+   "ws": 1
+  },
+  "c7s5bqe": {
+   "n": "Crossmount Cider Company",
+   "ig": "crossmountcidercompany",
+   "g": "ChIJaR5RDQDwBFMRelRkQFo7LW8",
+   "w": "https://crossmountcidercompany.ca/",
+   "ws": 1
+  },
+  "clntxfm": {
+   "n": "Solstice Ciderworks",
+   "ig": "yukonbeer",
+   "g": "ChIJmb8kSZZEVFER5oNxUJWOwUE"
+  },
+  "c7pxjun": {
+   "n": "Big Bang Cider",
+   "ig": "bigbangcider",
+   "g": "ChIJ9dKapeiliFQRXgrc4g2aU3g",
+   "w": "https://www.bigbangcider.com/",
+   "ws": 1
+  },
+  "c33e3y5": {
+   "n": "",
+   "hc": 1
+  },
+  "c91i05c": {
+   "n": "Cambium Cider Co.",
+   "ig": "cambiumcider",
+   "g": "ChIJt8jBO0TYfVMR02Yog1Tku1Y",
+   "w": "https://www.cambiumcider.com/",
+   "ws": 1
+  },
+  "cu7123s": {
+   "n": "Cherry Creek Cidery",
+   "ig": "cherrycreekcidery",
+   "g": "ChIJSXZtNwD3iFQRb62zph4W62I",
+   "w": "https://cherrycreekcidery.ca/",
+   "ws": 1
+  },
+  "ckv3ml7": {
+   "n": "Ciderworks at Salt Spring Apple Company",
+   "ig": "ciderworks_ssi",
+   "g": "ChIJNQPzaDdZj1QRX_1YLoAAbZk",
+   "w": "https://www.saltspringapplecompany.com/",
+   "ws": 1
+  },
+  "c3rmwg5": {
+   "n": "Clayburn Creek Cider Company",
+   "ig": "clearbrookbrewing",
+   "g": "ChIJeYjiEbHIhVQRnqNPvdse0BI"
+  },
+  "cth3en5": {
+   "n": "Farmstrong Cider Company",
+   "ig": "farmstrongcider",
+   "g": "ChIJ41TfDRh7flMRkSKEcz8pYaQ",
+   "w": "https://www.farmstrongcider.com/",
+   "ws": 1
+  },
+  "cvl0r2x": {
+   "n": "Gabriola Island Cidery",
+   "ig": "ravenskillorchards",
+   "g": "ChIJFVfK4geniFQRjqpqKfI9T3Y",
+   "w": "https://directory.hellogabriola.ca/",
+   "ws": 1
+  },
+  "cg3wi9a": {
+   "n": "Geo Cider",
+   "ig": "geo.cider",
+   "g": "ChIJV8XyNBj5hlQRDE5cQ8eaiI4",
+   "fx": 1,
+   "w": "https://www.geocider.com/",
+   "ws": 1
+  },
+  "cdzkeqk": {
+   "n": "Hardcore Cider Co.",
+   "ig": "hardcorecider",
+   "g": "ChIJGSAYXwoYUyYRMYf4hVHmfnQ",
+   "w": "https://hardcorecider.ca/",
+   "ws": 1
+  },
+  "cgi070o": {
+   "n": "Homestead Cider",
+   "ig": "homesteadcider",
+   "g": "ChIJ294791YNhFQRGMjL6-WQswc",
+   "w": "https://www.homesteadcider.ca/",
+   "ws": 1
+  },
+  "c10h6pl": {
+   "n": "Junction Orchard & Cidery",
+   "ig": "junctionvictoria",
+   "g": "ChIJJfQUpCxtj1QRohx7aZ8lMBY",
+   "w": "https://junctionvictoria.com/",
+   "ws": 1
+  },
+  "cuwqjy0": {
+   "n": "La Petite Abeille Cider",
+   "ig": "lapetiteabeillecider",
+   "g": "ChIJX0ybrxZjglQR0R-PghqH050"
+  },
+  "c1a2qrl": {
+   "n": "Left Field Cider Co.",
+   "ig": "leftfieldcider",
+   "g": "ChIJL3Qhep3HgVQRsJTRDSi9-ig",
+   "w": "https://www.leftfieldcider.com/",
+   "ws": 1
+  },
+  "cqszkpi": {
+   "n": "",
+   "hc": 1
+  },
+  "cy8f15d": {
+   "n": "Merridale Cidery & Distillery",
+   "g": "ChIJfQxCN4hBj1QRXqteW9ubm8Y"
+  },
+  "csvqid3": {
+   "n": "Millionaires’ Row Cider Co.",
+   "ig": "millionairesrowcider",
+   "g": "ChIJrSNrn0xkglQRWzGeTaFTmCY",
+   "w": "https://www.millionairesrowcider.com/",
+   "ws": 1
+  },
+  "ceeltsf": {
+   "n": "NOMAD Cider",
+   "ig": "nomadcider",
+   "g": "ChIJlYMWjVxkglQR2Cqw8uibAiY",
+   "w": "https://www.nomadcider.ca/",
+   "ws": 1
+  },
+  "cf559qg": {
+   "n": "Riley’s Cidery",
+   "ig": "rileyscidery",
+   "g": "ChIJcZk5wmEVhlQRXTNetC4-un8",
+   "w": "https://www.rileyscider.com/",
+   "ws": 1
+  },
+  "c67u7wp": {
+   "n": "Rose Hill Cider Co.",
+   "g": "ChIJWSmH6WrvfVMRBCmOxb4eei0",
+   "ig": "rosehillorchard"
+  },
+  "c710m5m": {
+   "n": "Rusty Rooster Orchard",
+   "ig": "rustyroostercider",
+   "g": "ChIJ8Q4vYUrvfVMRj_4wflaOAA0",
+   "w": "https://rustyroosterorchard.ca/",
+   "ws": 1
+  },
+  "cbydow2": {
+   "n": "Sea Cider Farm & Ciderhouse",
+   "ig": "seaciderhouse",
+   "g": "ChIJddESQDNvj1QRVmDGqvA0kAk",
+   "w": "https://seacider.ca/",
+   "ws": 1
+  },
+  "cbiy84g": {
+   "n": "Shuswap Cider Company",
+   "ig": "shuswapcider",
+   "g": "ChIJuyx4unf1flMRAuawbr30fGo",
+   "w": "https://www.shuswapcider.com/",
+   "ws": 1
+  },
+  "cbmzi9w": {
+   "n": "Soma Craft Cidery",
+   "ig": "somacraftcidery",
+   "g": "ChIJKeTQiASLfVMR586Ni5xbngE",
+   "w": "https://soma-craft-cidery.square.site/",
+   "ws": 1
+  },
+  "cycztvv": {
+   "n": "Swayne Creek Ciderhouse",
+   "ig": "swayne_creek_ciderhouse",
+   "g": "ChIJn6ID6yOPiFQRhkN10HVYAWg"
+  },
+  "c6ne1xc": {
+   "n": "Taves Estate Cidery",
+   "ig": "tavesestatecidery",
+   "g": "ChIJIf3QHa21hVQRO_H7SNPdTYQ",
+   "w": "https://tavesestatecidery.com/",
+   "ws": 1
+  },
+  "c869bai": {
+   "n": "The Bricker Cider Company",
+   "ig": "brickerscider",
+   "g": "ChIJtakB73owhlQR-_mwfS7NM40",
+   "w": "https://brickerscider.com/",
+   "ws": 1
+  },
+  "cn34ufs": {
+   "n": "The Fraser Valley Cider Company",
+   "ig": "fraservalleycider",
+   "g": "ChIJeYjiEbHIhVQRnqNPvdse0BI",
+   "w": "https://www.fraservalleycider.ca/",
+   "ws": 1
+  },
+  "cgx13s": {
+   "n": "Twisted Hill Craft Cider",
+   "ig": "twistedhillscraftcider",
+   "g": "ChIJTYcEiQfmglQRQ6vv3JEIGEA",
+   "w": "https://www.twistedhills.ca/",
+   "ws": 1
+  },
+  "c3abmt4": {
+   "n": "Wards Cider",
+   "ig": "theviewwinery",
+   "g": "ChIJ2VCTXH-MfVMRCbcfGt2gO-o",
+   "w": "https://www.wardshardcider.com/",
+   "ws": 1
+  },
+  "cjieqbw": {
+   "n": "Wildflower Cidery",
+   "ig": "wildflowercidery",
+   "g": "ChIJlUxRaACrYlQRPgxcVuEU7Hc"
+  },
+  "c5n6fzr": {
+   "n": "",
+   "hc": 1
+  },
+  "cyhmb7": {
+   "n": "Woodward Cider Co.",
+   "ig": "woodwardciderco",
+   "g": "ChIJmRN8wWDPf1MRDSUBFxtULKI",
+   "w": "https://www.woodwardciderco.ca/",
+   "ws": 1
+  },
+  "c22pdap": {
+   "n": "AppleManFarms",
+   "ig": "applemanfarms",
+   "g": "ChIJu4vy3PPspkwRji3KARoRQF0"
+  },
+  "c1wvx3k": {
+   "n": "Verger Belliveau Orchard",
+   "ig": "vergerbelliveauorchard",
+   "g": "ChIJp-WM8TmvoEwR4XoueUCwwIc",
+   "w": "https://vergerbelliveauorchard.ca/",
+   "ws": 1
+  },
+  "cw5s04o": {
+   "n": "Yip Cider",
+   "ig": "yipcider",
+   "g": "ChIJ2yrJCs5WpkwRMPkttE2gdGI",
+   "w": "https://yipcider.ca/",
+   "ws": 1
+  },
+  "c29iuz7": {
+   "n": "York County Cider",
+   "ig": "yorkcountycider",
+   "g": "ChIJJazY0nQipEwRTaBPCCPS9XE",
+   "w": "https://www.yorkcountycider.net/",
+   "ws": 1
+  },
+  "cy18rxk": {
+   "n": "Mauzy Cidery",
+   "g": "ChIJp8UsB4-jDEsR4VTU-L8gVb8"
+  },
+  "c31cwn0": {
+   "n": "Annapolis Cider Company",
+   "ig": "drinkannapolis",
+   "g": "ChIJ_45_1aBVWEsRsQmExRm4cGY",
+   "w": "https://drinkannapolis.ca/",
+   "ws": 1
+  },
+  "cymrcgo": {
+   "n": "Chain Yard Cider",
+   "ig": "chainyardcider",
+   "g": "ChIJ8UH-UnkhWksR-KfnQ9ut0T0",
+   "w": "https://www.chainyardcider.com/",
+   "ws": 1
+  },
+  "c1dp8sx": {
+   "n": "Corberrie Cider Company",
+   "ig": "corberrieciderco",
+   "g": "ChIJm-PNakstVksR7oZGXkfERfg",
+   "w": "https://www.corberriecidercompany.ca/",
+   "ws": 1
+  },
+  "cotmxnu": {
+   "n": "East Coast Cider Company",
+   "ig": "wix",
+   "g": "ChIJCba7MX__V0sRWUoF5TnImgk",
+   "w": "https://www.eastcoastcider.ca/",
+   "ws": 1
+  },
+  "cw2blxh": {
+   "n": "Island Folk Cider House",
+   "ig": "islandfolkciderhouse",
+   "g": "ChIJVVUguyv7Z0sRur9ralx9COU",
+   "w": "https://www.islandfolkcider.ca/",
+   "ws": 1
+  },
+  "chi8sxg": {
+   "n": "Lake City Cider",
+   "ig": "lakecitycider",
+   "g": "ChIJx4PgxlsjWksRF6ilFJJSUtA",
+   "w": "https://lakecitycider.ca/",
+   "ws": 1
+  },
+  "cg0twwh": {
+   "n": "Red Spruce Farm",
+   "ig": "redsprucefarm",
+   "g": "ChIJt_kpXlijXksRbKkIyioW29U",
+   "w": "https://redsprucefarm.com/",
+   "ws": 1
+  },
+  "csjxbz9": {
+   "n": "Double Hill Cidery",
+   "ig": "doublehillcider",
+   "g": "ChIJT-oFB41jXksRaWAKZNDr_mc",
+   "w": "https://doublehillcidery.com/",
+   "ws": 1
+  },
+  "cw142o6": {
+   "n": "Red Island Cider",
+   "ig": "redislandcider",
+   "g": "ChIJKwSmOzBTXksRdS1gKfgGWvk",
+   "w": "https://redislandcider.com/",
+   "ws": 1
+  },
+  "cvwso7a": {
+   "n": "Riverdale Orchard",
+   "ig": "riverdaleorchard",
+   "g": "ChIJG0VClLupX0sRJMMXl2Sy9rA",
+   "w": "https://riverdaleorchard.com/",
+   "ws": 1
+  },
+  "cmmnevw": {
+   "n": "Banjo Cider",
+   "ig": "banjocider",
+   "g": "ChIJ0VDauvE51YkRlFkXfUZBH6o",
+   "w": "https://banjocider.ca/",
+   "ws": 1
+  },
+  "ci01fcf": {
+   "n": "Bayfield Berry Farm",
+   "ig": "bayfield_berry_farm",
+   "g": "ChIJ7zB_B2P9KYgRj1UnxpaaF2I",
+   "w": "https://bayfieldberryfarm.on.ca/",
+   "ws": 1
+  },
+  "clrqk27": {
+   "n": "Commoner Cider Company",
+   "ig": "100acrebrewingco",
+   "g": "ChIJp_-SnFDz1YkRAVMJ4ILntQk"
+  },
+  "caxps53": {
+   "n": "Domaine Cleroux",
+   "ig": "domaine_cleroux",
+   "g": "ChIJTSP8LkJ9zkwR6xSDkzVHIxU",
+   "w": "https://domainecleroux.ca/",
+   "ws": 1
+  },
+  "cijbwbs": {
+   "n": "FieldBird Cider",
+   "ig": "fieldbird.cider",
+   "g": "ChIJx1Ez4ZA11okRFUZ9AqoazFQ",
+   "w": "https://fieldbirdcider.com/",
+   "ws": 1
+  },
+  "cpys73n": {
+   "n": "Folklore Cider",
+   "ig": "woodfolkcider",
+   "g": "ChIJP-9MexyxKk0RhX-JV-6CUkY"
+  },
+  "cz5367l": {
+   "n": "Geissberger Farmhouse Cider",
+   "ig": "farmhouse.cider",
+   "g": "ChIJJ9910MIE1YkRE3djiAIxdiQ",
+   "w": "https://farmhousecider.ca/",
+   "ws": 1
+  },
+  "cx0ynhu": {
+   "n": "Kawartha Country Wines",
+   "g": "ChIJr_KIqRvF1EwRmRzy3tmxsj4",
+   "w": "https://kawarthacountrywines.ca/",
+   "ws": 1
+  },
+  "cpm6qwd": {
+   "n": "KW Craft Cider",
+   "ig": "stockyardsbrewing",
+   "g": "ChIJB8LgeGr0K4gRAdhvntr6880",
+   "w": "https://kwcraftcider.com/",
+   "ws": 1
+  },
+  "cjfkehk": {
+   "n": "Lakeshore Cider",
+   "ig": "algomaorchards1964",
+   "g": "ChIJS4xuiY6p1YkROZ5R5n04KXs",
+   "w": "https://lakeshorecider.ca/",
+   "ws": 1
+  },
+  "c1ru28m": {
+   "n": "Myrtle Market & Cidery",
+   "ig": "myrtlemarketcidery",
+   "g": "ChIJfRPCLbEW1YkRVCi91Sfkxy0"
+  },
+  "cln9swb": {
+   "n": "Niagara Cider Company",
+   "ig": "benchbrewing",
+   "g": "ChIJvejzTnZF04kRWoG8UXdU1AI",
+   "w": "https://thecidercrate.com/",
+   "ws": 1
+  },
+  "cxecg7w": {
+   "n": "Out of the Blue CidWinery",
+   "ig": "adamoestatewinery",
+   "g": "ChIJq4Ys1An5KogRYG1QbgyPbuY"
+  },
+  "c6sls0c": {
+   "n": "Rubber Boot Ranch Cider Co.",
+   "ig": "stockandrow",
+   "g": "ChIJ0c98m3A11okRF5YWl9kk8tE"
+  },
+  "cxvpcv5": {
+   "n": "Stock and Row",
+   "ig": "stockandrow",
+   "g": "ChIJ0c98m3A11okRF5YWl9kk8tE",
+   "w": "https://stock-row-farm-cidery.wheree.com/",
+   "ws": 1
+  },
+  "cmq0iht": {
+   "n": "Two Blokes Cider",
+   "g": "ChIJSYfsFqdr1YkRmzDUUCyPDFc"
+  },
+  "cyg58ek": {
+   "n": "Ferme cidricole Moulton Hill",
+   "ig": "moultonhill_fermecidricole",
+   "g": "ChIJmbKRp0mzt0wRJSzx5C8fX4Q",
+   "w": "https://www.fermemoultonhill.ca/",
+   "ws": 1
+  },
+  "c4dtsn1": {
+   "n": "Domaine Labranche",
+   "ig": "domaine_labranche",
+   "g": "ChIJh0ElUAFtyUwRhjzHom8Nw1g",
+   "fx": 1,
+   "w": "https://labranche.ca/",
+   "ws": 1
+  },
+  "cq8e2gq": {
+   "n": "Les Cidres Aurea Mediocritas",
+   "ig": "aureamediocritas_cidre",
+   "g": "ChIJi403GAD7yUwRrbLKpc-qB5w",
+   "w": "https://www.aureacidre.ca/",
+   "ws": 1
+  },
+  "c474y35": {
+   "n": "Vignoble et Cidrerie Coteau St-Paul",
+   "ig": "vignoblecoteaustpaul",
+   "g": "ChIJKQ35R5HJyUwR5GrHsN6NcY8",
+   "w": "https://www.coteau-st-paul.com/",
+   "ws": 1
+  },
+  "c5b8qrx": {
+   "n": "Autour de la pomme",
+   "ig": "cidrerieautourdelapomme",
+   "g": "ChIJn2RSfUPXyUwRtLC-ut_9VN0",
+   "w": "https://autourdelapomme.com/",
+   "ws": 1
+  },
+  "cfitamc": {
+   "n": "Cassine",
+   "ig": "cidrerie_cassine",
+   "g": "ChIJmbOsTK77yUwRozf0GvCohQA",
+   "w": "https://www.cidreriecassine.com/",
+   "ws": 1
+  },
+  "ct3an12": {
+   "n": "Cidre Intrus",
+   "ig": "cidre_intrus",
+   "g": "ChIJCXGCACuXuEwR73ebDUmkE6Q",
+   "w": "https://www.intrus.ca/",
+   "ws": 1
+  },
+  "cspl2aj": {
+   "n": "Chemin des Sept",
+   "ig": "chemindessept",
+   "w": "https://chemindessept.ca/",
+   "ws": 1
+  },
+  "cvilo3w": {
+   "n": "Cidre Sauvageon",
+   "ig": "cidresauvageon",
+   "g": "ChIJp-UBDPcZyUwRZmMXdhJ-Mwg",
+   "w": "https://www.cidresauvageon.com/",
+   "ws": 1
+  },
+  "cg9oym9": {
+   "n": "Cidre Turbulence",
+   "ig": "reserve.naturelle.caviste",
+   "g": "ChIJ1X5BeN0ftkwRYo-L-ZRfP8U"
+  },
+  "c2cfeaf": {
+   "n": "Cidrerie & Verger à l’Orée du Bois",
+   "ig": "vergeroreedubois",
+   "g": "ChIJC9caRXKEuEwRhPRXsukjErY",
+   "w": "https://www.cidrerieoreedubois.com/",
+   "ws": 1
+  },
+  "cbh75gx": {
+   "n": "Cidrerie Compton",
+   "ig": "cidrerie.compton",
+   "g": "ChIJb_bami5RtkwRuIfxzOtqMYE",
+   "w": "https://cidreriecompton.com/",
+   "ws": 1
+  },
+  "cnb06es": {
+   "n": "Cidrerie Dragos",
+   "ig": "cidrerie_dragos",
+   "g": "ChIJ42LXe0-7yUwRObvYXGkqX4I",
+   "w": "https://cidreriedragos.com/",
+   "ws": 1
+  },
+  "c3s57nv": {
+   "n": "Cidrerie du Minot",
+   "ig": "cidrerieduminot",
+   "g": "ChIJNzZF-37Vy0wR41SxYAX50iw",
+   "w": "https://www.duminot.com/",
+   "ws": 1
+  },
+  "c2fsx8i": {
+   "n": "",
+   "hc": 1
+  },
+  "cjzytes": {
+   "n": "Cidrerie et Distillerie C.E. Petch",
+   "ig": "c.e.petch.ca",
+   "g": "ChIJaQZdm2x_yUwRu85-u4nkE0I"
+  },
+  "cj59r1h": {
+   "n": "Cidrerie Lacroix",
+   "ig": "cidrelacroix",
+   "g": "ChIJIah36-kxyUwRbEqildVC7_c",
+   "w": "https://www.cidrerielacroix.com/",
+   "ws": 1
+  },
+  "ci3ay4f": {
+   "n": "Cidrerie le Somnambule",
+   "ig": "cidrerielesomnambule",
+   "g": "ChIJTflfrAfuuEwRlAnmo-GTNEI",
+   "w": "https://lesomnambule.com/",
+   "ws": 1
+  },
+  "cpzbh8z": {
+   "n": "Cidrerie Les Travaux et les Jours",
+   "ig": "cidrerie.travaux.jours",
+   "g": "ChIJ3Zsq2EMFv0wRrDCaE8i7Duw",
+   "w": "https://www.cidrerielestravauxetlesjours.com/",
+   "ws": 1
+  },
+  "c3tjqm8": {
+   "n": "Cidrerie Milton",
+   "ig": "cidreriemilton",
+   "g": "ChIJm_hfHIHLyUwRmBLl6uvVz4Q",
+   "w": "https://cidreriemilton.com/",
+   "ws": 1
+  },
+  "cmtgmib": {
+   "n": "Cidrerie Paradoxe",
+   "g": "ChIJhzt_MAC7t0wRiQB7BiK8Sdk",
+   "ig": "cidrerieparadoxe",
+   "w": "https://www.cidrerieparadoxe.com/",
+   "ws": 1
+  },
+  "csshopa": {
+   "n": "Cidrerie Saint-Antoine",
+   "ig": "cidrerie_saint_antoine",
+   "g": "ChIJKyOsCHKEuEwR85DHANwtY3A",
+   "w": "https://www.cidreriestantoine.com/",
+   "ws": 1
+  },
+  "cl1m20r": {
+   "n": "Cidrerie St-Nicolas",
+   "ig": "popular",
+   "g": "ChIJQ4BoUBeFuEwRo5smypZ4sLc",
+   "w": "https://cidreriest-nicolas.com/",
+   "ws": 1
+  },
+  "cube9zl": {
+   "n": "Cidrerie Verger Bilodeau",
+   "ig": "cidrerievergerbilodeau",
+   "g": "ChIJ3bTBQpu4uEwRRbKor18C8rw",
+   "w": "https://www.cidreriebilodeau.com/",
+   "ws": 1
+  },
+  "cs9z5nk": {
+   "n": "Cidrerie Vergers Pedneault",
+   "ig": "vergerspedneault",
+   "g": "ChIJV7Lq2NQbv0wR6n12RPdnQlk",
+   "w": "https://www.charlevoixenligne.com/",
+   "ws": 1
+  },
+  "c2rp084": {
+   "n": "Clos Shanouk",
+   "ig": "closshanouk",
+   "g": "ChIJpahqPbLHuEwROKkj4Qic3Ko"
+  },
+  "cxa18sj": {
+   "n": "Domaine du Petit St-Joseph",
+   "ig": "domainedupetitstjoseph",
+   "g": "ChIJH8cN1mgyyUwRDo3OqHPoikc",
+   "w": "https://domainedupetitstjoseph.ca/",
+   "ws": 1
+  },
+  "c13ul14": {
+   "n": "Domaine Hébert",
+   "ig": "portneuf.culturede.saveurs",
+   "g": "ChIJlSZYaaOdx0wRbPaAettC5iY"
+  },
+  "cw6rg9p": {
+   "n": "Domaine de Lavoie",
+   "ig": "domainedelavoie",
+   "w": "https://de-lavoie.com/",
+   "ws": 1
+  },
+  "cifj1z1": {
+   "n": "Domaine Lafrance",
+   "ig": "domainelafrance",
+   "g": "ChIJi4Isf_8tyUwRkFGbpSH2_Aw",
+   "w": "https://domainelafrance.com/",
+   "ws": 1
+  },
+  "c4crxwm": {
+   "n": "Domaine RITT",
+   "ig": "domaineritt",
+   "g": "ChIJpQ9QVOgquUwRRTqxmfAL_wg",
+   "w": "https://domaineritt.com/",
+   "ws": 1
+  },
+  "cjvjhrs": {
+   "n": "Domaine Sainte-Famille",
+   "ig": "domainestefamille",
+   "g": "ChIJVZ_yYQ3IuEwR9gnzi4Nkd8w",
+   "w": "https://domainesaintefamille.com/",
+   "ws": 1
+  },
+  "cenvuxa": {
+   "n": "Domaine Steinbach",
+   "ig": "domainesteinbach",
+   "g": "ChIJMb0x0pu4uEwRZJw1A7YUWuA",
+   "w": "https://www.domainesteinbach.com/",
+   "ws": 1
+  },
+  "cuaojlg": {
+   "n": "Ferme Cidricole Équinoxe",
+   "ig": "equinoxefermecidricole",
+   "g": "ChIJRVEcz_rDyUwR8p5dD0IKtV4",
+   "w": "https://www.fermecidricoleequinoxe.com/",
+   "ws": 1
+  },
+  "cqjwerz": {
+   "n": "Cidre Joli Rouge",
+   "ig": "cidrejolirouge",
+   "g": "ChIJv5r4W1knwEwRkEDy720wRbc",
+   "w": "https://www.cidrejolirouge.com/",
+   "ws": 1
+  },
+  "ckb0j4k": {
+   "n": "Jus Sec",
+   "ig": "jus.sec",
+   "g": "ChIJOw-LVZ4ptkwR74vyenkYlYs"
+  },
+  "c69m660": {
+   "n": "Ibride Cidre nature",
+   "ig": "ibride.cidre.nature",
+   "w": "https://www.cidreibride.com/",
+   "ws": 1
+  },
+  "chc81v3": {
+   "n": "Abbaye de Saint-Benoît-du-Lac",
+   "ig": "stbenoitdulac",
+   "g": "ChIJ2-JmSPM-tkwRUi1VY3BEeyg"
+  },
+  "c2czq1g": {
+   "n": "La Capsule Temporelle",
+   "ig": "lacapsuletemporelle",
+   "g": "ChIJy7fGKs_fy0wRc5QDxIBkNIA",
+   "w": "https://lacapsuletemporelle.ca/",
+   "ws": 1
+  },
+  "cvk4kkd": {
+   "n": "La Cidrerie du Village",
+   "g": "ChIJsQennq2xyUwRuX2J0N4mdhA",
+   "w": "https://www.lacidrerieduvillage.ca/",
+   "ws": 1
+  },
+  "cg1aia2": {
+   "n": "Labonté de la pomme",
+   "ig": "labontedelapomme",
+   "g": "ChIJ8VcIPKIzyUwREaMv7GDvE5o",
+   "w": "https://labontedelapomme.ca/",
+   "ws": 1
+  },
+  "c3v7j74": {
+   "n": "Le Verger Trottier – Cidrerie des Générations",
+   "g": "ChIJQ-hlenUxyUwRt24zZLQFQZg",
+   "ig": "vergertrottiercidrerie",
+   "w": "https://www.vergertrottier.com/",
+   "ws": 1
+  },
+  "chzanua": {
+   "n": "Cidrerie Michel Jodoin",
+   "ig": "cidreriemicheljodoin",
+   "g": "ChIJ4-FZ53SxyUwRgRC8r5qfzrA",
+   "w": "https://www.micheljodoin.ca/",
+   "ws": 1
+  },
+  "c29wxu7": {
+   "n": "Terre 50",
+   "ig": "cidrerieterre50",
+   "g": "ChIJfQQ3UQC5uEwREG9MtQQ-QvM"
+  },
+  "c6o8t7p": {
+   "n": "Vignoble et Cidrerie Val Caudalies",
+   "ig": "valcaudalies",
+   "g": "ChIJ0-6US-zkyUwR_T3Awipp6Z0",
+   "w": "https://valcaudalies.com/",
+   "ws": 1
+  },
+  "cq7r4es": {
+   "n": "Verger Allen Demers",
+   "ig": "lapommeetlabete",
+   "g": "ChIJMQEwWdiRuEwRVU2vPsvV4Wo"
+  },
+  "c4o6cjb": {
+   "n": "Pomme Sauvage",
+   "ig": "cidreriepommesauvage"
+  },
+  "cq5zu0z": {
+   "n": "Verger et Cidrerie Merleau",
+   "g": "ChIJ3USZCWJB0EwREO7hXWpF0po"
+  },
+  "cvwditf": {
+   "n": "Verger Ferland",
+   "ig": "verger.ferland",
+   "g": "ChIJA_MK2PpQtkwRz-Cj622G76E",
+   "w": "https://vergerferland.com/",
+   "ws": 1
+  },
+  "cxqlrmt": {
+   "n": "Verger Hemmingford",
+   "ig": "petch_orchards",
+   "g": "ChIJUf8KwKN_yUwRcjxVidlFIaY"
+  },
+  "c4ae7fl": {
+   "n": "Vergers de velours",
+   "g": "ChIJNQXXltAP6kwRvoEVlOwnXwY",
+   "w": "https://en.vergersdevelours.com/",
+   "ws": 1
+  },
+  "ct5j4ds": {
+   "n": "Vergers Philion",
+   "ig": "vergersecologiquesphilion",
+   "g": "ChIJnwQIAk1-yUwRdF_qE70uQqU",
+   "w": "https://vergersphilion.com/",
+   "ws": 1
+  },
+  "chvginh": {
+   "n": "Vieux Moulin",
+   "ig": "vieuxmoulin.miel",
+   "g": "ChIJT49jqNl_lkwRdf7H04K5qrw",
+   "w": "https://vieuxmoulin.qc.ca/",
+   "ws": 1
+  },
+  "cbm4ykd": {
+   "n": "The Little Cider Company",
+   "ig": "thelittlecidercompany",
+   "g": "ChIJLXotqG3gOogRkDaYLjPmzw8",
+   "w": "https://thelittlecidercompany.ca/",
+   "ws": 1
+  },
+  "cusum8s": {
+   "n": "Domaine Héritage",
+   "ig": "domaine_heritage",
+   "g": "ChIJ96paE779yUwRCYnFdbpGKkw",
+   "w": "https://www.domaine-heritage.com/",
+   "ws": 1
+  },
+  "c8n8zg3": {
+   "n": "Black Lab Brewing",
+   "ig": "blacklabbeer",
+   "g": "ChIJcx0x02DL1IkRR2Uet5LPrQM",
+   "w": "https://www.blacklab.beer/",
+   "ws": 1
+  },
+  "cg9f94c": {
+   "n": "Red Tape Brewery",
+   "ig": "redtapebrewery",
+   "g": "ChIJB1lQjubN1IkRCBqLoi4yMWU",
+   "w": "https://redtapebrewery.com/",
+   "ws": 1
+  },
+  "co63xg6": {
+   "n": "Duggan’s Brewery",
+   "ig": "houseofmcgrath",
+   "g": "ChIJv1hGuD3L1IkRHL2WvixhQP0"
+  },
+  "cgn2g6k": {
+   "n": "",
+   "hc": 1
+  },
+  "c2b2h32": {
+   "n": "",
+   "hc": 1
+  },
+  "cweofsq": {
+   "n": "",
+   "hc": 1
+  },
+  "c4vapoc": {
+   "n": "",
+   "hc": 1
+  },
+  "cfp48g3": {
+   "n": "Bandit Brewery",
+   "ig": "bandit_brewery",
+   "g": "ChIJXR4CRjY0K4gRZwebwTz0NRc",
+   "w": "https://www.banditbrewery.ca/",
+   "ws": 1
+  },
+  "c7oxyb4": {
+   "n": "Collective Arts Brewing – Toronto",
+   "ig": "collectivebrew",
+   "g": "ChIJL9I-zQQ1K4gRQ8Y4p8IlW-c",
+   "w": "https://collectiveartscreativity.com/",
+   "ws": 1
+  },
+  "coauu8m": {
+   "n": "",
+   "hc": 1
+  },
+  "cp8al88": {
+   "n": "Burlington Beer Co.",
+   "ig": "burlingtonbeerco",
+   "g": "ChIJqY9nBd1hK4gRa5o4OOxKtfw",
+   "w": "https://www.burlingtonbeercompany.com/",
+   "ws": 1
+  },
+  "ck9q3qj": {
+   "n": "3 Brewers Oakville",
+   "ig": "3brasseursca",
+   "g": "ChIJEdp9i3NDK4gReeCkViVw2cg"
+  },
+  "ct6p6g5": {
+   "n": "Third Moon Brewing Company",
+   "ig": "thirdmoonbeer",
+   "g": "ChIJLaGt7jtvK4gRL8d3ZEwc1Ns",
+   "w": "https://thirdmoonbrewing.com/",
+   "ws": 1
+  },
+  "cwja39z": {
+   "n": "Orange Snail Brewers",
+   "ig": "orangesnailbrewers",
+   "g": "ChIJHxBserdvK4gR13-wqVjH9Jw",
+   "w": "https://orangesnailbrewers.ca/",
+   "ws": 1
+  },
+  "c1od3uc": {
+   "n": "",
+   "hc": 1
+  },
+  "cbcp9ad": {
+   "n": "Big Rig Kitchen & Brewery – Mississauga",
+   "ig": "bigrigkitchen",
+   "g": "ChIJUU8gTLNBK4gRi5vytwbAvvA",
+   "w": "https://bigrigbrew.com/",
+   "ws": 1
+  },
+  "cbcr5li": {
+   "n": "GoodLot Farmstead Brewing Co.",
+   "ig": "goodlot.beer",
+   "g": "ChIJY7REM9EHK4gRqTU1cAoyDpw",
+   "w": "https://www.goodlot.beer/",
+   "ws": 1
+  },
+  "c3w9c8o": {
+   "n": "Decew Falls Brewing Co.",
+   "ig": "decewfallsbrewing",
+   "g": "ChIJDQJwOJ9R04kRhPe52e3KDuQ",
+   "w": "https://decewfallsbrewing.ca/",
+   "ws": 1
+  },
+  "cotmipj": {
+   "n": "Dragan Brewing",
+   "ig": "coldbreak.ca",
+   "g": "ChIJDQJwOJ9R04kRhPe52e3KDuQ"
+  },
+  "clq92q8": {
+   "n": "Counterpart Brewing",
+   "ig": "counterpartbrewing",
+   "g": "ChIJKxpWJkpd04kRVRmKriqqBCM",
+   "w": "https://counterpartbrewing.com/",
+   "ws": 1
+  },
+  "cub0noq": {
+   "n": "Blackburn Brewhouse",
+   "ig": "blackburnbeercompany",
+   "g": "ChIJc9GyXPpF04kRQhYMjnBbu9o",
+   "w": "https://www.blackburnbrewhouse.com/",
+   "ws": 1
+  },
+  "c3uab6b": {
+   "n": "Brimstone Brewing Company",
+   "ig": "brimstonebrewing",
+   "g": "ChIJOYtvFdg904kRdqeW95pR-eY",
+   "w": "https://www.brimstonebrewing.ca/",
+   "ws": 1
+  },
+  "cvs9kdw": {
+   "n": "Kame & Kettle Beer Works",
+   "ig": "kameandkettle",
+   "g": "ChIJXdiJWllJ04kRMXwhi9mk7yY",
+   "w": "https://kameandkettle.ca/",
+   "ws": 1
+  },
+  "clnl29n": {
+   "n": "Amsterdam BrewHouse",
+   "ig": "amsterdambeer",
+   "g": "ChIJ22FaNyo1K4gRYKnKHwoYftQ"
+  },
+  "cip9gwb": {
+   "n": "Toronto Distillery Co.",
+   "ig": "nickel9distillery",
+   "g": "ChIJi9pyUxk0K4gRmZJiWtUskFQ"
+  },
+  "cx58asm": {
+   "n": "",
+   "hc": 1
+  },
+  "clqdl8s": {
+   "n": "Travellers Cider",
+   "ig": "travellers_cider"
+  },
+  "ctso3cj": {
+   "n": "Bridge Brewing – Pemberton",
+   "ig": "bridgebrewingpemberton",
+   "w": "https://www.bridgebrewing.com/",
+   "ws": 1
+  },
+  "cgttv8": {
+   "n": "Ernest Cider Co.",
+   "g": "ChIJ3YKH-vDTKogR5c7-cS-2wCQ",
+   "fx": 1,
+   "w": "https://ernestcider.com/",
+   "ws": 1
+  }
+ }
+}
