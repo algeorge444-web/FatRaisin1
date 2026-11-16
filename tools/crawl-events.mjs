@@ -3,7 +3,7 @@
    writes them to events-data.js, which the app loads. Run by .github/workflows/events.yml every week.
    Usage: node tools/crawl-events.mjs [--cache file.json] [--limit N] */
 import fs from 'fs'; import vm from 'vm'; import path from 'path'; import { fileURLToPath } from 'url';
-import { siteEvents, eventDoc, calEvents, fold } from './helper-lib.mjs';
+import { siteEvents, eventDoc, calEvents, fold, isRoutine } from './helper-lib.mjs';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const arg = n => { const i = process.argv.indexOf(n); return i > -1 ? process.argv[i + 1] : ''; };
 const HORIZON_DAYS = 150, PER_PLACE = 20, THREADS = 40;
@@ -62,13 +62,26 @@ for (const c of CALS) {
 }
 const today = new Date().toISOString().slice(0, 10), limit = new Date(Date.now() + HORIZON_DAYS * 864e5).toISOString().slice(0, 10);
 const clean = s => String(s || '').replace(/[\p{Cc}\p{Zl}\p{Zp}]+/gu, ' ').replace(/\s+/g, ' ').trim();
+const SPECIAL = /festival|fest\b|release|dinner|market|holiday|santa|christmas|anniversary|harvest|tour|workshop|pairing|gala|new year/i;
+/* words that mark a special event (a release, dinner, festival, class, holiday do...) */
+const WORTH = /release|releasing|dinner|supper|brunch|feast|pairing|paired|tasting|flight|festival|fest\b|oktoberfest|market|bazaar|fair\b|anniversary|birthday|party|gala|ball\b|celebrat|harvest|stomp|crush|tour\b|workshop|class\b|masterclass|seminar|paint|wreath|craft|holiday|christmas|xmas|santa|grinch|new year|nye\b|valentine|halloween|thanksgiving|friendsgiving|mardi gras|st\.? patrick|easter|mother|father|launch|debut|tapping|cask|firkin|barrel|vertical|library wine|winemaker|brewmaster|brewer|distiller|collab|bottle|vintage|vintner|sommelier|pickup|pick-up|open house|comedy|concert|charity|fundraiser|benefit|cook-?off|competition|contest|crawl|5k|show\b|murder mystery|dance party|grand opening|wine club|beer club|experience|chocolate|cheese|oyster|lobster|crab|bbq|pig roast|clambake|long table|chef|pop-?up dinner|soir[ée]e|retreat|car show|adoption|expo|gathering/i;
+const byId = {}; places.forEach(p => byId[p.id] = p);
+const hostOf = u => { try { return new URL(u).hostname.replace(/^www\./, ''); } catch (e) { return ''; } };
+/* how many different websites list the same title on the same day */
+const elsewhere = {}; { const hosts = {}; for (const pid in found) for (const e of found[pid]) { const k = fold(e.d.title) + '|' + e.d.date; (hosts[k] = hosts[k] || new Set()).add(hostOf(byId[pid] ? byId[pid].w : pid)); } for (const k in hosts) elsewhere[k] = hosts[k].size; }
 const rows = [], seen = new Set();
 for (const pid in found) {
   const list = found[pid].filter(e => e.d.date >= today && e.d.date <= limit).sort((a, b) => a.d.date < b.d.date ? -1 : 1);
-  let k = 0; const titles = {};
+  let k = 0; const titles = {}, repeats = {}; list.forEach(e => { const t = fold(e.d.title); repeats[t] = (repeats[t] || 0) + 1; });
   for (const e of list) {
     if (seen.has(e.id) || k >= PER_PLACE) continue;
-    const tk = fold(e.d.title); titles[tk] = (titles[tk] || 0) + 1; if (titles[tk] > 4) continue;   /* a weekly repeat: keep the next few only */
+    if (isRoutine(e.d.title, byId[pid] ? byId[pid].n : '')) continue;
+    if (!WORTH.test(e.d.title)) continue;   /* special events only: bare performer names and everyday listings are left out */
+    const tk = fold(e.d.title), reps = repeats[tk] || 0;
+    /* the same thing three or more times is a regular fixture, not a special event; seasonal ones keep their next two dates */
+    if (reps >= 3 && !SPECIAL.test(e.d.title)) continue;
+    titles[tk] = (titles[tk] || 0) + 1; if (titles[tk] > 2) continue;
+    if (elsewhere[tk + '|' + e.d.date] >= 3) continue;   /* listed by three or more unrelated places: a ticket-site listing, not this place's event */
     seen.add(e.id); k++;
     const d = e.d, link = /^https?:\/\//.test(d.link || '') ? d.link : '', tix = /^https?:\/\//.test(d.ticketLink || '') ? d.ticketLink : '';
     rows.push([e.id, pid, clean(d.title), d.date, d.time || '', d.type || 'Other', clean(d.desc).slice(0, 280), link, tix, clean(d.cost)]);

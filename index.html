@@ -3727,7 +3727,7 @@ function loadEventData(){
     var L=window.FR_EVENTS||[],have={},today=todayStr(),n=0;S.events.forEach(function(e){have[e.id]=1});
     L.forEach(function(x){
       if(!x||have[x[0]]||!x[3]||x[3]<today)return;
-      var w=winery(placeAlias(x[1]));if(!w||isRoutineEvent(x[2],w.name))return;
+      var w=winery(placeAlias(x[1]));if(!w||isRoutineEvent(x[2],w.name)||isAutoEventDull('web',x[2]))return;
       have[x[0]]=1;
       S.events.push({id:x[0],wid:w.id,wname:w.name,title:x[2],date:x[3],time:x[4]||'',type:x[5]||'Other',desc:x[6]||'',link:x[7]||'',ticketLink:x[8]||'',cost:x[9]||'',src:'web',prov:provOf(w),area:'',lat:null,lng:null,seed:true});n++});
     if(n&&!S.sheet)render();
@@ -6658,6 +6658,7 @@ function sharedEventsLoad(){
       n++;live[d.id]=1;
       var x=d.data();if(!x.title||!x.date)return;
       if(isRoutineEvent(x.title,x.wname||''))return;
+      if(isAutoEventDull(x.src||'',x.title))return;
       if(OLD_SEED_EVENT_IDS.indexOf(d.id)>-1||x.date<todayStr())return;
       var xw=placeAlias(x.wid||'');var wid=(xw&&winery(xw))?xw:(findWineryForEvent(x.wname||'')||xw||'');
       var rec={id:d.id,wid:wid,wname:x.wname||'',title:x.title,date:x.date,time:x.time||'',type:x.type||'Other',desc:x.desc||'',link:x.link||'',ticketLink:x.ticketLink||'',cost:x.cost||'',src:x.src||'',prov:x.prov||'',area:x.area||'',lat:isFinite(x.lat)?+x.lat:null,lng:isFinite(x.lng)?+x.lng:null,shared:true};
@@ -6666,7 +6667,7 @@ function sharedEventsLoad(){
     });
     /* upcoming shared events that are no longer in the shared list (removed by the owner) */
     if(n<1500){var today=todayStr(),before=S.events.length;
-      S.events=S.events.filter(function(e){return !(e.shared&&e.date>=today&&!live[e.id])&&!(e.shared&&isRoutineEv(e))});
+      S.events=S.events.filter(function(e){return !(e.shared&&e.date>=today&&!live[e.id])&&!(e.shared&&(isRoutineEv(e)||isAutoEventDull(e.src||'',e.title)))});
       if(S.events.length!==before)changed++}
     if(changed){saveEventsLocal();if(!S.sheet&&(S.tab==='events'||S.tab==='home'))render()}
   }).catch(function(){});
@@ -6700,8 +6701,18 @@ var ROUTINE_WORDS={};('lunch lunches dinner dinners brunch breakfast supper happ
   'live music musician musicians musical acoustic unplugged band bands dj djs tunes jam jams session sessions songs local entertainment performance performances performer series concert concerts night nights afternoon afternoons evening evenings weekend featuring presents vibes sounds sound').split(' ').forEach(function(w){if(w)ROUTINE_WORDS[w]=1});
 /* not events at all: closures, private bookings and changed hours, plus karaoke and games nights (bingo, trivia, euchre) */
 var NOT_EVENT_RE=/\b(closed|closure|closures|closing early|close early|closes early|private (event|events|function|party|parties|booking|bookings|rental)|privately booked|buy-?out|we(\u2019|')?re closed|we are closed|holiday hours|hours (change|update)|reduced hours|no (service|tastings?)|karaoke|bingo|trivia|euchre|quiz night|pub quiz|cribbage|crib night|poker|game night|games night)\b/i;
+/* everyday goings-on rather than special events: games and sports nights, weekly drink and food deals, exercise and
+   hobby clubs, opening-hours notices and anything named after a day of the week ("Thirsty Thursday", "Mahjong Mondays") */
+var CASUAL_EVENT_RE=/\b(trivia|thrivia|bingo|singo|karaoke|mah ?jongg?|euchre|cribbage|bunco|poker|chess|jeopardy|feud|cornhole|darts?|board games?|game night|games night|bar league|league night|leagues?|run club|running club|bike night|ride night|yoga|pilates|zumba|line danc\w*|dance (night|lessons?|class)|open mic|jam session|old time jam|football|nfl|ncaa|game ?day|watch party|ufc|super bowl|world series|march madness|playoffs?|happy hour|hoppy hour|happiest hour|pint night|wing night|wings|burger night|burger and pint|tacos?|pizza night|prime rib|food trucks?|drink specials?|specials?|bogo|half price|half off|\d+ ?% off|\$ ?\d+ off|off wine|industry (night|day)|mug club|members? only|member (mondays?|day)|senior day|teacher|neighbou?rhood night|ladies night|college night|(tap ?room|tasting room|gift shop|kitchen) open|hours|kid(\u2019|')?s meals?|public hours|open (at )?(noon|\d)|reservations?|sold out|admission|farmers market|knitting|stitch|book club|vinyl|turntable|story ?time|sunday funday|case sale|pop-?up|(mon|tues|wednes|thurs|fri|satur|sun)days)\b/i;
+var HOLIDAY_ONLY_RE=/^\W*(happy |merry )?(thanksgiving|christmas eve|christmas|new year(’|')?s (eve|day)|black friday|small business saturday|cyber monday|easter|halloween)( day)?\W*$/i;
+/* events gathered automatically from websites are only shown when the title marks a special event (a release, dinner,
+   festival, class, holiday do...); bare performer names and everyday listings are left out. Events the owner adds always show. */
+var SPECIAL_EVENT_RE=/release|releasing|dinner|supper|brunch|feast|pairing|paired|tasting|flight|festival|fest\b|oktoberfest|market|bazaar|fair\b|anniversary|birthday|party|gala|ball\b|celebrat|harvest|stomp|crush|tour\b|workshop|class\b|masterclass|seminar|paint|wreath|craft|holiday|christmas|xmas|santa|grinch|new year|nye\b|valentine|halloween|thanksgiving|friendsgiving|mardi gras|st\.? patrick|easter|mother|father|launch|debut|tapping|cask|firkin|barrel|vertical|library wine|winemaker|brewmaster|brewer|distiller|collab|bottle|vintage|vintner|sommelier|pickup|pick-up|open house|comedy|concert|charity|fundraiser|benefit|cook-?off|competition|contest|crawl|5k|show\b|murder mystery|dance party|grand opening|wine club|beer club|experience|chocolate|cheese|oyster|lobster|crab|bbq|pig roast|clambake|long table|chef|pop-?up dinner|soir[ée]e|retreat|car show|adoption|expo|gathering/i;
+function isAutoEventDull(src,title){return (src==='web'||src==='cal'||src==='wco')&&!SPECIAL_EVENT_RE.test(String(title||''))}
 function isRoutineEvent(title,placeName){
-  if(NOT_EVENT_RE.test(String(title||'')))return true;
+  if(NOT_EVENT_RE.test(String(title||''))||CASUAL_EVENT_RE.test(String(title||''))||HOLIDAY_ONLY_RE.test(String(title||'')))return true;
+  /* named after one day of the week ("Fireside Friday"), unless it is clearly a one-off such as a release, dinner or market */
+  if(/\b(mon|tues|wednes|thurs|fri|satur|sun)day\b/i.test(String(title||''))&&!/release|dinner|festival|fest\b|market|santa|anniversary|gala|pairing|party|celebration|launch|black friday|small business saturday/i.test(String(title||'')))return true;
   var t=String(title||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[\u2019']/g,'').replace(/[^a-z0-9]+/g,' ').trim();
   if(!t)return true;
   var place={};String(placeName||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[\u2019']/g,'').replace(/[^a-z0-9]+/g,' ').split(' ').forEach(function(w){if(w)place[w]=1});

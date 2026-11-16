@@ -998,8 +998,14 @@ function stableId(prefix, a, b) { const str = (a || '') + '|' + (b || ''); let h
 const ROUTINE = new Set(('lunch lunches dinner dinners brunch breakfast supper happy hour hours tasting tastings open opening opens now closed close reservation reservations reserve book booking seating seatings service services menu menus daily weekly nightly every day days weekend weekends weekday weekdays patio restaurant bistro kitchen terrace room dining dine cafe bar lounge wine wines flight flights tour tours takeout pickup curbside shop store retail boutique winery brewery taproom cidery distillery cellar door available special specials regular hours of at in on our the with and a an for to from all a la carte monday tuesday wednesday thursday friday saturday sunday mondays tuesdays wednesdays thursdays fridays saturdays sundays season seasonal summer fall winter spring live music musician musicians musical acoustic unplugged band bands dj djs tunes jam jams session sessions songs local entertainment performance performances performer series concert concerts night nights afternoon afternoons evening evenings weekend featuring presents vibes sounds sound').split(' '));
 const NOT_EVENT = /\b(closed|closure|closures|closing early|close early|closes early|private (event|events|function|party|parties|booking|bookings|rental)|privately booked|buy-?out|we(\u2019|')?re closed|we are closed|holiday hours|hours (change|update)|reduced hours|no (service|tastings?)|karaoke|bingo|trivia|euchre|quiz night|pub quiz|cribbage|crib night|poker|game night|games night)\b/i;
 function fold(t) { return String(t || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[\u2019']/g, '').replace(/[^a-z0-9]+/g, ' ').trim(); }
+/* everyday goings-on rather than special events: games and sports nights, weekly drink and food deals, exercise and
+   hobby clubs, opening-hours notices and anything named after a day of the week ("Thirsty Thursday", "Mahjong Mondays") */
+const CASUAL_EVENT = /\b(trivia|thrivia|bingo|singo|karaoke|mah ?jongg?|euchre|cribbage|bunco|poker|chess|jeopardy|feud|cornhole|darts?|board games?|game night|games night|bar league|league night|leagues?|run club|running club|bike night|ride night|yoga|pilates|zumba|line danc\w*|dance (night|lessons?|class)|open mic|jam session|old time jam|football|nfl|ncaa|game ?day|watch party|ufc|super bowl|world series|march madness|playoffs?|happy hour|hoppy hour|happiest hour|pint night|wing night|wings|burger night|burger and pint|tacos?|pizza night|prime rib|food trucks?|drink specials?|specials?|bogo|half price|half off|\d+ ?% off|\$ ?\d+ off|off wine|industry (night|day)|mug club|members? only|member (mondays?|day)|senior day|teacher|neighbou?rhood night|ladies night|college night|(tap ?room|tasting room|gift shop|kitchen) open|hours|kid(\u2019|')?s meals?|public hours|open (at )?(noon|\d)|reservations?|sold out|admission|farmers market|knitting|stitch|book club|vinyl|turntable|story ?time|sunday funday|case sale|pop-?up|(mon|tues|wednes|thurs|fri|satur|sun)days)\b/i;
+const HOLIDAY_ONLY = /^\W*(happy |merry )?(thanksgiving|christmas eve|christmas|new year(’|')?s (eve|day)|black friday|small business saturday|cyber monday|easter|halloween)( day)?\W*$/i;
 function isRoutine(title, place) {
-  if (NOT_EVENT.test(String(title || ''))) return true;
+  if (NOT_EVENT.test(String(title || '')) || CASUAL_EVENT.test(String(title || '')) || HOLIDAY_ONLY.test(String(title || ''))) return true;
+  /* named after one day of the week ("Fireside Friday"), unless it is clearly a one-off such as a release, dinner or market */
+  if(/\b(mon|tues|wednes|thurs|fri|satur|sun)day\b/i.test(String(title||''))&&!/release|dinner|festival|fest\b|market|santa|anniversary|gala|pairing|party|celebration|launch|black friday|small business saturday/i.test(String(title||'')))return true;
   const t = fold(title); if (!t) return true;
   const p = new Set(fold(place).split(' '));
   const words = t.split(' ').filter(w => !/^\d+(am|pm)?$/.test(w));
@@ -1098,4 +1104,4 @@ async function runCron(env) {
   return { mode, found, cursor };
 }
 
-export { siteEvents, eventDoc, calEvents, fold };
+export { siteEvents, eventDoc, calEvents, fold, isRoutine };
