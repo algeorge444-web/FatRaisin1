@@ -3,7 +3,7 @@
    writes them to events-data.js, which the app loads. Run by .github/workflows/events.yml every week.
    Usage: node tools/crawl-events.mjs [--cache file.json] [--limit N] */
 import fs from 'fs'; import vm from 'vm'; import path from 'path'; import { fileURLToPath } from 'url';
-import { siteEvents, eventDoc, calEvents, fold, isRoutine } from './helper-lib.mjs';
+import { siteEvents, eventDoc, calEvents, fold, isRoutine, wcoEvents } from './helper-lib.mjs';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const arg = n => { const i = process.argv.indexOf(n); return i > -1 ? process.argv[i + 1] : ''; };
 const HORIZON_DAYS = 150, PER_PLACE = 20, THREADS = 40;
@@ -60,6 +60,34 @@ for (const c of CALS) {
     console.log(c.name + ': ' + n + ' events linked to places');
   } catch (e) { console.log(c.name + ': could not be read'); }
 }
+/* Wine Country Ontario's own event listings */
+try {
+  const r = await Promise.race([wcoEvents(60, 15), new Promise(z => setTimeout(() => z({ events: [] }), 240000))]);
+  const on = places.filter(p => p.p === 'ON').map(p => [fold(p.n), p]).filter(x => x[0].length >= 5).sort((a, b) => b[0].length - a[0].length);
+  let n = 0;
+  for (const x of r.events || []) {
+    const wn = fold(x.winery), t = fold(x.title);
+    const hit = on.find(([k]) => (wn && (wn.includes(k) || (k.includes(wn) && wn.length >= 5))) || t.includes(k));
+    if (!hit) continue;
+    const e = eventDoc(hit[1], hit[1].id, x, 'cal'); if (e) { (found[hit[1].id] = found[hit[1].id] || []).push(e); n++; }
+  }
+  console.log('Wine Country Ontario: ' + n + ' events linked to places');
+} catch (e) { console.log('Wine Country Ontario: could not be read'); }
+/* events the helper or the owner's tools have already saved in the app's database (so visitors no longer have to load them from there) */
+try {
+  const ids = new Set(places.map(p => p.id)); let tok = '', n = 0;
+  const base = 'https://firestore.googleapis.com/v1/projects/fatraisin-a163e/databases/(default)/documents/events?pageSize=300';
+  for (let page = 0; page < 40; page++) {
+    const r = await (await fetch(base + (tok ? '&pageToken=' + encodeURIComponent(tok) : ''))).json();
+    for (const doc of r.documents || []) {
+      const f = doc.fields || {}, g = k => (f[k] && f[k].stringValue) || '';
+      if (!/^(web|cal|wco)$/.test(g('src')) || !ids.has(g('wid')) || !g('title') || !g('date')) continue;
+      (found[g('wid')] = found[g('wid')] || []).push({ id: doc.name.split('/').pop(), d: { title: g('title'), date: g('date'), time: g('time'), type: g('type'), desc: g('desc'), link: g('link'), ticketLink: g('ticketLink'), cost: g('cost') } }); n++;
+    }
+    tok = r.nextPageToken || ''; if (!tok) break;
+  }
+  console.log('App database: ' + n + ' saved events read');
+} catch (e) { console.log('App database: could not be read'); }
 const today = new Date().toISOString().slice(0, 10), limit = new Date(Date.now() + HORIZON_DAYS * 864e5).toISOString().slice(0, 10);
 const clean = s => String(s || '').replace(/[\p{Cc}\p{Zl}\p{Zp}]+/gu, ' ').replace(/\s+/g, ' ').trim();
 const SPECIAL = /festival|fest\b|release|dinner|market|holiday|santa|christmas|anniversary|harvest|tour|workshop|pairing|gala|new year/i;
@@ -72,9 +100,9 @@ const elsewhere = {}; { const hosts = {}; for (const pid in found) for (const e 
 const rows = [], seen = new Set();
 for (const pid in found) {
   const list = found[pid].filter(e => e.d.date >= today && e.d.date <= limit).sort((a, b) => a.d.date < b.d.date ? -1 : 1);
-  let k = 0; const titles = {}, repeats = {}; list.forEach(e => { const t = fold(e.d.title); repeats[t] = (repeats[t] || 0) + 1; });
+  let k = 0; const titles = {}, repeats = {}, dup = new Set(), counted = new Set(); list.forEach(e => { const t = fold(e.d.title), kk = t + '|' + e.d.date; if (counted.has(kk)) return; counted.add(kk); repeats[t] = (repeats[t] || 0) + 1; });
   for (const e of list) {
-    if (seen.has(e.id) || k >= PER_PLACE) continue;
+    const same = fold(e.d.title) + '|' + e.d.date; if (seen.has(e.id) || dup.has(same) || k >= PER_PLACE) continue;
     if (isRoutine(e.d.title, byId[pid] ? byId[pid].n : '')) continue;
     if (!WORTH.test(e.d.title)) continue;   /* special events only: bare performer names and everyday listings are left out */
     const tk = fold(e.d.title), reps = repeats[tk] || 0;
@@ -82,7 +110,7 @@ for (const pid in found) {
     if (reps >= 3 && !SPECIAL.test(e.d.title)) continue;
     titles[tk] = (titles[tk] || 0) + 1; if (titles[tk] > 2) continue;
     if (elsewhere[tk + '|' + e.d.date] >= 3) continue;   /* listed by three or more unrelated places: a ticket-site listing, not this place's event */
-    seen.add(e.id); k++;
+    seen.add(e.id); dup.add(same); k++;
     const d = e.d, link = /^https?:\/\//.test(d.link || '') ? d.link : '', tix = /^https?:\/\//.test(d.ticketLink || '') ? d.ticketLink : '';
     rows.push([e.id, pid, clean(d.title), d.date, d.time || '', d.type || 'Other', clean(d.desc).slice(0, 280), link, tix, clean(d.cost)]);
   }

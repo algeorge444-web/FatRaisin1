@@ -3720,18 +3720,19 @@ function loadMedia(){
 /* events found on places' own websites are published in events-data.js (rebuilt every week by the site itself).
    They are shown like any other event but never saved on the device or sent to Firebase. Each row:
    [id, place id, title, date, time, type, description, link, ticket link, cost] */
+function mergeEventData(){
+  var L=window.FR_EVENTS||[],have={},today=todayStr(),n=0;S.events.forEach(function(e){have[e.id]=1});
+  L.forEach(function(x){
+    if(!x||have[x[0]]||!x[3]||x[3]<today)return;
+    var w=winery(placeAlias(x[1]));if(!w||isRoutineEvent(x[2],w.name)||isAutoEventDull('web',x[2]))return;
+    have[x[0]]=1;
+    S.events.push({id:x[0],wid:w.id,wname:w.name,title:x[2],date:x[3],time:x[4]||'',type:x[5]||'Other',desc:x[6]||'',link:x[7]||'',ticketLink:x[8]||'',cost:x[9]||'',src:'web',prov:provOf(w),area:'',lat:null,lng:null,seed:true});n++});
+  return n;
+}
 function loadEventData(){
   if(window.__evDataLoading)return;window.__evDataLoading=1;
   var sc=document.createElement('script');sc.src='events-data.js?t='+Math.floor(Date.now()/36e5);sc.async=true;
-  sc.onload=function(){try{
-    var L=window.FR_EVENTS||[],have={},today=todayStr(),n=0;S.events.forEach(function(e){have[e.id]=1});
-    L.forEach(function(x){
-      if(!x||have[x[0]]||!x[3]||x[3]<today)return;
-      var w=winery(placeAlias(x[1]));if(!w||isRoutineEvent(x[2],w.name)||isAutoEventDull('web',x[2]))return;
-      have[x[0]]=1;
-      S.events.push({id:x[0],wid:w.id,wname:w.name,title:x[2],date:x[3],time:x[4]||'',type:x[5]||'Other',desc:x[6]||'',link:x[7]||'',ticketLink:x[8]||'',cost:x[9]||'',src:'web',prov:provOf(w),area:'',lat:null,lng:null,seed:true});n++});
-    if(n&&!S.sheet)render();
-  }catch(e){}};
+  sc.onload=function(){try{if(mergeEventData()&&!S.sheet)render()}catch(e){}};
   sc.onerror=function(){window.__evDataLoading=0};
   document.head.appendChild(sc);
 }
@@ -6651,7 +6652,9 @@ function evUnpublish(id){if(!isOwner())return;catDb().then(function(db){return d
 function saveEventsLocal(){try{localStorage.setItem(KEY,JSON.stringify({wineries:placesForSaving(),events:S.events.filter(function(e){return !e.seed})}))}catch(e){}}
 /* everyone: load upcoming shared events and merge them in */
 function sharedEventsLoad(){
-  catDb().then(function(db){return db.collection('events').where('date','>=',todayStr()).limit(1500).get()}).then(function(snap){
+  /* only events the owner has added are read from Firebase; everything found automatically on websites and calendars
+     comes from events-data.js, so opening the app costs a handful of database reads, not thousands */
+  catDb().then(function(db){return db.collection('events').where('src','not-in',['web','cal','wco']).get()}).then(function(snap){
     var have={},changed=0;S.events.forEach(function(e){have[e.id]=e});
     var live={},n=0;
     snap.forEach(function(d){
@@ -6669,6 +6672,7 @@ function sharedEventsLoad(){
     if(n<1500){var today=todayStr(),before=S.events.length;
       S.events=S.events.filter(function(e){return !(e.shared&&e.date>=today&&!live[e.id])&&!(e.shared&&(isRoutineEv(e)||isAutoEventDull(e.src||'',e.title)))});
       if(S.events.length!==before)changed++}
+    try{if(mergeEventData())changed++}catch(e){}
     if(changed){saveEventsLocal();if(!S.sheet&&(S.tab==='events'||S.tab==='home'))render()}
   }).catch(function(){});
 }

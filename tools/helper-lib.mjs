@@ -1104,4 +1104,4 @@ async function runCron(env) {
   return { mode, found, cursor };
 }
 
-export { siteEvents, eventDoc, calEvents, fold, isRoutine };
+export { siteEvents, eventDoc, calEvents, fold, isRoutine, wcoEvents };
