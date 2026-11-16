@@ -1,0 +1,83 @@
+/* FatRaisin weekly event search.
+   Visits every place's own website (and a few state/regional association calendars), collects upcoming events and
+   writes them to events-data.js, which the app loads. Run by .github/workflows/events.yml every week.
+   Usage: node tools/crawl-events.mjs [--cache file.json] [--limit N] */
+import fs from 'fs'; import vm from 'vm'; import path from 'path'; import { fileURLToPath } from 'url';
+import { siteEvents, eventDoc, calEvents, fold } from './helper-lib.mjs';
+const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const arg = n => { const i = process.argv.indexOf(n); return i > -1 ? process.argv[i + 1] : ''; };
+const HORIZON_DAYS = 150, PER_PLACE = 20, THREADS = 40;
+/* association calendars the helper can read (Squarespace, The Events Calendar, or event details on the page) */
+const CALS = [
+  { name: 'Ohio Wines', url: 'https://www.ohiowines.org/events', st: 'OH' },
+  { name: 'Brewers of Indiana Guild', url: 'https://drinkin.beer/events/', st: 'IN' },
+  { name: 'Garden State Wine Growers', url: 'https://www.newjerseywines.com/events/', st: 'NJ' },
+  { name: 'Washington Wine', url: 'https://www.washingtonwine.org/events/', st: 'WA' },
+  { name: 'Walla Walla Wine', url: 'https://www.wallawallawine.com/events/', st: 'WA' },
+  { name: 'Oregon Wine', url: 'https://www.oregonwine.org/events/', st: 'OR' },
+  { name: 'Sonoma Valley Vintners', url: 'https://sonomavalleywine.com/events/', st: 'CA' },
+  { name: 'Amador Vintners', url: 'https://amadorwine.com/events/', st: 'CA' },
+  { name: 'Idaho Wines', url: 'https://idahowines.org/events/', st: 'ID' },
+  { name: 'Kentucky Distillers Association', url: 'https://kybourbontrail.com/events/', st: 'KY' },
+  { name: 'Maryland Wine', url: 'https://marylandwine.com/events/', st: 'MD' },
+  { name: 'Cayuga Lake Wine Trail', url: 'https://www.cayugawinetrail.com/events/', st: 'NY' },
+  { name: 'Leelanau Peninsula Wine Trail', url: 'https://www.lpwines.com/events/', st: 'MI' }
+];
+const ctx = { window: {} }; vm.createContext(ctx);
+for (const f of ['places-ca.js', 'places-us.js']) vm.runInContext(fs.readFileSync(path.join(ROOT, f), 'utf8'), ctx);
+const D = ctx.window.FR_DATA;
+const prov = r => (r[1].match(/, ([A-Z]{2}) (?:\d{5}|[A-Z]\d[A-Z])/) || r[2].match(/, ([A-Z]{2})$/) || [])[1] || '';
+let places = [...D.US, ...D.CA].map(r => ({ id: r[10], n: r[0], w: r[4] ? (/^https?:/i.test(r[4]) ? r[4] : 'https://' + r[4]) : '', p: prov(r) }));
+const sites = places.filter(p => p.w && !/instagram\.com|facebook\.com/i.test(p.w)).slice(0, +arg('--limit') || 1e9);
+let cache = {}; if (arg('--cache') && fs.existsSync(arg('--cache'))) cache = JSON.parse(fs.readFileSync(arg('--cache'), 'utf8'));
+process.on('unhandledRejection', () => {}); process.on('uncaughtException', () => {});
+const found = {}; let i = 0, done = 0, total = 0;
+const worker = async () => {
+  while (i < sites.length) {
+    const p = sites[i++]; let evs = [];
+    if (cache[p.id]) evs = cache[p.id].e || [];
+    else try {
+      const r = await Promise.race([siteEvents(new URLSearchParams({ site: p.w }), { pages: 2, tickets: 4 }), new Promise(z => setTimeout(() => z({ events: [] }), 45000))]);
+      for (const x of r.events || []) { const e = eventDoc(p, p.id, x, 'site'); if (e) evs.push(e); }
+    } catch (e) {}
+    if (evs.length) found[p.id] = evs; total += evs.length;
+    if (++done % 1000 === 0) console.log(done + ' of ' + sites.length + ' websites checked, ' + total + ' events so far');
+  }
+};
+await Promise.all(Array.from({ length: THREADS }, worker));
+/* association calendars: each event is linked to the place it names, when that place is in the app */
+for (const c of CALS) {
+  try {
+    const rc = await Promise.race([calEvents(c.url), new Promise(z => setTimeout(() => z({ events: [] }), 60000))]);
+    const inState = places.filter(p => p.p === c.st).map(p => [fold(p.n), p]).filter(x => x[0].length >= 5).sort((a, b) => b[0].length - a[0].length);
+    let n = 0;
+    for (const x of rc.events || []) {
+      const wn = fold(x.winery), t = fold(x.title);
+      const hit = inState.find(([k]) => (wn && (wn.includes(k) || (k.includes(wn) && wn.length >= 5))) || t.includes(k));
+      if (!hit) continue;
+      const e = eventDoc(hit[1], hit[1].id, x, 'cal'); if (e) { (found[hit[1].id] = found[hit[1].id] || []).push(e); n++; }
+    }
+    console.log(c.name + ': ' + n + ' events linked to places');
+  } catch (e) { console.log(c.name + ': could not be read'); }
+}
+const today = new Date().toISOString().slice(0, 10), limit = new Date(Date.now() + HORIZON_DAYS * 864e5).toISOString().slice(0, 10);
+const clean = s => String(s || '').replace(/[\p{Cc}\p{Zl}\p{Zp}]+/gu, ' ').replace(/\s+/g, ' ').trim();
+const rows = [], seen = new Set();
+for (const pid in found) {
+  const list = found[pid].filter(e => e.d.date >= today && e.d.date <= limit).sort((a, b) => a.d.date < b.d.date ? -1 : 1);
+  let k = 0; const titles = {};
+  for (const e of list) {
+    if (seen.has(e.id) || k >= PER_PLACE) continue;
+    const tk = fold(e.d.title); titles[tk] = (titles[tk] || 0) + 1; if (titles[tk] > 4) continue;   /* a weekly repeat: keep the next few only */
+    seen.add(e.id); k++;
+    const d = e.d, link = /^https?:\/\//.test(d.link || '') ? d.link : '', tix = /^https?:\/\//.test(d.ticketLink || '') ? d.ticketLink : '';
+    rows.push([e.id, pid, clean(d.title), d.date, d.time || '', d.type || 'Other', clean(d.desc).slice(0, 280), link, tix, clean(d.cost)]);
+  }
+}
+rows.sort((a, b) => a[3] < b[3] ? -1 : a[3] > b[3] ? 1 : 0);
+const out = path.join(ROOT, 'events-data.js');
+let before = 0; try { const c2 = { window: {} }; vm.createContext(c2); vm.runInContext(fs.readFileSync(out, 'utf8'), c2); before = (c2.window.FR_EVENTS || []).filter(x => x[3] >= today).length; } catch (e) {}
+console.log(rows.length + ' upcoming events at ' + Object.keys(found).length + ' places (the current file has ' + before + ' still upcoming)');
+if (before > 200 && rows.length < before * 0.5 && !process.argv.includes('--force')) { console.log('Far fewer events than last time, so the existing file is kept (the search probably had network trouble).'); process.exit(0); }
+fs.writeFileSync(out, '/* FatRaisin events found on places’ own websites. Rebuilt every week by tools/crawl-events.mjs. Updated ' + today + '.\n   One row per event: [id, place id, title, date, time, type, description, link, ticket link, cost] */\nwindow.FR_EVENTS=[\n' + rows.map(r => JSON.stringify(r)).join(',\n') + '\n];\n');
+process.exit(0);

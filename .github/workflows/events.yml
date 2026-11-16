@@ -1,0 +1,30 @@
+name: Weekly event search
+# Visits every place's website once a week, collects upcoming events and saves them to events-data.js.
+on:
+  schedule:
+    - cron: '17 9 * * 1'   # Mondays, early morning in North America
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: events
+  cancel-in-progress: false
+jobs:
+  events:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Search websites for events
+        run: node tools/crawl-events.mjs
+      - name: Save the events file
+        run: |
+          git config user.name "FatRaisin event search"
+          git config user.email "actions@users.noreply.github.com"
+          git add events-data.js
+          git diff --cached --quiet || git commit -m "Weekly events update"
+          git pull --rebase -q origin main
+          git push
