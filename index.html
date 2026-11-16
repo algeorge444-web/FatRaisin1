@@ -1060,7 +1060,7 @@ function personalPlaces(){
   return {mine:mine,edits:edits,removed:removed};
 }
 function save(){HASUS_C.arr=null;
-  try{var p=personalPlaces();localStorage.setItem(PKEY2,JSON.stringify({v:SEED_VERSION,mine:p.mine,edits:p.edits,removed:p.removed,events:S.events}));
+  try{var p=personalPlaces();localStorage.setItem(PKEY2,JSON.stringify({v:SEED_VERSION,mine:p.mine,edits:p.edits,removed:p.removed,events:S.events.filter(function(e){return !e.seed})}));
     if(localStorage.getItem(KEY))localStorage.removeItem(KEY);   /* the old full copy: no longer needed, frees space */
   }catch(e){}
   fbPushDebounced()}
@@ -1179,7 +1179,7 @@ function savePinOk(){try{localStorage.setItem(PINOKKEY,JSON.stringify(PINOK))}ca
   (function(){
     var today=todayStr(),old={},before=S.events.length;OLD_SEED_EVENT_IDS.forEach(function(id){old[id]=1});
     S.events=S.events.filter(function(e){return !old[e.id]&&e.date&&e.date>=today});
-    if(S.events.length!==before){try{localStorage.setItem(KEY,JSON.stringify({wineries:placesForSaving(),events:S.events}))}catch(e){}}
+    if(S.events.length!==before){try{localStorage.setItem(KEY,JSON.stringify({wineries:placesForSaving(),events:S.events.filter(function(e){return !e.seed})}))}catch(e){}}
   })();
   try{S.attending=JSON.parse(localStorage.getItem(ATKEY))||[]}catch(e){S.attending=[]}
   if(!Array.isArray(S.attending))S.attending=[];
@@ -3717,6 +3717,24 @@ function loadMedia(){
   sc.onerror=function(){window.__mediaLoading=0};
   document.head.appendChild(sc);
 }
+/* events found on places' own websites are published in events-data.js (rebuilt every week by the site itself).
+   They are shown like any other event but never saved on the device or sent to Firebase. Each row:
+   [id, place id, title, date, time, type, description, link, ticket link, cost] */
+function loadEventData(){
+  if(window.__evDataLoading)return;window.__evDataLoading=1;
+  var sc=document.createElement('script');sc.src='events-data.js?t='+Math.floor(Date.now()/36e5);sc.async=true;
+  sc.onload=function(){try{
+    var L=window.FR_EVENTS||[],have={},today=todayStr(),n=0;S.events.forEach(function(e){have[e.id]=1});
+    L.forEach(function(x){
+      if(!x||have[x[0]]||!x[3]||x[3]<today)return;
+      var w=winery(placeAlias(x[1]));if(!w||isRoutineEvent(x[2],w.name))return;
+      have[x[0]]=1;
+      S.events.push({id:x[0],wid:w.id,wname:w.name,title:x[2],date:x[3],time:x[4]||'',type:x[5]||'Other',desc:x[6]||'',link:x[7]||'',ticketLink:x[8]||'',cost:x[9]||'',src:'web',prov:provOf(w),area:'',lat:null,lng:null,seed:true});n++});
+    if(n&&!S.sheet)render();
+  }catch(e){}};
+  sc.onerror=function(){window.__evDataLoading=0};
+  document.head.appendChild(sc);
+}
 function sharedImg(w){var g=S.ghours[w.id]||{},q=SHARED[w.id]||{},u=g.img||q.img||'';return /^https:\/\//.test(u)?u:''}
 function webPhoto(w){return w&&PHOTO_REMOVED.indexOf(w.name)<0&&(WEB_PHOTOS[w.name]||sharedImg(w))||''}
 /* the place's logo, from its website: shown on a plain background when there's no photo */
@@ -4136,7 +4154,7 @@ function fbApplyCloud(data){
   if(data.ghours){Object.keys(data.ghours).forEach(function(k){S.ghours[k]=data.ghours[k]});try{localStorage.setItem(GHKEY,JSON.stringify(S.ghours))}catch(e){}}
   if(data.pins){Object.keys(data.pins).forEach(function(k){if(data.pins[k]&&data.pins[k].src==='manual')S.pins[k]=data.pins[k]});try{localStorage.setItem(PNKEY,JSON.stringify(S.pins))}catch(e){}applyPins()}
   try{purgeStoredGoogleData()}catch(e){}
-  try{localStorage.setItem(KEY,JSON.stringify({wineries:placesForSaving(),events:S.events}))}catch(e){}
+  try{localStorage.setItem(KEY,JSON.stringify({wineries:placesForSaving(),events:S.events.filter(function(e){return !e.seed})}))}catch(e){}
   try{localStorage.setItem(FKEY,JSON.stringify(S.favorites))}catch(e){}
   syncMarkers();render();
 }
@@ -6630,7 +6648,7 @@ function evPublish(list){
   });
 }
 function evUnpublish(id){if(!isOwner())return;catDb().then(function(db){return db.collection('events').doc(id).delete()}).catch(function(){})}
-function saveEventsLocal(){try{localStorage.setItem(KEY,JSON.stringify({wineries:placesForSaving(),events:S.events}))}catch(e){}}
+function saveEventsLocal(){try{localStorage.setItem(KEY,JSON.stringify({wineries:placesForSaving(),events:S.events.filter(function(e){return !e.seed})}))}catch(e){}}
 /* everyone: load upcoming shared events and merge them in */
 function sharedEventsLoad(){
   catDb().then(function(db){return db.collection('events').where('date','>=',todayStr()).limit(1500).get()}).then(function(snap){
@@ -9490,7 +9508,7 @@ document.addEventListener('click',function(ev){
     case 'more-places':S.wLimit+=30;var wl=$('#wlist');if(wl)wl.innerHTML=wineryListInner();break;
     case 'import':importData();break;
     case 'copy':
-      var ta=$('#f-export');if(ta&&!ta.value)ta.value=JSON.stringify({wineries:S.wineries,events:S.events},null,1);ta.select();
+      var ta=$('#f-export');if(ta&&!ta.value)ta.value=JSON.stringify({wineries:S.wineries,events:S.events.filter(function(e){return !e.seed})},null,1);ta.select();
       try{navigator.clipboard.writeText(ta.value).then(function(){toast('Copied')},function(){document.execCommand('copy');toast('Copied')})}catch(e){try{document.execCommand('copy');toast('Copied')}catch(x){toast('Select the text and copy it')}}
       break;
   }
@@ -9662,6 +9680,7 @@ if(S.fbConfigText)setTimeout(function(){try{ensureFirebase()}catch(e){}},800);
 setTimeout(function(){try{sharedEventsLoad()}catch(e){}},1500);
 setTimeout(function(){try{sharedPlacesLoad()}catch(e){}},1200);
 setTimeout(function(){try{loadMedia()}catch(e){}},250);
+setTimeout(function(){try{loadEventData()}catch(e){}},2200);
 setTimeout(function(){try{loadMapLibre().then(function(){try{fetch(MAP_STYLE_URL)}catch(e){}})}catch(e){}},2500);
 setTimeout(function(){try{refineVisibleMarkers()}catch(e){}},4000);
 })();
