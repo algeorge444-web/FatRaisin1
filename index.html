@@ -1293,7 +1293,8 @@ var gmapsDir=function(w){return 'https://www.google.com/maps/dir/?api=1&destinat
 var mapsSearch=function(w){var q=encodeURIComponent(w.name+', '+w.address);if(!isAppleDev())return gmapsLink(w);return isAppleDev()?'https://maps.apple.com/?q='+q+(hasCoord(w)?'&ll='+w.lat+','+w.lng:''):(hasCoord(w)?'geo:'+w.lat+','+w.lng+'?q='+w.lat+','+w.lng+'('+encodeURIComponent(w.name)+')':'https://www.openstreetmap.org/search?query='+q)};
 var mapsDir=function(w){return isAppleDev()?appleMapsDir(w):gmapsDir(w);return 0?0:(hasCoord(w)?'geo:'+w.lat+','+w.lng+'?q='+w.lat+','+w.lng+'('+encodeURIComponent(w.name)+')':'https://www.openstreetmap.org/search?query='+encodeURIComponent(w.name+', '+w.address))};
 var appleMapsDir=function(w){return 'https://maps.apple.com/directions?destination='+encodeURIComponent(w.name+', '+w.address)+'&mode=driving'};
-var provinceOf=function(area){return area&&area.indexOf(', ')>-1?area.split(', ').pop():(area||'')};
+var PROV_BY_NAME={'Nova Scotia':'NS','Québec':'QC','Quebec':'QC','Northern BC':'BC','New Brunswick':'NB','Saskatchewan':'SK','Prince Edward Island':'PE','Yukon':'YT','Manitoba':'MB','Alberta':'AB','Ontario':'ON','British Columbia':'BC','Newfoundland and Labrador':'NL'};
+var provinceOf=function(area){if(!area)return '';var p=area.indexOf(', ')>-1?area.split(', ').pop():area;return PROV_BY_NAME[p]||p};
 /* ----- Canada / USA -----
    Every place belongs to one country (from its region or a US state + ZIP in its address).
    Visitors see one country at a time: the one they're in, unless they switch. Favourites and visits show both. */
@@ -1701,7 +1702,7 @@ function deleteAccount(){
 /* ===== welcome tour: three screens the first time the app opens (after the age check) ===== */
 var TOURKEY='cellardoor:tour:v1';
 var TOUR=[
-  {img:'img/tour-places.jpg',kick:'Discover',title:'Find wineries, breweries & more',text:'Thousands of places across Canada and the US. Search, filter by type or what\u2019s open now, and get live hours, ratings and directions.'},
+  {img:'img/tour-places.jpg',kick:'Discover',title:'Find wineries, breweries & more',text:'Thousands of places across Canada and the US. Search, filter by type or what\u2019s open now, and see photos, hours and directions.'},
   {img:'img/tour-trails.jpg',kick:'Plan',title:'One-tap trails for a day out',text:'Start a ready-made trail, wineries only or mixed with breweries and cideries, and FatRaisin puts the stops in the best driving order.'},
   {img:'img/tour-events.jpg',kick:'What\u2019s on',title:'Never miss a harvest dinner',text:'Tastings, releases, dinners and music near you. Tap I\u2019m going and add a reminder to your calendar.'},
   {img:'img/tour-passport.jpg',kick:'Collect',title:'Stamp your passport',text:'Mark the places you visit and collect an inked stamp for each, then share your passport card with friends.'},
@@ -5129,8 +5130,8 @@ function detailHTML(w){
 function areaGroups(){
   var g={},order=[];
   S.wineries.forEach(function(w){if(!w.area||!inCountry(w))return;var p=provinceOf(w.area);if(!g[p]){g[p]=[];order.push(p)}if(g[p].indexOf(w.area)<0)g[p].push(w.area)});
-  var names=Object.assign({ON:'Ontario',BC:'British Columbia',NS:'Nova Scotia',QC:'Québec'},US_STATES);
-  return order.sort().map(function(p){return {key:p,label:names[p]||p,areas:g[p].sort()}});
+  var names=Object.assign({ON:'Ontario',BC:'British Columbia',NS:'Nova Scotia',QC:'Québec',AB:'Alberta',MB:'Manitoba',SK:'Saskatchewan',NB:'New Brunswick',PE:'Prince Edward Island',NL:'Newfoundland and Labrador',YT:'Yukon',NT:'Northwest Territories',NU:'Nunavut'},US_STATES);
+  return order.map(function(p){return {key:p,label:names[p]||p,areas:g[p].sort()}}).sort(function(a,b){return a.label<b.label?-1:a.label>b.label?1:0});
 }
 function provinceOptions(cur){
   return areaGroups().map(function(g){return '<option value="'+esc(g.key)+'"'+(g.key===cur?' selected':'')+'>'+esc(g.label)+'</option>'}).join('');
