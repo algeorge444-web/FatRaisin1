@@ -1324,7 +1324,6 @@
 ["Steel Town Cider","150 Chatham Street, Unit 14 Fronts, Frid St, Hamilton, ON L8P 2B6","Hamilton, ON","","steeltowncider.com",43.256672,-79.89418,"ovt",0,"brewery","c80kf34"],
 ["Bains Road Cider Company","1019 Bains Rd, Haldimand, ON N1A 2W8","Niagara Escarpment, ON","905-979-5230","bainsroadcider.ca",42.882242,-79.73565,"ovt",0,"winery","crwna7t"],
 ["Vinemount Estates","604 Fifth Rd E, Hamilton, ON L8J 3L4","Niagara Escarpment, ON","905-643-3265","vinemountestates.com",43.20024,-79.708582,"ovt",0,"winery","cthcgpa"],
-["Vista Ridge - Losani Homes","4008 Mountain Street, Beamsville, ON L0R 1B2","Niagara Escarpment, ON","289-566-8757","losanihomes.com",43.15257,-79.479473,"ovt",0,"winery","c7m8dob"],
 ["Meldville Wines","4888 Ontario St, Lincoln, ON L3J 1J8","Niagara Escarpment, ON","905-563-6500","meldvillewines.com",43.19473,-79.477294,"ovt",0,"winery","c2s7tvl"],
 ["Black Bank Hill","4247 Sann Rd, Lincoln, ON L3J 1K2","Niagara Escarpment, ON","647-562-7442","blackbankhill.com",43.16284,-79.455331,"ovt",0,"winery","cb938nl"],
 ["Stonewall Estates","4209 Eleventh St, Lincoln, ON L2R 6P9","Niagara Escarpment, ON","905-329-6836","stonewallestates.ca",43.169156,-79.326946,"ovt",0,"winery","cdaqzcp"],

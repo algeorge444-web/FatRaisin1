@@ -875,6 +875,19 @@ html.gplacesoff [data-action="reviews-fetch"],html.gplacesoff .gponly{display:no
 .pfpanel .pfilters{margin-bottom:0}
 .gtkpick{margin-top:12px}.gtkpick b{display:block;font-size:13px;margin-bottom:6px}.gtkpick small{display:block;color:var(--muted);font-size:12px;margin-top:6px;line-height:1.35}
 .gtks{display:flex;flex-wrap:wrap;gap:6px}
+button.gtk[disabled]{opacity:.5;cursor:default}
+.tcard.tchal{background-size:cover}.tcard .tchemo{position:absolute;top:10px;right:14px;font-size:40px;line-height:1;filter:drop-shadow(0 2px 6px rgba(0,0,0,.25))}
+.badges{display:grid;grid-template-columns:1fr;gap:8px}@media(min-width:560px){.badges{grid-template-columns:1fr 1fr}}
+.badge{display:flex;gap:10px;align-items:center;border:1px solid var(--line);border-radius:14px;padding:8px 10px;background:var(--surface,#fff)}
+.badge svg{flex:none}.badge>div{min-width:0;flex:1}.badge b{display:block;font-size:14px}.badge span{display:block;font-size:12.5px;color:var(--muted);line-height:1.3}
+.badge small{display:block;font-size:11.5px;color:var(--muted);margin-top:3px}.badge.on small{color:#8a6420;font-weight:700}
+.bprog{height:5px;border-radius:3px;background:var(--line);overflow:hidden;margin-top:5px}.bprog i{display:block;height:100%;background:var(--accent)}
+.bsub{font-size:15px;margin:16px 0 8px}
+.clue{border:1px dashed var(--accent);border-radius:14px;padding:12px 14px;background:var(--surface,#fff);margin:10px 0}
+.cluehd{display:flex;justify-content:space-between;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);font-weight:700}
+.clue .riddle{font-family:var(--serif);font-size:19px;line-height:1.3;margin:8px 0}.clue .hint{margin:6px 0;font-size:14px}
+.secretdone{text-align:center;padding:10px 0}.secretdone b{font-size:20px;font-family:var(--serif)}
+.flcat{border-top:1px solid var(--line);padding-top:10px;margin-top:10px}.flcat h3{font-size:15px;margin:0 0 6px}
 .gtk{display:inline-flex;align-items:center;gap:4px;border:1px solid var(--line);background:var(--surface,#fff);color:var(--ink);border-radius:999px;padding:6px 11px;font:inherit;font-size:13px;white-space:nowrap}
 button.gtk{cursor:pointer}button.gtk[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
 .pchips{flex-wrap:nowrap!important;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;padding-bottom:2px}
@@ -4415,7 +4428,8 @@ function toggleVisited(id){
   S.visited=S.visited||{};
   var w=winery(id);if(!w)return;
   if(S.visited[id]){delete S.visited[id];saveVisited();render();toast('Removed from your passport');return}
-  S.visited[id]=todayStr();saveVisited();render();stampThunk(w);
+  var bBefore=badgesEarned();
+  S.visited[id]=todayStr();saveVisited();render();stampThunk(w);announceBadges(bBefore);
   if(LM.ready&&LM.markers[id])LM.markers[id].setIcon(markerIconFor(w));
   var n=Object.keys(S.visited).length;
   toast('Stamped! '+n+' place'+(n===1?'':'s')+' in your passport');
@@ -4507,7 +4521,7 @@ function passportCardHTML(){
       '<div class="ppstamps">'+st.ids.slice(0,3).map(function(id){return '<button class="ppstamp" data-action="viewplace" data-id="'+id+'" aria-label="'+esc(winery(id).name)+'">'+stampSVG(winery(id),S.visited[id],92)+'</button>'}).join('')+'</div>'+
       '<div class="pprule" role="progressbar" aria-valuenow="'+pct+'" aria-valuemin="0" aria-valuemax="100" aria-label="'+esc(ppStateName(home))+' visited"><i style="width:'+Math.max(pct,1)+'%"></i></div>'+
       '<p class="ppnote">'+done+' of '+inHome.length+' in '+esc(ppStateName(home))+'</p>'+
-      '<div class="ppacts"><button class="btn small" data-action="passport-open">Open passport</button><button class="btn small" data-action="card-open">Share card</button></div>':
+      '<div class="ppacts"><button class="btn small" data-action="passport-open">Open passport</button><button class="btn small" data-action="badges-open">\ud83c\udfc5 Badges</button><button class="btn small" data-action="card-open">Share card</button></div>':
       '<p class="ppnote" style="margin:0 0 12px">No stamps yet. Tap <b>Been here</b> on any winery, brewery, distillery or cidery you\u2019ve visited and it\u2019s stamped here.</p>'+
       '<div class="ppacts"><button class="btn small" data-action="navto" data-tab="wineries">Browse places</button></div>')+
     '</div>';
@@ -4552,7 +4566,7 @@ function passportSheetHTML(){
   return STAMP_DEFS+'<div class="sheet-head"><h2 id="sheetTitle">My passport</h2><button class="btn icon" data-action="close" aria-label="Close">'+I.x+'</button></div>'+
     '<div class="ppbook" id="ppbook" data-n="'+n+'">'+leaves.map(function(h,i){return '<div class="ppleaf'+(i<cur?' turned':'')+(i>cur?' ahead':'')+'" style="z-index:'+(i<cur?i+1:n-i+n)+'" aria-hidden="'+(i===cur?'false':'true')+'">'+h+'</div>'}).join('')+'</div>'+
     '<div class="ppnav"><button class="btn small" data-action="pp-prev" aria-label="Previous page">\u2190 Back</button><span class="pgno" id="ppno">'+ppPageLabel(cur,n)+'</span><button class="btn small primary" data-action="pp-next" aria-label="Next page">Next \u2192</button></div>'+
-    '<div class="sheet-actions" style="margin-top:12px"><button class="btn" data-action="card-open">Share card</button><button class="btn primary" data-action="close">Close</button></div>';
+    '<div class="sheet-actions" style="margin-top:12px"><button class="btn" data-action="badges-open">\ud83c\udfc5 Badges</button><button class="btn" data-action="card-open">Share card</button><button class="btn primary" data-action="close">Close</button></div>';
 }
 function ppPageLabel(i,n){return i===0?'Cover':i===n-1?'Back page':i===1?'Identity page':'Page '+i+' of '+(n-2)}
 /* turn to a page without redrawing, so the page-turn animates */
@@ -4671,7 +4685,7 @@ function shareCardSheetHTML(s){
 var INSTA_ICON='<svg class="i" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>';
 function openShareCard(){
   var s={kind:'sharecard',url:''};S.sheet=s;renderSheet();
-  var countP=S.fbUser?catDb().then(function(db){return db.collection('reviews').where('uid','==',S.fbUser.uid).get()}).then(function(sn){CARD.reviews=sn.size||0}).catch(function(){}):Promise.resolve();
+  var countP=S.fbUser?catDb().then(function(db){return db.collection('reviews').where('uid','==',S.fbUser.uid).get()}).then(function(sn){var n=0;sn.forEach(function(d){if(!/^flight-/.test(d.data().place||''))n++});CARD.reviews=n}).catch(function(){}):Promise.resolve();
   countP.then(makeProfileCard).then(function(cv){
     cv.toBlob(function(b){if(S.sheet!==s)return;s.blob=b;s.url=URL.createObjectURL(b);renderSheet()},'image/png');
   }).catch(function(){if(S.sheet===s){toast('Couldn\u2019t make the card');S.sheet=null;renderSheet()}});
@@ -5058,7 +5072,7 @@ var REVSUM=null,REVSUM_P=null;
 function loadRevSummary(){
   if(REVSUM||REVSUM_P)return REVSUM_P||Promise.resolve(REVSUM);
   REVSUM_P=catDb().then(function(db){return db.collection('reviews').limit(2000).get()}).then(function(snap){
-    var m={},seen={};snap.forEach(function(d){var x=d.data();if(!x.place||BLOCKED[x.uid])return;var pid=placeAlias(x.place);if(seen[pid+'|'+x.uid])return;seen[pid+'|'+x.uid]=1;var o=m[pid]=m[pid]||{n:0,sum:0};o.n++;o.sum+=+x.rating||0});
+    var m={},seen={};snap.forEach(function(d){var x=d.data();if(!x.place||BLOCKED[x.uid]||/^flight-/.test(x.place))return;var pid=placeAlias(x.place);if(seen[pid+'|'+x.uid])return;seen[pid+'|'+x.uid]=1;var o=m[pid]=m[pid]||{n:0,sum:0};o.n++;o.sum+=+x.rating||0});
     REVSUM=m;REVSUM_P=null;if(S.tab==='wineries'||S.tab==='favorites'||S.tab==='home')render();return m;
   }).catch(function(){REVSUM_P=null;REVSUM={};return REVSUM});
   return REVSUM_P;
@@ -5157,6 +5171,7 @@ function detailHTML(w){
       (past.length?'<p class="note">'+plural(past.length,'past event')+' not shown.</p>':'')+
     '</div>':'')+
     tagsSectionHTML(w)+
+    flightSectionHTML(w)+
     igSectionHTML(w)+
     reviewsSectionHTML(w)+
     (fine.length?'<p class="fine dfine">'+esc(fine.join(' '))+'</p>':'')+
@@ -8501,8 +8516,251 @@ var THEME_TRAILS=[
 function themeTrailsAvailable(mode){
   if(!MEDIA_READY)return [];
   /* themed trails stay in the country being browsed and, when your location is known, within about an hour's drive */
-  return THEME_TRAILS.map(function(f){return {t:Object.assign({fun:true,theme:true,area:'',prov:''},f),stops:funStops(function(w){return inCountry(w)&&f.test(w)},mode,f.id)}})
+  return THEME_TRAILS.filter(function(f){return !f.seasonal||fallSeason()}).map(function(f){return {t:Object.assign({fun:true,theme:true,area:'',prov:''},f),stops:funStops(function(w){return inCountry(w)&&f.test(w)},mode,f.id+(f.seasonal?':'+S.events.length:''))}})
     .filter(function(x){if(x.stops.length<3)return false;if(S.me&&haversineKm(S.me,x.stops[0])>100)return false;x.t.area=String(x.stops[0].area||'').replace(/,\s*[A-Z]{2}$/,'');x.t.prov=provOf(x.stops[0]);return !!fitTrail(x)});
+}
+/* ===== Fall for the Pour: a seasonal trail built from upcoming harvest events and seasonal releases ===== */
+var FALL_EVENT_RE=/harvest|crush\b|stomp|pumpkin|apple|cider season|oktoberfest|octoberfest|\bfall\b|autumn|nouveau|release|barrel tasting|new vintage|hay ?ride|corn maze|thanksgiving|friendsgiving|leaf|leaves|bonfire|seasonal|ice ?wine|mulled|cranberry|squash|gourd|maple/i;
+function fallSeason(){var m=new Date().getMonth();return m>=8&&m<=10}
+function fallEventsByPlace(){
+  return trailMemo('fallev:'+S.events.length,function(){
+    var today=todayStr(),lim=new Date(Date.now()+50*864e5).toISOString().slice(0,10),m={};
+    S.events.forEach(function(e){if(!e||!e.wid||e.date<today||e.date>lim||!FALL_EVENT_RE.test(e.title||''))return;var id=placeAlias(e.wid);(m[id]=m[id]||[]).push(e)});
+    Object.keys(m).forEach(function(k){m[k].sort(function(a,b){return a.date<b.date?-1:1})});
+    return m;
+  });
+}
+THEME_TRAILS.unshift({id:'theme-fall',name:'Fall for the Pour',kick:'Seasonal',emoji:'🍁',blurb:'Harvest celebrations and seasonal releases coming up at places near you this fall.',seasonal:true,
+  test:function(w){return !!fallEventsByPlace()[w.id]}});
+
+/* ===== Challenges: the Great Pour badges, the Secret Sip mystery trail and the Ultimate Flight Challenge ===== */
+function greatPourName(){return S.country==='US'?'The Great American Pour':'The Great Canadian Pour'}
+var PACIFIC={BC:1,WA:1,OR:1,CA:1,AK:1,HI:1},ATLANTIC={NS:1,NB:1,PE:1,NL:1,ME:1,NH:1,MA:1,RI:1,CT:1,NY:1,NJ:1,DE:1,MD:1,VA:1,NC:1,SC:1,GA:1,FL:1};
+function badgeStats(){
+  var ids=Object.keys(S.visited||{}).filter(function(id){return winery(id)});
+  var st={n:ids.length,by:{winery:0,brewery:0,cidery:0,distillery:0},areas:{},provs:{},days:{},fallN:0,tag:{},pac:0,atl:0,ca:0,us:0};
+  ids.forEach(function(id){var w=winery(id),t=w.type||'winery',d=String(S.visited[id]||'');st.by[t]=(st.by[t]||0)+1;
+    if(w.area)st.areas[w.area]=(st.areas[w.area]||0)+1;var p=ppState(w);if(p){st.provs[p]=(st.provs[p]||0)+1;if(PACIFIC[p])st.pac=1;if(ATLANTIC[p])st.atl=1;if(ppIsUS(p))st.us=1;else st.ca=1}
+    if(d){st.days[d]=(st.days[d]||0)+1;var mo=+d.slice(5,7);if(mo===9||mo===10)st.fallN++}
+    placeTags(w).split('').forEach(function(c){st.tag[c]=(st.tag[c]||0)+1})});
+  function mx(o){var b=0;for(var k in o)if(o[k]>b)b=o[k];return b}
+  st.maxArea=mx(st.areas);st.nAreas=Object.keys(st.areas).length;st.nProvs=Object.keys(st.provs).length;st.maxDay=mx(st.days);
+  st.types=['winery','brewery','cidery','distillery'].filter(function(t){return st.by[t]}).length;
+  st.wbc=(st.by.winery?1:0)+(st.by.brewery?1:0)+(st.by.cidery?1:0);
+  st.secret=+(secretState().done||0);st.flight=Object.keys(flightMine()).length;
+  return st;
+}
+var BADGES=[
+ ['first','🍷','First Pour','Stamp your first place.',1,function(s){return s.n}],
+ ['five','🥂','Pour Decisions','Stamp 5 places.',5,function(s){return s.n}],
+ ['ten','🎈','The Tipsy Trail','Stamp 10 places.',10,function(s){return s.n}],
+ ['quarter','🏅','The Golden Pour','Stamp 25 places.',25,function(s){return s.n}],
+ ['fifty','👑','Legend of the Pour','Stamp 50 places.',50,function(s){return s.n}],
+ ['trio','🍇','Hops, Grapes & Apples','Stamp a winery, a brewery and a cidery.',3,function(s){return s.wbc}],
+ ['flight4','✨','Full Flight','Stamp one of each: winery, brewery, cidery and distillery.',4,function(s){return s.types}],
+ ['hops','🍺','Hop Head','Stamp 10 breweries.',10,function(s){return s.by.brewery}],
+ ['vines','🍇','Vine Lover','Stamp 10 wineries.',10,function(s){return s.by.winery}],
+ ['orchard','🍎','Orchard to Glass','Stamp 5 cideries.',5,function(s){return s.by.cidery}],
+ ['spirits','🥃','Smoke & Spirits','Stamp 5 distilleries.',5,function(s){return s.by.distillery}],
+ ['local','📍','The Local Pour','Stamp 5 places in one region.',5,function(s){return s.maxArea}],
+ ['regions','🗺️','Region Rambler','Stamp places in 5 different regions.',5,function(s){return s.nAreas}],
+ ['provs','🚗','Province Hopper','Stamp places in 3 provinces or states.',3,function(s){return s.nProvs}],
+ ['coast','🌊','Coast to Coast','Stamp a place on the Pacific and one on the Atlantic.',2,function(s){return s.pac+s.atl}],
+ ['border','🍁','Border Crosser','Stamp places in both Canada and the US.',2,function(s){return s.ca+s.us}],
+ ['weekend','📅','The Weekend Pour','Stamp 3 places on the same day.',3,function(s){return s.maxDay}],
+ ['harvest','🍂','The Harvest Run','Stamp 3 places in September or October.',3,function(s){return s.fallN}],
+ ['patio','☀️','Patio Hopping','Stamp 3 places with a patio.',3,function(s){return s.tag.p||0}],
+ ['vibes','🎵','Vines & Vibes','Stamp 3 places that host live music.',3,function(s){return s.tag.m||0}],
+ ['secret','🕵️','Secret Sipper','Finish a Secret Sip mystery trail.',1,function(s){return s.secret}],
+ ['judge','⚖️','Flight Judge','Vote in all five Flight Challenge categories.',5,function(s){return s.flight}]
+];
+function badgeList(){
+  var s=badgeStats(),out=BADGES.map(function(b){var v=Math.min(b[4],+b[5](s)||0);return {id:b[0],emoji:b[1],name:b[2],desc:b[3],goal:b[4],have:v,done:v>=b[4]}});
+  /* regional challenges: 10 stamps in each province or state you've started on (your home first) */
+  var home=ppHome(),ps=Object.keys(s.provs).sort(function(a,b){return (b===home)-(a===home)||s.provs[b]-s.provs[a]});
+  if(ps.indexOf(home)<0)ps.unshift(home);
+  ps.slice(0,4).forEach(function(p){var v=Math.min(10,s.provs[p]||0);out.push({id:'prov-'+p,emoji:'🏳️',name:ppStateName(p)+' Pour',desc:'Stamp 10 places in '+ppStateName(p)+'.',goal:10,have:v,done:v>=10,region:true})});
+  return out;
+}
+function badgesEarned(){var o={};badgeList().forEach(function(b){if(b.done)o[b.id]=1});return o}
+function medalSVG(b,size){
+  var c=b.done?'#B8862F':'#C9BFC2',c2=b.done?'#F1D48A':'#ECE6E8';
+  return '<svg viewBox="0 0 64 64" width="'+size+'" height="'+size+'" aria-hidden="true"><circle cx="32" cy="32" r="29" fill="'+c2+'" stroke="'+c+'" stroke-width="3"/><circle cx="32" cy="32" r="22" fill="none" stroke="'+c+'" stroke-width="1.2" stroke-dasharray="2 3"/>'+
+    '<text x="32" y="41" text-anchor="middle" font-size="24"'+(b.done?'':' opacity=".45" style="filter:grayscale(1)"')+'>'+b.emoji+'</text></svg>';
+}
+function badgesSheetHTML(){
+  var list=badgeList(),done=list.filter(function(b){return b.done}).length;
+  function card(b){var pct=Math.round(b.have*100/b.goal);
+    return '<div class="badge'+(b.done?' on':'')+'">'+medalSVG(b,54)+'<div><b>'+esc(b.name)+'</b><span>'+esc(b.desc)+'</span>'+
+      (b.done?'<small>✓ Earned</small>':'<div class="bprog" role="progressbar" aria-valuenow="'+b.have+'" aria-valuemin="0" aria-valuemax="'+b.goal+'"><i style="width:'+Math.max(pct,3)+'%"></i></div><small>'+b.have+' of '+b.goal+'</small>')+'</div></div>'}
+  var main=list.filter(function(b){return !b.region}),reg=list.filter(function(b){return b.region});
+  main.sort(function(a,b){return (b.done-a.done)||((b.have/b.goal)-(a.have/a.goal))});
+  return '<div class="sheet-head"><h2 id="sheetTitle">'+esc(greatPourName())+'</h2><button class="btn icon" data-action="close" aria-label="Close">'+I.x+'</button></div>'+
+    '<p style="margin-top:0">Collect stamps at wineries, breweries, cideries and distilleries to earn badges and finish regional challenges. Tap <b>Been here</b> on a place to stamp it.</p>'+
+    '<p class="note"><b>'+done+' of '+list.length+'</b> badges earned</p>'+
+    '<h3 class="bsub">Badges</h3><div class="badges">'+main.map(card).join('')+'</div>'+
+    '<h3 class="bsub">Regional challenges</h3><div class="badges">'+reg.map(card).join('')+'</div>'+
+    '<div class="sheet-actions" style="margin-top:12px"><button class="btn" data-action="passport-open">My passport</button><button class="btn primary" data-action="close">Close</button></div>';
+}
+function announceBadges(before){
+  try{var after=badgesEarned(),nw=badgeList().filter(function(b){return after[b.id]&&!before[b.id]});
+    if(nw.length)setTimeout(function(){toast('🏅 Badge earned: '+nw.map(function(b){return b.name}).join(', '))},1400)}catch(e){}
+}
+
+/* ----- The Secret Sip: a weekly mystery trail; each clue leads to a nearby place, and finding it reveals the next ----- */
+var SECKEY='cellardoor:secret:v1';
+function secretState(){try{return JSON.parse(localStorage.getItem(SECKEY))||{}}catch(e){return {}}}
+function secretSave(o){try{localStorage.setItem(SECKEY,JSON.stringify(o))}catch(e){}}
+function weekNo(){var d=new Date(),j=new Date(d.getFullYear(),0,1);return d.getFullYear()+'-'+Math.ceil(((d-j)/864e5+j.getDay()+1)/7)}
+function seededRand(seed){var x=hashNum(seed)||1;return function(){x=(x*16807)%2147483647;return x/2147483647}}
+function secretAnchor(){
+  if(S.me)return S.me;
+  var home=ppHome(),inP=S.wineries.filter(function(w){return hasCoord(w)&&ppState(w)===home});if(!inP.length)return null;
+  var a={lat:0,lng:0};inP.forEach(function(w){a.lat+=w.lat;a.lng+=w.lng});a.lat/=inP.length;a.lng/=inP.length;
+  var best=null,bd=1e9;inP.forEach(function(w){var d=haversineKm(a,w);if(d<bd){bd=d;best=w}});return best?{lat:best.lat,lng:best.lng}:a;
+}
+function secretPlan(){
+  var a=secretAnchor();if(!a)return null;
+  var key=weekNo()+'|'+Math.round(a.lat*2)+','+Math.round(a.lng*2);
+  var cur=secretState();
+  /* keep this week's trail while you travel around it; start a new one only in a new week or far away */
+  if(cur.stops&&cur.stops.length&&cur.stops.every(function(id){return winery(id)})&&String(cur.key).split('|')[0]===weekNo()&&
+     (cur.key===key||haversineKm(a,winery(cur.stops[Math.min(cur.at||0,cur.stops.length-1)]))<80))return cur;
+  var rnd=seededRand(key);
+  var cand=S.wineries.filter(function(w){return hasCoord(w)&&!w.approx&&inCountry(w)&&haversineKm(a,w)<45});
+  if(cand.length<4)return null;
+  /* prefer places with something to hint at */
+  cand.sort(function(x,y){return (placeTags(y).length>0)-(placeTags(x).length>0)||rnd()-.5});
+  var pool=cand.slice(0,Math.max(12,Math.ceil(cand.length*.6)));
+  var first=pool[Math.floor(rnd()*Math.min(pool.length,8))],stops=[first];
+  while(stops.length<4){
+    var last=stops[stops.length-1],near=pool.filter(function(w){return stops.indexOf(w)<0}).sort(function(x,y){return haversineKm(last,x)-haversineKm(last,y)}).slice(0,5);
+    if(!near.length||haversineKm(last,near[0])>30)break;stops.push(near[Math.floor(rnd()*near.length)]);
+  }
+  if(stops.length<3)return null;
+  var o={key:key,stops:stops.map(function(w){return w.id}),at:0,hints:{},how:{},done:cur.done||0};
+  secretSave(o);return o;
+}
+var TAG_CLUE={f:'serves food',p:'has a patio',d:'welcomes dogs',m:'hosts live music',z:'has pizza on the menu',b:'fires up the BBQ',c:'pairs its drinks with cheese and charcuterie',v:'comes with a view',i:'has fire pits to sit beside',u:'pours something sparkling',s:'lets you stay the night',t:'offers tours',k:'is family-friendly',o:'sits on a farm or orchard'};
+function townOf(w){var a=String(w.address||''),p=a.split(',');return p.length>=3?p[p.length-2].trim():String(w.area||'').replace(/,\s*[A-Z]{2}$/,'')}
+function compass(a,b){var dy=b.lat-a.lat,dx=(b.lng-a.lng)*Math.cos(a.lat*Math.PI/180),ang=(Math.atan2(dx,dy)*180/Math.PI+360)%360;
+  return ['north','north-east','east','south-east','south','south-west','west','north-west'][Math.round(ang/45)%8]}
+function nameShape(n){var ws=String(n).replace(/[^A-Za-z0-9À-ſ'&\- ]/g,'').split(/\s+/).filter(Boolean);
+  return ws.map(function(x){return x.charAt(0).toUpperCase()+x.slice(1).replace(/[A-Za-z0-9À-ſ]/g,'_')}).join('   ')}
+function secretClues(w,from,fromLabel){
+  var t=w.type||'winery',typ=t==='winery'?'a winery':t==='brewery'?'a craft brewery':t==='cidery'?'a cidery':'a distillery';
+  var tg=placeTags(w).split('').filter(function(c){return TAG_CLUE[c]}),rnd=seededRand(w.id);tg.sort(function(){return rnd()-.5});
+  var c1='I’m '+typ+(tg.length?' that '+tg.slice(0,2).map(function(c){return TAG_CLUE[c]}).join(' and '):'')+'.';
+  var km=from?haversineKm(from,w):0;
+  var c2=from?'Look about '+(km<1?'1 km':Math.round(km)+' km')+' '+compass(from,w)+' of '+fromLabel+'.':'Look around '+String(w.area||'').replace(/,\s*[A-Z]{2}$/,'')+'.';
+  var c3='You’ll find me in '+townOf(w)+'.';
+  var ws=String(w.name).split(/\s+/).length;
+  var c4='My name has '+plural(ws,'word')+': '+nameShape(w.name);
+  return [c1,c2,c3,c4];
+}
+function secretSheetHTML(s){
+  var head='<div class="sheet-head"><h2 id="sheetTitle">The Secret Sip</h2><button class="btn icon" data-action="close" aria-label="Close">'+I.x+'</button></div>';
+  var o=secretPlan();
+  if(!o)return head+'<p>There aren’t enough places close together near you for a mystery trail. Turn on your location or try again when you’re in wine or brewery country.</p>';
+  var stops=o.stops.map(winery),n=stops.length,at=Math.min(o.at||0,n);
+  var intro='<p style="margin-top:0">A mystery trail near you. Each clue points to a place: find it, then tap <b>I’m here</b> to unlock the next. Stuck? Take another hint, or reveal it. A new trail appears every week.</p>';
+  var done=stops.slice(0,at).map(function(w,i){var how=o.how[w.id];return '<li><button class="hlink" data-action="viewplace" data-id="'+w.id+'" style="margin:0;text-align:left">'+esc(w.name)+'</button><span class="note">'+(how==='found'?'✓ Found it'+(o.hints[w.id]?' with '+plural(o.hints[w.id],'hint'):' with no hints'):'Revealed')+'</span></li>'}).join('');
+  if(at>=n){
+    return head+'<div class="secretdone"><div style="font-size:42px">🎉</div><b>Mystery solved!</b><p class="note">You found all '+n+' stops. A new Secret Sip appears next week.</p></div><ol class="trailstops">'+done+'</ol>'+
+      '<div class="sheet-actions"><button class="btn" data-action="badges-open">Badges</button><button class="btn primary" data-action="close">Close</button></div>';
+  }
+  var w=stops[at],prev=at?stops[at-1]:null,from=prev||S.me||null,fromLabel=prev?'the last stop ('+prev.name+')':'you';
+  var cl=secretClues(w,from,fromLabel),shown=Math.min(cl.length,1+(o.hints[w.id]||0));
+  return head+intro+(done?'<ol class="trailstops">'+done+'</ol>':'')+
+    '<div class="clue"><div class="cluehd"><span>Stop '+(at+1)+' of '+n+'</span><span>'+plural(shown-1,'hint')+' used</span></div>'+
+      cl.slice(0,shown).map(function(c,i){return '<p class="'+(i?'hint':'riddle')+'">'+esc(c)+'</p>'}).join('')+
+      (s&&s.msg?'<p class="note" style="color:var(--accent)">'+esc(s.msg)+'</p>':'')+
+    '</div>'+
+    '<div class="sheet-actions" style="flex-wrap:wrap">'+(shown<cl.length?'<button class="btn" data-action="secret-hint">Another hint</button>':'')+
+      '<button class="btn" data-action="secret-reveal">Reveal</button><button class="btn primary" data-action="secret-here">I’m here</button></div>'+
+    '<p class="note">Please plan a designated driver. Hours vary, so check the place before you go.</p>';
+}
+function secretAct(kind){
+  var o=secretPlan();if(!o)return;var id=o.stops[o.at];if(!id)return;
+  var before=badgesEarned();
+  if(kind==='hint'){o.hints[id]=(o.hints[id]||0)+1;secretSave(o);S.sheet={kind:'secret'};renderSheet();return}
+  function advance(how){o.how[id]=how;o.at++;if(o.at>=o.stops.length)o.done=(o.done||0)+1;secretSave(o);S.sheet={kind:'secret'};renderSheet();announceBadges(before)}
+  if(kind==='reveal'){var w=winery(id);if(!confirm('Reveal this stop? It’s '+w.name+'.'))return;advance('revealed');toast('It was '+w.name);return}
+  if(kind==='here'){
+    S.sheet={kind:'secret',msg:'Checking where you are…'};renderSheet();
+    /* a fresh reading, not the last remembered one, so arriving at the place counts */
+    freshLocate(function(){var w=winery(id),d=haversineKm(S.me,w);
+      if(d<=0.4){advance('found');toast('🎉 You found it: '+w.name)}
+      else{S.sheet={kind:'secret',msg:'Not quite — you’re about '+(d<10?(Math.round(d*10)/10):Math.round(d))+' km from it. '+(d<3?'You’re close!':'Keep looking.')};renderSheet()}
+    },function(){S.sheet={kind:'secret',msg:'Couldn’t get your location. Turn on location for this site, or use Reveal.'};renderSheet()});
+  }
+}
+
+function freshLocate(ok,fail){
+  if(!navigator.geolocation){fail();return}
+  navigator.geolocation.getCurrentPosition(function(pos){S.me={lat:pos.coords.latitude,lng:pos.coords.longitude};S.meAt=Date.now();try{if(LM.ready)placeMeMarker()}catch(e){}ok()},
+    function(){fail()},{enableHighAccuracy:true,timeout:15000,maximumAge:0});
+}
+/* ----- The Ultimate Flight Challenge: try flights where you've been and vote for your favourite in each category ----- */
+var FLIGHT_CATS=[['red','Red wine','🍷',['winery']],['white','White wine','🥂',['winery']],['cider','Cider','🍏',['cidery','winery','brewery']],['ipa','IPA','🍺',['brewery']],['stout','Stout','☕',['brewery']]];
+var FLKEY='cellardoor:flight:v1',FLIGHT={list:null,busy:false};
+function flightMine(){try{return JSON.parse(localStorage.getItem(FLKEY))||{}}catch(e){return {}}}
+function flightCatsFor(w){var t=w.type||'winery';return FLIGHT_CATS.filter(function(c){return c[3].indexOf(t)>-1})}
+/* votes are stored like reviews ("flight-red" etc. in place of a place id, the place voted for in the text),
+   so they need no extra database setup and never show up as reviews */
+function flightLoad(force){
+  if(FLIGHT.busy||(FLIGHT.list&&!force))return;FLIGHT.busy=true;
+  catDb().then(function(db){return db.collection('reviews').where('place','in',FLIGHT_CATS.map(function(c){return 'flight-'+c[0]})).limit(5000).get()}).then(function(snap){
+    var l=[];snap.forEach(function(d){var x=d.data();if(!BLOCKED[x.uid]&&x.text&&winery(placeAlias(x.text)))l.push({cat:String(x.place).slice(7),pid:placeAlias(x.text),uid:x.uid})});
+    FLIGHT.list=l;
+    if(S.fbUser){var m=flightMine(),ch=0;l.forEach(function(v){if(v.uid===S.fbUser.uid&&m[v.cat]!==v.pid){m[v.cat]=v.pid;ch=1}});if(ch)try{localStorage.setItem(FLKEY,JSON.stringify(m))}catch(e){}}
+  }).catch(function(){FLIGHT.list=FLIGHT.list||[]}).then(function(){FLIGHT.busy=false;if(S.sheet&&S.sheet.kind==='flight')renderSheet();if(S.detailId)try{render()}catch(e){}});
+}
+function flightTally(cat){var m={};(FLIGHT.list||[]).forEach(function(v){if(v.cat===cat)m[v.pid]=(m[v.pid]||0)+1});
+  return Object.keys(m).map(function(k){return [k,m[k]]}).sort(function(a,b){return b[1]-a[1]})}
+function flightSectionHTML(w){
+  var cats=flightCatsFor(w);if(!cats.length)return '';
+  var mine=flightMine(),been=isVisited(w.id);
+  var btns=cats.map(function(c){var on=mine[c[0]]===w.id,n=flightTally(c[0]).filter(function(x){return x[0]===w.id})[0];
+    return '<button class="gtk" data-action="flight-vote" data-id="'+w.id+'" data-cat="'+c[0]+'" aria-pressed="'+on+'"'+(been?'':' disabled')+'>'+c[2]+' '+(on?'My best ':'Best ')+esc(c[1].toLowerCase())+(n?' · '+n[1]:'')+'</button>'}).join('');
+  return '<div class="detailsec"><h3>Ultimate Flight Challenge</h3>'+
+    '<p class="note" style="margin-top:0">'+(been?'Tried a flight here? Vote it your favourite in a category. You get one vote per category, and you can change it any time.':'Stamp this place with <b>Been here</b> first, then vote for your favourite.')+'</p>'+
+    '<div class="gtks">'+btns+'</div><button class="link" data-action="flight-open" style="margin-top:8px">See the leaderboard →</button></div>';
+}
+function flightVote(id,cat){
+  var w=winery(id);if(!w)return;
+  if(!isVisited(id)){toast('Stamp it with Been here first');return}
+  if(!S.fbUser){S.sheet={kind:'flight',needSignin:true};renderSheet();return}
+  var m=flightMine(),c=FLIGHT_CATS.filter(function(x){return x[0]===cat})[0];if(!c)return;
+  var before=badgesEarned(),u=S.fbUser,docId='flight-'+cat+'_'+u.uid,clear=m[cat]===id;
+  var name=String(profileName(u)||'FatRaisin member');if(name===u.email)name=name.split('@')[0];
+  var doc={place:'flight-'+cat,uid:u.uid,name:name.slice(0,60),avatar:'',rating:5,text:id,updated:Date.now(),created:Date.now()};
+  catDb().then(function(db){var r=db.collection('reviews').doc(docId);return clear?r.delete():r.set(doc)}).then(function(){
+    if(clear)delete m[cat];else m[cat]=id;try{localStorage.setItem(FLKEY,JSON.stringify(m))}catch(e){}
+    FLIGHT.list=(FLIGHT.list||[]).filter(function(v){return !(v.uid===u.uid&&v.cat===cat)});if(!clear)FLIGHT.list.push({cat:cat,pid:id,uid:u.uid});
+    toast(clear?'Vote removed':'Voted '+w.name+' your best '+c[1].toLowerCase());render();if(S.sheet)renderSheet();announceBadges(before);
+  }).catch(function(e){toast('Couldn’t save your vote: '+catErrMsg(e))});
+}
+function flightSheetHTML(s){
+  var head='<div class="sheet-head"><h2 id="sheetTitle">Ultimate Flight Challenge</h2><button class="btn icon" data-action="close" aria-label="Close">'+I.x+'</button></div>';
+  if(s&&s.needSignin&&!S.fbUser)return head+'<p>Sign in to vote, so there’s one vote per person.</p><div class="sheet-actions" style="justify-content:flex-start"><button class="btn primary" data-action="owner-signin">Sign in</button><button class="btn" data-action="close">Close</button></div>';
+  if(!FLIGHT.list){flightLoad();return head+skel(3,{label:'Loading votes'})}
+  var mine=flightMine();
+  return head+'<p style="margin-top:0">Try a flight at the places you visit, then vote for your favourite red, white, cider, IPA and stout. Open a place you’ve stamped and tap a <b>Best…</b> button to vote.</p>'+
+    FLIGHT_CATS.map(function(c){var top=flightTally(c[0]).filter(function(x){return inCountry(winery(x[0]))}).slice(0,5),my=mine[c[0]]&&winery(mine[c[0]]);
+      return '<div class="flcat"><h3>'+c[2]+' '+esc(c[1])+'</h3>'+
+        (top.length?'<ol class="trailstops">'+top.map(function(x){var w=winery(x[0]);return '<li><button class="hlink" data-action="viewplace" data-id="'+w.id+'" style="margin:0;text-align:left">'+esc(w.name)+'</button><span class="note">'+plural(x[1],'vote')+' · '+esc(String(w.area||'').replace(/,\s*[A-Z]{2}$/,''))+'</span></li>'}).join('')+'</ol>':'<p class="note">No votes yet in '+(S.country==='US'?'the US':'Canada')+'. Be the first!</p>')+
+        '<p class="note" style="margin:0">Your vote: '+(my?'<b>'+esc(my.name)+'</b>':'not yet')+'</p></div>'}).join('')+
+    '<div class="sheet-actions" style="margin-top:12px"><button class="btn primary" data-action="close">Close</button></div>';
+}
+function challengeCardsHTML(){
+  var b=badgeList(),bd=b.filter(function(x){return x.done}).length,o=secretPlan(),m=Object.keys(flightMine()).length;
+  function card(act,kick,name,sub,emoji,bg){return '<button class="tcard tchal" data-action="'+act+'" style="background-image:'+bg+'"><span class="tchemo" aria-hidden="true">'+emoji+'</span><span class="tk">'+kick+'</span><b>'+name+'</b><small>'+sub+'</small></button>'}
+  return '<div class="section-title" style="margin:14px 0 8px"><h2 style="font-size:18px">Challenges <span class="sectsub">play along</span></h2></div><div class="hgrid trails">'+
+    card('badges-open','Badges',esc(greatPourName()),bd+' of '+b.length+' badges earned','🏅','linear-gradient(135deg,#5C1027,#8E3048)')+
+    (o?card('secret-open','Mystery trail','The Secret Sip',(o.at>=o.stops.length?'Solved · new one next week':'Stop '+(o.at+1)+' of '+o.stops.length+' · new every week'),'🕵️','linear-gradient(135deg,#1F2A44,#3E5480)'):'')+
+    card('flight-open','Vote','Ultimate Flight Challenge',m?m+' of 5 votes cast':'Best red, white, cider, IPA & stout','🏆','linear-gradient(135deg,#6B4A12,#B8862F)')+
+    '</div>';
 }
 function nameKey(n){return String(n||'').replace(/^(the|le|la|les|l\u2019|l')\s*/i,'').trim()}
 /* pick a tight group of matching places near you (or in your home province) */
@@ -8604,6 +8862,7 @@ function trailsStripHTML(){
     '<div class="seg trailmode" role="group" aria-label="Trail type"><button data-action="trail-mode" data-val="wine" aria-pressed="'+(mode==='wine')+'">Wineries only</button><button data-action="trail-mode" data-val="mix" aria-pressed="'+(mode==='mix')+'">Wineries &amp; more</button></div>'+
     '<div class="hgrid trails">'+(S.trailsAll?list:list.slice(0,10)).map(function(x){return trailCardHTML(x,x.t.auto?'Day trip':'Signature trail')}).join('')+
       (!S.trailsAll&&list.length>10?'<button class="tcard tmore" data-action="trails-all"><span>See all '+list.length+' trails \u2192</span></button>':'')+'</div>'+
+    challengeCardsHTML()+
     (themes.length?'<div class="section-title" style="margin:14px 0 8px"><h2 style="font-size:18px">Themed trails <span class="sectsub">near you</span></h2></div>'+
       '<div class="hgrid trails">'+themes.map(function(x){return trailCardHTML(x,x.t.kick)}).join('')+'</div>':'')+
     (fun.length?'<div class="section-title" style="margin:14px 0 8px"><h2 style="font-size:18px">Just for fun <span class="sectsub">new every week</span></h2></div>'+
@@ -8617,7 +8876,7 @@ function trailSheetHTML(s){
   return '<div class="sheet-head"><h2 id="sheetTitle">'+esc(t.name)+'</h2><button class="btn icon" data-action="close" aria-label="Close">'+I.x+'</button></div>'+
     '<p style="margin-top:0">'+esc(t.blurb)+'</p>'+(t.theme?'<p class="note" style="margin-top:-4px">Picked from what each place\u2019s own website says, so check with them before you set out.</p>':'')+
     '<p class="note">'+plural(stops.length,'stop')+' \u00b7 about '+Math.max(1,Math.round(km*1.3))+' km of driving'+(done?' \u00b7 '+done+' already stamped':'')+'</p>'+
-    '<ol class="trailstops">'+stops.map(function(w){return '<li><button class="hlink" data-action="viewplace" data-id="'+w.id+'" style="margin:0;text-align:left">'+esc(w.name)+'</button><span class="note">'+esc(w.type==='winery'||!w.type?'Winery':w.type.charAt(0).toUpperCase()+w.type.slice(1))+(isVisited(w.id)?' \u00b7 \u2713 stamped':'')+'</span></li>'}).join('')+'</ol>'+
+    '<ol class="trailstops">'+stops.map(function(w){return '<li><button class="hlink" data-action="viewplace" data-id="'+w.id+'" style="margin:0;text-align:left">'+esc(w.name)+'</button><span class="note">'+esc(w.type==='winery'||!w.type?'Winery':w.type.charAt(0).toUpperCase()+w.type.slice(1))+(isVisited(w.id)?' \u00b7 \u2713 stamped':'')+'</span>'+(t.id==='theme-fall'&&fallEventsByPlace()[w.id]?(function(e){return '<span class="note">\ud83c\udf41 '+esc(e.title)+' \u00b7 '+esc(fmtLong(e.date))+'</span>'})(fallEventsByPlace()[w.id][0]):'')+'</li>'}).join('')+'</ol>'+
     '<p class="note">Please plan a designated driver or book a tour \u2014 tasting fees and hours vary, so check each place before you go.</p>'+
     '<div class="sheet-actions" style="flex-wrap:wrap"><button class="btn" data-action="close">Close</button><button class="btn primary" data-action="trail-start" data-id="'+t.id+'">Start this trail</button></div>';
 }
@@ -8823,6 +9082,12 @@ function renderSheet(){
     h=isOwner()?reportsSheetHTML():ownerLockHTML();
   }else if(s.kind==='passport'){
     h=passportSheetHTML();
+  }else if(s.kind==='badges'){
+    h=badgesSheetHTML();
+  }else if(s.kind==='secret'){
+    h=secretSheetHTML(s);
+  }else if(s.kind==='flight'){
+    h=flightSheetHTML(s);
   }else if(s.kind==='profile'){
     h=profileSheetHTML(s);
   }else if(s.kind==='support'){
@@ -9312,6 +9577,13 @@ document.addEventListener('click',function(ev){
     case 'cstats-open':S.sheet={kind:'cellarstats'};renderSheet();break;
     case 'visit-toggle':toggleVisited(id);break;
     case 'passport-open':S.ppPage=0;S.sheet={kind:'passport'};renderSheet();break;
+    case 'badges-open':S.sheet={kind:'badges'};renderSheet();break;
+    case 'secret-open':S.sheet={kind:'secret'};renderSheet();break;
+    case 'secret-hint':secretAct('hint');break;
+    case 'secret-reveal':secretAct('reveal');break;
+    case 'secret-here':secretAct('here');break;
+    case 'flight-open':S.sheet={kind:'flight'};flightLoad(true);renderSheet();break;
+    case 'flight-vote':flightVote(id,t.dataset.cat);break;
     case 'seeall':S.tab='wineries';S.wType=t.dataset.val;S.wProvince='all';S.wArea='all';S.wSearch='';S.wLimit=30;render();window.scrollTo(0,0);break;
     case 'route-toggle':
       if(inRoute(id)){S.route=S.route.filter(function(x){return x!==id})}
