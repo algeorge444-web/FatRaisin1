@@ -5664,10 +5664,14 @@ function visionReadText(dataUrl){
     /* keep only the words the reader is sure of: glass, reflections and patterns otherwise turn into stray letters
        that get mistaken for a producer, a drink type or a description */
     function sure(w){var t=String(w.text||'');return (w.confidence||0)>=62&&/[A-Za-z0-9\u00c0-\u017f]/.test(t)&&(t.replace(/[^A-Za-z0-9\u00c0-\u017f]/g,'').length>=2||/^\d$/.test(t))}
-    var d=(r&&r.data)||{},lines=[],pages=[{blocks:(d.blocks||[]).map(function(bl){return {paragraphs:(bl.paragraphs||[]).map(function(pa){
-      var words=[];(pa.lines||[]).forEach(function(ln){var lt=[];(ln.words||[]).forEach(function(w){if(!sure(w))return;var b=w.bbox||{};lt.push(w.text);
-        words.push({symbols:[{text:w.text||'',property:{detectedBreak:{type:'SPACE'}}}],boundingBox:{vertices:[{x:b.x0,y:b.y0},{x:b.x1,y:b.y0},{x:b.x1,y:b.y1},{x:b.x0,y:b.y1}]}})});if(lt.length)lines.push(lt.join(' '))});
-      return {words:words}}).filter(function(pa){return pa.words.length})}})}];
+    /* each printed line is its own piece of text, so the wine's name (usually the biggest line) isn't merged
+       with the producer, the grape and the small print around it */
+    var d=(r&&r.data)||{},lines=[],paras=[];
+    (d.blocks||[]).forEach(function(bl){(bl.paragraphs||[]).forEach(function(pa){(pa.lines||[]).forEach(function(ln){
+      var lt=[],words=[];(ln.words||[]).forEach(function(w){if(!sure(w))return;var b=w.bbox||{};lt.push(w.text);
+        words.push({symbols:[{text:w.text||'',property:{detectedBreak:{type:'SPACE'}}}],boundingBox:{vertices:[{x:b.x0,y:b.y0},{x:b.x1,y:b.y0},{x:b.x1,y:b.y1},{x:b.x0,y:b.y1}]}})});
+      if(lt.length){lines.push(lt.join(' '));paras.push({words:words})}})})});
+    var pages=[{blocks:[{paragraphs:paras}]}];
     return {fullTextAnnotation:{text:lines.join('\n'),pages:pages},webDetection:{},localizedObjectAnnotations:[]};
   },function(){throw {msg:'The label reader didn\u2019t load. Check your connection and try again.'}});
 }
@@ -5764,7 +5768,11 @@ function extractFromLabel(resp){
   if(!r.producer){
     var pool=(paras.length?paras.map(function(p){return p.text}):full.split('\n')).concat(ents),pl=null;
     pool.some(function(t){
-      if(/\b(winery|wineries|estates?|vineyards?|cellars?|wine co(mpany)?|wines|brewing|brewery|distillery|distillers|cidery|cider house)\b/i.test(t)&&t.length<60&&!/(produced|bottled|produit|embouteill)/i.test(t)){pl=t;return true}return false});
+      if(/\b(winery|wineries|estates?|vineyards?|cellars?|wine co(mpany)?|wines|brewing|brewery|distillery|distillers|cidery|cider house|domaine|ch[a\u00e2]teau|bodegas?|tenuta|cantina|weingut|maison|quinta|clos)\b/i.test(t)&&t.length<60&&!/(produced|bottled|produit|embouteill|quality|qualit[eé]|premium|finest|\bour\b|\bmade\b|grown|crafted|aged|blend)/i.test(t)&&!VARIETIES.some(function(v){return t.toLowerCase().indexOf(v[0])>-1})){pl=t;return true}return false});
+    /* a producer name in capitals that wraps onto a second short line ("DOMAINE DES TROIS / CHENES") */
+    if(pl&&paras.length){var pi=-1;paras.some(function(p,i){if(p.text===pl){pi=i;return true}return false});
+      var nx=pi>-1?paras[pi+1]:null;
+      if(nx&&pl===pl.toUpperCase()&&nx.text===nx.text.toUpperCase()&&/^[A-Z\u00c0-\u017f'\- ]{3,20}$/.test(nx.text)&&nx.text.split(' ').length<=2&&!isGrapeWord(normPlaceName(nx.text)))pl=pl+' '+nx.text}
     if(pl)r.producer=titleCase(pl.replace(/\b(inc|ltd|ltée|limited)\.?$/i,'').replace(/[.,]+$/,'').trim());
   }
   /* vintage: a plausible year on the label that isn't a founding date; else one from Google's matches */
@@ -5815,6 +5823,12 @@ function extractFromLabel(resp){
     return tx.length<=40&&tx.split(' ').length<=6;
   }).sort(function(a,b){return b.h-a.h});
   var labelName=cands.length?cands[0].text.replace(/\b(19|20)\d{2}\b/g,'').replace(/\s+/g,' ').trim():'';
+  /* when the biggest line is only the grape ("Chardonnay"), a line of nearly the same size just above it is
+     part of the name ("Vintner's Reserve Chardonnay") */
+  if(cands.length&&isGrapeWord(normPlaceName(labelName))){
+    var gi=paras.indexOf(cands[0]),up=gi>0?paras[gi-1]:null;
+    if(up&&cands.indexOf(up)>-1&&up.h>=cands[0].h*0.6&&!isGrapeWord(normPlaceName(up.text))&&!/\b(19|20)\d{2}\b/.test(up.text))labelName=up.text.trim()+' '+labelName;
+  }
   var wc=webNameCandidates(web,r.producer,labelWords),name='';
   if(wc.length&&wc[0].score>=3)name=wc[0].n;
   else if(labelName)name=labelName;
@@ -5823,10 +5837,14 @@ function extractFromLabel(resp){
   if(name&&grapes.length===1&&normPlaceName(name).indexOf(normPlaceName(grapes[0].v[0]))<0&&name.length<=28)name=name+' '+grapes[0].v[0];
   if(!name&&grapes.length===1)name=grapes[0].v[0];
   if(name)r.name=titleCase(name);
+  /* no producer found but the name reads "<Producer> <Grape>" (e.g. "Jacob's Creek Shiraz"): the words before the grape are the producer */
+  if(!r.producer&&r.name&&grapes.length){var gname=titleCase(grapes[0].v[0]),ix=r.name.toLowerCase().lastIndexOf(gname.toLowerCase());
+    if(ix>0){var pre=r.name.slice(0,ix).trim();if(pre.split(' ').length<=3&&pre.length>=4&&!/\b(reserve|reserva|estate|classic|select|vintner|private|special|old vines?|single)\b/i.test(pre))r.producer=pre}}
   /* region and alcohol */
   var reg='',lowNoAddr=paras.filter(function(p){return !LABEL_JUNK.test(p.text)}).map(function(p){return p.text}).join(' ').toLowerCase();
   if(!paras.length)lowNoAddr=low;
   var vq=full.match(/(VQA|DVA|BC VQA)\s+([A-Z][A-Za-z\u00c0-\u017f\u2019'\.\- ]{3,40})/);
+  if(vq)vq[2]=vq[2].replace(/\s+(red|white|ros[e\u00e9]|sparkling|dessert)?\s*(wine|vin)\b.*$/i,'').replace(/\s+(product|produit|750|375)\b.*$/i,'');
   WINE_REGIONS.some(function(x){if(lowNoAddr.indexOf(x.toLowerCase())>-1){reg=x;return true}return false});
   if(!reg&&vq)reg=titleCase(vq[2].trim());
   if(!reg)WINE_REGIONS.some(function(x){if(webLow.indexOf(x.toLowerCase())>-1){reg=x;return true}return false});
@@ -6320,6 +6338,15 @@ function applyWebInfo(s,info,manual){
   s.webStatus={state:'found',site:info.site||hostOfUrl(info.url),filled:filled};
   renderSheet();
 }
+function webNameAgrees(name,title,producer){
+  var stop={wine:1,wines:1,winery:1,estate:1,red:1,white:1,the:1,and:1,de:1,du:1,la:1,le:1,vqa:1};
+  var pw={};normPlaceName(producer||'').split(' ').forEach(function(x){pw[x]=1});
+  var want=normPlaceName(name).split(' ').filter(function(x){return x.length>=3&&!stop[x]&&!pw[x]&&!/^\d+$/.test(x)});
+  if(!want.length)return true;
+  var t=' '+normPlaceName(title||'')+' ';
+  var hit=want.filter(function(x){return t.indexOf(' '+x+' ')>-1}).length;
+  return hit*2>=want.length&&hit>=Math.min(2,want.length);
+}
 function webFind(s){
   if(!s||s.kind!=='wine')return;
   keepWineForm();var d=s.draft||{};
@@ -6330,6 +6357,11 @@ function webFind(s){
   helperGet('/find',{name:d.name||'',producer:d.producer||'',vintage:d.vintage||'',site:site,ctry:(w&&countryOf(w)==='US')?'US':''}).then(function(info){
     if(S.sheet!==s)return;
     if(!info.found){s.webStatus={state:'none',results:(info.results||[]).slice(0,3)};renderSheet();return}
+    /* a search often lands on a different wine from the same producer: when the page's name doesn't match what the
+       label says, keep the label's name and offer the page as a choice instead of filling the form from it */
+    var dd=s.draft||{};
+    if(dd.name&&s.src&&s.src.name!=='web'&&!webNameAgrees(dd.name,info.title,dd.producer)){
+      s.webStatus={state:'none',results:[{url:info.url,title:info.title}].concat((info.results||[]).filter(function(r){return r.url!==info.url})).slice(0,3)};renderSheet();return}
     applyWebInfo(s,info,false);
   }).catch(function(e){if(S.sheet!==s)return;s.webStatus={state:'err',msg:e&&e.msg==='nohelper'?'':(e&&e.msg)||'The web lookup didn\u2019t work.'};renderSheet()});
 }
