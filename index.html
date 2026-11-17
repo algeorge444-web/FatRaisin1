@@ -4971,15 +4971,44 @@ function homeEventsSection(){
         '<div class="evc-main"><h3>'+esc(e.title)+'</h3><p>'+esc(w?w.name:(e.wname||''))+(e.time?' \u00b7 '+esc(fmtTime(e.time)):'')+'</p>'+(goingCount&&isGoing(e.id)?'<span class="tag" style="margin-top:4px">\u2713 Going</span>':'')+'</div></div>';
     }).join('')+'</div></div>';
 }
-/* places you haven't stamped yet, closest first (or around your home province) */
+/* places you haven't stamped yet that are worth the drive: not the ones already in "Closest to you", a mix of
+   wineries, breweries, cideries and distilleries, favouring places with an event coming up, a real photo or extras
+   (food, patio, music...), and a fresh pick each day */
 function homeNextStampSection(){
-  var cand=S.wineries.filter(function(w){return hasCoord(w)&&!isVisited(w.id)});
-  if(S.me)cand.sort(function(a,b){return haversineKm(S.me,a)-haversineKm(S.me,b)});
-  else{var home=(S.profile&&S.profile.home)||'ON';cand=cand.filter(function(w){return provOf(w)===home});cand=featured('winery').filter(function(w){return !isVisited(w.id)}).concat(cand)}
-  var list=cand.slice(0,8);if(!list.length)return '';
+  var near={};
+  if(S.me)S.wineries.filter(hasCoord).slice().sort(function(a,b){return haversineKm(S.me,a)-haversineKm(S.me,b)}).slice(0,8).forEach(function(w){near[w.id]=1});
+  var cand=S.wineries.filter(function(w){return hasCoord(w)&&!isVisited(w.id)&&!near[w.id]});
+  if(S.me){
+    var within=function(km){return cand.filter(function(w){return haversineKm(S.me,w)<=km})},pick=within(120);
+    if(pick.length<16)pick=within(250);if(pick.length<8)pick=cand.slice().sort(function(a,b){return haversineKm(S.me,a)-haversineKm(S.me,b)}).slice(0,40);
+    cand=pick;
+  }else{var home=(S.profile&&S.profile.home)||'ON';cand=cand.filter(function(w){return provOf(w)===home})}
+  if(!cand.length)return '';
+  var today=todayStr(),soon=new Date(Date.now()+21*864e5).toISOString().slice(0,10),evAt={};
+  S.events.forEach(function(e){if(e.wid&&e.date>=today&&e.date<=soon&&(!evAt[e.wid]||e.date<evAt[e.wid].date))evAt[e.wid]=e});
+  /* the kinds of place you've stamped least come first, so the list nudges you to try something new */
+  var typeN={};Object.keys(S.visited||{}).forEach(function(id){var w=winery(id);if(w){var t=w.type||'winery';typeN[t]=(typeN[t]||0)+1}});
+  var rnd=seededRand('nextstamp|'+today+'|'+(S.me?Math.round(S.me.lat*10)+','+Math.round(S.me.lng*10):'')),gen=TYPE_PHOTOS;
+  var scored=cand.map(function(w){
+    var t=w.type||'winery',img=placeImg(w),sc=rnd()*3;
+    if(evAt[w.id])sc+=3;
+    if(img&&img!==gen[t]&&img!==sceneURL(w))sc+=2;
+    if(placeTags(w))sc+=Math.min(2,placeTags(w).length*0.5);
+    if(FEATURED[t]&&FEATURED[t].indexOf(w.name)>-1)sc+=1.5;
+    sc+=Math.max(0,1.5-(typeN[t]||0)*0.3);
+    return {w:w,sc:sc};
+  }).sort(function(a,b){return b.sc-a.sc});
+  var list=[],perType={};
+  scored.forEach(function(x){var t=x.w.type||'winery';if(list.length<8&&(perType[t]||0)<3){perType[t]=(perType[t]||0)+1;list.push(x.w)}});
+  scored.forEach(function(x){if(list.length<8&&list.indexOf(x.w)<0)list.push(x.w)});
+  if(S.me)list.sort(function(a,b){return haversineKm(S.me,a)-haversineKm(S.me,b)});
   var n=Object.keys(S.visited||{}).length;
   return '<div class="homesec"><div class="section-title"><h2>Your next stamp <span class="sectsub">'+(n?plural(n,'stamp')+' so far':'start your passport')+'</span></h2><button class="hlink" data-action="tab" data-tab="account">Passport</button></div>'+
-    '<div class="hgrid">'+list.map(function(w){return featCard(w,S.me?fmtDist(haversineKm(S.me,w)):undefined,true)}).join('')+'</div></div>';
+    '<div class="hgrid">'+list.map(function(w){
+      var e=evAt[w.id],why=e?(e.date===today?'Event today':'Event '+parseYmd(e.date).toLocaleDateString(undefined,{month:'short',day:'numeric'})):'';
+      var d=S.me?fmtDist(haversineKm(S.me,w)):'';
+      return featCard(w,(d&&why)?d+' · '+why:(d||why||undefined),true);
+    }).join('')+'</div></div>';
 }
 function openNowBadge(w){
   var h=hoursFor(w);if(!h||!h.week||h.closed)return '';
