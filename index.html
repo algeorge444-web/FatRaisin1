@@ -1063,7 +1063,18 @@ function readKey(k){
 var PKEY2='cellardoor:mine:v1';
 var SEEDIDX={n:-1,m:null};
 function seedIndex(){if(SEEDIDX.n===CA_ROWS.length&&SEEDIDX.m)return SEEDIDX.m;var m={};seedWineries().forEach(function(w){m[w.id]=w});SEEDIDX={n:CA_ROWS.length,m:m};return m}
-var EDIT_SKIP={_o:1,ci:1,_pv:1,_pvk:1};
+var EDIT_SKIP={_o:1,ci:1,_pv:1,_pvk:1,lat:1,lng:1,approx:1,src:1};
+/* Older versions of the app kept a whole copy of every place on the phone; when that copy was turned into a short list of
+   "your changes", out-of-date map spots, addresses and missing phones were wrongly saved as changes and then hid every later
+   fix (so the phone counted ~1,000 rough pins when only 15 remain). Map spots are never personal changes (hand-placed pins
+   are kept separately), and a saved address, phone or website is only kept if it isn't a step back from the app's data. */
+function staleEdit(k,a,b){
+  if(EDIT_SKIP[k])return true;
+  if(!b)return false;
+  if((k==='phone'||k==='website')&&!a&&b[k])return true;
+  if(k==='address'&&b.address&&hasStreet(b.address)&&!hasStreet(a||''))return true;
+  return false;
+}
 function personalPlaces(){
   var seed=seedIndex(),mine=[],edits={},have={};
   placesForSaving().forEach(function(w){
@@ -1099,7 +1110,7 @@ function savePinOk(){try{localStorage.setItem(PINOKKEY,JSON.stringify(PINOK))}ca
   if(p2&&p2.mine){
     var base=seedWineries(),rm={};(p2.removed||[]).forEach(function(id){rm[id]=1});
     var ed=p2.edits||{};
-    S.wineries=base.filter(function(w){return !rm[w.id]}).map(function(w){var e=ed[w.id];if(e)Object.keys(e).forEach(function(k){w[k]=e[k]});return w});
+    S.wineries=base.filter(function(w){return !rm[w.id]}).map(function(w){var e=ed[w.id];if(e)Object.keys(e).forEach(function(k){if(!staleEdit(k,e[k],w))w[k]=e[k]});return w});
     var seen={};S.wineries.forEach(function(w){seen[w.id]=1});
     (p2.mine||[]).forEach(function(w){if(!seen[w.id]){S.wineries.push(w);seen[w.id]=1}});
     S.wineries=S.wineries.filter(function(w){return !(SEED_REMOVED.indexOf(w.name)>-1&&/^c[a-z0-9]+$/.test(w.id))});
