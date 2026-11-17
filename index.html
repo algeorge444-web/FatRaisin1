@@ -7286,9 +7286,14 @@ function discSave(){
 /* everyone: places you've added load from Firebase */
 function sharedPlacesLoad(){
   catDb().then(function(db){return db.collection('places').limit(3000).get()}).then(function(snap){
-    var live={},changed=false;
+    var live={},changed=false,builtIn={};
+    /* a place you added that has since joined the built-in list is shown once, as the built-in one */
+    var key=function(t){return String(t||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'')};
+    S.wineries.forEach(function(w){if(!w.shared&&/^c/.test(w.id))builtIn[key(w.name)]=1});
     snap.forEach(function(d){
-      var x=d.data();if(!x||!x.name||!isFinite(x.lat))return;live[d.id]=1;
+      var x=d.data();if(!x||!x.name||!isFinite(x.lat))return;
+      if(builtIn[key(x.name)])return;
+      live[d.id]=1;
       var w=winery(d.id),rec={id:d.id,name:x.name,address:x.address||'',area:x.area||'',phone:x.phone||'',website:x.website||'',instagram:x.instagram||'',lat:+x.lat,lng:+x.lng,approx:!!x.approx,type:x.type||'winery',src:'owner',shared:true};
       if(x.gid&&!(S.ghours[d.id]&&S.ghours[d.id].gid)){S.ghours[d.id]=Object.assign(S.ghours[d.id]||{},{gid:x.gid})}
       if(w){Object.keys(rec).forEach(function(k){if(k!=='lat'&&k!=='lng'||!w._o){if(w[k]!==rec[k]){w[k]=rec[k];changed=true}}})}

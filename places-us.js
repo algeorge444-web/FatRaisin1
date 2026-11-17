@@ -11401,7 +11401,6 @@
 ["Anthill Farms Winery","4791 Dry Creek Rd #3–4, Healdsburg, CA 95448","Sonoma County, CA","707-385-9396","anthillfarms.com",38.673244,-122.933827,"ovt",0,"winery","c7drfgz"],
 ["Breaking Bread Winery","4791 Dry Creek Rd, Healdsburg, CA 95448","Sonoma County, CA","707-220-3058","breakingbreadwines.com",38.673395,-122.933718,"ovt",0,"winery","cqu4ier"],
 ["Trattore Wines and Dry Creek Olive Company","4791 Dry Creek Rd, Healdsburg, CA 95448","Sonoma County, CA","707-431-7200","trattorefarms.com",38.673289,-122.934407,"ovt",0,"winery","ckkkwrv"],
-["Kokomo Winery","4791 Dry Creek Rd, Healdsburg, CA 95448","Sonoma County, CA","707-433-0205","kokomowines.com",38.673218,-122.934196,"ovt",0,"winery","c7deqjp"],
 ["A Rafanelli Winery","4685 W Dry Creek Rd, Healdsburg, CA 95448","Sonoma County, CA","707-433-1385","arafanelliwinery.com",38.653287,-122.934977,"ovt",0,"winery","cv5if5q"],
 ["Quivira Vineyards","4900 W Dry Creek Rd, Healdsburg, CA 95448","Sonoma County, CA","707-431-8333","quivirawine.com",38.656136,-122.937689,"ovt",0,"winery","csx6way"],
 ["Martorana Family Winery","5956 W Dry Creek Rd, Healdsburg, CA 95448","Sonoma County, CA","707-433-1909","martoranafamilywinery.com",38.667831,-122.943603,"ovt",0,"winery","cbd1e66"],
