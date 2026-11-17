@@ -10,7 +10,7 @@ T=r'(?:\d{1,2}(?::\d{2})?\s*(?:a\.?m\.?|p\.?m\.?)?|noon|midnight)'
 DAYS=r'(?P<days>'+ALL+r'|weekdays|weekends|'+D+r'(?:\s*(?:-|,|&|and|/|\+)\s*'+D+r')*)'
 RX=re.compile(DAYS+r'\s*[:|@,;\u2022\u00b7*]?\s*(?:from\s+|open\s+)?(?:(?P<closed>closed)|(?P<o>'+T+r')\s*-\s*(?P<c>'+T+r'))',re.I)
 RX2=re.compile(r'(?P<o>'+T+r')\s*-\s*(?P<c>'+T+r')\s*[,|]?\s*(?:on\s+|every\s+)?'+DAYS,re.I)
-BAD=re.compile(r'currently closed|closed (for the season|until)|reopen|re-open|happy hour|kitchen|brunch|trivia|live music|tours? (times|at|run|daily)|pick-?up|curbside|office|food truck|yoga|bingo|karaoke|summer|winter|spring|fall hours|autumn|season|january|february|march|april|\bmay\b|june|july|august|september|october|november|december|\b(jan|feb|mar|apr|jun|jul|aug|sep|sept|oct|nov|dec)\b\.?|appointment|reservation only|holiday|memorial|labor day|thanksgiving|christmas|temporarily|last (call|pour|seating)|delivery|restaurant hours|bottle shop|retail|store hours|distillery tours|coffee|breakfast|lunch|dinner|class|event',re.I)
+BAD=re.compile(r'currently closed|closed (for the season|until)|reopen|re-open|happy hour|kitchen|brunch|trivia|live music|tours? (times|at|run|daily)|pick-?up|curbside|office|food truck|yoga|bingo|karaoke|summer|winter|spring|fall hours|autumn|season|january|february|march|april|\bmay\b|june|july|august|september|october|november|december|\b(jan|feb|mar|apr|jun|jul|aug|sep|sept|oct|nov|dec)\b\.?|appointment|reservation only|holiday|memorial|labor day|thanksgiving|christmas|temporarily|last (call|pour|seating)|delivery|restaurant hours|bottle shop|retail|store hours|distillery tours|coffee|breakfast|lunch|dinner|class|event|food (service )?hours|kitchen hours|\bmusic\b',re.I)
 def norm(s):
     s=s.lower().replace('–','-').replace('—','-').replace('‒','-').replace('‐','-').replace('‑','-').replace('−','-').replace('~','-')
     s=re.sub(r'\b(to|thru|through|until|till|til)\b','-',s)
@@ -74,8 +74,22 @@ def pdays(s):
         else:out.append(k)
         prev=k
     return out or None
+HARD=re.compile(r'currently closed|closed (for the season|until)|reopen|re-open|temporarily|appointment|reservation only|anytown|123 main',re.I)
+SEASONAL=re.compile(r'summer|winter|spring|fall hours|autumn|season|january|february|march|april|\bmay\b|june|july|august|september|october|november|december|\b(jan|feb|mar|apr|jun|jul|aug|sep|sept|oct|nov|dec)\b\.?',re.I)
+FIRSTDAY=re.compile(r'\b(mon|tue|tues|wed|thu|thur|thurs|fri|sat|sun)(day|sday|nesday|rsday|urday)?s?\b|\bdaily\b|\bevery ?day\b|\b7 days\b|\bweekdays\b|\bweekends\b',re.I)
+def trim(w):
+    """keep only the opening-hours part of a block of text: a schedule that is headed by kitchen, brunch, seasonal or
+    other side hours is turned away; anything after such a word (a food-truck or brunch schedule that follows) is cut off"""
+    if HARD.search(w):return None
+    d=FIRSTDAY.search(w)
+    if not d:return None
+    pre=w[max(0,d.start()-40):d.start()]
+    if BAD.search(pre) or SEASONAL.search(w[:d.start()]):return None
+    cut=BAD.search(w,d.end())
+    return w[:cut.start()] if cut else w
 def pwin(w):
-    if BAD.search(w):return None
+    w=trim(w)
+    if not w:return None
     s=norm(w);res={};n=0
     ms=list(RX.finditer(s));m2=list(RX2.finditer(s))
     fd=re.search(DAYS,s,re.I)
@@ -93,6 +107,7 @@ def pwin(w):
             if d in res and res[d]!=v:return None
             res[d]=v
     if n==0 or len(res)<2:return None
+    if all(v=='closed' or v[1]-v[0]<120 for v in res.values()):return None
     return tuple(res.get(i,'closed') for i in range(7))
 def pld(objs):
     out=[]
@@ -147,6 +162,7 @@ if __name__=='__main__':
     from urllib.parse import urlparse
     host=lambda u:urlparse(u if u.startswith('http') else 'https://'+u).netloc.lower().replace('www.','')
     allp=json.load(open('allhosts.json'));HOSTN=collections.Counter(host(u) for u in allp)
+    LDN=collections.Counter(x for r in R if r.get('ok') for x in set(pld(r.get('ld') or [])))
     for r in R:
         if not r.get('ok'):st['nosite']+=1;continue
         if HOSTN[host(TD[r['id']]['web'])]>1:st['chain']+=1;continue
@@ -157,8 +173,18 @@ if __name__=='__main__':
             if x:c.append((src,x))
         if not c:st['none' if not r.get('w') else 'unparsed']+=1;continue
         kinds=set(x for _,x in c)
-        if all(k=='ld' for k,_ in c) and (r.get('w') or []):st['ld_unconfirmed']+=1;continue
-        if len(kinds)>1:st['conflict']+=1;continue
+        # hours given only in the page's structured data: kept unless the page talks of appointments, or the same
+        # hours appear on several unrelated sites (a website template's sample hours)
+        if all(k=='ld' for k,_ in c) and (r.get('w') or []):
+            if any(re.search(r'appointment|reservation only|temporarily closed',w,re.I) for _,w in r['w']) or LDN[c[0][1]]>3:st['ld_unconfirmed']+=1;continue
+            st['ld_only']+=1
+        if len(kinds)>1:
+            # several different schedules: take the one most of the site's pages agree on, else the one on an hours page
+            cnt=collections.Counter(x for _,x in c).most_common()
+            hp=set(x for src,x in c if re.search(r'hours',src,re.I))
+            if cnt[0][1]>cnt[1][1]:kinds={cnt[0][0]};st['conflict_majority']+=1
+            elif len(hp)==1:kinds=hp;st['conflict_hourspage']+=1
+            else:st['conflict']+=1;continue
         h=kinds.pop()
         if all(v!='closed' and v==(0,1440) for v in h):st['24h']+=1;continue
         out[r['id']]=[DN[i].capitalize()+': '+fmt(h[i]) for i in range(7)];st['ok_ld' if c[0][0]=='ld' else 'ok_text']+=1
