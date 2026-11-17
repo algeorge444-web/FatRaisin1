@@ -11,6 +11,7 @@ The owner is not a programmer: explain changes in plain language, and push finis
 - `place-media.js` — photos, logos and hours keyed by place name (`window.FR_MEDIA`).
 - `data-version.js` — `window.FR_DV`; must equal `SEED_VERSION`. **Bump both on every data change** or phones keep old data.
 - `events-data.js` — events found on places' websites; rebuilt weekly by `.github/workflows/events.yml` running `tools/crawl-events.mjs`.
+- Opening hours (`FR_MEDIA.HOURS`) come from places' websites (`tools/hours-crawl.py` + `tools/hours-parse.py`) and, for places still without any, from OpenStreetMap once a month (`.github/workflows/osm-hours.yml` running `tools/osm-hours.mjs`; it bumps the data version itself and logs to `tools/osm-hours-last-run.txt`). OpenStreetMap can't be reached from Claude's workspace, only from GitHub.
 - `wine-barcodes.js` — `window.FR_BC`: wine barcodes from BC's open liquor price list (wine only), built by `tools/bc-wine-barcodes.py`; loaded only when a barcode is scanned and checked before the shared Firebase catalogue (then Open Food Facts).
 - `tools/helper-lib.mjs` — copy of the Cloudflare Worker ("helper") code, used by the event search. The live worker is deployed by the owner in Cloudflare, not from this repo. The event search here has extra sources the live worker lacks (Squarespace event JSON, Commerce7 event tickets, public Google Calendar feeds, single event pages); the app doesn't need the worker's 15-minute cron any more.
 

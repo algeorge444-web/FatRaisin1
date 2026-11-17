@@ -1,0 +1,35 @@
+name: Opening hours from OpenStreetMap
+# Once a month, fills in opening hours from OpenStreetMap for places that have none yet.
+on:
+  schedule:
+    - cron: '23 11 4 * *'   # the 4th of each month
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'tools/osm-hours.mjs'
+      - '.github/workflows/osm-hours.yml'
+permissions:
+  contents: write
+concurrency:
+  group: osm-hours
+  cancel-in-progress: false
+jobs:
+  hours:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Read opening hours from OpenStreetMap
+        run: node tools/osm-hours.mjs
+      - name: Save the new hours
+        run: |
+          git config user.name "FatRaisin hours search"
+          git config user.email "actions@users.noreply.github.com"
+          git add place-media.js place-lists.js data-version.js tools/osm-hours-last-run.txt
+          git diff --cached --quiet || git commit -m "Opening hours from OpenStreetMap: $(cat tools/.osm-hours-summary) added"
+          git pull --rebase -q origin main
+          git push
