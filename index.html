@@ -9386,7 +9386,7 @@ function renderSheet(){
       '<h3 style="margin:18px 0 6px">Fill in missing details</h3>'+
       '<p class="note" style="margin-top:0">These search the web through your helper, a little at a time, and check each result against the place before saving it.</p>'+
       toolCountryHTML()+
-      '<div class="sheet-actions" style="justify-content:flex-start;flex-wrap:wrap;margin-bottom:10px"><button class="btn" data-action="addr-open">Find addresses &amp; phones ('+infoTodo().length+')</button></div>'+
+      (infoTodo().length?'<div class="sheet-actions" style="justify-content:flex-start;flex-wrap:wrap;margin-bottom:10px"><button class="btn" data-action="addr-open">Find addresses &amp; phones ('+infoTodo().length+')</button></div>':'<p class="note">Addresses &amp; phones: nothing left to check.</p>')+
       siteBlockHTML()+igBlockHTML()+
       '<h3 style="margin:18px 0 6px">Backup</h3>'+
       sharedFbBlockHTML();
