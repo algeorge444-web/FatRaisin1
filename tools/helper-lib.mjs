@@ -306,7 +306,67 @@ async function siteEvents(params, lim) {
       ldEvents(h, tl[i]).forEach(e => { if (!e.tickets) e.tickets = tl[i]; if (!e.url) e.url = tl[i]; add(e); });
     });
   }
-  return { source: events.length ? 'pages' : 'none', events };
+  if (events.length) return { source: 'pages', events };
+  /* 4. other ways websites publish their events (only tried when nothing was found above) */
+  if (Date.now() - started > 25000) return { source: 'none', events };
+  const all = htmls.join(' ');
+  /* Squarespace event pages give their list as JSON */
+  if (/squarespace/i.test(home)) {
+    const urls = [...new Set(pageList.concat([...pages]).map(u => u.split('?')[0]))].slice(0, 3);
+    const got = await Promise.all(urls.map(u => getJson(u + '?format=json')));
+    got.forEach(sq => {
+      if (!sq || !Array.isArray(sq.upcoming)) return;
+      const tz = (sq.website && sq.website.timeZone) || params.get('tz') || 'America/New_York';
+      sq.upcoming.forEach(x => add({ title: decode(x.title || ''), start: x.startDate ? localStamp(x.startDate, tz) : '', url: absUrl(x.fullUrl || '', origin),
+        desc: stripHtml(x.excerpt || x.body || '').slice(0, 600), img: x.assetUrl || '' }));
+    });
+    if (events.length) return { source: 'squarespace', events };
+  }
+  /* Commerce7 wine shops sell event tickets that carry the event's date */
+  const c7 = (all.match(/data-tenant=["']([a-z0-9-]+)["']/i) || all.match(/images\.commerce7\.com\/([a-z0-9-]+)\//i) || [])[1];
+  if (c7) {
+    const j = await getJson('https://api.commerce7.com/v1/product/for-web?limit=50&type=Event%20Ticket', { tenant: c7 });
+    ((j && j.products) || []).forEach(x => {
+      const when = x.eventTicket && x.eventTicket.eventDate; if (x.type !== 'Event Ticket' || !when) return;
+      add({ title: decode(x.title || ''), start: localStamp(Date.parse(when), params.get('tz')), url: origin + '/product/' + (x.slug || ''),
+        tickets: origin + '/product/' + (x.slug || ''), desc: stripHtml(x.teaser || x.content || '').replace(/<[^>]+>/g, ' ').slice(0, 600) });
+    });
+    if (events.length) return { source: 'commerce7', events };
+  }
+  /* a Google Calendar shown on the page has a public feed with each event's date (one-off events only) */
+  const gcal = [...new Set((all.match(/calendar\.google\.com\/calendar\/(?:u\/\d\/)?embed\?[^"'\s<>]*?src=([^&"'\s<>]+)/gi) || []).map(m => decodeURIComponent(m.replace(/^.*src=/i, ''))))]
+    .map(id => /@/.test(id) ? id : (() => { try { return atob(id); } catch (e) { return id; } })()).filter(id => /@/.test(id) && !/#holiday|holiday@group/i.test(id)).slice(0, 2);
+  for (const id of gcal) icsEvents(await getText('https://calendar.google.com/calendar/ical/' + encodeURIComponent(id) + '/public/basic.ics'), params.get('tz')).forEach(add);
+  if (events.length) return { source: 'google-calendar', events };
+  /* single event pages linked from the events page (event plugins usually describe each event on its own page) */
+  const one = new Set();
+  htmls.slice(1).forEach(h => (h.match(/href\s*=\s*["'][^"']+["']/gi) || []).forEach(x => {
+    const u = absUrl(x.replace(/^href\s*=\s*["']|["']$/gi, ''), origin).split('#')[0];
+    if (u.startsWith(origin) && /\/(events?|calendar)\/(?!category|tag|list|month|week|day|page|feed|ical)[a-z0-9][^\/?]{3,}\/?$/i.test(u) && !pages.has(u)) one.add(u);
+  }));
+  const ol = [...one].slice(0, 6);
+  (await Promise.all(ol.map(u => getHtml(u)))).forEach((h, i) => { if (h) ldEvents(h, ol[i]).forEach(add); });
+  return { source: events.length ? 'event-pages' : 'none', events };
+}
+/* events in a calendar feed (.ics); repeating events are left out because they are regular fixtures */
+async function getText(u) {
+  try { const r = await timedFetch(u, { headers: UA, redirect: 'follow' }); return r.ok ? (await r.text()).slice(0, 2000000) : ''; } catch (e) { return ''; }
+}
+function icsEvents(ics, tz) {
+  const out = []; if (!ics || !/BEGIN:VCALENDAR/.test(ics)) return out;
+  const today = new Date().toISOString().slice(0, 10).replace(/-/g, '');
+  const un = s => String(s || '').replace(/\\n/gi, ' ').replace(/\\([,;\\])/g, '$1');
+  for (const block of ics.replace(/\r?\n[ \t]/g, '').split('BEGIN:VEVENT').slice(1)) {
+    const f = k => { const m = block.match(new RegExp('^' + k + '(;[^:\\r\\n]*)?:(.*)$', 'm')); return m ? { p: m[1] || '', v: m[2].trim() } : null; };
+    if (f('RRULE') || f('RECURRENCE-ID')) continue;
+    const st = f('DTSTART'); if (!st || st.v.slice(0, 8) < today) continue;
+    const v = st.v, d = v.slice(0, 4) + '-' + v.slice(4, 6) + '-' + v.slice(6, 8);
+    let start = d;
+    if (/T\d{4}/.test(v)) start = /Z$/.test(v) ? localStamp(Date.parse(d + 'T' + v.slice(9, 11) + ':' + v.slice(11, 13) + ':00Z'), tz) : d + 'T' + v.slice(9, 11) + ':' + v.slice(11, 13);
+    const sum = f('SUMMARY'), url = f('URL'), desc = f('DESCRIPTION');
+    out.push({ title: decode(un(sum && sum.v)), start, allDay: !/T/.test(v), url: url ? url.v : '', desc: stripHtml(un(desc && desc.v)).replace(/<[^>]+>/g, ' ').slice(0, 600) });
+  }
+  return out;
 }
 
 /* ---------- is this image a real photo, not a logo or graphic? (no image library needed) ----------
@@ -556,9 +616,9 @@ function timedFetch(u, opts, ms) {
   const ctl = new AbortController(); const t = setTimeout(() => ctl.abort(), ms || 7000);
   return fetch(u, Object.assign({}, opts || {}, { signal: ctl.signal })).finally(() => clearTimeout(t));
 }
-async function getJson(u) {
+async function getJson(u, extra) {
   try {
-    const r = await timedFetch(u, { headers: UA, redirect: 'follow' });
+    const r = await timedFetch(u, { headers: extra ? Object.assign({}, UA, extra) : UA, redirect: 'follow' });
     if (!r.ok || !/json/i.test(r.headers.get('content-type') || '')) return null;
     return await r.json();
   } catch (e) { return null; }

@@ -29,6 +29,10 @@ const D = ctx.window.FR_DATA;
 const prov = r => (r[1].match(/, ([A-Z]{2}) (?:\d{5}|[A-Z]\d[A-Z])/) || r[2].match(/, ([A-Z]{2})$/) || [])[1] || '';
 let places = [...D.US, ...D.CA].map(r => ({ id: r[10], n: r[0], w: r[4] ? (/^https?:/i.test(r[4]) ? r[4] : 'https://' + r[4]) : '', p: prov(r) }));
 const sites = places.filter(p => p.w && !/instagram\.com|facebook\.com/i.test(p.w)).slice(0, +arg('--limit') || 1e9);
+/* rough time zone for each state or province, used when a calendar gives times in UTC */
+const TZ = { 'America/Los_Angeles': 'CA OR WA NV BC', 'America/Phoenix': 'AZ', 'America/Denver': 'CO UT NM WY MT ID AB', 'America/Chicago': 'TX OK KS NE SD ND MN IA MO AR LA MS AL TN WI IL MB SK',
+  'America/New_York': 'NY PA NJ CT RI MA VT NH ME DE MD DC VA WV NC SC GA FL OH MI IN KY ON QC', 'America/Halifax': 'NS NB PE', 'America/St_Johns': 'NL', 'America/Anchorage': 'AK', 'Pacific/Honolulu': 'HI' };
+const tzOf = st => Object.keys(TZ).find(z => TZ[z].split(' ').includes(st)) || 'America/New_York';
 let cache = {}; if (arg('--cache') && fs.existsSync(arg('--cache'))) cache = JSON.parse(fs.readFileSync(arg('--cache'), 'utf8'));
 process.on('unhandledRejection', () => {}); process.on('uncaughtException', () => {});
 const found = {}; let i = 0, done = 0, total = 0;
@@ -37,7 +41,7 @@ const worker = async () => {
     const p = sites[i++]; let evs = [];
     if (cache[p.id]) evs = cache[p.id].e || [];
     else try {
-      const r = await Promise.race([siteEvents(new URLSearchParams({ site: p.w }), { pages: 2, tickets: 4 }), new Promise(z => setTimeout(() => z({ events: [] }), 45000))]);
+      const r = await Promise.race([siteEvents(new URLSearchParams({ site: p.w, tz: tzOf(p.p) }), { pages: 2, tickets: 4 }), new Promise(z => setTimeout(() => z({ events: [] }), 45000))]);
       for (const x of r.events || []) { const e = eventDoc(p, p.id, x, 'site'); if (e) evs.push(e); }
     } catch (e) {}
     if (evs.length) found[p.id] = evs; total += evs.length;
@@ -112,7 +116,7 @@ for (const pid in found) {
     if (elsewhere[tk + '|' + e.d.date] >= 3) continue;   /* listed by three or more unrelated places: a ticket-site listing, not this place's event */
     seen.add(e.id); dup.add(same); k++;
     const d = e.d, link = /^https?:\/\//.test(d.link || '') ? d.link : '', tix = /^https?:\/\//.test(d.ticketLink || '') ? d.ticketLink : '';
-    rows.push([e.id, pid, clean(d.title), d.date, d.time || '', d.type || 'Other', clean(d.desc).slice(0, 280), link, tix, clean(d.cost)]);
+    rows.push([e.id, pid, clean(d.title).replace(/\s+[\u2014\u2013|-]\s+[^\u2014\u2013]*\|.*$/, ''), d.date, d.time || '', d.type || 'Other', clean(d.desc).slice(0, 280), link, tix, clean(d.cost)]);
   }
 }
 rows.sort((a, b) => a[3] < b[3] ? -1 : a[3] > b[3] ? 1 : 0);

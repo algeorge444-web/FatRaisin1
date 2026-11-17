@@ -12,7 +12,7 @@ The owner is not a programmer: explain changes in plain language, and push finis
 - `data-version.js` — `window.FR_DV`; must equal `SEED_VERSION`. **Bump both on every data change** or phones keep old data.
 - `events-data.js` — events found on places' websites; rebuilt weekly by `.github/workflows/events.yml` running `tools/crawl-events.mjs`.
 - `wine-barcodes.js` — `window.FR_BC`: wine barcodes from BC's open liquor price list (wine only), built by `tools/bc-wine-barcodes.py`; loaded only when a barcode is scanned and checked before the shared Firebase catalogue (then Open Food Facts).
-- `tools/helper-lib.mjs` — copy of the Cloudflare Worker ("helper") code, used by the event search. The live worker is deployed by the owner in Cloudflare, not from this repo.
+- `tools/helper-lib.mjs` — copy of the Cloudflare Worker ("helper") code, used by the event search. The live worker is deployed by the owner in Cloudflare, not from this repo. The event search here has extra sources the live worker lacks (Squarespace event JSON, Commerce7 event tickets, public Google Calendar feeds, single event pages); the app doesn't need the worker's 15-minute cron any more.
 
 ## Features worth knowing
 - Flight Challenge votes are saved in the `reviews` collection as `place: "flight-<category>"`, `text: <place id>`, doc id `flight-<category>_<uid>` (chosen so it should fit the existing reviews rules; not yet confirmed with a real signed-in vote). Review lists and counts skip `flight-` entries.
