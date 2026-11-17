@@ -2,7 +2,7 @@
    Asks OpenStreetMap (free, through its Overpass service) for breweries, wineries, cideries and distilleries in Canada
    and the US that have opening hours, matches them to the app's places by name and location, and adds the hours to
    place-media.js for places that don't have any yet (hours read from a place's own website are never replaced).
-   Run by .github/workflows/osm-hours.yml. Usage: node tools/osm-hours.mjs [--file overpass.json] [--dry] */
+   Run by .github/workflows/osm-hours.yml. Usage: node tools/osm-hours.mjs [--save osm.json | --file osm.json] [--dry] */
 import fs from 'fs'; import vm from 'vm'; import path from 'path'; import { fileURLToPath } from 'url';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const arg = n => { const i = process.argv.indexOf(n); return i > -1 ? process.argv[i + 1] : ''; };
@@ -101,7 +101,7 @@ async function overpass(q) {
   return null;
 }
 let els = [];
-if (arg('--file')) els = JSON.parse(fs.readFileSync(arg('--file'), 'utf8')).elements || [];
+if (arg('--file')) { const j = JSON.parse(fs.readFileSync(arg('--file'), 'utf8')); els = j.elements || []; (j.log || []).forEach(x => log.push(x)); }
 else {
   let missed = 0;
   for (const t of TILES) {
@@ -111,6 +111,8 @@ else {
     await new Promise(z => setTimeout(z, 3000));
   }
   say((TILES.length - missed) + ' of ' + TILES.length + ' map tiles read in ' + Math.round((Date.now() - STARTED) / 60000) + ' minutes.');
+  /* --save: keep what was read and stop, so the matching can run on the newest copy of the app's files afterwards */
+  if (arg('--save')) { fs.writeFileSync(arg('--save'), JSON.stringify({ elements: els, log })); console.log('Saved to ' + arg('--save')); process.exit(0); }
 }
 
 /* ---------- match and add ---------- */

@@ -24,12 +24,13 @@ jobs:
         with:
           node-version: 22
       - name: Read opening hours from OpenStreetMap
-        run: node tools/osm-hours.mjs
-      - name: Save the new hours
+        run: node tools/osm-hours.mjs --save "$RUNNER_TEMP/osm.json"
+      - name: Match them to the newest copy of the places and save
         run: |
           git config user.name "FatRaisin hours search"
           git config user.email "actions@users.noreply.github.com"
+          git pull -q origin main
+          node tools/osm-hours.mjs --file "$RUNNER_TEMP/osm.json"
           git add place-media.js place-lists.js data-version.js tools/osm-hours-last-run.txt
           git diff --cached --quiet || git commit -m "Opening hours from OpenStreetMap: $(cat tools/.osm-hours-summary) added"
-          git pull --rebase -q origin main
           git push
