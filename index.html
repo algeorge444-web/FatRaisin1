@@ -998,6 +998,7 @@ var INSTAGRAM=FRL.INSTAGRAM||{};
 var IG_PREV=FRL.IG_PREV||{};
 var TOCK=FRL.TOCK||{};
 var LIBRORESERVE=FRL.LIBRORESERVE||{};
+var RESY=FRL.RESY||{},SEVENROOMS=FRL.SEVENROOMS||{};
 var OPENTABLE=FRL.OPENTABLE||{};
 var HOURS=FRL.HOURS||{};
 var SEED_ID_MOVES=FRL.SEED_ID_MOVES||{};
@@ -1030,7 +1031,7 @@ function seedWineries(){
   var all=CA_ROWS.concat(BREW_ROWS).concat(DIST_ROWS).concat(CIDER_ROWS);
   return all.map(function(r,i){
     var ai=areas.indexOf(r[2]);if(ai<0){areas.push(r[2]);ai=areas.length-1}
-    return {id:r[10]||stableId('c',r[0],r[1]),name:r[0],address:r[1],area:r[2],phone:r[3],website:r[4],instagram:INSTAGRAM[r[0]]||'',hours:HOURS[r[0]]||'',tock:TOCK[r[0]]||'',opentable:OPENTABLE[r[0]]||'',libroreserve:LIBRORESERVE[r[0]]||'',lat:r[5],lng:r[6],src:r[7],approx:!!r[8],type:r[9]||'winery',ci:ai%COLORS.length};
+    return {id:r[10]||stableId('c',r[0],r[1]),name:r[0],address:r[1],area:r[2],phone:r[3],website:r[4],instagram:INSTAGRAM[r[0]]||'',hours:HOURS[r[0]]||'',tock:TOCK[r[0]]||'',opentable:OPENTABLE[r[0]]||'',libroreserve:LIBRORESERVE[r[0]]||'',resy:RESY[r[0]]||'',sevenrooms:SEVENROOMS[r[0]]||'',lat:r[5],lng:r[6],src:r[7],approx:!!r[8],type:r[9]||'winery',ci:ai%COLORS.length};
   });
 }
 /* The old built-in event list is retired: events now come from Wine Country Ontario, winery websites,
