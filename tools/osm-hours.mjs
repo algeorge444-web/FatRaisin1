@@ -71,39 +71,46 @@ function osmHours(s) {
 
 /* ---------- fetch from Overpass, a slice of the continent at a time ---------- */
 const SERVERS = ['https://overpass-api.de/api/interpreter', 'https://overpass.kumi.systems/api/interpreter', 'https://overpass.private.coffee/api/interpreter'];
-const SLICES = [[-170, -125], [-125, -117], [-117, -105], [-105, -95], [-95, -88], [-88, -82], [-82, -77], [-77, -72], [-72, -50]];
-function query(w, e) {
-  const bb = '(24,' + w + ',72,' + e + ')';
-  return '[out:json][timeout:600];(' +
+/* small tiles keep each question quick; the far north, Alaska and Hawaii get one big tile each */
+const TILES = [];
+for (let la = 24; la < 54; la += 6) for (let ln = -126; ln < -60; ln += 6) TILES.push([la, ln, la + 6, ln + 6]);
+TILES.push([54, -141, 72, -50], [50, -170, 72, -141], [18, -161, 23, -154]);
+function query([s, w, n, e]) {
+  const bb = '(' + s + ',' + w + ',' + n + ',' + e + ')';
+  return '[out:json][timeout:170];(' +
     'nwr["opening_hours"]["craft"~"brewery|winery|distillery|cider|mead"]' + bb + ';' +
     'nwr["opening_hours"]["industrial"~"brewery|winery|distillery"]' + bb + ';' +
     'nwr["opening_hours"]["tourism"="wine_cellar"]' + bb + ';' +
     'nwr["opening_hours"]["microbrewery"="yes"]' + bb + ';' +
     'nwr["opening_hours"]["brewery"]["amenity"~"pub|bar|restaurant|biergarten"]' + bb + ';' +
-    'nwr["opening_hours"]["name"~"brew|winery|vineyard|cider|distill|wine co|meadery|taproom",i]["amenity"~"pub|bar|restaurant|biergarten|cafe"]' + bb + ';' +
-    'nwr["opening_hours"]["name"~"brew|winery|vineyard|cider|distill|meadery",i]["shop"~"wine|alcohol|beverages"]' + bb + ';' +
+    'nwr["opening_hours"]["amenity"~"pub|bar|restaurant|biergarten|cafe"]["name"~"brew|winery|vineyard|cider|distill|taproom",i]' + bb + ';' +
+    'nwr["opening_hours"]["shop"~"wine|alcohol|beverages"]["name"~"brew|winery|vineyard|cider|distill|meadery",i]' + bb + ';' +
     ');out center tags;';
 }
+const STARTED = Date.now(), BUDGET = 85 * 60000;   /* stop asking after 85 minutes and keep what was found */
 async function overpass(q) {
-  for (let attempt = 0; attempt < 2; attempt++) for (const url of SERVERS) {
+  for (const url of SERVERS) {
+    if (Date.now() - STARTED > BUDGET) return null;
     try {
-      const r = await fetch(url, { method: 'POST', body: 'data=' + encodeURIComponent(q), headers: { 'Content-Type': 'application/x-www-form-urlencoded', 'User-Agent': 'FatRaisin-hours/1.0 (https://github.com/algeorge444-web/FatRaisin1)' }, signal: AbortSignal.timeout(700000) });
-      if (r.ok) { const j = await r.json(); if (Array.isArray(j.elements)) return j.elements; }
+      const r = await fetch(url, { method: 'POST', body: 'data=' + encodeURIComponent(q), headers: { 'Content-Type': 'application/x-www-form-urlencoded', 'User-Agent': 'FatRaisin-hours/1.0 (https://github.com/algeorge444-web/FatRaisin1)' }, signal: AbortSignal.timeout(200000) });
+      if (r.ok) { const j = await r.json(); if (Array.isArray(j.elements) && !(j.remark && /timed out|out of memory/i.test(j.remark))) return j.elements; }
       say('  ' + new URL(url).host + ' answered ' + r.status);
     } catch (e) { say('  ' + new URL(url).host + ' failed: ' + String(e.message || e).slice(0, 80)); }
-    await new Promise(z => setTimeout(z, 20000));
+    await new Promise(z => setTimeout(z, 10000));
   }
   return null;
 }
 let els = [];
 if (arg('--file')) els = JSON.parse(fs.readFileSync(arg('--file'), 'utf8')).elements || [];
 else {
-  for (const [w, e] of SLICES) {
-    const got = await overpass(query(w, e));
-    say('Longitude ' + w + ' to ' + e + ': ' + (got ? got.length + ' places with hours' : 'could not be read'));
-    if (got) els.push(...got);
-    await new Promise(z => setTimeout(z, 5000));
+  let missed = 0;
+  for (const t of TILES) {
+    if (Date.now() - STARTED > BUDGET) { missed++; continue; }
+    const got = await overpass(query(t));
+    if (got) { els.push(...got); console.log('Tile ' + t.join(',') + ': ' + got.length); } else { missed++; say('Tile ' + t.join(',') + ' could not be read'); }
+    await new Promise(z => setTimeout(z, 3000));
   }
+  say((TILES.length - missed) + ' of ' + TILES.length + ' map tiles read in ' + Math.round((Date.now() - STARTED) / 60000) + ' minutes.');
 }
 
 /* ---------- match and add ---------- */
