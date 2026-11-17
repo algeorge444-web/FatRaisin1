@@ -69,7 +69,7 @@ export default {
         return new Response(r.body, { status: r.ok ? 200 : 502, headers: { ...cors, 'Content-Type': 'text/csv; charset=utf-8', 'X-Source-Url': r.url || '', 'Access-Control-Expose-Headers': 'X-Source-Url', 'Cache-Control': 'public, max-age=3600' } });
       }
       if (url.pathname === '/ping') {
-        return reply({ ok: true, search: !!env.SEARCH_KEY, locked: allowed.length > 0 });
+        return reply({ ok: true, search: !!env.SEARCH_KEY, lcbo: !!env.BOOZEDATA_KEY, locked: allowed.length > 0 });
       }
       /* Answers are cached for a day, so the same wine doesn't use up another search. */
       const cache = caches.default;
@@ -110,6 +110,9 @@ export default {
         out = await findSite(url.searchParams, env);
       } else if (url.pathname === '/insta') {
         out = await findInsta(url.searchParams, env);
+      } else if (url.pathname === '/lcbo') {
+        if (!env.BOOZEDATA_KEY) return reply({ error: 'nokey' }, 400);
+        out = await lcboByBarcode(url.searchParams.get('upc') || '', env);
       } else if (url.pathname === '/find') {
         if (!env.SEARCH_KEY) return reply({ error: 'The helper has no search key yet. Add SEARCH_KEY in the Worker settings.' }, 400);
         out = await findWine(url.searchParams, env);
@@ -118,7 +121,8 @@ export default {
       }
       const empty = !out || out.error || out.found === false || (Array.isArray(out.places) && !out.places.length);
       ctx.waitUntil(cache.put(cacheKey, new Response(JSON.stringify(out), {
-        headers: { 'Content-Type': 'application/json', 'Cache-Control': 'public, max-age=' + (empty ? 3600 : 86400) }
+        /* LCBO barcode answers are kept for a month (misses for a week), so each bottle uses up the free daily allowance only once */
+        headers: { 'Content-Type': 'application/json', 'Cache-Control': 'public, max-age=' + (url.pathname === '/lcbo' ? (empty ? 604800 : 2592000) : (empty ? 3600 : 86400)) }
       })));
       return reply(out);
     } catch (e) {
@@ -126,6 +130,37 @@ export default {
     }
   }
 };
+
+/* ---------- LCBO wines by barcode, through BoozeData (https://boozedata.ca, needs a free BOOZEDATA_KEY secret) ---------- */
+async function lcboByBarcode(code, env) {
+  const d = String(code || '').replace(/\D/g, '');
+  if (d.length < 8 || d.length > 14) return { found: false };
+  const bare = d.replace(/^0+/, '');
+  /* the same barcode can be written with different numbers of leading zeros; try the common forms, stopping at the first hit */
+  const tries = [...new Set([d, bare.padStart(12, '0'), bare.padStart(13, '0'), bare.padStart(14, '0')])].slice(0, 3);
+  for (const upc of tries) {
+    const r = await fetch('https://boozedata.ca/api/v1/products?retailer=lcbo&limit=1&upc=' + encodeURIComponent(upc), {
+      headers: { Authorization: 'Bearer ' + env.BOOZEDATA_KEY, Accept: 'application/json' }
+    });
+    if (r.status === 429) return { error: 'busy' };
+    if (!r.ok) return { error: 'BoozeData answered ' + r.status };
+    const j = await r.json().catch(() => ({}));
+    const p = (j.products || [])[0];
+    if (!p) continue;
+    const cat = String(p.ec_category_filter || p.category || '');
+    /* wine only */
+    if (!/wine|champagne|sparkling|ros[ée]|port|sherry|sake/i.test(cat) || /spirit|beer|cider|cooler/i.test(cat)) return { found: false, notWine: true };
+    const t = /ice ?wine|dessert|fortified|port|sherry/i.test(cat) ? 'dessert' : /sparkling|champagne/i.test(cat) ? 'sparkling' : /ros[ée]/i.test(cat) ? 'rose' : /red/i.test(cat) ? 'red' : /white/i.test(cat) ? 'white' : '';
+    const vint = (String(p.name || '').match(/\b(19[5-9]\d|20[0-4]\d)\b/) || [])[1] || '';
+    return {
+      found: true, name: String(p.name || '').replace(/\b(19[5-9]\d|20[0-4]\d)\b/, '').replace(/\s+/g, ' ').trim(),
+      producer: p.producer || p.brand || '', vintage: vint, type: t, abv: p.alcohol_percent || '',
+      region: [p.region_name, p.country_of_manufacture].filter(Boolean).join(', '),
+      price: p.price || '', img: p.thumbnail_url || '', link: p.retailer_url || '', source: 'LCBO via BoozeData'
+    };
+  }
+  return { found: false };
+}
 
 /* ---------- searching ---------- */
 async function search(q, env, ctry) {

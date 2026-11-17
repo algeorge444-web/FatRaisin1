@@ -18,6 +18,8 @@ The owner is not a programmer: explain changes in plain language, and push finis
 - Flight Challenge votes are saved in the `reviews` collection as `place: "flight-<category>"`, `text: <place id>`, doc id `flight-<category>_<uid>` (chosen so it should fit the existing reviews rules; not yet confirmed with a real signed-in vote). Review lists and counts skip `flight-` entries.
 - Badges, the Secret Sip and the passport are worked out on the phone from the visitor's stamps; nothing extra is stored online.
 
+- LCBO wine barcodes: the app calls the helper's `/lcbo?upc=` endpoint, which asks BoozeData (boozedata.ca, free tier 100 requests/day) using the `BOOZEDATA_KEY` Worker secret. Without that secret the app skips it. Order on a scan: BC list, shared catalogue, LCBO, Open Food Facts.
+
 ## Rules the owner has set
 - No paid Google services (maps, places, search). Firebase stays; Google Maps *links* for directions on non-Apple devices are fine.
 - A place should have a street address and a working website; phone where one can be found (places without a phone are kept).
