@@ -1,5 +1,6 @@
 /* FatRaisin events found on places’ own websites. Rebuilt every week by tools/crawl-events.mjs. Updated 2026-11-16.
    One row per event: [id, place id, title, date, time, type, description, link, ticket link, cost] */
+window.FR_EVENTS_UPDATED="2026-11-16";
 window.FR_EVENTS=[
 ["xchs4u16cnybcy","chs4u16","Stitchin’ Season: The Deer Widow’s Quilting Retreat","2026-11-16","","Other","🧵 Stitchin’ Season: The Deer Widow’s Quilting Retreat 📅 Monday, November 16 – Thursday, November 19 📍 Castle Farms 💲 $200 per person | Limited to 50 guests Reserve Your Spot Now! While the hunters head into the woods, it’s time for the quilters to head to the castle! Join us ","https://castlefarms.com/event/stitchin-season-the-deer-widows-quilting-retreat-2/","",""],
 ["xc4xk9p0d1pcrt","c4xk9p0","Succulent Terrarium Class at Twisted Elk Brewery","2026-11-16","18:00","Class","Want to do something fun this Season? Create your own Succulent Terrarium with Ashton Ferns! Class includes all supplies! Tickets: $33.85.","https://www.eventbrite.com/e/succulent-terrarium-class-at-twisted-elk-brewery-tickets-2003769958887","https://www.eventbrite.com/e/succulent-terrarium-class-at-twisted-elk-brewery-tickets-2003769958887","33.85"],

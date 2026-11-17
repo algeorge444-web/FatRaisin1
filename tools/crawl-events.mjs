@@ -120,5 +120,5 @@ const out = path.join(ROOT, 'events-data.js');
 let before = 0; try { const c2 = { window: {} }; vm.createContext(c2); vm.runInContext(fs.readFileSync(out, 'utf8'), c2); before = (c2.window.FR_EVENTS || []).filter(x => x[3] >= today).length; } catch (e) {}
 console.log(rows.length + ' upcoming events at ' + Object.keys(found).length + ' places (the current file has ' + before + ' still upcoming)');
 if (before > 200 && rows.length < before * 0.5 && !process.argv.includes('--force')) { console.log('Far fewer events than last time, so the existing file is kept (the search probably had network trouble).'); process.exit(0); }
-fs.writeFileSync(out, '/* FatRaisin events found on places’ own websites. Rebuilt every week by tools/crawl-events.mjs. Updated ' + today + '.\n   One row per event: [id, place id, title, date, time, type, description, link, ticket link, cost] */\nwindow.FR_EVENTS=[\n' + rows.map(r => JSON.stringify(r)).join(',\n') + '\n];\n');
+fs.writeFileSync(out, '/* FatRaisin events found on places’ own websites. Rebuilt every week by tools/crawl-events.mjs. Updated ' + today + '.\n   One row per event: [id, place id, title, date, time, type, description, link, ticket link, cost] */\nwindow.FR_EVENTS_UPDATED="' + today + '";\nwindow.FR_EVENTS=[\n' + rows.map(r => JSON.stringify(r)).join(',\n') + '\n];\n');
 process.exit(0);

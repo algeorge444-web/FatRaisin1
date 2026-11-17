@@ -1349,7 +1349,7 @@ function toolCountryHTML(){
   var c=toolCountry(),n=S.wineries.filter(function(w){return countryOf(w)===c}).length;
   return '<div class="aboutcard" style="margin:0 0 14px"><p style="margin:0 0 8px"><b>Checking and fixing tools work on:</b></p>'+
     '<div class="seg" role="group" aria-label="Country for tools"><button data-action="tool-country" data-val="CA" aria-pressed="'+(c==='CA')+'">\ud83c\udde8\ud83c\udde6 Canada</button><button data-action="tool-country" data-val="US" aria-pressed="'+(c==='US')+'">\ud83c\uddfa\ud83c\uddf8 USA</button></div>'+
-    '<p class="note" style="margin:8px 0 0">'+plural(n,'place')+' in '+(c==='US'?'the USA':'Canada')+'. Find addresses, Check addresses with Google, Pins from OpenStreetMap, Review pins and the downloads only look at these.</p></div>';
+    '<p class="note" style="margin:8px 0 0">'+plural(n,'place')+' in '+(c==='US'?'the USA':'Canada')+'. The three tools below only look at these.</p></div>';
 }
 function countryFromLocation(lat,lng){
   try{var c=sessionStorage.getItem('cellardoor:countrylocdone');if(c==='CA'||c==='US')return Promise.resolve(c)}catch(e){}
@@ -1956,6 +1956,38 @@ function sharedFbPublish(now){
     SHARED=cleanShared(obj.pins);try{localStorage.setItem(SPKEY,JSON.stringify({pins:SHARED,at:Date.now(),src:'firebase'}))}catch(e){}
     var el=$('#shfbMsg');if(el)el.textContent=SHFB.msg;return true;
   }).catch(function(e){SHFB.busy=false;SHFB.msg='Couldn\u2019t save to Firebase: '+catErrMsg(e)+' (check the Firestore rules include the shared section).';var el=$('#shfbMsg');if(el)el.textContent=SHFB.msg;return false});
+}
+/* owner tools: a quick look at how the app's data is doing */
+function ownerGlanceHTML(){
+  var all=S.wineries,n=all.length,ca=all.filter(function(w){return countryOf(w)!=='US'}).length;
+  var pct=function(k){return n?Math.round(k*100/n)+'%':'0%'};
+  var pics=all.filter(function(w){return WEB_PHOTOS[w.name]||(typeof LOGOS!=='undefined'&&LOGOS[w.name])}).length;
+  var hrs=all.filter(function(w){return HOURS[w.name]}).length,tg=all.filter(function(w){return placeTags(w)}).length,ig=all.filter(function(w){return placeIg(w)}).length;
+  var rough=all.filter(function(w){return w.approx&&!sharedPin(w.id)&&!S.pins[w.id]}).length;
+  var ev=(window.FR_EVENTS||[]).filter(function(x){return x[3]>=todayStr()}).length,evd=shortDay(window.FR_EVENTS_UPDATED);
+  function row(a,b){return '<div class="acctrow"><span>'+a+'</span><b>'+b+'</b></div>'}
+  return '<div class="aboutcard" style="margin:0 0 14px"><p style="margin:0 0 6px"><b>At a glance</b></p>'+
+    row('Places in Canada',ca.toLocaleString())+row('Places in the USA',(n-ca).toLocaleString())+
+    row('With a photo or logo',pct(pics))+row('With opening hours',pct(hrs))+row('With \u201cGood to know\u201d tags',pct(tg))+row('With Instagram',pct(ig))+
+    row('Rough map pins',String(rough))+
+    row('Upcoming events',ev.toLocaleString())+(evd?row('Events last updated',esc(evd)):'')+
+    row('Data version',String(SEED_VERSION))+
+    '<p class="note" style="margin:8px 0 0">Places, photos, hours, tags and the weekly events are kept in the app\u2019s files on GitHub, so Claude updates them for you.</p></div>';
+}
+function shortDay(d){if(!d)return '';try{return new Date(d+'T12:00').toLocaleDateString(undefined,{month:'short',day:'numeric'})}catch(e){return d}}
+function ownerEventsHTML(){
+  var ev=(window.FR_EVENTS||[]).filter(function(x){return x[3]>=todayStr()}).length,evd=shortDay(window.FR_EVENTS_UPDATED);
+  return '<h3 style="margin:18px 0 6px">Events</h3>'+
+    '<p class="note" style="margin-top:0">A search on GitHub checks every place\u2019s website and the regional wine calendars each Monday morning and keeps only special events. Right now: <b>'+ev.toLocaleString()+' upcoming</b>'+(evd?', last updated '+esc(evd):'')+'. '+
+    '<a href="https://github.com/algeorge444-web/FatRaisin1/actions" target="_blank" rel="noopener">See the weekly runs</a>. Events you add yourself from an event page show for everyone straight away.</p>'+
+    (routineShared().length?'<p class="note">'+plural(routineShared().length,'shared entry')+' look like regular lunch, dinner or opening hours rather than events. <button class="link" data-action="ev-clean">Remove them</button></p>':'');
+}
+function ownerPinsHTML(){
+  var list=S.wineries.filter(function(w){return w.approx&&!sharedPin(w.id)&&!S.pins[w.id]});
+  return '<h3 style="margin:18px 0 6px">Map pins</h3>'+
+    (list.length?'<p class="note" style="margin-top:0">'+plural(list.length,'place')+' still sit on a town-level spot because no exact address position could be found. Tap one to drop its pin in the right place on the map.</p>'+
+      '<div class="gtks" style="margin-bottom:10px">'+list.map(function(w){return '<button class="gtk" data-action="pin-fix" data-id="'+w.id+'">'+esc(w.name)+'</button>'}).join('')+'</div>':
+      '<p class="note" style="margin-top:0">Every place is on its exact address.</p>');
 }
 function sharedFbBlockHTML(){
   return '<p class="note" style="margin-top:0"><b>Sharing:</b> place IDs, websites, Instagram handles, closed places and pins you\u2019ve placed by hand now save to Firebase automatically a few seconds after any change, and everyone gets them the next time they open the app. No more uploading pins.json.</p>'+
@@ -9245,14 +9277,14 @@ function renderSheet(){
       var pinned=S.pins[pw.id];
       h='<div class="sheet-head"><h2 id="sheetTitle">Fix pin</h2><button class="btn icon" data-action="close" aria-label="Close">'+I.x+'</button></div>'+
         '<p><b>'+esc(pw.name)+'</b><br>'+esc(pw.address)+'</p>'+
-        '<p class="note" style="margin-top:0">'+(pinned?(pinned.src==='manual'?'This pin was placed by hand.':pinned.src==='google'?'This pin was matched to the address by Google.':(pinned.src==='confirmed'||pinned.ok)?'You confirmed this pin.':'This pin came from the old free address lookup and may be off. Tap Find the exact spot to re-check it with Google.'):(sharedPin(pw.id)?'This pin was checked and corrected by FatRaisin.':(pw.approx?'This pin is only approximate (town-level).':'This pin is marked exact.')))+'</p>'+
+        '<p class="note" style="margin-top:0">'+(pinned?(pinned.src==='manual'?'This pin was placed by hand.':pinned.src==='google'?'This pin was matched to the address by Google.':(pinned.src==='confirmed'||pinned.ok)?'You confirmed this pin.':'This pin came from an older address lookup and may be off.'):(sharedPin(pw.id)?'This pin was checked and corrected by FatRaisin.':(pw.approx?'This pin is only approximate (town-level).':'This pin is marked exact.')))+'</p>'+
         '<div class="choicelist">'+
-          '<button class="choice" data-action="pin-find" data-id="'+pw.id+'">'+I.pin+'<span>'+(PIN.busy[pw.id]?'Searching\u2026':'Find the exact spot from the address')+'</span></button>'+
+          
           '<button class="choice" data-action="pin-place" data-id="'+pw.id+'">'+I.pin+'<span>Pick up the pin, find the spot, then drop it</span></button>'+
           '<button class="choice" data-action="pin-drag" data-id="'+pw.id+'">'+I.route+'<span>Drag the pin myself on the map</span></button>'+
           (pinned&&originalPin(pw.id)?'<button class="choice" data-action="pin-reset" data-id="'+pw.id+'">'+I.x+'<span>Put the pin back to how it was</span></button>':'')+
         '</div>'+
-        '<p class="note">Address lookups use Google Maps, so this place\u2019s name and address are sent to Google. Corrected pins are saved on this device'+(S.fbUser?' and to your account':'')+'.</p>';
+        '<p class="note">Corrected pins are saved on this device'+(S.fbUser?' and shared with everyone through Firebase':'')+'.</p>';
     }
   }else if(s.kind==='mapkey'){
     h='<div class="sheet-head"><h2 id="sheetTitle">Connect your Google Maps key</h2><button class="btn icon" data-action="close" aria-label="Close">'+I.x+'</button></div>'+
@@ -9300,45 +9332,19 @@ function renderSheet(){
       '<div class="sheet-actions"><button class="btn primary" data-action="close">Close</button></div>';
   }else{
     if(!isOwner()){h=ownerLockHTML();sh.innerHTML=h;ov.classList.add('on');return}
-    h='<div class="sheet-head"><h2 id="sheetTitle">Owner tools</h2><button class="btn icon" data-action="close" aria-label="Close">'+I.x+'</button></div>'+ownerNoticeHTML()+toolCountryHTML()+
-      '<div class="sheet-actions" style="justify-content:flex-start;flex-wrap:wrap;margin-bottom:14px"><button class="btn primary" data-action="cimp-open">Add wines to the catalogue</button>'+
-      '<button class="btn" data-action="helper-setup">Web lookup: '+(helperUrl()?'on':'set up')+'</button>'+
-      '<button class="btn" data-action="sug-open">Suggested places'+(SUG.list&&SUG.list.length?' ('+SUG.list.length+')':'')+'</button></div>'+
-      '<h3 style="margin:18px 0 6px">Find new places</h3><p class="note" style="margin-top:0">Search a town or region with Google for wineries, breweries, cideries and distilleries FatRaisin doesn\u2019t have yet, and add them for everyone using details from their own websites.</p><div class="sheet-actions" style="justify-content:flex-start;margin-bottom:10px;flex-wrap:wrap"><button class="btn primary" data-action="disc-open">Discover with Google</button><button class="btn" data-action="addr-open">Find addresses, websites &amp; phones ('+infoTodo().length+')</button><button class="btn" data-action="gchk-open">Check addresses with Google ('+gchkQueue(false).length+')</button><button class="btn" data-action="osm-open">Pins from OpenStreetMap</button></div>'+
-      reportsBlockHTML()+siteBlockHTML()+evBlockHTML()+catFillHTML()+crxBlockHTML()+
-      igBlockHTML()+
-      '<p class="note" style="margin-top:0">Everything you add is saved in this browser only. The export covers wineries and events but not photos. Copy it to back up or move to another device.</p>'+
-      '<div class="field"><label for="f-export">Export</label><textarea id="f-export" readonly style="min-height:110px;font-size:13px" placeholder="Tap Copy to make the export (it holds every place, so it\u2019s built only when you ask for it)"></textarea></div>'+
-      '<div class="sheet-actions" style="justify-content:flex-start;margin-bottom:16px"><button class="btn" data-action="copy">Copy export</button></div>'+
-      '<div class="field"><label for="f-import">Import</label><textarea id="f-import" placeholder="Paste exported data here" style="min-height:90px;font-size:13px"></textarea><small>Imported wineries and events are added to what you already have.</small></div>'+
-      '<div class="err" id="err" role="alert"></div>'+
-      '<h3 class="detailsec" style="margin:18px 0 6px"><span style="font-size:15px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em">Opening hours</span></h3>'+
-      (HRS.running?
-        '<p class="note" style="margin-top:0" id="hoursProg">'+HRS.done+' of '+HRS.total+' checked \u00b7 '+HRS.ok+' linked</p><div class="sheet-actions" style="justify-content:flex-start;margin-bottom:16px"><button class="btn" data-action="hours-stop">Stop</button></div>'
-        :
-        '<p class="note" style="margin-top:0">Links every place to its Google listing (its place ID), so opening hours, phone, website and the exact map spot show live from Google when someone opens it. Google\u2019s terms only allow keeping place IDs, so the details themselves aren\u2019t saved. Places Google lists as permanently closed are removed. '+plural(hoursTodo().length,'place')+' still to link. Download pins.json afterwards to share them with everyone.</p>'+
-        '<div class="sheet-actions" style="justify-content:flex-start;flex-wrap:wrap;margin-bottom:10px"><button class="btn primary" data-action="hours-all">Link places to Google</button></div>'
-      )+
-      (S.hrsMsg?'<p class="note" style="margin-top:0">'+esc(S.hrsMsg)+'</p>':'')+
-      '<h3 class="detailsec" style="margin:18px 0 6px"><span style="font-size:15px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em">Google Calendar import</span></h3>'+
-      (S.gcalToken?
-        '<p class="note" style="margin-top:0">Connected'+(S.gcalEmail?' as '+esc(S.gcalEmail):'')+'. Imports events from a calendar named exactly <b>Wine Events</b> on that account.</p>'+
-        '<div class="sheet-actions" style="justify-content:flex-start;flex-wrap:wrap;margin-bottom:16px"><button class="btn primary" data-action="gcal-import">'+(S.gcalBusy?'Importing\u2026':'Import from Wine Events')+'</button><button class="btn" data-action="gcal-disconnect">Disconnect</button></div>'
-        :
-        '<p class="note" style="margin-top:0">Connect your own Google account to pull events from a calendar you keep there named exactly <b>Wine Events</b>, instead of finding them here one by one.</p>'+
-        '<div class="sheet-actions" style="justify-content:flex-start;flex-wrap:wrap;margin-bottom:16px"><button class="btn primary gponly" data-action="gcal-connect">Connect Google Calendar</button></div>'
-      )+
-      (S.gcalMsg?'<p class="note" style="margin-top:0">'+esc(S.gcalMsg)+'</p>':'')+
-      '<h3 class="detailsec" style="margin:18px 0 6px"><span style="font-size:15px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em">Map pins</span></h3>'+
-      '<p class="note" style="margin-top:0">'+esc(reviewSummary(pinReport()))+'.</p>'+
-      (PIN.running?'<p class="note" id="pinProg2" style="margin-top:0">Fetching pins from Google\u2026 '+PIN.done+' of '+PIN.total+' checked \u00b7 '+PIN.fixed+' placed</p>':
-        '<p class="note" style="margin-top:0">'+(pinsToFix().length?plural(pinsToFix().length,'place')+' still on a rough or unchecked pin.':'Every pin has been placed with Google or confirmed.')+(PIN.msg?' '+esc(PIN.msg):'')+'</p>')+
-      '<div class="sheet-actions" style="justify-content:flex-start;flex-wrap:wrap;margin-bottom:10px">'+
-        (PIN.running?'<button class="btn" data-action="pin-stop">Stop</button>':'')+(!FAP.running&&approxTodo().length?'<button class="btn primary" data-action="fap-run">Find all pins with Google ('+approxTodo().length+')</button>':'')+
-        '<button class="btn'+(pinsToFix().length?'':' primary')+'" data-action="pinreview-open">Review pins</button></div>'+
-
-      sharedFbBlockHTML()+
-      '<div class="sheet-actions" style="justify-content:flex-start;flex-wrap:wrap"><button class="btn primary" data-action="import">Add imported data</button><button class="btn" data-action="clear-samples">Clear sample events</button><button class="btn" data-action="reset">'+(S.confirm==='reset'?'Tap again to restore':'Restore the original list')+'</button></div>';
+    h='<div class="sheet-head"><h2 id="sheetTitle">Owner tools</h2><button class="btn icon" data-action="close" aria-label="Close">'+I.x+'</button></div>'+ownerNoticeHTML()+
+      ownerGlanceHTML()+
+      '<div class="sheet-actions" style="justify-content:flex-start;flex-wrap:wrap;margin-bottom:6px"><button class="btn primary" data-action="cimp-open">Add wines to the catalogue</button>'+
+      '<button class="btn" data-action="sug-open">Suggested places'+(SUG.list&&SUG.list.length?' ('+SUG.list.length+')':'')+'</button>'+
+      '<button class="btn" data-action="helper-setup">Web lookup: '+(helperUrl()?'on':'set up')+'</button></div>'+
+      reportsBlockHTML()+ownerEventsHTML()+ownerPinsHTML()+
+      '<h3 style="margin:18px 0 6px">Fill in missing details</h3>'+
+      '<p class="note" style="margin-top:0">These search the web through your helper, a little at a time, and check each result against the place before saving it.</p>'+
+      toolCountryHTML()+
+      '<div class="sheet-actions" style="justify-content:flex-start;flex-wrap:wrap;margin-bottom:10px"><button class="btn" data-action="addr-open">Find addresses &amp; phones ('+infoTodo().length+')</button></div>'+
+      siteBlockHTML()+igBlockHTML()+
+      '<h3 style="margin:18px 0 6px">Backup</h3>'+
+      sharedFbBlockHTML();
   }
   sh.innerHTML=h;ov.classList.add('on');
   /* a different screen in the sheet starts at the top */
