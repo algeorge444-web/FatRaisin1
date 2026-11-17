@@ -1,8 +1,8 @@
 name: Opening hours from OpenStreetMap
-# Once a month, fills in opening hours from OpenStreetMap for places that have none yet.
+# Once a week, fills in opening hours from OpenStreetMap for places that have none yet (each run covers part of the map).
 on:
   schedule:
-    - cron: '23 11 4 * *'   # the 4th of each month
+    - cron: '23 12 * * 3'   # Wednesdays
   workflow_dispatch:
   push:
     branches: [main]

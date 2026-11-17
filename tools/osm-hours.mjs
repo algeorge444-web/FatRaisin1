@@ -72,12 +72,15 @@ function osmHours(s) {
 /* ---------- fetch from Overpass, a slice of the continent at a time ---------- */
 const SERVERS = ['https://overpass-api.de/api/interpreter', 'https://overpass.kumi.systems/api/interpreter', 'https://overpass.private.coffee/api/interpreter'];
 /* small tiles keep each question quick; the far north, Alaska and Hawaii get one big tile each */
-const TILES = [];
-for (let la = 24; la < 54; la += 6) for (let ln = -126; ln < -60; ln += 6) TILES.push([la, ln, la + 6, ln + 6]);
-TILES.push([54, -141, 72, -50], [50, -170, 72, -141], [18, -161, 23, -154]);
+/* 3-degree tiles, only where the app has places (busy areas time out when asked about all at once); each run starts
+   at a different tile, so a run that hits the time limit is picked up by the next one */
+let TILES = [];
+{ const seen = {}; places.forEach(p => { const la = Math.floor(p.lat / 3) * 3, ln = Math.floor(p.lng / 3) * 3, k = la + ',' + ln; if (!seen[k]) { seen[k] = 1; TILES.push([la, ln, la + 3, ln + 3]); } });
+  TILES.sort((a, b) => a[0] - b[0] || a[1] - b[1]);
+  const start = Math.floor(Date.now() / 864e5 / 7) * 37 % TILES.length; TILES = TILES.slice(start).concat(TILES.slice(0, start)); }
 function query([s, w, n, e]) {
   const bb = '(' + s + ',' + w + ',' + n + ',' + e + ')';
-  return '[out:json][timeout:170];(' +
+  return '[out:json][timeout:120];(' +
     'nwr["opening_hours"]["craft"~"brewery|winery|distillery|cider|mead"]' + bb + ';' +
     'nwr["opening_hours"]["industrial"~"brewery|winery|distillery"]' + bb + ';' +
     'nwr["opening_hours"]["tourism"="wine_cellar"]' + bb + ';' +
@@ -92,7 +95,7 @@ async function overpass(q) {
   for (const url of SERVERS) {
     if (Date.now() - STARTED > BUDGET) return null;
     try {
-      const r = await fetch(url, { method: 'POST', body: 'data=' + encodeURIComponent(q), headers: { 'Content-Type': 'application/x-www-form-urlencoded', 'User-Agent': 'FatRaisin-hours/1.0 (https://github.com/algeorge444-web/FatRaisin1)' }, signal: AbortSignal.timeout(200000) });
+      const r = await fetch(url, { method: 'POST', body: 'data=' + encodeURIComponent(q), headers: { 'Content-Type': 'application/x-www-form-urlencoded', 'User-Agent': 'FatRaisin-hours/1.0 (https://github.com/algeorge444-web/FatRaisin1)' }, signal: AbortSignal.timeout(140000) });
       if (r.ok) { const j = await r.json(); if (Array.isArray(j.elements) && !(j.remark && /timed out|out of memory/i.test(j.remark))) return j.elements; }
       say('  ' + new URL(url).host + ' answered ' + r.status);
     } catch (e) { say('  ' + new URL(url).host + ' failed: ' + String(e.message || e).slice(0, 80)); }
