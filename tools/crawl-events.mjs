@@ -97,6 +97,7 @@ const clean = s => String(s || '').replace(/[\p{Cc}\p{Zl}\p{Zp}]+/gu, ' ').repla
 const SPECIAL = /festival|fest\b|release|dinner|market|holiday|santa|christmas|anniversary|harvest|tour|workshop|pairing|gala|new year/i;
 /* words that mark a special event (a release, dinner, festival, class, holiday do...) */
 const WORTH = /release|releasing|dinner|supper|brunch|feast|pairing|paired|tasting|flight|festival|fest\b|oktoberfest|market|bazaar|fair\b|anniversary|birthday|party|gala|ball\b|celebrat|harvest|stomp|crush|tour\b|workshop|class\b|masterclass|seminar|paint|wreath|craft|holiday|christmas|xmas|santa|grinch|new year|nye\b|valentine|halloween|thanksgiving|friendsgiving|mardi gras|st\.? patrick|easter|mother|father|launch|debut|tapping|cask|firkin|barrel|vertical|library wine|winemaker|brewmaster|brewer|distiller|collab|bottle|vintage|vintner|sommelier|pickup|pick-up|open house|comedy|concert|charity|fundraiser|benefit|cook-?off|competition|contest|crawl|5k|show\b|murder mystery|dance party|grand opening|wine club|beer club|experience|chocolate|cheese|oyster|lobster|crab|bbq|pig roast|clambake|long table|chef|pop-?up dinner|soir[ée]e|retreat|car show|adoption|expo|gathering/i;
+const NOT_SPECIAL = /^\W*open\b(?! house| air| mic| spot)|\bopen (?:on|until|late|\d)|\b(?:run|walk|running) club\b|packet pick ?up|^\W*food\s*:|food trucks?\b(?!.*festival)/i;
 const byId = {}; places.forEach(p => byId[p.id] = p);
 const hostOf = u => { try { return new URL(u).hostname.replace(/^www\./, ''); } catch (e) { return ''; } };
 /* how many different websites list the same title on the same day */
@@ -108,7 +109,8 @@ for (const pid in found) {
   for (const e of list) {
     const same = fold(e.d.title) + '|' + e.d.date; if (seen.has(e.id) || dup.has(same) || k >= PER_PLACE) continue;
     if (isRoutine(e.d.title, byId[pid] ? byId[pid].n : '')) continue;
-    if (!WORTH.test(e.d.title)) continue;   /* special events only: bare performer names and everyday listings are left out */
+    if (!WORTH.test(e.d.title)) continue;
+    if (NOT_SPECIAL.test(e.d.title)) continue;   /* opening-hours notices, run clubs and race packet pick-ups, food-truck line-ups */   /* special events only: bare performer names and everyday listings are left out */
     const tk = fold(e.d.title), reps = repeats[tk] || 0;
     /* the same thing three or more times is a regular fixture, not a special event; seasonal ones keep their next two dates */
     if (reps >= 3 && !SPECIAL.test(e.d.title)) continue;
