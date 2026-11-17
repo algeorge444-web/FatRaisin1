@@ -7983,6 +7983,8 @@ function installGmShim(){
   function GMap(el,o){
     o=o||{};var c=P(o.center||{lat:43.25,lng:-79.06});var self=this;
     this._m=new ML.Map({container:el,style:MAP_STYLE_URL,center:[c.lng,c.lat],zoom:Math.max(0,(o.zoom||3)-1),attributionControl:{compact:true},cooperativeGestures:o.gestureHandling==='cooperative',dragRotate:false,pitchWithRotate:false,touchPitch:false});
+    /* start with the map credit folded to its small (i) button so it doesn't cover the map or sit under the route button; a tap opens it */
+    (function(m){function fold(){try{var a=el.querySelector('.maplibregl-ctrl-attrib');if(a){a.classList.remove('maplibregl-compact-show');a.removeAttribute('open')}}catch(e){}}m.once('load',fold);m.once('idle',fold)})(this._m);
     this._m.touchZoomRotate.disableRotation();
     this._m.addControl(new ML.NavigationControl({showCompass:false}),'bottom-right');
     if(o.fullscreenControl)this._m.addControl(new ML.FullscreenControl(),'top-right');
