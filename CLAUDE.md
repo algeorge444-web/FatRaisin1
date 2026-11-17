@@ -22,6 +22,7 @@ The owner is not a programmer: explain changes in plain language, and push finis
 
 ## Rules the owner has set
 - No paid Google services (maps, places, search). Firebase stays; Google Maps *links* for directions on non-Apple devices are fine.
-- A place should have a street address and a working website; phone where one can be found (places without a phone are kept).
+- A place should have a street address and a working website; phone where one can be found (places without a phone are kept, and marked as checked in `CONTACT_OK`).
+- **New** places (added by Claude to the data files, or by the owner in the app) must have all three: street address, phone and website. The app's add-place forms enforce this.
 - When removing a place, also add its name to `SEED_REMOVED` and drop its entries from the name-keyed lists and media.
 - Renaming a place means renaming its keys in `place-lists.js` and `place-media.js` too.

@@ -7215,7 +7215,7 @@ function discAddSheetHTML(s){
     '<p class="note" style="margin-top:0">'+(s.fromSite?'Filled in from <b>'+esc(host(s.web))+'</b>. Check everything before saving.':'Please check the details before saving.')+'</p>'+
     '<div class="seg" role="group" aria-label="Type" style="margin-bottom:12px;flex-wrap:wrap">'+[['winery','Winery'],['brewery','Brewery'],['cidery','Cidery'],['distillery','Distillery']].map(function(o){return '<button data-action="disc-type" data-val="'+o[0]+'" aria-pressed="'+(d.type===o[0])+'">'+o[1]+'</button>'}).join('')+'</div>'+
     field('daName','Name *',d.name||'')+field('daAddr','Address *',d.address||'',{ph:'Street, town, province, postal code'})+
-    '<div class="two">'+field('daPhone','Phone',d.phone||'',{type:'tel'})+field('daWeb','Website',d.website||'')+'</div>'+
+    '<div class="two">'+field('daPhone','Phone *',d.phone||'',{type:'tel'})+field('daWeb','Website *',d.website||'')+'</div>'+
     field('daIg','Instagram',d.instagram||'',{ph:'handle'})+field('daArea','Area / region *',d.area||'',{ph:'e.g. Prince Edward County, ON'})+
     (s.err?'<p class="note" style="color:var(--danger)">'+esc(s.err)+'</p>':'')+
     '<div class="sheet-actions"><button class="btn" data-action="disc-back">Back</button><button class="btn primary" data-action="disc-save"'+(s.saving?' disabled':'')+'>'+(s.saving?'Saving\u2026':'Add to FatRaisin')+'</button></div>');
@@ -7266,6 +7266,10 @@ function roughSpot(area,address){
 function discSave(){
   var s=S.sheet;if(!s||s.kind!=='discadd')return;discKeep();var d=s.draft;
   if(!d.name||!d.address||!d.area){s.err='Name, address and area are needed.';renderSheet();return}
+  /* every place added for everyone needs a street address, a phone number and a website */
+  if(!hasStreet(d.address)){s.err='Enter the full street address, with the street number (for example 123 Vine Rd, Town).';renderSheet();return}
+  if(String(d.phone||'').replace(/\D/g,'').length<10){s.err='Enter a phone number with the area code.';renderSheet();return}
+  if(!safeUrl(d.website)){s.err='Enter the place\u2019s website (for example www.example.com).';renderSheet();return}
   var spot=(d.lat&&d.lng)?{lat:d.lat,lng:d.lng}:roughSpot(d.area,d.address);
   if(!spot){s.err='Couldn\u2019t place it on the map. Check the area matches one already in FatRaisin (e.g. Prince Edward County, ON).';renderSheet();return}
   var id='p'+stableId('p',d.name,d.address).slice(1);
