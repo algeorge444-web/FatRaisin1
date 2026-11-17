@@ -11,14 +11,13 @@ The owner is not a programmer: explain changes in plain language, and push finis
 - `place-media.js` — photos, logos and hours keyed by place name (`window.FR_MEDIA`).
 - `data-version.js` — `window.FR_DV`; must equal `SEED_VERSION`. **Bump both on every data change** or phones keep old data.
 - `events-data.js` — events found on places' websites; rebuilt weekly by `.github/workflows/events.yml` running `tools/crawl-events.mjs`.
-- `wine-barcodes.js` — `window.FR_BC`: wine barcodes from BC's open liquor price list (wine only), built by `tools/bc-wine-barcodes.py`; loaded only when a barcode is scanned and checked before the shared Firebase catalogue.
+- `wine-barcodes.js` — `window.FR_BC`: wine barcodes from BC's open liquor price list (wine only), built by `tools/bc-wine-barcodes.py`; loaded only when a barcode is scanned and checked before the shared Firebase catalogue (then Open Food Facts).
 - `tools/helper-lib.mjs` — copy of the Cloudflare Worker ("helper") code, used by the event search. The live worker is deployed by the owner in Cloudflare, not from this repo.
 
 ## Features worth knowing
 - Flight Challenge votes are saved in the `reviews` collection as `place: "flight-<category>"`, `text: <place id>`, doc id `flight-<category>_<uid>` (chosen so it should fit the existing reviews rules; not yet confirmed with a real signed-in vote). Review lists and counts skip `flight-` entries.
 - Badges, the Secret Sip and the passport are worked out on the phone from the visitor's stamps; nothing extra is stored online.
 
-- LCBO wine barcodes: the app calls the helper's `/lcbo?upc=` endpoint, which asks BoozeData (boozedata.ca, free tier 100 requests/day) using the `BOOZEDATA_KEY` Worker secret. Without that secret the app skips it. Order on a scan: BC list, shared catalogue, LCBO, Open Food Facts.
 
 ## Rules the owner has set
 - No paid Google services (maps, places, search). Firebase stays; Google Maps *links* for directions on non-Apple devices are fine.

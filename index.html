@@ -838,6 +838,7 @@ html.maplock #gmap{touch-action:none}
 .ppbookcover .pphint{position:absolute;bottom:22px;font-size:12px;letter-spacing:1.5px;opacity:.8}
 .ppnav{display:flex;align-items:center;justify-content:space-between;gap:10px;max-width:420px;margin:10px auto 0}
 .ppnav .pgno{font-family:var(--serif);font-size:13px;letter-spacing:1px;color:var(--muted)}
+.ppend::after{display:none}
 .ppend{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:10px;padding:24px!important}
 @media (prefers-reduced-motion:reduce){.ppleaf{transition:none}}
 
@@ -7621,27 +7622,7 @@ function handleBarcode(code){
     offLookupFlow(code);
   });
 }
-/* LCBO wines by barcode, through the helper (it uses BoozeData; nothing happens until the owner adds its key) */
-function lcboLookup(code){
-  if(!helperUrl()||LCBO_OFF)return Promise.resolve(null);
-  return Promise.race([helperGet('/lcbo',{upc:code}),new Promise(function(r){setTimeout(function(){r(null)},9000)})])
-    .then(function(j){return j&&j.found?j:null},function(e){if(e&&(e.msg==='nokey'||e.msg==='Unknown request'))LCBO_OFF=true;return null});
-}
-var LCBO_OFF=false;
 function offLookupFlow(code){
-  lcboLookup(code).then(function(l){
-    var s=S.sheet;if(!s||s.kind!=='wine'||!s.draft||s.draft.barcode!==code||s.id)return;
-    if(l){
-      keepWineForm();var dr=s.draft;
-      [['name',l.name],['producer',l.producer],['vintage',l.vintage?+l.vintage:''],['abv',l.abv?+l.abv:''],['region',l.region],['price',l.price?+l.price:''],['link',l.link],['img',l.img]].forEach(function(x){if(x[1]!==''&&x[1]!==undefined&&x[1]!==null&&(dr[x[0]]===undefined||dr[x[0]]===''))dr[x[0]]=x[1]});
-      if(l.type)dr.type=l.type;
-      s.auto=s.auto||{};s.auto.type=dr.type;if(l.img){s.webImgs=[l.img];s.officialImg=l.img}
-      s.lookup='cat';s.fromCat=true;renderSheet();return;
-    }
-    offLookupFlow2(code);
-  });
-}
-function offLookupFlow2(code){
   offLookup(code).then(function(p){
     var s=S.sheet;if(!s||s.kind!=='wine'||!s.draft||s.draft.barcode!==code||s.id)return;
     keepWineForm();
