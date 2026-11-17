@@ -2,37 +2,51 @@
   overpass-api.de answered 502
   overpass.kumi.systems failed: The operation was aborted due to timeout
   overpass.private.coffee failed: The operation was aborted due to timeout
-Tile 24,-114,30,-108 could not be read
-  overpass-api.de failed: The operation was aborted due to timeout
-  overpass.kumi.systems failed: The operation was aborted due to timeout
-  overpass.private.coffee failed: The operation was aborted due to timeout
-Tile 30,-120,36,-114 could not be read
+Tile 54,-129,57,-126 could not be read
   overpass-api.de answered 502
   overpass.kumi.systems failed: The operation was aborted due to timeout
   overpass.private.coffee failed: The operation was aborted due to timeout
-Tile 30,-96,36,-90 could not be read
-  overpass-api.de failed: The operation was aborted due to timeout
+Tile 54,-123,57,-120 could not be read
+  overpass-api.de answered 502
   overpass.kumi.systems failed: The operation was aborted due to timeout
   overpass.private.coffee failed: The operation was aborted due to timeout
-Tile 30,-90,36,-84 could not be read
-  overpass-api.de failed: The operation was aborted due to timeout
+Tile 60,-153,63,-150 could not be read
+  overpass-api.de answered 502
+  overpass.kumi.systems failed: The operation was aborted due to timeout
+  overpass.private.coffee answered 504
+Tile 60,-150,63,-147 could not be read
+  overpass-api.de answered 502
+  overpass.kumi.systems failed: The operation was aborted due to timeout
+  overpass.private.coffee failed: The operation was aborted due to timeout
+Tile 60,-138,63,-135 could not be read
+  overpass-api.de answered 502
+  overpass.kumi.systems answered 502
+  overpass.private.coffee failed: The operation was aborted due to timeout
+Tile 18,-156,21,-153 could not be read
+  overpass-api.de answered 502
+  overpass.kumi.systems failed: The operation was aborted due to timeout
+  overpass.private.coffee failed: The operation was aborted due to timeout
+Tile 21,-162,24,-159 could not be read
+  overpass-api.de answered 502
+  overpass.kumi.systems failed: The operation was aborted due to timeout
+  overpass.private.coffee failed: The operation was aborted due to timeout
+Tile 24,-84,27,-81 could not be read
+  overpass-api.de answered 502
+  overpass.kumi.systems answered 504
+  overpass-api.de answered 502
   overpass.kumi.systems answered 504
   overpass.private.coffee failed: The operation was aborted due to timeout
-Tile 30,-84,36,-78 could not be read
+Tile 27,-99,30,-96 could not be read
+  overpass-api.de answered 502
+  overpass.kumi.systems failed: The operation was aborted due to timeout
   overpass-api.de answered 502
   overpass.kumi.systems answered 504
   overpass.private.coffee answered 502
-Tile 30,-78,36,-72 could not be read
-  overpass-api.de answered 502
+Tile 27,-87,30,-84 could not be read
+  overpass-api.de answered 504
   overpass.kumi.systems failed: The operation was aborted due to timeout
   overpass.private.coffee failed: The operation was aborted due to timeout
-Tile 36,-126,42,-120 could not be read
-  overpass-api.de answered 502
-  overpass.kumi.systems answered 504
-  overpass.private.coffee failed: The operation was aborted due to timeout
-Tile 36,-120,42,-114 could not be read
-  overpass-api.de failed: fetch failed
-Tile 36,-108,42,-102 could not be read
-17 of 58 map tiles read in 87 minutes.
-701 OpenStreetMap places read, 621 with plain weekly hours, 235 matched to app places; hours added for 137 places that had none (7740 of 20490 now have hours).
-Data version is now 290.
+Tile 30,-114,33,-111 could not be read
+27 of 174 map tiles read in 87 minutes.
+450 OpenStreetMap places read, 415 with plain weekly hours, 149 matched to app places; hours added for 16 places that had none (7756 of 20490 now have hours).
+Data version is now 292.
