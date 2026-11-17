@@ -14,7 +14,7 @@ The owner is not a programmer: explain changes in plain language, and push finis
 - `tools/helper-lib.mjs` — copy of the Cloudflare Worker ("helper") code, used by the event search. The live worker is deployed by the owner in Cloudflare, not from this repo.
 
 ## Features worth knowing
-- Flight Challenge votes are saved in the `reviews` collection as `place: "flight-<category>"`, `text: <place id>`, doc id `flight-<category>_<uid>` (so no new Firestore rules were needed). Review lists and counts skip `flight-` entries.
+- Flight Challenge votes are saved in the `reviews` collection as `place: "flight-<category>"`, `text: <place id>`, doc id `flight-<category>_<uid>` (chosen so it should fit the existing reviews rules; not yet confirmed with a real signed-in vote). Review lists and counts skip `flight-` entries.
 - Badges, the Secret Sip and the passport are worked out on the phone from the visitor's stamps; nothing extra is stored online.
 
 ## Rules the owner has set
