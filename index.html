@@ -873,6 +873,10 @@ html.gplacesoff [data-action="reviews-fetch"],html.gplacesoff .gponly{display:no
 .pfbtn i{font-style:normal;background:var(--accent,#5C1027);color:#fff;border-radius:999px;padding:0 6px;font-size:12px;margin-left:4px}
 .pfpanel{background:var(--surface,#fff);border:1px solid var(--line);border-radius:16px;padding:12px;margin:0 0 10px}
 .pfpanel .pfilters{margin-bottom:0}
+.gtkpick{margin-top:12px}.gtkpick b{display:block;font-size:13px;margin-bottom:6px}.gtkpick small{display:block;color:var(--muted);font-size:12px;margin-top:6px;line-height:1.35}
+.gtks{display:flex;flex-wrap:wrap;gap:6px}
+.gtk{display:inline-flex;align-items:center;gap:4px;border:1px solid var(--line);background:var(--surface,#fff);color:var(--ink);border-radius:999px;padding:6px 11px;font:inherit;font-size:13px;white-space:nowrap}
+button.gtk{cursor:pointer}button.gtk[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
 .pchips{flex-wrap:nowrap!important;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;padding-bottom:2px}
 .pchips::-webkit-scrollbar{display:none}
 .pchips button{flex:0 0 auto}
@@ -3706,6 +3710,16 @@ var WEB_PHOTOS=FRL.WEB_PHOTOS||{},PHOTO_REMOVED=FRL.PHOTO_REMOVED||[];
 /* photos, logos and opening hours live in place-media.js, which loads just after the app has opened, so the app starts
    quickly and pictures appear a moment later. Older copies of place-lists.js that still hold them keep working. */
 var MEDIA_READY=false;
+/* "Good to know" tags, read from each place's own website: one letter per tag, e.g. "dpf" */
+var TAGS={};
+var TAG_DEFS=[['f','Food','\ud83c\udf7d\ufe0f'],['p','Patio or outdoor','\u2600\ufe0f'],['d','Dog-friendly','\ud83d\udc15'],['k','Family-friendly','\ud83d\udc6a'],['t','Tours','\ud83d\udeb6'],['m','Live music','\ud83c\udfb5'],['s','Stay overnight','\ud83d\udecf\ufe0f'],['e','Private events','\ud83e\udd42']];
+function placeTags(w){return (w&&TAGS[w.name])||''}
+function tagFilterOn(){return Object.keys(S.wTags||{}).filter(function(k){return S.wTags[k]})}
+function tagsSectionHTML(w){
+  var t=placeTags(w);if(!t)return '';
+  var chips=TAG_DEFS.filter(function(d){return t.indexOf(d[0])>-1}).map(function(d){return '<span class="gtk">'+d[2]+' '+d[1]+'</span>'}).join('');
+  return chips?'<div class="detailsec"><h3>Good to know</h3><div class="gtks">'+chips+'</div><p class="note" style="margin:6px 0 0">Picked up from the place\u2019s own website. Things change, so check with them before you go.</p></div>':'';
+}
 function loadMedia(){
   if(MEDIA_READY||window.__mediaLoading)return;window.__mediaLoading=1;
   var sc=document.createElement('script');sc.src='place-media.js?v='+encodeURIComponent(window.FR_DV||Math.floor(Date.now()/6e5));sc.async=true;
@@ -3713,6 +3727,7 @@ function loadMedia(){
     if(M.WEB_PHOTOS)WEB_PHOTOS=Object.assign({},M.WEB_PHOTOS,FRL.WEB_PHOTOS||{});
     if(M.LOGOS)LOGOS=Object.assign({},M.LOGOS,FRL.LOGOS||{});
     if(M.HOURS)HOURS=Object.assign({},M.HOURS,FRL.HOURS||{});
+    if(M.TAGS)TAGS=M.TAGS;
     MEDIA_READY=true;try{render();if(S.sheet)renderSheet()}catch(e){}};
   sc.onerror=function(){window.__mediaLoading=0};
   document.head.appendChild(sc);
@@ -5139,6 +5154,7 @@ function detailHTML(w){
       }).join('')+'</div>':emptyHTML('calendar','No upcoming events','Check back soon, or tap the heart to keep this place in your favourites.','',true))+
       (past.length?'<p class="note">'+plural(past.length,'past event')+' not shown.</p>':'')+
     '</div>':'')+
+    tagsSectionHTML(w)+
     igSectionHTML(w)+
     reviewsSectionHTML(w)+
     (fine.length?'<p class="fine dfine">'+esc(fine.join(' '))+'</p>':'')+
@@ -5231,8 +5247,10 @@ function wineryListInner(){
   if(!S._ctryInit){S.country=guessCountry();S._ctryInit=true}
   S.wOpenNow=false;   /* Open now is switched off (it looked up Google hours for many places at once) */
   var q=S.wSearch.trim().toLowerCase();
-  var filtersOn=S.wType!=='all'||S.wProvince!=='all'||S.wArea!=='all'||!!q;
+  var wantTags=tagFilterOn();
+  var filtersOn=S.wType!=='all'||S.wProvince!=='all'||S.wArea!=='all'||!!q||wantTags.length>0;
   var list=S.wineries.filter(function(w){
+    if(wantTags.length){var pt=placeTags(w);for(var ti=0;ti<wantTags.length;ti++)if(pt.indexOf(wantTags[ti])<0)return false}
     if(S.wType!=='favorites'&&S.wType!=='visited'&&!inCountry(w))return false;
     if(S.wType==='favorites'){
       if(!isFav(w.id))return false;
@@ -7907,7 +7925,7 @@ function wineriesHTML(){
   var nV=Object.keys(S.visited||{}).filter(function(id){return winery(id)}).length;
   var chip=function(act,on,label){return '<button data-action="'+act+'" aria-pressed="'+on+'">'+label+'</button>'};
   /* compact filters: search, a Filters button and one scrolling row of types; country, province, area and sort open from Filters */
-  var nf=(S.wProvince&&S.wProvince!=='all'?1:0)+(S.wArea&&S.wArea!=='all'?1:0)+(S.wSort==='near'?1:0);
+  var nf=(S.wProvince&&S.wProvince!=='all'?1:0)+(S.wArea&&S.wArea!=='all'?1:0)+(S.wSort==='near'?1:0)+tagFilterOn().length;
   var flag=hasUS()?(S.country==='US'?'\ud83c\uddfa\ud83c\uddf8 ':'\ud83c\udde8\ud83c\udde6 '):'';
   return '<div class="psearch"><div class="psearchbox">'+I.search+'<input id="wSearch" type="search" placeholder="Search places or towns" value="'+esc(S.wSearch)+'" aria-label="Search places"></div>'+
       '<button class="ploc'+(S.me?' on':'')+'" data-action="locate" aria-label="'+(S.me?'Update my location':'Use my location')+'">'+I.pin+'</button>'+
@@ -7917,6 +7935,8 @@ function wineriesHTML(){
       (S.wType==='favorites'?'':'<div class="pfilters"><select id="wProvince" aria-label="Filter by province"><option value="all">'+(S.country==='US'&&hasUS()?'All states':'All provinces')+'</option>'+provinceOptions(S.wProvince)+'</select>'+
       '<select id="wArea" aria-label="Filter by area"><option value="all">All areas</option>'+areaOptions(S.wArea,S.wProvince)+'</select></div>')+
       (S.me?'<div class="seg" role="group" aria-label="Sort" style="margin-top:8px"><button data-action="sort-near" aria-pressed="'+(S.wSort==='near')+'">Nearest first</button><button data-action="sort-az" aria-pressed="'+(S.wSort!=='near')+'">A\u2013Z</button></div>':'')+
+      '<div class="gtkpick"><b>Good to know</b><div class="gtks">'+TAG_DEFS.map(function(d){return '<button class="gtk" data-action="wtag" data-tag="'+d[0]+'" aria-pressed="'+!!(S.wTags&&S.wTags[d[0]])+'">'+d[2]+' '+d[1]+'</button>'}).join('')+'</div>'+
+        '<small>From each place\u2019s own website. Places that don\u2019t mention these won\u2019t show, so a short list doesn\u2019t mean nowhere else has them.</small></div>'+
       (nf?'<button class="link" data-action="clear-filters" style="margin-top:8px">Clear filters</button>':'')+
     '</div>':'')+
     '<div class="pchips" role="group" aria-label="Type">'+
@@ -9524,7 +9544,8 @@ document.addEventListener('click',function(ev){
     case 'loc-enable':locate();break;
     case 'home-search':(function(){var el=$('#homeSearch');S.wSearch=el?el.value.trim():'';S.wType='all';S.wProvince='all';S.wArea='all';S.wLimit=30;go('wineries')})();break;
     case 'tips-dismiss':S.tipsDismissed=true;try{localStorage.setItem(TDKEY,'1')}catch(e){}render();break;
-    case 'clear-filters':S.wType='all';S.wProvince='all';S.wArea='all';S.wSearch='';S.wLimit=30;render();break;
+    case 'clear-filters':S.wType='all';S.wProvince='all';S.wArea='all';S.wSearch='';S.wTags={};S.wLimit=30;render();break;
+    case 'wtag':S.wTags=S.wTags||{};S.wTags[t.dataset.tag]=!S.wTags[t.dataset.tag];S.wLimit=30;render();break;
     case 'seenear':S.wSort='near';S.wType='all';S.wProvince='all';S.wArea='all';S.wSearch='';S.wLimit=30;go('wineries');break;
     case 'pin-fix':S.sheet={kind:'pinfix',id:id};renderSheet();break;
     case 'pin-find':refinePin(id,false,true).then(function(r){if(r==='ok'){S.sheet=null;render();focusOnMap(id);toast('Pin moved to the exact address')}else if(S.sheet&&S.sheet.kind==='pinfix')renderSheet()});renderSheet();break;
