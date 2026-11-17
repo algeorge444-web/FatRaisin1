@@ -7309,6 +7309,17 @@ function catBackfill(){
     catPublish(todo[i++],null,true,true).then(function(r){if(r)ok++;else{catBackfill.busy=false;return}next()});
   })();
 }
+/* wine barcodes from BC's open product list, in their own file that loads only when a barcode is scanned */
+var BCW={p:null};
+function bcWineGet(code){
+  if(!BCW.p)BCW.p=new Promise(function(res){var sc=document.createElement('script');sc.src='wine-barcodes.js?v='+(window.FR_DV||1);sc.async=true;
+    sc.onload=function(){res(window.FR_BC||{})};sc.onerror=function(){BCW.p=null;res({})};document.head.appendChild(sc)});
+  return Promise.race([BCW.p,new Promise(function(r){setTimeout(function(){r(null)},6000)})]).then(function(m){
+    var k=bcKey(code),e=m&&(m[k]||m[k.replace(/^0+/,'')]);if(!e)return null;
+    var o={name:e[0],producer:e[1]||'',barcode:code};if(e[2])o.vintage=+e[2];if(e[3])o.type=e[3];if(e[4]&&+e[4]>0)o.abv=+e[4];if(e[5])o.region=e[5];
+    return o;
+  }).catch(function(){return null});
+}
 function catGet(code){
   var id=catId({barcode:code});if(!id)return Promise.resolve(null);
   return Promise.race([
@@ -7593,7 +7604,9 @@ function handleBarcode(code){
   }
   S.sheet={kind:'wine',id:null,draft:{barcode:code,qty:1,type:'red'},lookup:'busy'};
   renderSheet();
-  catGet(code).then(function(c){
+  Promise.all([catGet(code),bcWineGet(code)]).then(function(a){
+    /* BC's official list has the cleanest name, producer and vintage for its barcodes; the shared catalogue adds anything else it knows */
+    var c=a[0],b=a[1];if(b)c=Object.assign({},c||{},b);
     var s=S.sheet;if(!s||s.kind!=='wine'||!s.draft||s.draft.barcode!==code||s.id)return;
     if(c&&c.name){
       keepWineForm();
