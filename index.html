@@ -5324,7 +5324,12 @@ function normPlaceName(s){
 function matchPlace(text){
   var t=normPlaceName(text);if(t.length<4)return '';
   var best='',bl=0;
-  S.wineries.forEach(function(w){var n=normPlaceName(w.name);if(n.length<4)return;if((wordHas(t,n)||wordHas(n,t))&&n.length>bl){bl=n.length;best=w.id}});
+  /* the same name wins; otherwise one has to sit inside the other and be distinctive, so that "Jacob's Creek"
+     is not linked to a place called "The Creek" */
+  function distinct(x){return x.indexOf(' ')>0?x.length>=8:(x.length>=7&&!COMMON_LABEL_WORD.test(x))}
+  S.wineries.forEach(function(w){var n=normPlaceName(w.name);if(n.length<4)return;
+    var hit=n===t?n.length+100:((wordHas(t,n)&&distinct(n))||(wordHas(n,t)&&distinct(t)))?n.length:0;
+    if(hit>bl){bl=hit;best=w.id}});
   return best;
 }
 /* ----- cellar stats ----- */
@@ -5484,7 +5489,7 @@ function wineSheetHTML(s){
   var typeOpts=WTYPES.map(function(t){return '<option value="'+t[0]+'"'+((d.type||'red')===t[0]?' selected':'')+'>'+esc(t[1])+'</option>'}).join('');
   var rateOpts=['No rating','\u2605','\u2605\u2605','\u2605\u2605\u2605','\u2605\u2605\u2605\u2605','\u2605\u2605\u2605\u2605\u2605'].map(function(l,i){return '<option value="'+i+'"'+((+d.rating||0)===i?' selected':'')+'>'+l+'</option>'}).join('');
   var nl=s.labelResps.length;
-  var note=s.lookup==='label-busy'?'Reading '+(s.pending>1?plural(s.pending,'photo'):'the label')+'\u2026':s.lookup==='label-hit'?'Read '+plural(nl,'photo')+' with Google. Filled in: '+(s.filled||[]).join(', ')+'. Check it over'+(nl<2?', and add the back label too if anything is missing.':'.'):
+  var note=s.lookup==='label-busy'?'Reading '+(s.pending>1?plural(s.pending,'photo'):'the label')+'\u2026':s.lookup==='label-hit'?'Read '+plural(nl,'photo')+'. Filled in: '+(s.filled||[]).join(', ')+'. Check it over'+(nl<2?', and add the back label too if anything is missing.':'.'):
     s.lookup==='label-same'?'Read '+plural(nl,'photo')+'. Nothing new to add from that one.':
     s.lookup==='label-none'?'Couldn\u2019t pick out the details from that photo. Try a closer, straight-on photo of the front label.':s.lookup==='label-err'?(s.labelErr||''):
     s.lookup==='busy'?'Looking up this barcode\u2026':s.lookup==='cat'?'Found in the FatRaisin catalogue: someone has added this wine before. Check the details, then add it.':s.lookup==='hit'?'Found it in Open Food Facts. Check the details and add the vintage.':s.lookup==='miss'?'This barcode isn\u2019t in the free product database. Type the details once and it\u2019ll be recognised next time.':(s.note||'');
@@ -5572,7 +5577,7 @@ function deleteWine(){
   delete CPH[s.id];saveCellarPhotos();saveCellar();
   S.sheet=null;renderSheet();render();toast('Deleted');
 }
-/* ----- read a bottle label photo with Google Cloud Vision and fill in the wine form ----- */
+/* ----- read a bottle label photo (on the phone, with Tesseract) and fill in the wine form ----- */
 var VARIETIES=[['cabernet sauvignon','red'],['cabernet franc','red'],['pinot noir','red'],['baco noir','red'],['marechal foch','red'],['maréchal foch','red'],['merlot','red'],['syrah','red'],['shiraz','red'],['gamay','red'],['malbec','red'],['zinfandel','red'],['tempranillo','red'],['sangiovese','red'],['petit verdot','red'],['meritage','red'],['marquette','red'],['frontenac','red'],['chambourcin','red'],['zweigelt','red'],['nebbiolo','red'],['grenache','red'],
   ['chardonnay','white'],['riesling','white'],['sauvignon blanc','white'],['pinot gris','white'],['pinot grigio','white'],['pinot blanc','white'],['gewurztraminer','white'],['gewürztraminer','white'],['viognier','white'],['vidal','white'],['chenin blanc','white'],['auxerrois','white'],['gruner veltliner','white'],['grüner veltliner','white'],['muscat','white'],['moscato','white'],['seyval blanc','white'],['l\u2019acadie blanc','white'],["l'acadie blanc",'white'],['ortega','white'],['siegerrebe','white'],['kerner','white'],['semillon','white'],['sémillon','white']];
 /* Turn Google's error into a specific fix. Google says exactly why it refused, so pass that on. */
@@ -5621,11 +5626,14 @@ function tessLoad(){
 }
 function visionReadText(dataUrl){
   return tessLoad().then(function(T){return T.recognize(dataUrl,'eng+fra')}).then(function(r){
-    var d=(r&&r.data)||{},pages=[{blocks:(d.blocks||[]).map(function(bl){return {paragraphs:(bl.paragraphs||[]).map(function(pa){
-      var words=[];(pa.lines||[]).forEach(function(ln){(ln.words||[]).forEach(function(w){var b=w.bbox||{};
-        words.push({symbols:[{text:w.text||'',property:{detectedBreak:{type:'SPACE'}}}],boundingBox:{vertices:[{x:b.x0,y:b.y0},{x:b.x1,y:b.y0},{x:b.x1,y:b.y1},{x:b.x0,y:b.y1}]}})})});
-      return {words:words}})}})}];
-    return {fullTextAnnotation:{text:d.text||'',pages:pages},webDetection:{},localizedObjectAnnotations:[]};
+    /* keep only the words the reader is sure of: glass, reflections and patterns otherwise turn into stray letters
+       that get mistaken for a producer, a drink type or a description */
+    function sure(w){var t=String(w.text||'');return (w.confidence||0)>=62&&/[A-Za-z0-9\u00c0-\u017f]/.test(t)&&(t.replace(/[^A-Za-z0-9\u00c0-\u017f]/g,'').length>=2||/^\d$/.test(t))}
+    var d=(r&&r.data)||{},lines=[],pages=[{blocks:(d.blocks||[]).map(function(bl){return {paragraphs:(bl.paragraphs||[]).map(function(pa){
+      var words=[];(pa.lines||[]).forEach(function(ln){var lt=[];(ln.words||[]).forEach(function(w){if(!sure(w))return;var b=w.bbox||{};lt.push(w.text);
+        words.push({symbols:[{text:w.text||'',property:{detectedBreak:{type:'SPACE'}}}],boundingBox:{vertices:[{x:b.x0,y:b.y0},{x:b.x1,y:b.y0},{x:b.x1,y:b.y1},{x:b.x0,y:b.y1}]}})});if(lt.length)lines.push(lt.join(' '))});
+      return {words:words}}).filter(function(pa){return pa.words.length})}})}];
+    return {fullTextAnnotation:{text:lines.join('\n'),pages:pages},webDetection:{},localizedObjectAnnotations:[]};
   },function(){throw {msg:'The label reader didn\u2019t load. Check your connection and try again.'}});
 }
 /* Paragraphs with their text size, so the biggest words on the label can be found. */
@@ -5688,6 +5696,8 @@ function bestLink(web,producerWinery,producerName){
   return own||other||'';
 }
 var LABEL_JUNK=/(alc\.?\s*\/?\s*vol|% ?alc|\bml\b|\bcl\b|\blitre|\bliter|contains|contient|sulphit|sulfit|product of|produit d|produced (and|&) bottled|produit et|bottled by|embouteill|www\.|\.com|\.ca\b|\bon l\d|niagara stone rd|\b\d{3,5} [a-z]+ (rd|road|st|street|line|ave|avenue|hwy|highway|dr|drive)\b|government warning|recycl|consigne|deposit|\binc\b|\bltd\b|\bltée\b|\d{6,})/i;
+var COMMON_LABEL_WORD=/^(vintage|reserve|reserva|riserva|coast|coastal|estate|valley|creek|classic|select|selection|harvest|cellar|mountain|mountains|river|north|south|west|east|northern|southern|western|eastern|ridge|hills|grand|private|special|limited|original|premium|heritage|family|natural|barrel|barrels|vines|grapes|blanc|rouge|table|country|village|garden|gardens|sunset|summit|canyon|island|islands|pacific|atlantic|american|canadian|california|ontario|niagara|oregon|washington|virginia|michigan|central|national|imperial|royal|golden|silver|black|white|copper|stone|bottle|bottled|cuvee|chateau|domaine|product|produce|produced|quality|superior|tradition|traditional|established|collection|edition|series|sparkling|dessert|winemaker|winemakers|founders?|pioneer|legacy|origin|origins|label|spirit|spirits|crafted|handcrafted|small|batch|single|double|triple|unfiltered|lakeside|lakeshore|riverside|hillside|seaside|meadow|meadows|orchard|orchards|prairie|forest|harbor|harbour|district|county|region|appellation)$/;
+function isGrapeWord(n){for(var i=0;i<VARIETIES.length;i++){if(normPlaceName(VARIETIES[i][0])===n)return true}return false}
 function extractFromLabel(resp){
   var full=String((resp.fullTextAnnotation&&resp.fullTextAnnotation.text)||(resp.textAnnotations&&resp.textAnnotations[0]&&resp.textAnnotations[0].description)||'');
   var web=resp.webDetection||{};
@@ -5702,10 +5712,14 @@ function extractFromLabel(resp){
   var best=null,bs=0,normT=normPlaceName(full),normW=normPlaceName(webLow);
   S.wineries.forEach(function(w){
     var sc=0,n=normPlaceName(w.name);
-    if(n.length>=4&&wordHas(normT,n))sc=n.length+10;
-    else if(n.length>=4&&wordHas(normW,n))sc=n.length+6;
+    /* with thousands of places, a one-word name such as "Coast" or "Vintage" turns up on labels by chance:
+       a name has to be two words or more, or one unusual word, before it counts as the producer */
+    var okName=n.length>=4&&(n.indexOf(' ')>0?n.length>=7:(n.length>=6&&!COMMON_LABEL_WORD.test(n)&&!isGrapeWord(n)));
+    if(okName&&wordHas(normT,n))sc=n.length+10;
+    else if(okName&&wordHas(normW,n))sc=n.length+6;
     var st=String(w.address||'').toLowerCase().match(/^(\d+)\s+([a-z\u2019']+)/);
-    if(st&&low.indexOf(st[1]+' '+st[2])>-1)sc+=12;
+    /* a street number and name on its own can match by chance ("2017 Reserve"), so it only adds to a name or website match */
+    if(st&&st[1].length>=3&&low.indexOf(st[1]+' '+st[2])>-1)sc+=sc?12:6;
     var h=w.website?String(w.website).toLowerCase().replace(/^https?:\/\//,'').replace(/^www\./,'').split('/')[0]:'';
     if(h&&h.length>5&&(low.replace(/\s/g,'').indexOf(h)>-1||webLow.indexOf(h)>-1))sc+=15;
     if(sc>bs){bs=sc;best=w}
@@ -5755,6 +5769,9 @@ function extractFromLabel(resp){
   var cands=paras.filter(function(p){
     var tx=p.text,n=normPlaceName(tx);
     if(tx.replace(/[^a-z\u00c0-\u017f]/gi,'').length<3)return false;
+    /* stray letters picked up from glass or patterns are not a name */
+    var tk=tx.split(/\s+/),shortTk=tk.filter(function(x){return x.replace(/[^A-Za-z\u00c0-\u017f]/g,'').length<=2}).length;
+    if(!/[A-Za-z\u00c0-\u017f]{4,}/.test(tx)||shortTk*2>=tk.length)return false;
     if(LABEL_JUNK.test(tx))return false;
     if(/^(vqa|product of canada|red wine|white wine|vin rouge|vin blanc|wine|vin)$/i.test(tx.replace(/[|\s]+/g,' ').trim()))return false;
     if(/^(red wine|white wine|ros[ée] wine)\s*\|?\s*(vin\b.*)?$/i.test(tx))return false;
@@ -5782,7 +5799,8 @@ function extractFromLabel(resp){
   var abv=low.match(/(\d{1,2}(?:[.,]\d)?)\s*%\s*(alc|vol|abv)/);
   if(abv)r.abv=abv[1].replace(',','.');
   /* the label's own description, if there is one (usually on the back) */
-  var desc=paras.filter(function(p){return p.text.length>=70&&/[a-z]{3,} [a-z]{3,}/.test(p.text)&&!/(contains|contient|government|warning|recycl|produced (and|&) bottled|produit et)/i.test(p.text)})
+  function readsLikeText(t){var ws=t.split(/\s+/),good=ws.filter(function(x){return /^[A-Za-z\u00c0-\u017f\u2019'][a-z\u00e0-\u017f\u2019']{2,}[.,;:!?]?$/.test(x)}).length;return ws.length>=10&&good/ws.length>=0.6}
+  var desc=paras.filter(function(p){return p.text.length>=70&&readsLikeText(p.text)&&/[a-z]{3,} [a-z]{3,}/.test(p.text)&&!/(contains|contient|government|warning|recycl|produced (and|&) bottled|produit et)/i.test(p.text)})
     .sort(function(a,b){return b.text.length-a.text.length})[0];
   if(desc)r.desc=desc.text.replace(/\s+/g,' ').trim().replace(/^(.)/,function(c){return c.toUpperCase()}).slice(0,600);
   r.link=bestLink(web,best&&bs>=12?best:null,r.producer);
@@ -5949,8 +5967,49 @@ function mpBottleMask(canvas,box){
     if(!count)return null;
     var areaFrac=count/((x1-x0)*(y1-y0));
     if(areaFrac<0.15||areaFrac>0.92)return null;
-    return keep;
+    /* the outline has to look like a bottle before the picture is changed by itself; the Blur button always tries */
+    var shaped=bottleShape(keep,w,h);
+    if(box.manual)return shaped||keep;
+    return shaped;
   });
+}
+/* Tidy an outline and check it is a bottle: tall, narrow at the neck, wider in the body, and even on both sides.
+   Anything beside or below the bottle that got swept in (a glass, fruit, a shadow) is trimmed off.
+   Returns the tidied outline, or null when the shape is not a bottle (a close-up of a label, a glass, a table). */
+function bottleShape(mask,w,h){
+  var top=-1,bot=-1,y,x;
+  for(y=0;y<h;y++){var any=0;for(x=0;x<w;x++)if(mask[y*w+x]){any=1;break}if(any){if(top<0)top=y;bot=y}}
+  if(top<0||bot-top<40)return null;
+  /* the bottle's centre line: the middle of the outline, taken over its upper two thirds */
+  var mids=[],yEnd=top+Math.round((bot-top)*0.66);
+  for(y=top;y<=yEnd;y++){var l=-1,r=-1;for(x=0;x<w;x++)if(mask[y*w+x]){if(l<0)l=x;r=x}if(l>=0)mids.push((l+r)/2)}
+  if(mids.length<20)return null;mids.sort(function(a,b){return a-b});var axis=Math.round(mids[mids.length>>1]);
+  /* in each row keep only the stretch that crosses the centre line */
+  var out=new Uint8Array(w*h),L=new Int32Array(h).fill(-1),R=new Int32Array(h).fill(-1);
+  for(y=top;y<=bot;y++){
+    var ax=-1;for(var d=0;d<=3&&ax<0;d++){if(mask[y*w+axis-d])ax=axis-d;else if(mask[y*w+axis+d])ax=axis+d}
+    if(ax<0)continue;
+    var a=ax,b=ax;while(a>0&&mask[y*w+a-1])a--;while(b<w-1&&mask[y*w+b+1])b++;
+    L[y]=a;R[y]=b;
+  }
+  /* the body: the usual width over the lower-middle of the outline */
+  var ws=[];for(y=top;y<=bot;y++)if(L[y]>=0)ws.push(R[y]-L[y]+1);
+  if(ws.length<30)return null;var sorted=ws.slice().sort(function(a,b){return a-b}),body=sorted[Math.floor(sorted.length*0.8)];
+  /* below the widest part, stop where the outline goes lopsided or balloons out (a shadow, a coaster, fruit) or breaks off */
+  var end=bot,bad=0,start=top+Math.round((bot-top)*0.55);
+  for(y=start;y<=bot;y++){
+    var okRow=L[y]>=0&&Math.abs((L[y]+R[y])/2-axis)<=body*0.12&&(R[y]-L[y]+1)<=body*1.18;
+    if(okRow)bad=0;else if(++bad>=4){end=y-4;break}
+  }
+  var n=0;for(y=top;y<=end;y++){if(L[y]<0)continue;for(x=L[y];x<=R[y];x++){out[y*w+x]=1;n++}}
+  var hh=end-top+1;if(hh<60||n<200)return null;
+  /* tall like a bottle, with a neck clearly narrower than the body */
+  var neck=0,nn=0,low=0,ln=0,maxw=0;
+  for(y=top;y<=end;y++){if(L[y]<0)continue;var wd=R[y]-L[y]+1,rel=(y-top)/hh;if(wd>maxw)maxw=wd;if(rel<0.18){neck+=wd;nn++}else if(rel>0.5&&rel<0.92){low+=wd;ln++}}
+  if(!nn||!ln)return null;
+  if(hh/maxw<2.1)return null;
+  if((neck/nn)>(low/ln)*0.62)return null;
+  return out;
 }
 /* lay the outlined bottle on a white 600x800 picture, with soft edges */
 /* ===== bottle pictures: the bottle stays sharp in front of its own background, softly blurred (like portrait mode) ===== */
