@@ -3712,7 +3712,9 @@ var WEB_PHOTOS=FRL.WEB_PHOTOS||{},PHOTO_REMOVED=FRL.PHOTO_REMOVED||[];
 var MEDIA_READY=false;
 /* "Good to know" tags, read from each place's own website: one letter per tag, e.g. "dpf" */
 var TAGS={};
-var TAG_DEFS=[['f','Food','\ud83c\udf7d\ufe0f'],['p','Patio or outdoor','\u2600\ufe0f'],['d','Dog-friendly','\ud83d\udc15'],['k','Family-friendly','\ud83d\udc6a'],['t','Tours','\ud83d\udeb6'],['m','Live music','\ud83c\udfb5'],['s','Stay overnight','\ud83d\udecf\ufe0f'],['e','Private events','\ud83e\udd42']];
+var TAG_DEFS=[['f','Food','\ud83c\udf7d\ufe0f'],['p','Patio or outdoor','\u2600\ufe0f'],['d','Dog-friendly','\ud83d\udc15'],['k','Family-friendly','\ud83d\udc6a'],['t','Tours','\ud83d\udeb6'],['m','Live music','\ud83c\udfb5'],['s','Stay overnight','\ud83d\udecf\ufe0f'],['e','Private events','\ud83e\udd42'],
+  ['z','Pizza','\ud83c\udf55'],['b','BBQ and smoked','\ud83c\udf56'],['c','Cheese and charcuterie','\ud83e\uddc0'],['v','Views or waterfront','\ud83c\udf05'],['i','Fire pits','\ud83d\udd25'],['u','Sparkling','\ud83c\udf7e']];
+/* other letters are used only by the themed trails: o orchard or farm, r romantic, g premium tastings, h small and off the beaten path */
 function placeTags(w){return (w&&TAGS[w.name])||''}
 function tagFilterOn(){return Object.keys(S.wTags||{}).filter(function(k){return S.wTags[k]})}
 function tagsSectionHTML(w){
@@ -8477,9 +8479,34 @@ var FUN_TRAILS=[
  {id:'fun-numbers',name:'The Numbers Game',emoji:'\ud83d\udd22',blurb:'Every stop has a number in its name. Count them as you go.',
   re:/\d|\b(one|two|three|four|five|six|seven|eight|nine|ten|twenty|thirty|hundred)\b/i}
 ];
+/* ===== themed trails: built from what each place's own website says (the "Good to know" tags) ===== */
+function hasTag(w,l){return placeTags(w).indexOf(l)>-1}
+var THEME_TRAILS=[
+ {id:'theme-sizzle',name:'Sip & Sizzle',kick:'BBQ lovers',emoji:'\ud83c\udf56',blurb:'Wineries, breweries and cideries that serve BBQ, smoked meats or burgers off the grill.',test:function(w){return hasTag(w,'b')}},
+ {id:'theme-savour',name:'Sip & Savour',kick:'Foodie trail',emoji:'\ud83e\uddc0',blurb:'Wine, craft beer and cider with local cheese, charcuterie and farm-shop finds.',test:function(w){return hasTag(w,'c')}},
+ {id:'theme-pizza',name:'Pints & Pizza',kick:'Casual dining',emoji:'\ud83c\udf55',blurb:'Breweries and cideries with pizza on the menu, many of them wood-fired.',test:function(w){return hasTag(w,'z')&&(w.type==='brewery'||w.type==='cidery')}},
+ {id:'theme-sunsets',name:'Sunsets & Sips',kick:'Romantic escapes',emoji:'\ud83c\udf05',blurb:'Scenic vineyards, waterfront taprooms and patios with a view.',test:function(w){return hasTag(w,'v')&&hasTag(w,'p')}},
+ {id:'theme-orchards',name:'Orchards & Ales',kick:'Country adventure',emoji:'\ud83c\udf4e',blurb:'Cideries, orchards and farm breweries out in the countryside.',test:function(w){return w.type==='cidery'||(hasTag(w,'o')&&w.type==='brewery')}},
+ {id:'theme-hops',name:'Hops & Stops',kick:'Brewery hop',emoji:'\ud83c\udf7a',blurb:'A craft brewery hopping adventure: taprooms close enough to string together.',test:function(w){return w.type==='brewery'}},
+ {id:'theme-datenight',name:'Date Night & Vine',kick:'For two',emoji:'\ud83c\udf39',blurb:'Wineries that set the scene for two: romantic settings, firesides and views.',test:function(w){return isWineType(w)&&(hasTag(w,'r')||(hasTag(w,'i')&&hasTag(w,'v')))}},
+ {id:'theme-tunes',name:'Tunes & Tastings',kick:'Live music',emoji:'\ud83c\udfb5',blurb:'Wineries and breweries that host live music.',test:function(w){return hasTag(w,'m')}},
+ {id:'theme-backroads',name:'Backroads & Brews',kick:'Hidden gems',emoji:'\ud83d\udee4\ufe0f',blurb:'Small, family-run and off-the-beaten-path producers worth the detour.',test:function(w){return hasTag(w,'h')}},
+ {id:'theme-bubbles',name:'Bubbles & Beyond',kick:'Sparkling',emoji:'\ud83c\udf7e',blurb:'Sparkling wines, bubbly ciders and other things that fizz.',test:function(w){return hasTag(w,'u')}},
+ {id:'theme-firepits',name:'Pints & Firepits',kick:'Cozy evenings',emoji:'\ud83d\udd25',blurb:'Breweries and taprooms with fire pits or a fireplace to settle in beside.',test:function(w){return hasTag(w,'i')&&!isWineType(w)}},
+ {id:'theme-grand',name:'The Grand Pour',kick:'Premium tastings',emoji:'\ud83e\udd42',blurb:'Seated, private and reserve tastings for when you want the full experience.',test:function(w){return hasTag(w,'g')}},
+ {id:'theme-patio',name:'Patio Hopping',kick:'Outdoor tasting',emoji:'\u2600\ufe0f',blurb:'Patios, beer gardens and picnic lawns for a day outside.',test:function(w){return hasTag(w,'p')}},
+ {id:'theme-corks',name:'Corks & Forks',kick:'Winery dining',emoji:'\ud83c\udf7d\ufe0f',blurb:'Wineries with a restaurant or kitchen, for lunch among the vines.',test:function(w){return isWineType(w)&&hasTag(w,'f')}},
+ {id:'theme-weekend',name:'The Weekend Pour',kick:'Stay over',emoji:'\ud83d\udecf\ufe0f',blurb:'Places where you can stay the night, so nobody has to drive home.',test:function(w){return hasTag(w,'s')}}
+];
+function themeTrailsAvailable(mode){
+  if(!MEDIA_READY)return [];
+  /* themed trails stay in the country being browsed and, when your location is known, within about an hour's drive */
+  return THEME_TRAILS.map(function(f){return {t:Object.assign({fun:true,theme:true,area:'',prov:''},f),stops:funStops(function(w){return inCountry(w)&&f.test(w)},mode,f.id)}})
+    .filter(function(x){if(x.stops.length<3)return false;if(S.me&&haversineKm(S.me,x.stops[0])>100)return false;x.t.area=String(x.stops[0].area||'').replace(/,\s*[A-Z]{2}$/,'');x.t.prov=provOf(x.stops[0]);return !!fitTrail(x)});
+}
 function nameKey(n){return String(n||'').replace(/^(the|le|la|les|l\u2019|l')\s*/i,'').trim()}
 /* pick a tight group of matching places near you (or in your home province) */
-function funStops(test,mode){return trailMemo('f:'+mode+':'+String(test).slice(0,300),function(){return funStops0(test,mode)})}
+function funStops(test,mode,key){return trailMemo('f:'+mode+':'+(key?key+(MEDIA_READY?1:0):String(test).slice(0,300)),function(){return funStops0(test,mode)})}
 function funStops0(test,mode){
   var cand=S.wineries.filter(function(w){return hasCoord(w)&&test(w)&&(mode!=='wine'||isWineType(w))});
   if(cand.length<3)return [];
@@ -8487,6 +8514,8 @@ function funStops0(test,mode){
   if(!anchor){var home=(S.profile&&S.profile.home)||'ON',inP=S.wineries.filter(function(w){return hasCoord(w)&&provOf(w)===home});
     if(inP.length){anchor={lat:0,lng:0};inP.forEach(function(w){anchor.lat+=w.lat;anchor.lng+=w.lng});anchor.lat/=inP.length;anchor.lng/=inP.length}}
   var best=[];
+  /* with thousands of matches, only the few hundred closest can end up in a trail near you */
+  if(anchor&&cand.length>300){cand=cand.map(function(w){return [haversineKm(anchor,w),w]}).sort(function(a,b){return a[0]-b[0]}).slice(0,300).map(function(x){return x[1]})}
   cand.slice().sort(function(a,b){return anchor?haversineKm(anchor,a)-haversineKm(anchor,b):0}).slice(0,12).forEach(function(seed){
     if(best.length>=5)return;
     var byD=cand.slice().sort(function(a,b){return haversineKm(seed,a)-haversineKm(seed,b)});
@@ -8549,6 +8578,7 @@ function fitAll(list){return list.map(fitTrail).filter(Boolean)}
 function findTrail(id){
   if(/^letter-/.test(id))return fitTrail(letterTrail(id.slice(7),trailMode()));
   var f=funTrailsAvailable(trailMode()).filter(function(r){return r.t.id===id})[0];if(f)return f;
+  var th=themeTrailsAvailable(trailMode()).filter(function(r){return r.t.id===id})[0];if(th)return th;
   var x=trailsAvailable().filter(function(r){return r.t.id===id})[0];return x||null;
 }
 /* a trail card: the first stop's photo, a gold kicker, the name in serif, and plain-word details (no emoji) */
@@ -8569,10 +8599,13 @@ function trailsStripHTML(){
   var list=trailsAvailable();if(!list.length)return '';
   var mode=trailMode();
   var fun=(function(){var f=funTrailsAvailable(mode),l=weeklyLetterTrails(mode,6),out=[];for(var i=0;i<Math.max(f.length,l.length);i++){if(l[i])out.push([l[i],'Letter trail']);if(f[i])out.push([f[i],'Theme'])}return out})();
+  var themes=themeTrailsAvailable(mode);
   return '<div class="trailstrip"><div class="section-title" style="margin:0 0 8px"><h2 style="font-size:18px">Trails <span class="sectsub">'+list.length+' day trips</span></h2></div>'+
     '<div class="seg trailmode" role="group" aria-label="Trail type"><button data-action="trail-mode" data-val="wine" aria-pressed="'+(mode==='wine')+'">Wineries only</button><button data-action="trail-mode" data-val="mix" aria-pressed="'+(mode==='mix')+'">Wineries &amp; more</button></div>'+
     '<div class="hgrid trails">'+(S.trailsAll?list:list.slice(0,10)).map(function(x){return trailCardHTML(x,x.t.auto?'Day trip':'Signature trail')}).join('')+
       (!S.trailsAll&&list.length>10?'<button class="tcard tmore" data-action="trails-all"><span>See all '+list.length+' trails \u2192</span></button>':'')+'</div>'+
+    (themes.length?'<div class="section-title" style="margin:14px 0 8px"><h2 style="font-size:18px">Themed trails <span class="sectsub">near you</span></h2></div>'+
+      '<div class="hgrid trails">'+themes.map(function(x){return trailCardHTML(x,x.t.kick)}).join('')+'</div>':'')+
     (fun.length?'<div class="section-title" style="margin:14px 0 8px"><h2 style="font-size:18px">Just for fun <span class="sectsub">new every week</span></h2></div>'+
       '<div class="hgrid trails">'+fun.map(function(f){return trailCardHTML(f[0],f[1])}).join('')+'</div>':'')+
     '</div>';
@@ -8582,7 +8615,7 @@ function trailSheetHTML(s){
   var t=found.t,stops=orderStops(found.stops),km=0;for(var i=1;i<stops.length;i++)km+=haversineKm(stops[i-1],stops[i]);
   var done=stops.filter(function(w){return isVisited(w.id)}).length;
   return '<div class="sheet-head"><h2 id="sheetTitle">'+esc(t.name)+'</h2><button class="btn icon" data-action="close" aria-label="Close">'+I.x+'</button></div>'+
-    '<p style="margin-top:0">'+esc(t.blurb)+'</p>'+
+    '<p style="margin-top:0">'+esc(t.blurb)+'</p>'+(t.theme?'<p class="note" style="margin-top:-4px">Picked from what each place\u2019s own website says, so check with them before you set out.</p>':'')+
     '<p class="note">'+plural(stops.length,'stop')+' \u00b7 about '+Math.max(1,Math.round(km*1.3))+' km of driving'+(done?' \u00b7 '+done+' already stamped':'')+'</p>'+
     '<ol class="trailstops">'+stops.map(function(w){return '<li><button class="hlink" data-action="viewplace" data-id="'+w.id+'" style="margin:0;text-align:left">'+esc(w.name)+'</button><span class="note">'+esc(w.type==='winery'||!w.type?'Winery':w.type.charAt(0).toUpperCase()+w.type.slice(1))+(isVisited(w.id)?' \u00b7 \u2713 stamped':'')+'</span></li>'}).join('')+'</ol>'+
     '<p class="note">Please plan a designated driver or book a tour \u2014 tasting fees and hours vary, so check each place before you go.</p>'+

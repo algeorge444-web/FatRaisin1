@@ -3,7 +3,7 @@ import json,re,html,concurrent.futures as cf,requests
 from urllib.parse import urljoin,urlparse
 T=json.load(open('tagstodo.json'))
 H={'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36','Accept':'text/html,*/*','Accept-Language':'en-US,en;q=0.9'}
-KEY=re.compile(r'dog|pet[s -]|pup|pooch|furry|leash|service animal|patio|beer garden|biergarten|outdoor|picnic|terrace|courtyard|fire ?pit|deck|kitchen|restaurant|menu|wood[- ]fired|pizza|brewpub|bistro|charcuterie|cheese|small plates|lunch|dinner|eatery|food|tours?\b|live music|live band|concert|entertainment|family|kid|children|all ages|21\+|adults only|minors|bed (and|&) breakfast|b&b|guest ?house|cottage|stay|lodging|\binn\b|accommodation|airbnb|vacation rental|wedding|private event|event space|venue|host your',re.I)
+KEY=re.compile(r'bbq|b\.b\.q|barbe[cq]ue|smoked|smokehouse|smoker|brisket|pulled pork|ribs|burger|grill|pizza|pizzeria|cheese|charcuterie|artisan|farm (shop|store|market|stand)|farm[- ]to[- ]table|local(ly)? (sourced|produce)|sunset|waterfront|lakefront|lakeside|riverside|riverfront|oceanfront|overlook|scenic|panoramic|\bviews?\b|orchard|u-pick|pick[- ]your[- ]own|pumpkin|farm brewery|farmhouse|working farm|sparkling|bubbl|\bbrut\b|p[eé]t[- ]?nat|champagne|m[eé]thode|traditional method|fire ?place|bonfire|fire ?pit|cozy|cosy|romantic|couples|date night|proposal|elevated|reserve tasting|library (wine|tasting)|private tasting|seated tasting|by appointment|premium|luxury|award[- ]winning|hidden gem|off the beaten|family[- ]owned|small[- ]batch|dog|pet[s -]|pup|pooch|furry|leash|service animal|patio|beer garden|biergarten|outdoor|picnic|terrace|courtyard|fire ?pit|deck|kitchen|restaurant|menu|wood[- ]fired|pizza|brewpub|bistro|charcuterie|cheese|small plates|lunch|dinner|eatery|food|tours?\b|live music|live band|concert|entertainment|family|kid|children|all ages|21\+|adults only|minors|bed (and|&) breakfast|b&b|guest ?house|cottage|stay|lodging|\binn\b|accommodation|airbnb|vacation rental|wedding|private event|event space|venue|host your',re.I)
 def get(u):
     try:
         r=requests.get(u,headers=H,timeout=14)
@@ -18,7 +18,7 @@ def snips(t):
     for m in KEY.finditer(t):
         if m.start()<last:continue
         out.append(t[max(0,m.start()-60):m.end()+70]);last=m.end()+70
-        if len(out)>=120:break
+        if len(out)>=200:break
     return out
 def work0(p):
     u=p['web'] if p['web'].startswith('http') else 'https://'+p['web']
@@ -29,7 +29,7 @@ def work0(p):
     host=urlparse(fu).netloc;links=[]
     for m in re.finditer(r'href=["\']([^"\'#]+)["\']',h):
         l=urljoin(fu,m.group(1))
-        if urlparse(l).netloc==host and re.search(r'visit|about|faq|menu|food|taproom|tasting|tour|experience|plan',urlparse(l).path,re.I) and l not in links and l.rstrip('/')!=fu.rstrip('/') and not re.search(r'\.(pdf|jpg|png)$',l,re.I):links.append(l)
+        if urlparse(l).netloc==host and re.search(r'visit|about|faq|menu|food|kitchen|eat|taproom|tasting|tour|experience|plan|story',urlparse(l).path,re.I) and l not in links and l.rstrip('/')!=fu.rstrip('/') and not re.search(r'\.(pdf|jpg|png)$',l,re.I):links.append(l)
     links.sort(key=lambda l:0 if re.search(r'visit|faq',l,re.I) else 1)
     for l in links[:3]:
         h2,_=get(l)
@@ -42,5 +42,5 @@ res=[]
 with cf.ThreadPoolExecutor(64) as ex:
     for i,x in enumerate(ex.map(work,T)):
         res.append(x)
-        if i%1000==0:json.dump(res,open('tagsraw.json','w'));print(i,flush=True)
-json.dump(res,open('tagsraw.json','w'));print('done',len(res))
+        if i%1000==0:json.dump(res,open('tagsraw2.json','w'));print(i,flush=True)
+json.dump(res,open('tagsraw2.json','w'));print('done',len(res))
