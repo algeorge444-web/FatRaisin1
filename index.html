@@ -617,6 +617,50 @@ main{max-width:920px;margin:0 auto;padding:16px 16px 110px}
 .wvnotes{white-space:pre-wrap;line-height:1.5;margin:0}
 .wvnotesbox{margin:0 0 12px}
 .wvnotesbox .wvnotes{font-size:15px;margin-top:2px}
+/* cellar: a dark wine-list look */
+.wlist{background:linear-gradient(180deg,#3B1621,#2B0F17);border-radius:20px;padding:6px 14px;box-shadow:0 10px 26px rgba(43,15,23,.25);color:#F6ECE6}
+.wrow{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid rgba(246,236,230,.12)}
+.wrow:last-child{border-bottom:0}.wrow.done{opacity:.5}
+.wlist .wthumb{flex:none;width:52px;height:66px;border-radius:12px;overflow:hidden;background:#4A1E2A;border:0;padding:0;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.wthumb img{width:100%;height:100%;object-fit:cover;display:block}.wthumb svg{width:24px;height:50px}
+.wmain{flex:1;min-width:0;cursor:pointer}
+.wmain b{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font-size:15.5px;line-height:1.25;color:#FFF7F2}
+.wmain small{display:block;color:rgba(246,236,230,.7);font-size:13px;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.wline{display:block;font-size:12px;color:rgba(246,236,230,.6);margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.wline i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px;vertical-align:0}
+.wline em{font-style:normal;color:#E9B949;letter-spacing:1px}
+.wside{flex:none;display:flex;flex-direction:column;align-items:flex-end;gap:6px}
+.wprice{font-size:14px;font-weight:700;color:#E9C98F}
+.wqty{display:flex;align-items:center;gap:4px;background:rgba(255,255,255,.08);border-radius:999px;padding:2px}
+.wqty button{width:28px;height:28px;border-radius:50%;border:0;background:transparent;color:#F6ECE6;font-size:17px;line-height:1;cursor:pointer}
+.wqty button:disabled{opacity:.3;cursor:default}
+.wqty span{min-width:18px;text-align:center;font-weight:700;font-size:14px}
+/* the bottle page */
+.sheet:has(.wvd){background:linear-gradient(180deg,#3B1621 0%,#2A0E16 60%);color:#F6ECE6}
+.wvd .sheet-head{align-items:flex-start}.wvd .wvtop{min-width:0}
+.wvd .wvtitle{color:#FFF7F2}.wvd .wvsub{color:rgba(246,236,230,.72);margin:4px 0 0}
+.wvd .btn{background:rgba(255,255,255,.1);color:#F6ECE6;border-color:rgba(255,255,255,.18)}
+.wvd .btn.primary{background:#E9C98F;color:#2A0E16;border-color:#E9C98F}
+.wvd .note{color:rgba(246,236,230,.55)}
+.wvstage{background:radial-gradient(120% 90% at 50% 20%,#5A2533 0%,#2A0E16 70%);border-radius:20px;padding:14px 10px 12px;margin:4px 0 12px}
+.wvd .wvhero{margin:0 0 10px}.wvd .wvhero img{height:300px;background:transparent;filter:drop-shadow(0 14px 18px rgba(0,0,0,.45))}
+.wvd .wvph{background:rgba(255,255,255,.06)}
+.wvtags{display:flex;flex-wrap:wrap;justify-content:center;gap:6px}
+.wvchip{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;padding:5px 11px;border-radius:999px;background:rgba(255,255,255,.1)}
+.wvchip i{width:9px;height:9px;border-radius:50%}.wvchip.price{color:#E9C98F}.wvchip.stars{color:#E9B949;letter-spacing:1px}
+.wvd .wvqtyrow{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.12)}
+.wvd .wvqtyrow span{color:rgba(246,236,230,.6)}.wvd .wvqtyrow b{font-size:18px;color:#FFF7F2}
+.wvsec{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#E9C98F;margin:16px 0 6px;font-family:var(--sans,inherit);font-weight:700}
+.wvlist{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:2px 12px}
+.wvrow{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid rgba(246,236,230,.1)}
+.wvrow:last-child{border-bottom:0}.wvrow.tall{align-items:flex-start}
+.wvic{flex:none;width:30px;height:30px;border-radius:50%;border:1px solid rgba(233,201,143,.45);display:flex;align-items:center;justify-content:center}
+.wvic svg{width:16px;height:16px;fill:none;stroke:#E9C98F;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.wvlab{font-size:14px;color:rgba(246,236,230,.75)}
+.wvval{margin-left:auto;text-align:right;font-weight:600;font-size:14.5px;color:#FFF7F2;overflow-wrap:anywhere;max-width:60%}
+.wvtext{min-width:0}.wvtext .wvlab{display:block;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:#E9C98F}
+.wvtext p{margin:3px 0 0;line-height:1.5;font-size:14.5px;color:#FFF7F2}
+.wvfoot{margin-top:12px}
 .weblook{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:10px 12px;margin:0 0 12px}
 .wgallery{display:flex;gap:8px;overflow-x:auto;padding:2px 0 6px;margin-bottom:10px;-webkit-overflow-scrolling:touch}
 .wthumb{position:relative;flex:none;width:72px;height:96px;border-radius:10px;overflow:hidden;background:var(--soft);border:2px solid transparent}
@@ -5540,7 +5584,7 @@ function cellarStatsHTML(){
     (Object.keys(st.producers).length?'<h3 class="wvh">Top producers</h3>'+bars(topList(st.producers,5),st.bottles):'')+
     (st.vint.length?'<h3 class="wvh">Vintages</h3><p style="margin:0 0 6px">Oldest: <button class="hlink" data-action="cellar-view" data-id="'+st.vint[0].id+'" style="margin:0">'+esc(st.vint[0].vintage+' '+st.vint[0].name)+'</button><br>Newest: '+esc(st.vint[st.vint.length-1].vintage+' '+st.vint[st.vint.length-1].name)+'</p>':'')+
     (st.soon.length?'<h3 class="wvh">Drink soon</h3><p class="note" style="margin:0 0 4px">Wines with a drink-by year of '+(y+1)+' or earlier.</p>'+st.soon.slice(0,6).map(function(w){
-      return '<div class="vstamp"><button class="hlink" data-action="cellar-view" data-id="'+w.id+'" style="margin:0;text-align:left;flex:1">'+esc(w.name)+'</button><span class="note"'+(+w.drinkBy<y?' style="color:var(--danger)"':'')+'>'+(+w.drinkBy<y?'past ':'by ')+esc(String(w.drinkBy))+'</span></div>'}).join(''):'')+
+      return '<div class="pstamp"><button class="hlink" data-action="cellar-view" data-id="'+w.id+'" style="margin:0;text-align:left;flex:1">'+esc(w.name)+'</button><span class="note"'+(+w.drinkBy<y?' style="color:var(--danger)"':'')+'>'+(+w.drinkBy<y?'past ':'by ')+esc(String(w.drinkBy))+'</span></div>'}).join(''):'')+
     (st.top&&(+st.top.qty||0)>1?'<p class="note" style="margin-top:12px">Most bottles: <b>'+esc(st.top.name)+'</b> ('+st.top.qty+')</p>':'')+
     '<div class="sheet-actions" style="margin-top:14px"><button class="btn primary" data-action="close">Close</button></div>';
 }
@@ -5574,23 +5618,19 @@ function cellarListInner(){
     return (b.added||0)-(a.added||0);
   });
   if(!list.length)return emptyHTML('search','No wines match','Try another word, or clear the type filter.','',true);
-  return list.map(function(w){
-    var t=wtype(w.type),qty=+w.qty||0,pl=w.wid&&winery(w.wid);
-    var sub=[w.producer,w.vintage].filter(Boolean).join(' \u00b7 ');
-    return '<div class="ccard'+(qty?'':' done')+'">'+
-      '<button class="cimg" data-action="cellar-view" data-id="'+w.id+'" aria-label="See '+esc(w.name)+'">'+wineImgHTML(w)+'</button>'+
-      '<div class="cbody" data-action="cellar-view" data-id="'+w.id+'"><b>'+esc(w.name)+'</b>'+(sub?'<small>'+esc(sub)+'</small>':'')+
-        '<div class="cmeta"><span class="ctype" style="--c:'+t[2]+'">'+esc(t[1])+'</span>'+
-        (+w.rating?'<span class="cstars" aria-label="'+w.rating+' out of 5">'+'\u2605\u2605\u2605\u2605\u2605'.slice(0,+w.rating)+'</span>':'')+
-        (w.grapes?'<span class="cloc">'+esc(w.grapes)+'</span>':'')+(w.region?'<span class="cloc">'+esc(w.region)+'</span>':'')+
-        (w.location?'<span class="cloc">'+esc(w.location)+'</span>':'')+
-        (w.drinkBy?'<span class="cloc">Drink by '+esc(w.drinkBy)+'</span>':'')+
-        (qty?'':'<span class="cloc">Finished</span>')+'</div>'+
-        (pl?'<button class="cplace" data-action="viewplace" data-id="'+pl.id+'">Visit '+esc(pl.name)+'</button>':'')+
-      '</div>'+
-      '<div class="cqty"><button data-action="cellar-inc" data-id="'+w.id+'" aria-label="Add a bottle">+</button><span aria-label="'+plural(qty,'bottle')+'">'+qty+'</span><button data-action="cellar-dec" data-id="'+w.id+'" aria-label="Remove a bottle"'+(qty?'':' disabled')+'>\u2212</button></div>'+
+  return '<div class="wlist">'+list.map(function(w){
+    var t=wtype(w.type),qty=+w.qty||0;
+    var sub=[w.producer,w.vintage].filter(Boolean).join(' · ');
+    var line=[w.grapes,w.region].filter(Boolean).join(' · ');
+    var price=+w.price?'$'+(+w.price).toFixed(2).replace(/\.00$/,''):'';
+    return '<div class="wrow'+(qty?'':' done')+'">'+
+      '<button class="wthumb" data-action="cellar-view" data-id="'+w.id+'" aria-label="See '+esc(w.name)+'">'+wineImgHTML(w)+'</button>'+
+      '<div class="wmain" data-action="cellar-view" data-id="'+w.id+'"><b>'+esc(w.name)+'</b>'+(sub?'<small>'+esc(sub)+'</small>':'')+
+        '<span class="wline"><i style="background:'+t[2]+'"></i>'+esc(t[1])+(line?' · '+esc(line):'')+(+w.rating?' <em aria-label="'+w.rating+' out of 5">'+'★★★★★'.slice(0,+w.rating)+'</em>':'')+(qty?'':' · Finished')+'</span></div>'+
+      '<div class="wside">'+(price?'<span class="wprice">'+price+'</span>':'')+
+        '<div class="wqty"><button data-action="cellar-dec" data-id="'+w.id+'" aria-label="Remove a bottle"'+(qty?'':' disabled')+'>−</button><span aria-label="'+plural(qty,'bottle')+'">'+qty+'</span><button data-action="cellar-inc" data-id="'+w.id+'" aria-label="Add a bottle">+</button></div></div>'+
     '</div>';
-  }).join('');
+  }).join('')+'</div>';
 }
 function refreshCellarList(){var l=$('#clist');if(l)l.innerHTML=cellarListInner();else if(S.tab==='cellar')render()}
 function cellarStep(id,d){
@@ -5613,39 +5653,71 @@ function fmtDate(ts){
   if(!ts)return '';
   try{return new Date(ts).toLocaleDateString(undefined,{day:'numeric',month:'short',year:'numeric'})}catch(e){return ''}
 }
+/* split free-text tasting notes into nose, palate, finish and food pairing where the words make that clear */
+function tastingParts(notes){
+  var out={},rest=[],keys=[['nose',/\b(nose|aromas?|aromatics?|bouquet|smells?)\b/i],['palate',/\b(palate|flavou?rs?|tastes?|mouth|tannins?|acidity|body|bodied)\b/i],['finish',/\b(finish(es)?|aftertaste|lingers?|lingering|length)\b/i],['pair',/\b(pairs?|pairing|serve with|enjoy (it )?with|match(es)? with|alongside|cheeses?|grilled|roast|seafood|pasta|steak|chicken|pork|lamb|salmon|dishes?)\b/i]];
+  String(notes||'').replace(/\s+/g,' ').split(/(?<=[.!?;])\s+/).forEach(function(sn){
+    sn=sn.trim();if(!sn)return;var k=null;
+    for(var i=0;i<keys.length;i++)if(keys[i][1].test(sn)){k=keys[i][0];break}
+    if(k&&!out[k])out[k]=sn;else if(k&&out[k].length<220)out[k]+=' '+sn;else rest.push(sn);
+  });
+  out.rest=rest.join(' ');return out;
+}
+var WV_ICON={
+  nose:'<path d="M12 3c2 3 2 6 0 9-2-3-2-6 0-9z"/><path d="M6 9c2 1.5 3 4 2.5 7M18 9c-2 1.5-3 4-2.5 7"/><path d="M5 19h14"/>',
+  palate:'<path d="M7 3h10c.5 5 0 8-2 10a4.3 4.3 0 0 1-6 0C7 11 6.5 8 7 3z"/><path d="M12 14v6M8.5 21h7"/>',
+  finish:'<path d="M7 3h10M7 21h10M8 3c0 5 8 6 8 9s-8 4-8 9M16 3c0 5-8 6-8 9s8 4 8 9"/>',
+  pair:'<path d="M7 3v8M5 3v5a2 2 0 0 0 4 0V3M7 11v10M16 3c-2 0-3 3-3 6s1 4 3 4v8"/>',
+  grapes:'<circle cx="9" cy="10" r="2.4"/><circle cx="15" cy="10" r="2.4"/><circle cx="12" cy="14.5" r="2.4"/><circle cx="12" cy="19" r="2"/><path d="M12 7c0-2 1-3 3-4"/>',
+  region:'<path d="M12 21c-5-6-7-9-7-12a7 7 0 0 1 14 0c0 3-2 6-7 12z"/><circle cx="12" cy="9" r="2.4"/>',
+  abv:'<path d="M5 19L19 5"/><circle cx="7" cy="7" r="2.4"/><circle cx="17" cy="17" r="2.4"/>',
+  price:'<path d="M12 3v18M16.5 7.5c-1-1.6-2.6-2.2-4.5-2.2-2.4 0-4 1.3-4 3.2 0 4.6 9 2.4 9 7 0 2-1.8 3.3-4.6 3.3-2 0-3.8-.8-4.8-2.4"/>',
+  value:'<rect x="4" y="7" width="16" height="12" rx="2"/><path d="M8 7V5h8v2M4 12h16"/>',
+  stored:'<path d="M3 21V9l9-6 9 6v12"/><path d="M8 21v-7h8v7M8 17h8"/>',
+  drink:'<rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/>'
+};
+function wvRow(icon,label,val){
+  if(val===''||val===undefined||val===null)return '';
+  return '<div class="wvrow"><span class="wvic"><svg viewBox="0 0 24 24" aria-hidden="true">'+WV_ICON[icon]+'</svg></span><span class="wvlab">'+label+'</span><span class="wvval">'+esc(String(val))+'</span></div>';
+}
+function wvNote(icon,label,val){
+  if(!val)return '';
+  return '<div class="wvrow tall"><span class="wvic"><svg viewBox="0 0 24 24" aria-hidden="true">'+WV_ICON[icon]+'</svg></span><div class="wvtext"><span class="wvlab">'+label+'</span><p>'+esc(val)+'</p></div></div>';
+}
 function wineViewHTML(s){
   var w=cellarWine(s.id);
   if(!w)return '<div class="sheet-head"><h2 id="sheetTitle">Wine not found</h2><button class="btn icon" data-action="close" aria-label="Close">'+I.x+'</button></div>';
   var t=wtype(w.type),qty=+w.qty||0,imgs=wineViewImgs(w),pl=w.wid&&winery(w.wid),link=safeUrl(w.link);
-  var sub=[w.producer,w.vintage].filter(Boolean).join(' \u00b7 ');
-  function fact(label,val,wide){return val===''||val===undefined||val===null?'':'<div class="wvfact'+(wide?' wide':'')+'"><span>'+label+'</span><b>'+esc(String(val))+'</b></div>'}
+  var sub=[w.producer,w.vintage].filter(Boolean).join(' · ');
   var price=+w.price?'$'+(+w.price).toFixed(2).replace(/\.00$/,''):'';
-  var value=+w.price&&qty?'$'+Math.round(+w.price*qty).toLocaleString():'';
-  return '<div class="sheet-head"><h2 id="sheetTitle" class="wvtitle">'+esc(w.name)+'</h2>'+
+  var value=+w.price&&qty>1?'$'+Math.round(+w.price*qty).toLocaleString():'';
+  var tp=tastingParts(w.notes),hasNotes=tp.nose||tp.palate||tp.finish||tp.pair;
+  return '<div class="wvd">'+
+    '<div class="sheet-head"><div class="wvtop"><h2 id="sheetTitle" class="wvtitle">'+esc(w.name)+'</h2>'+(sub?'<p class="wvsub">'+esc(sub)+'</p>':'')+'</div>'+
       '<div class="wvhead"><button class="btn small" data-action="cellar-edit" data-id="'+w.id+'">Edit</button>'+
       '<button class="btn icon" data-action="close" aria-label="Close">'+I.x+'</button></div></div>'+
-    (imgs.length?'<div class="wvhero'+(imgs.length===1?' one':'')+'">'+imgs.map(function(u){
+    '<div class="wvstage">'+(imgs.length?'<div class="wvhero'+(imgs.length===1?' one':'')+'">'+imgs.map(function(u){
         return '<img src="'+esc(u)+'" alt="'+esc(w.name)+'" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display=\'none\'">';
       }).join('')+'</div>':'<div class="wvhero one"><div class="wvph">'+bottleSVG(t[2])+'</div></div>')+
-    (sub?'<p class="wvsub">'+esc(sub)+'</p>':'')+
-    '<div class="cmeta" style="margin:0 0 12px"><span class="ctype" style="--c:'+t[2]+'">'+esc(t[1])+'</span>'+
-      (+w.rating?'<span class="cstars" aria-label="'+w.rating+' out of 5">'+'\u2605\u2605\u2605\u2605\u2605'.slice(0,+w.rating)+'</span>':'')+
-      (qty?'':'<span class="cloc">Finished</span>')+'</div>'+
-    '<div class="wvqtyrow"><div><span>Bottles</span><b>'+qty+'</b></div>'+
-      '<div class="wvqbtns"><button class="btn small" data-action="cellar-dec" data-id="'+w.id+'"'+(qty?'':' disabled')+' aria-label="Remove a bottle">\u2212 Opened one</button>'+
+      '<div class="wvtags"><span class="wvchip"><i style="background:'+t[2]+'"></i>'+esc(t[1])+'</span>'+(price?'<span class="wvchip price">'+price+'</span>':'')+
+      (+w.rating?'<span class="wvchip stars" aria-label="'+w.rating+' out of 5">'+'★★★★★'.slice(0,+w.rating)+'</span>':'')+(qty?'':'<span class="wvchip">Finished</span>')+'</div></div>'+
+    '<div class="wvqtyrow"><div><span>In your cellar</span><b>'+plural(qty,'bottle')+'</b></div>'+
+      '<div class="wvqbtns"><button class="btn small" data-action="cellar-dec" data-id="'+w.id+'"'+(qty?'':' disabled')+' aria-label="Remove a bottle">− Opened one</button>'+
       '<button class="btn small" data-action="cellar-inc" data-id="'+w.id+'" aria-label="Add a bottle">+ Add</button></div></div>'+
-    '<div class="wvfacts">'+
-      fact('Grapes',w.grapes,true)+
-      fact('Region',w.region)+fact('Alcohol',w.abv?w.abv+'%':'')+
-      fact('Price per bottle',price)+fact('Value in cellar',value)+
-      fact('Stored',w.location)+fact('Drink by',w.drinkBy)+
+    (hasNotes||tp.rest?'<h3 class="wvsec">Tasting notes</h3><div class="wvlist">'+
+      wvNote('nose','Nose',tp.nose)+wvNote('palate','Palate',tp.palate)+wvNote('finish','Finish',tp.finish)+wvNote('pair','Pairs with',tp.pair)+
+      (tp.rest?'<div class="wvrow tall"><div class="wvtext"><p>'+esc(tp.rest)+'</p></div></div>':'')+'</div>':'')+
+    '<h3 class="wvsec">Details</h3><div class="wvlist">'+
+      wvRow('grapes','Grapes',w.grapes)+wvRow('region','Region',w.region)+wvRow('abv','Alcohol',w.abv?w.abv+'%':'')+
+      wvRow('price','Price per bottle',price)+wvRow('value','Value in cellar',value)+
+      wvRow('stored','Stored',w.location)+wvRow('drink','Drink by',w.drinkBy)+
+      (!w.grapes&&!w.region&&!w.abv&&!price&&!w.location&&!w.drinkBy?'<div class="wvrow"><span class="wvlab">Tap Edit to add grapes, region, price and more.</span></div>':'')+
     '</div>'+
-    (w.notes?'<div class="wvfact wide wvnotesbox"><span>About this wine</span><p class="wvnotes">'+esc(w.notes)+'</p></div>':'')+
-    '<div class="sheet-actions" style="justify-content:flex-start;flex-wrap:wrap;margin-top:6px">'+
+    '<div class="sheet-actions" style="justify-content:flex-start;flex-wrap:wrap;margin-top:12px">'+
       (link?'<a class="btn" href="'+esc(link)+'" target="_blank" rel="noopener noreferrer">'+I.globe+'<span>'+esc(hostOfUrl(link)||'Web page')+'</span></a>':'')+
       (pl?'<button class="btn" data-action="cellar-visit" data-id="'+pl.id+'">'+I.pin+'<span>Visit '+esc(pl.name)+'</span></button>':'')+
     '</div>'+
-    '<p class="note" style="margin-top:12px">'+[w.barcode?'Barcode '+esc(w.barcode):'',w.added?'Added '+esc(fmtDate(w.added)):''].filter(Boolean).join(' \u00b7 ')+'</p>';
+    '<p class="note wvfoot">'+[w.barcode?'Barcode '+esc(w.barcode):'',w.added?'Added '+esc(fmtDate(w.added)):''].filter(Boolean).join(' · ')+'</p></div>';
 }
 /* ----- wine form sheet ----- */
 function wineSheetHTML(s){
