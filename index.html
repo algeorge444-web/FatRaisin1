@@ -641,8 +641,8 @@ main{max-width:920px;margin:0 auto;padding:16px 16px 110px}
 /* the bottle page */
 .wvd .sheet-head{align-items:flex-start}.wvd .wvtop{min-width:0}
 .wvd .wvsub{color:var(--muted);margin:4px 0 0}
-.wvstage{position:relative;overflow:hidden;isolation:isolate;border-radius:170px 170px 22px 22px;padding:46px 10px 22px;margin:4px 0 12px;background:#2A1A12;box-shadow:inset 0 0 0 1px rgba(201,161,91,.5),0 10px 24px rgba(43,21,27,.18)}
-.wvbg{position:absolute;inset:0;z-index:-2;background:url(img/cellar-backdrop.webp) center 35%/cover no-repeat;filter:blur(1.5px) saturate(1.05);transform:scale(1.04)}
+.wvstage{position:relative;overflow:hidden;isolation:isolate;border-radius:170px 170px 22px 22px;padding:46px 10px 22px;margin:4px 0 12px;background:#3A2A10;box-shadow:inset 0 0 0 1px rgba(201,161,91,.5),0 10px 24px rgba(43,21,27,.18)}
+.wvbg{position:absolute;inset:0;z-index:-2;background:url(img/vineyard-backdrop.webp) center 40%/cover no-repeat;filter:blur(1.2px) saturate(1.05);transform:scale(1.04)}
 .wvstage::before{content:'';position:absolute;inset:0;z-index:-1;background:radial-gradient(60% 50% at 50% 42%,rgba(255,214,150,.30) 0%,rgba(255,214,150,0) 70%),linear-gradient(180deg,rgba(20,10,8,.15) 0%,rgba(20,10,8,.05) 45%,rgba(20,10,8,.55) 100%),radial-gradient(120% 90% at 50% 40%,transparent 55%,rgba(10,5,4,.55) 100%)}
 .wvfloor{position:absolute;left:50%;bottom:58px;width:58%;height:22px;transform:translateX(-50%);z-index:-1;background:radial-gradient(closest-side,rgba(0,0,0,.55),rgba(0,0,0,0));filter:blur(3px)}
 .wvd .wvstage .wvhero img{filter:drop-shadow(0 10px 14px rgba(0,0,0,.5)) drop-shadow(0 0 22px rgba(255,214,150,.18))}
@@ -5705,7 +5705,7 @@ function wineViewHTML(s){
         return '<img src="'+esc(u)+'" alt="'+esc(w.name)+'" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display=\'none\'">';
       }).join('')+'</div>':'<div class="wvhero one"><div class="wvph">'+bottleSVG(t[2])+'</div></div>')+
       '<div class="wvtags"><span class="wvchip"><i style="background:'+t[2]+'"></i>'+esc(t[1])+'</span>'+(price?'<span class="wvchip price">'+price+'</span>':'')+
-      (+w.rating?'<span class="wvchip stars" aria-label="'+w.rating+' out of 5">'+'★★★★★'.slice(0,+w.rating)+'</span>':'')+(qty?'':'<span class="wvchip">Finished</span>')+'</div><a class="wvcredit" href="https://commons.wikimedia.org/wiki/File:Torres_wine_cellars.jpg" target="_blank" rel="noopener noreferrer">Photo: vittis m., CC BY 2.0</a></div>'+
+      (+w.rating?'<span class="wvchip stars" aria-label="'+w.rating+' out of 5">'+'★★★★★'.slice(0,+w.rating)+'</span>':'')+(qty?'':'<span class="wvchip">Finished</span>')+'</div><a class="wvcredit" href="https://commons.wikimedia.org/wiki/File:DSC06590_Vineyard_at_Sunset,_Gumpoldskirchen,_2023-10.jpg" target="_blank" rel="noopener noreferrer">Photo: Aciarium, CC BY 4.0</a></div>'+
     '<div class="wvqtyrow"><div><span>In your cellar</span><b>'+plural(qty,'bottle')+'</b></div>'+
       '<div class="wvqbtns"><button class="btn small" data-action="cellar-dec" data-id="'+w.id+'"'+(qty?'':' disabled')+' aria-label="Remove a bottle">− Opened one</button>'+
       '<button class="btn small" data-action="cellar-inc" data-id="'+w.id+'" aria-label="Add a bottle">+ Add</button></div></div>'+
