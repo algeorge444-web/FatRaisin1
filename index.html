@@ -880,7 +880,7 @@ button.gtk[disabled]{opacity:.5;cursor:default}
 .tcard.tchal{background-size:cover}.tcard .tchemo{position:absolute;top:10px;right:14px;font-size:40px;line-height:1;filter:drop-shadow(0 2px 6px rgba(0,0,0,.25))}
 .badges{display:grid;grid-template-columns:1fr;gap:8px}@media(min-width:560px){.badges{grid-template-columns:1fr 1fr}}
 .badge{display:flex;gap:10px;align-items:center;border:1px solid var(--line);border-radius:14px;padding:8px 10px;background:var(--surface,#fff)}
-.badge svg{flex:none}.badge>div{min-width:0;flex:1}.badge b{display:block;font-size:14px}.badge span{display:block;font-size:12.5px;color:var(--muted);line-height:1.3}
+.badge svg,.badge .vstamp{flex:none}.vstamp{display:inline-block;line-height:0}.vstamp svg{display:block}.vstamp.locked{filter:grayscale(1);opacity:.32}.ppprov{display:flex;align-items:center;justify-content:center}.badge>div{min-width:0;flex:1}.badge b{display:block;font-size:14px}.badge span{display:block;font-size:12.5px;color:var(--muted);line-height:1.3}
 .badge small{display:block;font-size:11.5px;color:var(--muted);margin-top:3px}.badge.on small{color:#8a6420;font-weight:700}
 .bprog{height:5px;border-radius:3px;background:var(--line);overflow:hidden;margin-top:5px}.bprog i{display:block;height:100%;background:var(--accent)}
 .bsub{font-size:15px;margin:16px 0 8px}
@@ -4517,13 +4517,6 @@ function passportStats(){
   return {ids:ids,total:ids.length,by:by,areas:Object.keys(areas).length,provs:Object.keys(provs)};
 }
 /* ===== passport stamps: each visit is an inked rubber stamp ===== */
-var STAMP_INK={winery:'#7A2638',brewery:'#7E5A2A',cidery:'#3F5B3A',distillery:'#2E4A68'};
-var STAMP_GLYPH={
-  winery:'<path d="M-6-9h12c.4 4-.2 7-2 8.6A4 4 0 0 1 0 1a4 4 0 0 1-4-1.4C-5.8-2-6.4-5-6-9z"/><path d="M0 1v7M-4 9h8"/>',
-  brewery:'<rect x="-6" y="-7" width="10" height="14" rx="1.5"/><path d="M4-4h2a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H4M-6-7c-.5-2 1-3 2.4-2.6.4-1.3 2-1.7 3-.8 1-.8 2.6-.4 3 .8 1.4-.4 2.6.8 2.2 2.6"/>',
-  cidery:'<path d="M0-4c-2.4-2.4-8-1.8-8 3.2 0 5 3.4 9.8 6.2 9.8.8 0 1.2-.5 1.8-.5s1 .5 1.8.5C4.6 9 8 4.2 8-.8 8-5.8 2.4-6.4 0-4z"/><path d="M0-4c0-2 .6-3.6 2-4.6"/>',
-  distillery:'<path d="M-6-6h12l-1.4 13a2 2 0 0 1-2 1.8h-5.2a2 2 0 0 1-2-1.8z"/><rect x="-2.6" y="-1.6" width="5" height="5" rx="1" transform="rotate(-12)"/>'
-};
 function hashNum(str){var h=0;for(var i=0;i<str.length;i++)h=(h*31+str.charCodeAt(i))|0;return Math.abs(h)}
 function stampDate(iso){try{var d=new Date((iso||todayStr())+'T12:00');return d.toLocaleDateString('en-CA',{day:'2-digit',month:'short',year:'numeric'}).toUpperCase().replace(/\./g,'')}catch(e){return iso||''}}
 var STAMP_DEFS='<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>'+
@@ -4533,34 +4526,89 @@ var STAMP_DEFS='<svg width="0" height="0" style="position:absolute" aria-hidden=
   '<feComposite in="SourceGraphic" in2="m" operator="in" result="ink"/>'+
   '<feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="2" seed="9" result="w"/><feDisplacementMap in="ink" in2="w" scale="1.6"/></filter>'+
   '</defs></svg>';
+/* ===== vintage ink stamps (rubber-stamp travel style): one ink colour, double border, name on top, a small
+   picture in the middle and VISITED along the bottom ===== */
+var STAMP_PALETTE=['#2E4372','#3D6A31','#A8322D','#B07F22','#6B2D6A','#7A4A2A','#246A6A'];
+/* little pictures, drawn in a box about 44 wide x 30 high centred on (0,0) */
+var STAMP_ART={
+  vineyard:'<circle cx="11" cy="-9" r="6"/><path d="M-25 16C-18 2-8-3 0-3s18 5 25 19z"/><path d="M-19 16l9-17M-10 16l5-18M-1 16l1-19M8 16l-2-18M17 16l-6-16" stroke="PAPER" stroke-width="1.6" fill="none"/><path d="M-26 16h52" stroke-width="2.4"/>',
+  grapes:'<path d="M0-15c0-3 2-6 6-7" fill="none" stroke-width="2"/><path d="M4-18c5-4 11-3 13 1-4 4-10 4-13-1z"/><g stroke="PAPER" stroke-width=".9"><circle cx="-7" cy="-9" r="4.3"/><circle cx="1" cy="-9" r="4.3"/><circle cx="9" cy="-9" r="4.3"/><circle cx="-3" cy="-1" r="4.3"/><circle cx="5" cy="-1" r="4.3"/><circle cx="-7" cy="7" r="4.3"/><circle cx="1" cy="7" r="4.3"/><circle cx="-3" cy="15" r="4"/></g>',
+  hops:'<path d="M0-21v5" stroke-width="2" fill="none"/><path d="M1-18c5-4 11-3 13 1-4 3.4-9 3.4-13-1z"/><path d="M0-15c-10 2-12 13-9 21 2 6 5 10 9 11 4-1 7-5 9-11 3-8 1-19-9-21z"/><path d="M-8-6q8 5 16 0M-10 1q10 5 20 0M-8 8q8 4 16 0M-4 14q4 2 8 0M0-14v4" stroke="PAPER" stroke-width="1.5" fill="none"/>',
+  still:'<path d="M-15 15v-13a11 11 0 0 1 22 0v13z"/><path d="M-6-9v-7h5" fill="none" stroke-width="2.2"/><path d="M-1-16c9 0 15 2 17 9v21" fill="none" stroke-width="2.2"/><rect x="12" y="6" width="9" height="9" rx="1"/><path d="M-20 15h42" stroke-width="2.6"/><path d="M-11 2h14M-11 8h14" stroke="PAPER" stroke-width="1.4"/>',
+  apples:'<path d="M-8-4c-3-3-12-2-12 5 0 7 5 13 9 13 1.3 0 2-.7 3.2-.7s1.9.7 3.2.7c4 0 9-6 9-13 0-7-9-8-12.4-5z"/><path d="M9-6c-2.5-2.5-9-2-9 3.5 0 5.2 3.4 10 6.6 10 1 0 1.5-.6 2.4-.6s1.5.6 2.4.6c3.3 0 6.6-4.8 6.6-10 0-5.4-6.6-6-9-3.5z"/><path d="M-8-4c0-3 1.4-5.6 3.6-7M9-6c0-2.4 1-4.2 2.2-5.2" fill="none" stroke-width="1.8"/><path d="M-4-11c3-3.6 8-2.6 9 0-2.4 2.4-7 2.4-9 0z"/><path d="M-14 0c0-2 1-3.4 2.4-4" stroke="PAPER" stroke-width="1.3" fill="none"/>',
+  mountains:'<path d="M-26 16l15-25 7 10 10-19 20 34z"/><path d="M-11-9l3 5 3-3M6-18l4 8 3-3" stroke="PAPER" stroke-width="1.6" fill="none"/><path d="M-22 16l-4-10 3 1-2-7 3 1-1-6 3 7-2-1 2 6-2-1 3 10z" stroke="PAPER" stroke-width=".6"/><path d="M20 16l-3-9 2 1-1-6 2 1 0-6 2 6-1 0 2 6-2-1 3 8z" stroke="PAPER" stroke-width=".6"/>',
+  lighthouse:'<path d="M-5 15l2.4-24h5.2L5 15z"/><path d="M-7-9h14v-3h-14zM-4-16h8v4h-8z"/><path d="M0-16v-4" stroke-width="2"/><path d="M-4.4 1h8.8M-5 8h10" stroke="PAPER" stroke-width="2.2"/><path d="M6-14l17-6M6-11l17 1" stroke-width="1.4"/><path d="M-25 15c4-3 8-3 12 0s8 3 12 0 8-3 12 0 8 3 13 0" fill="none" stroke-width="2"/>',
+  field:'<circle cx="-13" cy="-11" r="6"/><path d="M-26 1h52v15h-52z"/><path d="M-22 16l9-15M-11 16l4-15M0 16V1M11 16L7 1M22 16L13 1" stroke="PAPER" stroke-width="1.5"/><path d="M5-7h13v8H5zM8-7l3.5-5 3.5 5"/>',
+  city:'<path d="M-25 16v-11h7v11zM-17 16v-18h8v18zM-8 16v-9h6v9zM-1 16v-25h7v25zM7 16v-15h7v15zM15 16v-10h9v10z"/><path d="M2.5-9v-7" stroke-width="1.6"/><path d="M-14-1h2M-14 4h2M-14 9h2M2 0h2M2 6h2M10 5h2M18 10h2" stroke="PAPER" stroke-width="1.6"/><path d="M-27 16h54" stroke-width="2.4"/>',
+  palm:'<path d="M3 16c0-11-1-19-5-26" fill="none" stroke-width="3"/><path d="M-2-10c-7-4-14-2-18 3 6 0 12-1 18-3zM-2-10c2-7 9-10 16-7-4 3-10 6-16 7zM-2-10c6-3 13 0 18 5-7 1-13-2-18-5zM-2-10c-5 1-11 6-13 12 5-3 10-7 13-12z"/><circle cx="15" cy="-14" r="4.5"/><path d="M-24 16c6-3 12-3 18 0s12 3 18 0 8-2 10-1" fill="none" stroke-width="2"/>',
+  lake:'<circle cx="0" cy="-7" r="8"/><path d="M-26 1h52" stroke-width="2.4"/><path d="M-19 6h13M2 6h15M-11 11h22" stroke-width="1.8"/><path d="M-23 1l-4-11 3 1-2-7 3 1-1-6 3 7-2-1 2 6-2-1 3 11zM21 1l-3-9 2 1-1-6 2 1 0-6 2 6-1 0 2 6-2-1 3 8z"/>',
+  barn:'<path d="M-15 15v-15l15-11 15 11v15z"/><path d="M-6 15v-10h12v10M-6 5l12 10M6 5l-12 10" stroke="PAPER" stroke-width="1.5" fill="none"/><path d="M-26 15h52" stroke-width="2.4"/><path d="M20 15v-13M16 6l4-4 4 4" fill="none" stroke-width="1.8"/>',
+  maple:'<path d="M0-20l3.4 6.6 5.6-2.2-2.2 9 6.6-2.2-2.2 5.5 5.5 1.1-9 6.6 1.1 4.4-8.8-1.1v9h-2.2v-9l-8.8 1.1 1.1-4.4-9-6.6 5.5-1.1-2.2-5.5 6.6 2.2-2.2-9 5.6 2.2z"/>',
+  glass:'<path d="M-9-18h18c1 10 .5 16-3.4 20A8 8 0 0 1 0 4.5 8 8 0 0 1-5.6 2C-9.5-2-10-8-9-18z" fill="none" stroke-width="2.2"/><path d="M-8.4-7h16.8c-.4 4.4-1.6 7.6-3.6 9.4A7 7 0 0 1 0 4a7 7 0 0 1-4.8-1.6C-6.8.6-8-2.6-8.4-7z"/><path d="M0 4.5v10M-7 15h14" stroke-width="2.2"/>',
+  cheers:'<g transform="rotate(-14 -6 0)"><path d="M-15-15h12c.6 8 0 12-2.6 14.6A5 5 0 0 1-9 1a5 5 0 0 1-3.4-1.4C-15-2.4-15.6-7-15-15z" fill="none" stroke-width="2"/><path d="M-14.6-8h11.2c-.4 4-1.4 6.4-2.6 7.6A4.4 4.4 0 0 1-9 .4a4.4 4.4 0 0 1-3-1C-13.6-1.6-14.2-4-14.6-8z"/><path d="M-9 1v11M-13 13h8" stroke-width="2"/></g><g transform="rotate(14 6 0)"><path d="M3-15h12c.6 8 0 12-2.6 14.6A5 5 0 0 1 9 1a5 5 0 0 1-3.4-1.4C3-2.4 2.4-7 3-15z" fill="none" stroke-width="2"/><path d="M3.4-8h11.2c-.4 4-1.4 6.4-2.6 7.6A4.4 4.4 0 0 1 9 .4a4.4 4.4 0 0 1-3-1C4.4-1.6 3.8-4 3.4-8z"/><path d="M9 1v11M5 13h8" stroke-width="2"/></g><path d="M-2-21l2-4M3-20l4-3M-6-20l-3-3" stroke-width="1.8"/>',
+  pin:'<path d="M0 16c-9-10-13-16-13-23a13 13 0 0 1 26 0c0 7-4 13-13 23z"/><circle cx="0" cy="-7" r="5" fill="PAPER" stroke="none"/>',
+  note:'<path d="M-6 10V-13l15-4v21" fill="none" stroke-width="2.6"/><ellipse cx="-10" cy="10" rx="5" ry="3.8"/><ellipse cx="5" cy="5" rx="5" ry="3.8"/><path d="M-6-8l15-4" stroke-width="2.6"/>',
+  key:'<circle cx="-9" cy="0" r="8.5"/><circle cx="-9" cy="0" r="3.4" fill="PAPER" stroke="none"/><path d="M-1 0h21M15 0v7M9 0v5" stroke-width="3"/>',
+  crown:'<path d="M-17 9l-3-19 11 10 9-15 9 15 11-10-3 19z"/><path d="M-17 14h34" stroke-width="2.8"/><circle cx="0" cy="-18" r="2.4"/><circle cx="-20" cy="-12" r="2.2"/><circle cx="20" cy="-12" r="2.2"/><circle cx="0" cy="3" r="2.4" fill="PAPER" stroke="none"/>',
+  sun:'<circle cx="0" cy="-2" r="8"/><path d="M0-16v-4M0 12v4M-14-2h-4M14-2h4M-10-12l-3-3M10-12l3-3M-10 8l-3 3M10 8l3 3" stroke-width="2.2"/><path d="M-24 16h48" stroke-width="2.4"/>',
+  leaf:'<path d="M-15 13c0-17 11-25 28-27-2 17-11 27-28 27z"/><path d="M-15 13c7-9 13-15 23-21M-6 4h6M-1-2h6" stroke="PAPER" stroke-width="1.5" fill="none"/>',
+  scale:'<path d="M0-17v29M-11 13h22M-18-11h36" stroke-width="2.4"/><path d="M-18-11l-6 11h12zM18-11l-6 11h12z"/>'
+};
+function stampInk(seed){return STAMP_PALETTE[hashNum(String(seed))%STAMP_PALETTE.length]}
+/* text that shrinks to fit */
+function stampFit(len,max,per){return len*per>max?' textLength="'+max+'" lengthAdjust="spacingAndGlyphs"':''}
+/* o: {shape:'round'|'rect', top, bottom, small, art, ink, size, rot, label, uid} */
+function inkStampSVG(o){
+  var ink=o.ink||STAMP_PALETTE[0],uid=o.uid||('k'+hashNum(o.top+o.bottom+(o.small||''))),top=String(o.top||'').toUpperCase(),bot=String(o.bottom||'VISITED').toUpperCase();
+  var art='<g transform="translate(50 '+(o.shape==='rect'?48:47)+') scale('+(o.shape==='rect'?1.12:1.02)+')" fill="'+ink+'" stroke="'+ink+'" stroke-linecap="round" stroke-linejoin="round">'+(STAMP_ART[o.art]||STAMP_ART.grapes).replace(/PAPER/g,'#FBF6EC')+'</g>';
+  var small=o.small?'<text x="50" y="'+(o.shape==='rect'?73.6:69.8)+'" text-anchor="middle" font-size="5.4" font-weight="700" letter-spacing=".6" fill="'+ink+'">'+esc(o.small)+'</text>':'';
+  var body;
+  if(o.shape==='rect'){
+    var ts=top.length>14?8.4:top.length>10?9.6:11.5;
+    body='<rect x="13" y="6" width="74" height="88" rx="2" fill="none" stroke="'+ink+'" stroke-width="3.6"/><rect x="17.5" y="10.5" width="65" height="79" fill="none" stroke="'+ink+'" stroke-width="1"/>'+
+      '<text x="50" y="'+(16+ts*.75)+'" text-anchor="middle" font-size="'+ts+'" font-weight="800" letter-spacing=".3" fill="'+ink+'"'+stampFit(top.length,58,ts*.68)+'>'+esc(top)+'</text>'+
+      '<rect x="17.5" y="77" width="65" height="12.5" fill="'+ink+'"/><text x="50" y="86.4" text-anchor="middle" font-size="7.2" font-weight="800" letter-spacing="1" fill="#FBF6EC"'+stampFit(bot.length+4,58,5.4)+'>★ '+esc(bot)+' ★</text>';
+  }else{
+    var tsz=top.length>18?8:top.length>12?9.4:11.2;
+    body='<circle cx="50" cy="50" r="45.5" fill="none" stroke="'+ink+'" stroke-width="3.6"/><circle cx="50" cy="50" r="40" fill="none" stroke="'+ink+'" stroke-width="1"/>'+
+      '<path id="tt'+uid+'" d="M15.5 50a34.5 34.5 0 1 1 69 0" fill="none"/><text font-size="'+tsz+'" font-weight="800" letter-spacing=".8" fill="'+ink+'"><textPath href="#tt'+uid+'" startOffset="50%" text-anchor="middle"'+stampFit(top.length,100,tsz*.72)+'>'+esc(top)+'</textPath></text>'+
+      '<path id="tb'+uid+'" d="M19 52a31 31 0 0 0 62 0" fill="none"/><text font-size="9.6" font-weight="800" letter-spacing="1.6" fill="'+ink+'" dy="4.4"><textPath href="#tb'+uid+'" startOffset="50%" text-anchor="middle"'+stampFit(bot.length,70,6.8)+'>'+esc(bot)+'</textPath></text>'+
+      '<text x="12.5" y="53.2" text-anchor="middle" font-size="7" fill="'+ink+'">★</text><text x="87.5" y="53.2" text-anchor="middle" font-size="7" fill="'+ink+'">★</text>';
+  }
+  return '<svg class="stamp" viewBox="0 0 100 100" width="'+(o.size||110)+'" height="'+(o.size||110)+'" role="img" aria-label="'+esc(o.label||top)+'" style="transform:rotate('+(o.rot||0)+'deg)">'+
+    '<g filter="url(#stampInk)" opacity=".96" font-family="Rockwell,\'Roboto Slab\',\'Arvo\',Georgia,\'Times New Roman\',serif">'+body+art+small+'</g></svg>';
+}
+/* a place's own stamp */
+var STAMP_TYPE_ART={winery:'vineyard',brewery:'hops',cidery:'apples',distillery:'still'};
 function stampSVG(w,dateIso,size){
-  var t=w.type||'winery',ink=STAMP_INK[t]||STAMP_INK.winery,h=hashNum(w.id),rot=(h%25)-12,uid='s'+w.id;
+  var t=w.type||'winery',h=hashNum(w.id),rot=(h%21)-10;
   var name=String(w.name).toUpperCase().replace(/\s*[–-]\s*.*$/,'').replace(/\s*&\s*(RESTAURANT|BISTRO|INN|KITCHEN|GUEST HOUSE|TASTING ROOM)\b.*$/,'').replace(/\s+FAMILY ESTATES?$/,'');
   for(var k=0;k<3;k++)name=name.replace(/\s+(ESTATE WINERY|WINERY|VINEYARDS?|CELLARS|BREWING COMPANY|BREWING CO\.?|BREWERY|CRAFT DISTILLERY|DISTILLERY|SMALL BATCH DISTILLERS|DISTILLERS|DISTILLING|CIDER HOUSE|CIDERHOUSE|CIDERY|ESTATE|COMPANY|CO\.?|INC\.?|LTD\.?)$/,'');
-  if(name.length>34)name=name.slice(0,33)+'\u2026';
-  function fit(str,max,per){var l=str.length*per;return l>max?' textLength="'+max+'" lengthAdjust="spacingAndGlyphs"':''}
-  var prov=ppState(w)||'',town=String(w.area||'').replace(/,\s*[A-Z]{2}$/,'').toUpperCase();if(town.length>22)town=town.slice(0,21)+'\u2026';
-  var glyph='<g transform="translate(50 47) scale(1.05)" fill="none" stroke="'+ink+'" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">'+(STAMP_GLYPH[t]||STAMP_GLYPH.winery)+'</g>';
-  var mid='<text x="50" y="68" text-anchor="middle" font-size="7.4" font-weight="700" letter-spacing=".6" fill="'+ink+'">'+esc(stampDate(dateIso))+'</text>'+
-    '<text x="50" y="32" text-anchor="middle" font-size="6" font-weight="700" letter-spacing="1.4" fill="'+ink+'">'+(t==='winery'?'WINERY':t==='brewery'?'BREWERY':t==='cidery'?'CIDERY':'DISTILLERY')+'</text>';
-  var shape;
-  if(t==='brewery'){        /* a rectangular customs-style stamp */
-    shape='<rect x="6" y="14" width="88" height="72" rx="6" fill="none" stroke="'+ink+'" stroke-width="2.1"/><rect x="11" y="19" width="78" height="62" rx="3" fill="none" stroke="'+ink+'" stroke-width=".7"/>'+
-      '<text x="50" y="28" text-anchor="middle" font-size="7" font-weight="700" letter-spacing=".4" fill="'+ink+'"'+fit(name,72,4.6)+'>'+esc(name)+'</text>'+
-      '<text x="50" y="78" text-anchor="middle" font-size="5.4" font-weight="700" letter-spacing="1" fill="'+ink+'"'+fit(town+(prov?' \u00b7 '+prov:''),70,4.2)+'>'+esc(town)+(prov?' \u00b7 '+prov:'')+'</text>';
-    mid=mid.replace('y="32"','y="36"');
-  }else if(t==='distillery'){ /* an octagon */
-    shape='<polygon points="30,6 70,6 94,30 94,70 70,94 30,94 6,70 6,30" fill="none" stroke="'+ink+'" stroke-width="2.1"/><polygon points="32,11 68,11 89,32 89,68 68,89 32,89 11,68 11,32" fill="none" stroke="'+ink+'" stroke-width=".7"/>'+
-      '<path id="tp'+uid+'" d="M18 50a32 32 0 1 1 64 0" fill="none"/><text font-size="7" font-weight="700" letter-spacing="1" fill="'+ink+'"><textPath href="#tp'+uid+'" startOffset="50%" text-anchor="middle"'+fit(name,92,5.6)+'>'+esc(name)+'</textPath></text>'+
-      '<text x="50" y="84" text-anchor="middle" font-size="5.6" font-weight="700" letter-spacing="1" fill="'+ink+'">'+esc(prov)+'</text>';
-  }else{                      /* round (wineries) or oval (cideries), with the name around the edge */
-    var ry=t==='cidery'?40:44;
-    shape='<ellipse cx="50" cy="50" rx="44" ry="'+ry+'" fill="none" stroke="'+ink+'" stroke-width="2.1"/><ellipse cx="50" cy="50" rx="31" ry="'+(ry-13)+'" fill="none" stroke="'+ink+'" stroke-width=".7"/>'+
-      '<path id="tp'+uid+'" d="M12 50a38 '+(ry-6)+' 0 1 1 76 0" fill="none"/><text font-size="7.4" font-weight="700" letter-spacing="1.1" fill="'+ink+'"><textPath href="#tp'+uid+'" startOffset="50%" text-anchor="middle"'+fit(name,108,6)+'>'+esc(name)+'</textPath></text>'+
-      '<path id="bp'+uid+'" d="M15 54a35 '+(ry-9)+' 0 0 0 70 0" fill="none"/><text font-size="5.8" font-weight="700" letter-spacing="1.2" fill="'+ink+'"><textPath href="#bp'+uid+'" startOffset="50%" text-anchor="middle"'+fit('* '+town+(prov?' . '+prov:'')+' *',96,4.9)+'>\u2605 '+esc(town)+(prov?' \u00b7 '+prov:'')+' \u2605</textPath></text>';
-  }
-  return '<svg class="stamp" viewBox="0 0 100 100" width="'+(size||110)+'" height="'+(size||110)+'" role="img" aria-label="'+esc(w.name+', visited '+stampDate(dateIso))+'" style="transform:rotate('+rot+'deg)">'+
-    '<g filter="url(#stampInk)" opacity=".84" font-family="\'Times New Roman\',Georgia,serif">'+shape+glyph+mid+'</g></svg>';
+  if(name.length>26)name=name.slice(0,25)+'…';
+  var art=STAMP_TYPE_ART[t]||'grapes';if(t==='winery'&&h%3===0)art='grapes';
+  return inkStampSVG({shape:(t==='brewery'||t==='distillery')?'rect':'round',top:name,bottom:'VISITED',small:stampDate(dateIso),art:art,ink:STAMP_PALETTE[h%STAMP_PALETTE.length],size:size,rot:rot,uid:'s'+w.id,label:w.name+', visited '+stampDate(dateIso)});
+}
+/* province and state stamps: a printed one where we have it, otherwise drawn in the same style */
+var PROV_STAMP_IMG={BC:1,AB:1,SK:1,MB:1,ON:1,QC:1,NB:1,CA:1,NY:1,WA:1,OR:1,TX:1,FL:1,CO:1,VA:1,MI:1};
+var PROV_STAMP_ART={NS:'lighthouse',PE:'lighthouse',NL:'lighthouse',YT:'mountains',NT:'lake',NU:'mountains',
+  ME:'lighthouse',MA:'lighthouse',RI:'lighthouse',CT:'lighthouse',NH:'mountains',VT:'barn',NJ:'vineyard',PA:'barn',DE:'lighthouse',MD:'lighthouse',DC:'city',WV:'mountains',
+  NC:'mountains',SC:'palm',GA:'vineyard',AL:'field',MS:'field',LA:'city',AR:'mountains',TN:'mountains',KY:'barn',OH:'barn',IN:'field',IL:'city',WI:'lake',MN:'lake',IA:'field',MO:'vineyard',
+  ND:'field',SD:'mountains',NE:'field',KS:'field',OK:'field',NM:'sun',AZ:'sun',UT:'mountains',NV:'sun',ID:'mountains',MT:'mountains',WY:'mountains',AK:'mountains',HI:'palm'};
+function provStampHTML(code,size,done){
+  size=size||96;var name=ppStateName(code),off=done===false?' locked':'';
+  if(PROV_STAMP_IMG[code])return '<img class="vstamp'+off+'" src="img/stamps/prov-'+code+'.webp" alt="'+esc(name)+' visited" width="'+size+'" height="'+size+'" loading="lazy" style="object-fit:contain;transform:rotate('+((hashNum(code)%9)-4)+'deg)">';
+  var us=ppIsUS(code);
+  return '<span class="vstamp'+off+'">'+inkStampSVG({shape:us?'rect':'round',top:name,bottom:'VISITED',art:PROV_STAMP_ART[code]||'vineyard',ink:stampInk(code),size:size,rot:(hashNum(code)%9)-4,uid:'p'+code,label:name+' visited'})+'</span>';
+}
+/* badge art: printed stamps for some, drawn ones for the rest */
+var BADGE_STAMP_IMG={first:'passport',five:'cheers',ten:'good-times',trio:'wine-country',flight4:'tasting-trail',vines:'winery',hops:'craft-beer',orchard:'cider-trail',spirits:'spirits'};
+var BADGE_STAMP_ART={quarter:'glass',fifty:'crown',local:'pin',regions:'mountains',provs:'field',coast:'lighthouse',border:'maple',weekend:'cheers',harvest:'leaf',patio:'sun',vibes:'note',secret:'key',judge:'scale'};
+function badgeStampHTML(b,size){
+  var off=b.done?'':' locked',img=BADGE_STAMP_IMG[b.id];
+  if(b.id==='border')img=ppIsUS(ppHome())?'usa-trail':'canada-trail';
+  if(/^prov-/.test(b.id))return provStampHTML(b.id.slice(5),size,b.done);
+  if(img)return '<img class="vstamp'+off+'" src="img/stamps/'+img+'.webp" alt="" width="'+size+'" height="'+size+'" loading="lazy" style="object-fit:contain">';
+  return '<span class="vstamp'+off+'">'+inkStampSVG({shape:'round',top:b.name,bottom:b.done?'EARNED':'BADGE',art:BADGE_STAMP_ART[b.id]||'grapes',ink:stampInk(b.id),size:size,uid:'b'+b.id,label:b.name})+'</span>';
 }
 /* Account tab: a passport cover with your latest stamps */
 function passportCardHTML(){
@@ -4607,10 +4655,11 @@ function passportSheetHTML(){
   var pageNo=2,PER=6;
   Object.keys(groups).sort(function(a,b){var ua=PROVS.some(function(x){return x[1]===a})?0:1,ub=PROVS.some(function(x){return x[1]===b})?0:1;return ua-ub||a.localeCompare(b)}).forEach(function(p){
     var list=groups[p];
-    for(var k=0;k<list.length;k+=PER){
-      var stamps=list.slice(k,k+PER).map(function(w){var h=hashNum(w.id),dx=(h%13)-6,dy=((h>>4)%11)-5;
+    for(var k=0,step;k<list.length;k+=step){step=PER-(k===0&&ppState(list[0])?1:0);
+      var code=ppState(list[0]);
+      var stamps=(k===0&&code?'<div class="ppstamp ppprov">'+provStampHTML(code,112)+'</div>':'')+list.slice(k,k+PER-(k===0&&code?1:0)).map(function(w){var h=hashNum(w.id),dx=(h%13)-6,dy=((h>>4)%11)-5;
         return '<button class="ppstamp" data-action="viewplace" data-id="'+w.id+'" style="transform:translate('+dx+'px,'+dy+'px)">'+stampSVG(w,S.visited[w.id],118)+'</button>'}).join('');
-      leaves.push('<div class="pppage"><div class="pphead"><span>'+esc(p)+(list.length>PER?' \u00b7 '+(k/PER+1)+'/'+Math.ceil(list.length/PER):'')+'</span><span>'+(pageNo++)+'</span></div><div class="ppgrid">'+stamps+'</div></div>');
+      leaves.push('<div class="pppage"><div class="pphead"><span>'+esc(p)+(list.length>PER-1?' \u00b7 '+(k?Math.ceil((k+1)/PER)+1:1)+'/'+(Math.ceil((list.length+1)/PER)):'')+'</span><span>'+(pageNo++)+'</span></div><div class="ppgrid">'+stamps+'</div></div>');
     }
   });
   if(!st.total)leaves.push('<div class="pppage ppend"><b>No stamps yet</b><p class="note">Tap <b>Been here</b> on any place you\u2019ve visited and it\u2019s stamped on a page here.</p></div>');
@@ -5491,7 +5540,7 @@ function cellarStatsHTML(){
     (Object.keys(st.producers).length?'<h3 class="wvh">Top producers</h3>'+bars(topList(st.producers,5),st.bottles):'')+
     (st.vint.length?'<h3 class="wvh">Vintages</h3><p style="margin:0 0 6px">Oldest: <button class="hlink" data-action="cellar-view" data-id="'+st.vint[0].id+'" style="margin:0">'+esc(st.vint[0].vintage+' '+st.vint[0].name)+'</button><br>Newest: '+esc(st.vint[st.vint.length-1].vintage+' '+st.vint[st.vint.length-1].name)+'</p>':'')+
     (st.soon.length?'<h3 class="wvh">Drink soon</h3><p class="note" style="margin:0 0 4px">Wines with a drink-by year of '+(y+1)+' or earlier.</p>'+st.soon.slice(0,6).map(function(w){
-      return '<div class="pstamp"><button class="hlink" data-action="cellar-view" data-id="'+w.id+'" style="margin:0;text-align:left;flex:1">'+esc(w.name)+'</button><span class="note"'+(+w.drinkBy<y?' style="color:var(--danger)"':'')+'>'+(+w.drinkBy<y?'past ':'by ')+esc(String(w.drinkBy))+'</span></div>'}).join(''):'')+
+      return '<div class="vstamp"><button class="hlink" data-action="cellar-view" data-id="'+w.id+'" style="margin:0;text-align:left;flex:1">'+esc(w.name)+'</button><span class="note"'+(+w.drinkBy<y?' style="color:var(--danger)"':'')+'>'+(+w.drinkBy<y?'past ':'by ')+esc(String(w.drinkBy))+'</span></div>'}).join(''):'')+
     (st.top&&(+st.top.qty||0)>1?'<p class="note" style="margin-top:12px">Most bottles: <b>'+esc(st.top.name)+'</b> ('+st.top.qty+')</p>':'')+
     '<div class="sheet-actions" style="margin-top:14px"><button class="btn primary" data-action="close">Close</button></div>';
 }
@@ -8728,11 +8777,11 @@ function medalSVG(b,size){
 function badgesSheetHTML(){
   var list=badgeList(),done=list.filter(function(b){return b.done}).length;
   function card(b){var pct=Math.round(b.have*100/b.goal);
-    return '<div class="badge'+(b.done?' on':'')+'">'+medalSVG(b,54)+'<div><b>'+esc(b.name)+'</b><span>'+esc(b.desc)+'</span>'+
+    return '<div class="badge'+(b.done?' on':'')+'">'+badgeStampHTML(b,64)+'<div><b>'+esc(b.name)+'</b><span>'+esc(b.desc)+'</span>'+
       (b.done?'<small>✓ Earned</small>':'<div class="bprog" role="progressbar" aria-valuenow="'+b.have+'" aria-valuemin="0" aria-valuemax="'+b.goal+'"><i style="width:'+Math.max(pct,3)+'%"></i></div><small>'+b.have+' of '+b.goal+'</small>')+'</div></div>'}
   var main=list.filter(function(b){return !b.region}),reg=list.filter(function(b){return b.region});
   main.sort(function(a,b){return (b.done-a.done)||((b.have/b.goal)-(a.have/a.goal))});
-  return '<div class="sheet-head"><h2 id="sheetTitle">'+esc(greatPourName())+'</h2><button class="btn icon" data-action="close" aria-label="Close">'+I.x+'</button></div>'+
+  return STAMP_DEFS+'<div class="sheet-head"><h2 id="sheetTitle">'+esc(greatPourName())+'</h2><button class="btn icon" data-action="close" aria-label="Close">'+I.x+'</button></div>'+
     '<p style="margin-top:0">Collect stamps at wineries, breweries, cideries and distilleries to earn badges and finish regional challenges. Tap <b>Been here</b> on a place to stamp it.</p>'+
     '<p class="note"><b>'+done+' of '+list.length+'</b> badges earned</p>'+
     '<h3 class="bsub">Badges</h3><div class="badges">'+main.map(card).join('')+'</div>'+
