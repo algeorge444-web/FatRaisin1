@@ -5589,7 +5589,7 @@ function cellarStatsHTML(){
 function cellarHTML(){
   var all=S.cellar||[],f=S.cFilter||'all',q=(S.cSearch||'').trim().toLowerCase(),sort=S.cSort||'recent';
   var bottles=0,value=0;all.forEach(function(w){var n=+w.qty||0;bottles+=n;if(+w.price)value+=n*(+w.price)});
-  var h='<div class="hero" style="padding-bottom:8px"><div style="display:flex;align-items:center;justify-content:space-between;gap:10px"><h2>My cellar</h2>'+(all.length?'<button class="btn small" data-action="cstats-open">\ud83d\udcca <span>Stats</span></button>':'')+'</div><p>'+(all.length?plural(bottles,'bottle')+' \u00b7 '+plural(all.length,'wine')+(value?' \u00b7 about $'+Math.round(value).toLocaleString()+' total':''):'Keep track of the bottles you own. Scan the barcode on the label to add one.')+'</p></div>'+
+  var h='<div class="hero" style="padding-bottom:8px"><div style="display:flex;align-items:center;justify-content:space-between;gap:10px"><h2>My cellar</h2>'+(all.length?'<div style="display:flex;gap:6px">'+((all.some(wineNeeds))?'<button class="btn small" data-action="cfill-all">\u2728 <span>Fill in details</span></button>':'')+'<button class="btn small" data-action="cstats-open">\ud83d\udcca <span>Stats</span></button></div>':'')+'</div><p>'+(all.length?plural(bottles,'bottle')+' \u00b7 '+plural(all.length,'wine')+(value?' \u00b7 about $'+Math.round(value).toLocaleString()+' total':''):'Keep track of the bottles you own. Scan the barcode on the label to add one.')+'</p></div>'+
     '<div class="cactions"><button class="btn primary" data-action="cellar-label">'+CAM_ICON+'<span>Snap the label</span></button><button class="btn primary" data-action="cellar-scan">'+BARCODE_ICON+'<span>Scan barcode</span></button></div>'+
     '<div class="csub"><button class="btn" data-action="cellar-add">'+I.plus+'<span>Add by hand</span></button><button class="btn" data-action="cat-open">'+BOOK_ICON+'<span>Browse catalogue</span></button></div>';
   if(!all.length)return h+emptyHTML('glass','Your cellar is empty','Snap a bottle\u2019s label and FatRaisin fills in the name, producer, vintage and type for you. You can also scan a barcode or browse the catalogue.','');
@@ -5714,8 +5714,101 @@ function wineViewHTML(s){
     '<div class="sheet-actions" style="justify-content:flex-start;flex-wrap:wrap;margin-top:12px">'+
       (link?'<a class="btn" href="'+esc(link)+'" target="_blank" rel="noopener noreferrer">'+I.globe+'<span>'+esc(hostOfUrl(link)||'Web page')+'</span></a>':'')+
       (pl?'<button class="btn" data-action="cellar-visit" data-id="'+pl.id+'">'+I.pin+'<span>Visit '+esc(pl.name)+'</span></button>':'')+
+      (wineNeeds(w)?'<button class="btn" data-action="cfill-one" data-id="'+w.id+'">\u2728 <span>Find more details</span></button>':'')+
     '</div>'+
     '<p class="note wvfoot">'+[w.barcode?'Barcode '+esc(w.barcode):'',w.added?'Added '+esc(fmtDate(w.added)):''].filter(Boolean).join(' · ')+'</p></div>';
+}
+/* ----- fill in missing details for the wines in your cellar: barcode lists, Ontario and BC winery shops, the shared
+   catalogue, then the wine's own web page. Only empty fields are filled, and only from a wine whose name matches. ----- */
+var SHOPW={p:null};
+function shopWines(){
+  if(!SHOPW.p)SHOPW.p=new Promise(function(res){var sc=document.createElement('script');sc.src='shop-wines.js?v='+(window.FR_DV||1);sc.async=true;
+    sc.onload=function(){res(window.FR_SHOP||[])};sc.onerror=function(){SHOPW.p=null;res([])};document.head.appendChild(sc)});
+  return SHOPW.p;
+}
+function wineNeeds(w){return !w.notes||!w.grapes||!w.region||!(+w.abv)||!(+w.price)||(!w.img&&!cphList(w.id).length)}
+function sameProducer(a,b){var x=normPlaceName(a),y=normPlaceName(b);return !!(x&&y&&(x===y||wordHas(x,y)||wordHas(y,x)))}
+function fillFrom(w,o,src){
+  var got=[];
+  function put(f,v,label){if(v===undefined||v===null||v===''||(typeof v==='number'&&!(v>0)))return;var cur=w[f];
+    if(cur===undefined||cur===null||cur===''||(typeof cur==='number'&&!(cur>0))||(f==='type'&&cur==='other')){w[f]=v;got.push(label)}}
+  put('producer',o.producer,'producer');put('vintage',+o.vintage||'','vintage');put('type',o.type,'type');
+  put('grapes',o.grapes,'grapes');put('region',o.region,'region');put('abv',+o.abv||'','alcohol');
+  put('price',+o.price?Math.round(+o.price*100)/100:'','price');
+  var desc=String(o.notes||'').replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim();if(desc.length>=30)put('notes',desc,'tasting notes');
+  put('link',safeUrl(o.link)||'','web page');
+  if(o.img&&!w.img&&!cphList(w.id).length&&/^https:\/\//.test(o.img)){w.img=o.img;got.push('picture')}
+  if(!w.grapes){var txt=(String(w.name)+' '+String(w.notes||'')).toLowerCase(),gr=[];
+    VARIETIES.forEach(function(v){var i=txt.indexOf(v[0]);if(i>=0)gr.push({v:v,i:i})});gr.sort(function(a,b){return a.i-b.i});
+    var seen={};gr=gr.filter(function(g){var k=g.v[0].replace(/[^a-z]/g,'');if(seen[k])return false;seen[k]=1;return true}).slice(0,3);
+    if(gr.length){w.grapes=gr.map(function(g){return titleCase(g.v[0])}).join(', ');got.push('grapes')}}
+  if(got.length){w.updated=Date.now();w.filledFrom=w.filledFrom||src}
+  return got;
+}
+function fillOneWine(w){
+  var all=[];function add(g){all=all.concat(g)}
+  var p=Promise.resolve();
+  if(w.barcode){
+    p=p.then(function(){return bcWineGet(w.barcode)}).then(function(o){if(o)add(fillFrom(w,o,'barcode'))})
+      .then(function(){return wineNeeds(w)?catGet(w.barcode):null}).then(function(o){if(o)add(fillFrom(w,{producer:o.producer,vintage:o.vintage,type:o.type,grapes:o.grapes,region:o.region,abv:o.abv,price:o.price,notes:o.notes,link:o.link,img:o.img},'catalogue'))});
+  }
+  /* Ontario and BC winery shops */
+  p=p.then(function(){if(!wineNeeds(w))return;return shopWines().then(function(list){
+    var best=null;list.forEach(function(r){if(best)return;
+      if(w.producer&&r[1]&&!sameProducer(w.producer,r[1]))return;
+      if(!webNameAgrees(w.name,r[0]+' '+r[1],w.producer||r[1]))return;
+      if(w.vintage&&r[2]&&+r[2]!==+w.vintage)return;
+      best=r});
+    if(best)add(fillFrom(w,{producer:best[1],vintage:best[2],type:best[3],grapes:best[4],region:best[5],abv:best[7],notes:best[10],link:best[8],img:best[9]},'winery shop'));
+  })});
+  /* the shared catalogue */
+  p=p.then(function(){if(!wineNeeds(w))return;var words=catSearchWords(w.name);if(!words.length)return;
+    var key=words.slice().sort(function(a,b){return b.length-a.length})[0].slice(0,15);
+    return Promise.race([catDb().then(function(db){return db.collection('catalog').where('kw','array-contains',key).limit(60).get()}),new Promise(function(r){setTimeout(function(){r(null)},6000)})]).then(function(snap){
+      if(!snap)return;var best=null;
+      snap.forEach(function(d){var x=d.data();if(best)return;
+        if(w.producer&&x.producer&&!sameProducer(w.producer,x.producer))return;
+        if(!webNameAgrees(w.name,x.name+' '+(x.producer||''),w.producer||x.producer))return;
+        if(w.vintage&&x.vintage&&+x.vintage!==+w.vintage)return;best=x});
+      if(best)add(fillFrom(w,{producer:best.producer,vintage:best.vintage,type:best.type,grapes:best.grapes,region:best.region,abv:best.abv,price:best.price,notes:best.notes,link:best.link,img:best.img},'catalogue'));
+    }).catch(function(){});
+  });
+  /* the wine's own web page, through the helper */
+  p=p.then(function(){if(!wineNeeds(w)||!helperUrl())return;var pl=w.wid&&winery(w.wid),site=pl&&pl.website?hostOfUrl(/^https?:/.test(pl.website)?pl.website:'https://'+pl.website):'';
+    return helperGet('/find',{name:w.name||'',producer:w.producer||'',vintage:w.vintage||'',site:site,ctry:(pl&&countryOf(pl)==='US')?'US':''}).then(function(info){
+      if(!info||!info.found||!webNameAgrees(w.name,info.title,w.producer))return;
+      var txt=(String(info.title||'')+' '+String(info.description||'')).toLowerCase(),t='';
+      if(/\b(ice ?wine|icewine|late harvest)\b/.test(txt))t='dessert';else if(/\b(sparkling|brut|traditional method|prosecco|cava)\b/.test(txt))t='sparkling';
+      add(fillFrom(w,{notes:info.description,price:(info.price&&(!info.currency||!/USD|EUR|GBP/i.test(info.currency)))?info.price:'',link:info.url,img:info.image,type:t},'web'));
+    }).catch(function(){});
+  });
+  return p.then(function(){return all});
+}
+var CFILL={running:false};
+function cellarFillAll(onlyId){
+  if(CFILL.running)return;
+  var list=(S.cellar||[]).filter(function(w){return (!onlyId||w.id===onlyId)&&wineNeeds(w)});
+  if(!list.length){toast(onlyId?'This wine already has all its details.':'Every wine already has its details.');return}
+  CFILL={running:true,done:0,total:list.length,wines:0,fields:0};
+  if(!onlyId){S.sheet={kind:'cfill'};renderSheet()}else toast('Looking for details…');
+  var i=0;
+  (function next(){
+    if(i>=list.length||CFILL.stop){CFILL.running=false;saveCellar();
+      if(S.sheet&&S.sheet.kind==='cfill')renderSheet();else if(S.sheet&&S.sheet.kind==='wineview')renderSheet();
+      if(onlyId)toast(CFILL.fields?'Added '+plural(CFILL.fields,'detail')+'.':'Couldn’t find more details for this wine.');
+      if(S.tab==='cellar')refreshCellarList();return}
+    var w=list[i++];
+    fillOneWine(w).then(function(got){CFILL.done++;if(got.length){CFILL.wines++;CFILL.fields+=got.length;saveCellarLocal()}
+      if(S.sheet&&S.sheet.kind==='cfill')renderSheet();next()});
+  })();
+}
+function cfillSheetHTML(){
+  var c=CFILL;
+  return '<div class="sheet-head"><h2 id="sheetTitle">Fill in wine details</h2><button class="btn icon" data-action="close" aria-label="Close">'+I.x+'</button></div>'+
+    '<p style="margin-top:0">Looking up each wine’s tasting notes, grapes, region, alcohol, price and picture. Only empty details are filled in, and only from a wine with the same name.</p>'+
+    '<div class="pstats"><div><b>'+c.done+' / '+c.total+'</b><span>checked</span></div><div><b>'+c.wines+'</b><span>wines improved</span></div><div><b>'+c.fields+'</b><span>details added</span></div></div>'+
+    (c.running?'<div class="bprog" style="margin:12px 0"><i style="width:'+Math.max(3,Math.round(c.done*100/Math.max(1,c.total)))+'%"></i></div><p class="note">You can close this; it keeps going.</p>':'<p class="note" style="margin-top:12px">Done.'+(c.total-c.wines?' '+plural(c.total-c.wines,'wine')+' had nothing more to find; you can add details by hand with Edit.':'')+'</p>')+
+    '<div class="sheet-actions" style="margin-top:12px">'+(c.running?'<button class="btn" data-action="cfill-stop">Stop</button>':'')+'<button class="btn primary" data-action="close">Close</button></div>';
 }
 /* ----- wine form sheet ----- */
 function wineSheetHTML(s){
@@ -9316,6 +9409,8 @@ function renderSheet(){
     h=wineSheetHTML(s);
   }else if(s.kind==='sharecard'){
     h=shareCardSheetHTML(s);
+  }else if(s.kind==='cfill'){
+    h=cfillSheetHTML();
   }else if(s.kind==='cellarstats'){
     h=cellarStatsHTML();
   }else if(s.kind==='letters'){
@@ -9939,6 +10034,9 @@ document.addEventListener('click',function(ev){
     case 'cimp-stop':CIMP.stop=true;toast('Stopping after the current group');break;
     case 'cat-del':catDel(id);break;
     case 'cellar-view':S.sheet={kind:'wineview',id:id};renderSheet();break;
+    case 'cfill-all':cellarFillAll();break;
+    case 'cfill-one':cellarFillAll(id);break;
+    case 'cfill-stop':CFILL.stop=true;break;
     case 'cellar-edit':openWineSheet(id);break;
     case 'cellar-visit':S.sheet=null;renderSheet();S.detailEventId=null;S.detailId=id;S.detailBack=S.tab;render();window.scrollTo(0,0);break;
     case 'cellar-inc':cellarStep(id,1);break;
