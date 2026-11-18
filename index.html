@@ -622,17 +622,17 @@ main{max-width:920px;margin:0 auto;padding:16px 16px 110px}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .wlist,:root:not([data-theme="light"]) .wvd{--wine:#E07A9C;--wine-soft:#4A2531}}
 :root[data-theme="dark"] .wlist,:root[data-theme="dark"] .wvd{--wine:#E07A9C;--wine-soft:#4A2531}
 .wlist{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:6px 14px;box-shadow:0 8px 22px rgba(92,16,39,.08);color:var(--ink)}
-.wrow{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
+.wrow{display:flex;align-items:flex-start;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
 .wrow:last-child{border-bottom:0}.wrow.done{opacity:.5}
 .wlist .wthumb{flex:none;width:52px;height:66px;border-radius:12px;overflow:hidden;background:var(--wine-soft);border:0;padding:0;display:flex;align-items:center;justify-content:center;cursor:pointer}
 .wthumb img{width:100%;height:100%;object-fit:cover;display:block}.wthumb svg{width:24px;height:50px}
 .wmain{flex:1;min-width:0;cursor:pointer}
-.wmain b{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font-size:15.5px;line-height:1.25;color:var(--ink)}
+.wmain b{display:block;font-size:15.5px;line-height:1.3;color:var(--ink);overflow-wrap:anywhere}
 .wmain small{display:block;color:var(--muted);font-size:13px;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .wline{display:block;font-size:12px;color:var(--muted);margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .wline i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px;vertical-align:0}
 .wline em{font-style:normal;color:#E8A317;letter-spacing:1px}
-.wside{flex:none;display:flex;flex-direction:column;align-items:flex-end;gap:6px}
+.wside{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:8px}
 .wprice{font-size:14px;font-weight:700;color:var(--wine)}
 .wqty{display:flex;align-items:center;gap:4px;background:var(--wine-soft);border-radius:999px;padding:2px}
 .wqty button{width:28px;height:28px;border-radius:50%;border:0;background:transparent;color:var(--ink);font-size:17px;line-height:1;cursor:pointer}
@@ -5624,9 +5624,9 @@ function cellarListInner(){
     return '<div class="wrow'+(qty?'':' done')+'">'+
       '<button class="wthumb" data-action="cellar-view" data-id="'+w.id+'" aria-label="See '+esc(w.name)+'">'+wineImgHTML(w)+'</button>'+
       '<div class="wmain" data-action="cellar-view" data-id="'+w.id+'"><b>'+esc(w.name)+'</b>'+(sub?'<small>'+esc(sub)+'</small>':'')+
-        '<span class="wline"><i style="background:'+t[2]+'"></i>'+esc(t[1])+(line?' · '+esc(line):'')+(+w.rating?' <em aria-label="'+w.rating+' out of 5">'+'★★★★★'.slice(0,+w.rating)+'</em>':'')+(qty?'':' · Finished')+'</span></div>'+
-      '<div class="wside">'+(price?'<span class="wprice">'+price+'</span>':'')+
-        '<div class="wqty"><button data-action="cellar-dec" data-id="'+w.id+'" aria-label="Remove a bottle"'+(qty?'':' disabled')+'>−</button><span aria-label="'+plural(qty,'bottle')+'">'+qty+'</span><button data-action="cellar-inc" data-id="'+w.id+'" aria-label="Add a bottle">+</button></div></div>'+
+        '<span class="wline"><i style="background:'+t[2]+'"></i>'+esc(t[1])+(line?' · '+esc(line):'')+(+w.rating?' <em aria-label="'+w.rating+' out of 5">'+'★★★★★'.slice(0,+w.rating)+'</em>':'')+(qty?'':' · Finished')+'</span>'+
+      '<div class="wside">'+(price?'<span class="wprice">'+price+'</span>':'<span></span>')+
+        '<div class="wqty"><button data-action="cellar-dec" data-id="'+w.id+'" aria-label="Remove a bottle"'+(qty?'':' disabled')+'>−</button><span aria-label="'+plural(qty,'bottle')+'">'+qty+'</span><button data-action="cellar-inc" data-id="'+w.id+'" aria-label="Add a bottle">+</button></div></div></div>'+
     '</div>';
   }).join('')+'</div>';
 }
