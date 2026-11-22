@@ -29,7 +29,8 @@ jobs:
         run: sudo apt-get update -qq && sudo apt-get install -y -qq osmium-tool
       - name: Download each province and state and keep drinks places with opening hours
         run: |
-          mkdir -p "$RUNNER_TEMP/osm"; cd "$RUNNER_TEMP/osm"
+          set +e   # one region going wrong must not stop the others
+          mkdir -p "$RUNNER_TEMP/osm"; cd "$RUNNER_TEMP/osm"; : > "$RUNNER_TEMP/regions.txt"
           CA="alberta british-columbia manitoba new-brunswick newfoundland-and-labrador northwest-territories nova-scotia nunavut ontario prince-edward-island quebec saskatchewan yukon"
           US="alabama alaska arizona arkansas california colorado connecticut delaware district-of-columbia florida georgia hawaii idaho illinois indiana iowa kansas kentucky louisiana maine maryland massachusetts michigan minnesota mississippi missouri montana nebraska nevada new-hampshire new-jersey new-mexico new-york north-carolina north-dakota ohio oklahoma oregon pennsylvania rhode-island south-carolina south-dakota tennessee texas utah vermont virginia washington west-virginia wisconsin wyoming"
           get() {
@@ -38,22 +39,34 @@ jobs:
           for r in $(for p in $CA; do echo canada/$p; done) $(for s in $US; do echo us/$s; done); do
             n=$(basename $r)
             if get $r; then
-              osmium tags-filter -O -o hours.pbf in.pbf nwr/opening_hours
-              osmium tags-filter -O -o keep.pbf hours.pbf nwr/craft nwr/industrial=brewery,winery,distillery nwr/tourism=wine_cellar nwr/microbrewery nwr/brewery nwr/amenity=pub,bar,restaurant,biergarten,cafe nwr/shop=wine,alcohol,beverages
-              osmium export -O -f geojsonseq -o "$n.geojsonseq" keep.pbf || true
-              echo "$r: $(wc -l < $n.geojsonseq) places"
+              if osmium tags-filter -O -o hours.pbf in.pbf nwr/opening_hours &&
+                 osmium tags-filter -O -o keep.pbf hours.pbf nwr/craft nwr/industrial=brewery,winery,distillery nwr/tourism=wine_cellar nwr/microbrewery nwr/brewery nwr/amenity=pub,bar,restaurant,biergarten,cafe nwr/shop=wine,alcohol,beverages &&
+                 osmium export -O -f geojsonseq -o "$n.geojsonseq" keep.pbf; then
+                echo "$r: $(wc -l < $n.geojsonseq) places" | tee -a "$RUNNER_TEMP/regions.txt"
+              else
+                rm -f "$n.geojsonseq"; echo "$r: could not be read" | tee -a "$RUNNER_TEMP/regions.txt"
+              fi
             else
-              echo "$r: could not be downloaded"
+              echo "$r: could not be downloaded" | tee -a "$RUNNER_TEMP/regions.txt"
             fi
             rm -f in.pbf hours.pbf keep.pbf
           done
+          df -h . | tail -1
+          set -e
           node "$GITHUB_WORKSPACE/tools/osm-extract.mjs" "$RUNNER_TEMP/osm.json" *.geojsonseq
       - name: Match them to the newest copy of the places and save
         run: |
           git config user.name "FatRaisin hours search"
           git config user.email "actions@users.noreply.github.com"
-          git pull -q origin main
-          node tools/osm-hours.mjs --file "$RUNNER_TEMP/osm.json"
-          git add place-media.js place-lists.js data-version.js tools/osm-hours-last-run.txt
-          git diff --cached --quiet || git commit -m "Opening hours from OpenStreetMap: $(cat tools/.osm-hours-summary) added"
-          git push
+          # if someone else saves place data at the same moment, start again from their newest copy (up to 3 times)
+          for try in 1 2 3; do
+            git fetch -q origin main && git reset -q --hard origin/main
+            node tools/osm-hours.mjs --file "$RUNNER_TEMP/osm.json"
+            { echo; echo "Regions:"; cat "$RUNNER_TEMP/regions.txt"; } >> tools/osm-hours-last-run.txt
+            git add place-media.js place-lists.js data-version.js tools/osm-hours-last-run.txt
+            git diff --cached --quiet && exit 0
+            git commit -q -m "Opening hours from OpenStreetMap: $(cat tools/.osm-hours-summary) added"
+            git push -q origin HEAD:main && exit 0
+            sleep 20
+          done
+          exit 1
