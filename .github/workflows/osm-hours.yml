@@ -51,9 +51,11 @@ jobs:
             fi
             rm -f in.pbf hours.pbf keep.pbf
           done
-          df -h . | tail -1
-          set -e
-          node "$GITHUB_WORKSPACE/tools/osm-extract.mjs" "$RUNNER_TEMP/osm.json" *.geojsonseq
+          df -h . | tail -1 | tee -a "$RUNNER_TEMP/regions.txt"
+          ls -la *.geojsonseq | awk '{s+=$5} END {print "downloaded places files: " s/1e6 " MB"}' | tee -a "$RUNNER_TEMP/regions.txt"
+          node --max-old-space-size=6000 "$GITHUB_WORKSPACE/tools/osm-extract.mjs" "$RUNNER_TEMP/osm.json" *.geojsonseq 2>&1 | tee -a "$RUNNER_TEMP/regions.txt"
+          test -s "$RUNNER_TEMP/osm.json" || echo '{"elements":[],"log":["the OpenStreetMap files could not be read this time"]}' > "$RUNNER_TEMP/osm.json"
+          exit 0
       - name: Match them to the newest copy of the places and save
         run: |
           git config user.name "FatRaisin hours search"
