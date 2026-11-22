@@ -646,12 +646,13 @@ main{max-width:920px;margin:0 auto;padding:16px 16px 110px}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .wvd{--wgold:#D9B06A;--wgold2:#E9C98C;--wcirc:#7A1C36}}
 :root[data-theme="dark"] .wvd{--wgold:#D9B06A;--wgold2:#E9C98C;--wcirc:#7A1C36}
 .wvd .sheet-head{align-items:center}.wvd .wvkick{font-family:var(--sans);font-size:17px;font-weight:600;letter-spacing:.01em;flex:1;text-align:center;padding-left:64px}
-.wvstage{position:relative;overflow:hidden;isolation:isolate;border:1px solid var(--line);border-radius:22px;padding:26px 10px 20px;margin:4px 0 14px;
+.wvstage{position:relative;overflow:hidden;isolation:isolate;-webkit-mask-image:-webkit-radial-gradient(white,black);transform:translateZ(0);border:1px solid var(--line);border-radius:22px;padding:26px 10px 20px;margin:4px 0 14px;
   background:radial-gradient(38% 46% at 50% 46%,rgba(214,160,72,.42) 0%,rgba(214,160,72,.14) 55%,rgba(214,160,72,0) 100%),var(--surface)}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .wvstage{background:radial-gradient(38% 46% at 50% 46%,rgba(226,170,80,.30) 0%,rgba(226,170,80,.08) 55%,rgba(226,170,80,0) 100%),var(--surface)}}
 :root[data-theme="dark"] .wvstage{background:radial-gradient(38% 46% at 50% 46%,rgba(226,170,80,.30) 0%,rgba(226,170,80,.08) 55%,rgba(226,170,80,0) 100%),var(--surface)}
 .wvfloor{position:absolute;left:50%;bottom:16px;width:46%;height:18px;transform:translateX(-50%);z-index:-1;background:radial-gradient(closest-side,rgba(43,21,27,.30),rgba(43,21,27,0));filter:blur(3px)}
-.wvd .wvstage .wvhero{position:relative;z-index:2;margin:0}.wvd .wvstage .wvhero img{filter:drop-shadow(0 0 18px rgba(214,160,72,.35)) drop-shadow(0 12px 14px rgba(43,21,27,.28))}
+/* no filter on the picture: on iPhones a filtered picture inside the rounded box breaks the box's corners */
+.wvd .wvstage .wvhero{position:relative;z-index:2;margin:0}.wvd .wvstage .wvhero img{filter:none;border-radius:14px;box-shadow:0 10px 22px rgba(43,21,27,.16)}
 .wvname{font-family:var(--serif);font-weight:700;font-size:30px;line-height:1.15;text-align:center;margin:2px 4px 4px;overflow-wrap:anywhere;
   color:var(--wgold);background:linear-gradient(180deg,var(--wgold2),var(--wgold));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 .wvd .wvsub{text-align:center;color:var(--muted);margin:0 0 14px;font-size:16px}
@@ -668,7 +669,7 @@ main{max-width:920px;margin:0 auto;padding:16px 16px 110px}
 .wvflav{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 4px}
 .wvflav span{font-size:15px;padding:7px 15px;border-radius:999px;background:var(--surface);border:1px solid var(--line);color:var(--ink);box-shadow:inset 0 1px 0 rgba(255,255,255,.06)}
 .wvd .wvhero img{border-radius:10px}
-.wvd .wvhero{margin:0 0 10px}.wvd .wvhero img{height:300px;background:transparent;filter:drop-shadow(0 12px 16px rgba(43,21,27,.22))}
+.wvd .wvhero{margin:0 0 10px}.wvd .wvhero img{height:300px;background:transparent}
 .wvd .wvph{background:transparent}
 .wvtags{display:flex;flex-wrap:wrap;justify-content:center;gap:6px}
 .wvchip{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;padding:5px 11px;border-radius:999px;background:var(--surface);border:1px solid var(--line);color:var(--ink)}
