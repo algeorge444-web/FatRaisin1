@@ -1,57 +1,73 @@
-2026-11-18
-  overpass-api.de answered 502
-  overpass.kumi.systems answered 504
-  overpass.private.coffee failed: The operation was aborted due to timeout
-Tile 54,-129,57,-126 could not be read
-  overpass-api.de answered 502
-  overpass.kumi.systems answered 504
-  overpass.private.coffee failed: The operation was aborted due to timeout
-Tile 54,-123,57,-120 could not be read
-  overpass-api.de answered 502
-  overpass.kumi.systems failed: The operation was aborted due to timeout
-  overpass.private.coffee failed: The operation was aborted due to timeout
-Tile 54,-111,57,-108 could not be read
-  overpass-api.de answered 502
-  overpass.kumi.systems failed: The operation was aborted due to timeout
-  overpass.private.coffee answered 504
-Tile 60,-153,63,-150 could not be read
-  overpass-api.de answered 502
-  overpass.kumi.systems failed: The operation was aborted due to timeout
-  overpass.private.coffee failed: The operation was aborted due to timeout
-Tile 63,-147,66,-144 could not be read
-  overpass-api.de answered 502
-  overpass.kumi.systems answered 504
-  overpass.private.coffee answered 504
-Tile 18,-159,21,-156 could not be read
-  overpass-api.de answered 502
-  overpass.kumi.systems failed: The operation was aborted due to timeout
-  overpass.private.coffee answered 504
-Tile 18,-156,21,-153 could not be read
-  overpass-api.de answered 504
-  overpass.kumi.systems failed: The operation was aborted due to timeout
-  overpass.private.coffee answered 504
-Tile 24,-84,27,-81 could not be read
-  overpass-api.de answered 502
-  overpass.kumi.systems answered 504
-  overpass.private.coffee failed: The operation was aborted due to timeout
-Tile 27,-99,30,-96 could not be read
-  overpass-api.de answered 502
-  overpass-api.de answered 504
-  overpass.kumi.systems failed: The operation was aborted due to timeout
-  overpass.private.coffee failed: The operation was aborted due to timeout
-Tile 27,-87,30,-84 could not be read
-  overpass-api.de answered 502
-  overpass.kumi.systems failed: The operation was aborted due to timeout
-  overpass.private.coffee failed: The operation was aborted due to timeout
-Tile 27,-84,30,-81 could not be read
-  overpass-api.de answered 502
-  overpass.kumi.systems answered 502
-  overpass.private.coffee failed: The operation was aborted due to timeout
-Tile 27,-81,30,-78 could not be read
-  overpass-api.de answered 502
-  overpass.kumi.systems answered 504
-  overpass.private.coffee failed: The operation was aborted due to timeout
-Tile 30,-120,33,-117 could not be read
-21 of 174 map tiles read in 85 minutes.
-167 OpenStreetMap places read, 146 with plain weekly hours, 47 matched to app places; hours added for 6 places that had none (7762 of 20490 now have hours).
-Data version is now 295.
+2026-11-22
+81348 places with opening hours taken from OpenStreetMap downloads (Geofabrik).
+81348 OpenStreetMap places read, 71399 with plain weekly hours, 1778 matched to app places; hours added for 543 places that had none (8665 of 20490 now have hours).
+Data version is now 298.
+
+Regions:
+canada/alberta: could not be downloaded
+canada/british-columbia: could not be downloaded
+canada/manitoba: could not be downloaded
+canada/new-brunswick: could not be downloaded
+canada/newfoundland-and-labrador: could not be downloaded
+canada/northwest-territories: could not be downloaded
+canada/nova-scotia: could not be downloaded
+canada/nunavut: could not be downloaded
+canada/ontario: could not be downloaded
+canada/prince-edward-island: could not be downloaded
+canada/quebec: could not be downloaded
+canada/saskatchewan: could not be downloaded
+canada/yukon: could not be downloaded
+us/alabama: could not be downloaded
+us/alaska: could not be downloaded
+us/arizona: could not be downloaded
+us/arkansas: could not be downloaded
+us/california: could not be downloaded
+us/colorado: could not be downloaded
+us/connecticut: could not be downloaded
+us/delaware: could not be downloaded
+us/district-of-columbia: could not be downloaded
+us/florida: could not be downloaded
+us/georgia: could not be downloaded
+us/hawaii: 1064 places
+us/idaho: 788 places
+us/illinois: could not be downloaded
+us/indiana: 2007 places
+us/iowa: 1060 places
+us/kansas: 1250 places
+us/kentucky: 1274 places
+us/louisiana: 1504 places
+us/maine: 688 places
+us/maryland: could not be downloaded
+us/massachusetts: 3205 places
+us/michigan: 4195 places
+us/minnesota: 3148 places
+us/mississippi: 534 places
+us/missouri: 1833 places
+us/montana: 510 places
+us/nebraska: 762 places
+us/nevada: 1505 places
+us/new-hampshire: 1162 places
+us/new-jersey: 2692 places
+us/new-mexico: 1049 places
+us/new-york: 11336 places
+us/north-carolina: 4692 places
+us/north-dakota: 257 places
+us/ohio: 4557 places
+us/oklahoma: 1397 places
+us/oregon: 5634 places
+us/pennsylvania: 7686 places
+us/rhode-island: 403 places
+us/south-carolina: 1758 places
+us/south-dakota: 372 places
+us/tennessee: 2852 places
+us/texas: 10199 places
+us/utah: 2514 places
+us/vermont: 560 places
+us/virginia: 5635 places
+us/washington: 7196 places
+us/west-virginia: 396 places
+us/wisconsin: 3534 places
+us/wyoming: 284 places
+/dev/root       145G   58G   87G  40% /
+downloaded places files: 57.7127 MB
+81348 places written to /home/runner/work/_temp/osm.json
