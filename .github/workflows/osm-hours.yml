@@ -1,13 +1,15 @@
 name: Opening hours from OpenStreetMap
-# Once a week, fills in opening hours from OpenStreetMap for places that have none yet (each run covers part of the map).
+# Once a month, downloads the free OpenStreetMap files for every Canadian province and US state (Geofabrik),
+# keeps only drinks places that list opening hours, and fills in hours for app places that have none yet.
 on:
   schedule:
-    - cron: '23 12 * * 3'   # Wednesdays
+    - cron: '23 12 6 * *'   # the 6th of each month
   workflow_dispatch:
   push:
     branches: [main]
     paths:
       - 'tools/osm-hours.mjs'
+      - 'tools/osm-extract.mjs'
       - '.github/workflows/osm-hours.yml'
 permissions:
   contents: write
@@ -17,14 +19,35 @@ concurrency:
 jobs:
   hours:
     runs-on: ubuntu-latest
-    timeout-minutes: 120
+    timeout-minutes: 300
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - name: Read opening hours from OpenStreetMap
-        run: node tools/osm-hours.mjs --save "$RUNNER_TEMP/osm.json"
+      - name: Install osmium
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq osmium-tool
+      - name: Download each province and state and keep drinks places with opening hours
+        run: |
+          mkdir -p "$RUNNER_TEMP/osm"; cd "$RUNNER_TEMP/osm"
+          CA="alberta british-columbia manitoba new-brunswick newfoundland-and-labrador northwest-territories nova-scotia nunavut ontario prince-edward-island quebec saskatchewan yukon"
+          US="alabama alaska arizona arkansas california colorado connecticut delaware district-of-columbia florida georgia hawaii idaho illinois indiana iowa kansas kentucky louisiana maine maryland massachusetts michigan minnesota mississippi missouri montana nebraska nevada new-hampshire new-jersey new-mexico new-york north-carolina north-dakota ohio oklahoma oregon pennsylvania rhode-island south-carolina south-dakota tennessee texas utah vermont virginia washington west-virginia wisconsin wyoming"
+          get() {
+            for try in 1 2 3; do curl -sSfL --retry 3 -o in.pbf "https://download.geofabrik.de/north-america/$1-latest.osm.pbf" && return 0; sleep 30; done; return 1
+          }
+          for r in $(for p in $CA; do echo canada/$p; done) $(for s in $US; do echo us/$s; done); do
+            n=$(basename $r)
+            if get $r; then
+              osmium tags-filter -O -o hours.pbf in.pbf nwr/opening_hours
+              osmium tags-filter -O -o keep.pbf hours.pbf nwr/craft nwr/industrial=brewery,winery,distillery nwr/tourism=wine_cellar nwr/microbrewery nwr/brewery nwr/amenity=pub,bar,restaurant,biergarten,cafe nwr/shop=wine,alcohol,beverages
+              osmium export -O -f geojsonseq -o "$n.geojsonseq" keep.pbf || true
+              echo "$r: $(wc -l < $n.geojsonseq) places"
+            else
+              echo "$r: could not be downloaded"
+            fi
+            rm -f in.pbf hours.pbf keep.pbf
+          done
+          node "$GITHUB_WORKSPACE/tools/osm-extract.mjs" "$RUNNER_TEMP/osm.json" *.geojsonseq
       - name: Match them to the newest copy of the places and save
         run: |
           git config user.name "FatRaisin hours search"
