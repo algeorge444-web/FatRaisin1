@@ -641,19 +641,31 @@ main{max-width:920px;margin:0 auto;padding:16px 16px 110px}
 /* the bottle page */
 .wvd .sheet-head{align-items:flex-start}.wvd .wvtop{min-width:0}
 .wvd .wvsub{color:var(--muted);margin:4px 0 0}
-.wvstage{position:relative;overflow:hidden;isolation:isolate;border:1px solid var(--line);border-radius:22px;padding:22px 10px 18px;margin:4px 0 12px;
-  background:radial-gradient(70% 55% at 50% 45%,rgba(255,250,240,.95) 0%,rgba(255,250,240,0) 70%),linear-gradient(180deg,var(--surface) 0%,var(--wine-soft) 100%)}
-.wvvine{position:absolute;top:10px;left:50%;transform:translateX(-50%);width:96%;max-width:520px;height:auto;z-index:1;pointer-events:none}
-.wvvine .stem{fill:none;stroke:#6B4A2A;stroke-width:2.2;stroke-linecap:round}
-.wvvine .leaf{fill:#6F8A3C;stroke:#4E6627;stroke-width:.8}
-.wvvine .vein{fill:none;stroke:#C8D79A;stroke-width:.7;opacity:.8}
-.wvvine .grapes circle{fill:#5B2347;stroke:#3B1230;stroke-width:.6}
-.wvvine .tendril{fill:none;stroke:#7C8F45;stroke-width:1.2;stroke-linecap:round}
-.wvfloor{position:absolute;left:50%;bottom:58px;width:58%;height:20px;transform:translateX(-50%);z-index:-1;background:radial-gradient(closest-side,rgba(43,21,27,.28),rgba(43,21,27,0));filter:blur(3px)}
-.wvd .wvstage .wvhero{position:relative;z-index:2}.wvd .wvstage .wvhero img{filter:drop-shadow(0 12px 16px rgba(43,21,27,.25))}
-.wvstage .wvtags{position:relative;z-index:2}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .wvstage{background:radial-gradient(70% 55% at 50% 38%,rgba(255,220,200,.10) 0%,transparent 70%),linear-gradient(180deg,var(--surface) 0%,var(--wine-soft) 100%)}}
-:root[data-theme="dark"] .wvstage{background:radial-gradient(70% 55% at 50% 38%,rgba(255,220,200,.10) 0%,transparent 70%),linear-gradient(180deg,var(--surface) 0%,var(--wine-soft) 100%)}
+.wvd{--wgold:#A47424;--wgold2:#C9973E;--wcirc:#5C1027}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .wvd{--wgold:#D9B06A;--wgold2:#E9C98C;--wcirc:#7A1C36}}
+:root[data-theme="dark"] .wvd{--wgold:#D9B06A;--wgold2:#E9C98C;--wcirc:#7A1C36}
+.wvd .sheet-head{align-items:center}.wvd .wvkick{font-family:var(--sans);font-size:17px;font-weight:600;letter-spacing:.01em;flex:1;text-align:center;padding-left:64px}
+.wvstage{position:relative;overflow:hidden;isolation:isolate;border:1px solid var(--line);border-radius:22px;padding:26px 10px 20px;margin:4px 0 14px;
+  background:radial-gradient(38% 46% at 50% 46%,rgba(214,160,72,.42) 0%,rgba(214,160,72,.14) 55%,rgba(214,160,72,0) 100%),var(--surface)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .wvstage{background:radial-gradient(38% 46% at 50% 46%,rgba(226,170,80,.30) 0%,rgba(226,170,80,.08) 55%,rgba(226,170,80,0) 100%),var(--surface)}}
+:root[data-theme="dark"] .wvstage{background:radial-gradient(38% 46% at 50% 46%,rgba(226,170,80,.30) 0%,rgba(226,170,80,.08) 55%,rgba(226,170,80,0) 100%),var(--surface)}
+.wvfloor{position:absolute;left:50%;bottom:16px;width:46%;height:18px;transform:translateX(-50%);z-index:-1;background:radial-gradient(closest-side,rgba(43,21,27,.30),rgba(43,21,27,0));filter:blur(3px)}
+.wvd .wvstage .wvhero{position:relative;z-index:2;margin:0}.wvd .wvstage .wvhero img{filter:drop-shadow(0 0 18px rgba(214,160,72,.35)) drop-shadow(0 12px 14px rgba(43,21,27,.28))}
+.wvname{font-family:var(--serif);font-weight:700;font-size:30px;line-height:1.15;text-align:center;margin:2px 4px 4px;overflow-wrap:anywhere;
+  color:var(--wgold);background:linear-gradient(180deg,var(--wgold2),var(--wgold));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.wvd .wvsub{text-align:center;color:var(--muted);margin:0 0 14px;font-size:16px}
+.wvd .wvsub i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px;vertical-align:1px}
+.wvstats{position:relative;display:grid;grid-template-columns:1fr 86px 1fr;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:999px;min-height:64px;margin:20px 0 14px}
+.wvstat{text-align:center;color:var(--muted);font-size:14px;white-space:nowrap;padding:0 6px}
+.wvstat b{font-family:var(--sans);font-size:24px;font-weight:700;color:var(--wgold);margin-right:4px;font-variant-numeric:tabular-nums}
+.wvcirc{justify-self:center;width:86px;height:86px;margin:-16px 0;border-radius:50%;background:var(--wcirc);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 6px 16px rgba(43,21,27,.28);border:3px solid var(--bg)}
+.wvcirc b{font-family:var(--serif);font-size:30px;font-weight:700;line-height:1}.wvcirc small{font-size:11px;letter-spacing:.12em;text-transform:uppercase;margin-top:3px;opacity:.9}
+.wvcirc.t b{font-size:17px}
+.wvnh{font-family:var(--sans);font-size:20px;font-weight:600;margin:18px 0 6px}
+.wvnp{margin:0 0 6px;line-height:1.55;font-size:16px;color:var(--ink)}
+.wvpair{margin:6px 0 0;font-size:15px;color:var(--muted)}.wvpair b{color:var(--ink);font-weight:600}
+.wvflav{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 4px}
+.wvflav span{font-size:15px;padding:7px 15px;border-radius:999px;background:var(--surface);border:1px solid var(--line);color:var(--ink);box-shadow:inset 0 1px 0 rgba(255,255,255,.06)}
 .wvd .wvhero img{border-radius:10px}
 .wvd .wvhero{margin:0 0 10px}.wvd .wvhero img{height:300px;background:transparent;filter:drop-shadow(0 12px 16px rgba(43,21,27,.22))}
 .wvd .wvph{background:transparent}
@@ -5665,6 +5677,14 @@ function fmtDate(ts){
   try{return new Date(ts).toLocaleDateString(undefined,{day:'numeric',month:'short',year:'numeric'})}catch(e){return ''}
 }
 /* split free-text tasting notes into nose, palate, finish and food pairing where the words make that clear */
+var FLAVOURS='blackberry,blackcurrant,cassis,black cherry,cherry,raspberry,strawberry,cranberry,plum,blueberry,fig,raisin,prune,currant,pomegranate,lemon,lime,grapefruit,orange,citrus,apple,green apple,pear,peach,apricot,nectarine,melon,pineapple,mango,passion fruit,lychee,tropical fruit,gooseberry,rose,violet,floral,elderflower,honeysuckle,jasmine,honey,vanilla,caramel,butterscotch,toffee,chocolate,cocoa,mocha,coffee,espresso,tobacco,leather,cedar,oak,smoke,smoky,toast,brioche,almond,hazelnut,nutty,butter,buttery,cream,creamy,mineral,minerality,graphite,slate,flint,crushed rock,earth,earthy,mushroom,forest floor,herbal,herbs,mint,eucalyptus,sage,thyme,grass,bell pepper,black pepper,pepper,spice,spicy,clove,cinnamon,nutmeg,anise,licorice,ginger,jammy,velvety,silky,crisp,juicy,bright,elegant,bold,tannic,smooth'.split(',');
+function wineFlavours(notes){
+  var t=' '+String(notes||'').toLowerCase().replace(/[^a-z ]+/g,' ').replace(/\s+/g,' ')+' ',hits=[];
+  FLAVOURS.forEach(function(f){var i=t.indexOf(' '+f+' ');if(i<0&&!/y$/.test(f))i=t.indexOf(' '+f+'s ');if(i>=0)hits.push({f:f,i:i})});
+  hits.sort(function(a,b){return a.i-b.i||b.f.length-a.f.length});
+  var out=[];hits.forEach(function(h){if(out.length>=5)return;if(out.some(function(o){return o.indexOf(h.f)>=0||h.f.indexOf(o)>=0}))return;out.push(h.f)});
+  return out.map(function(f){return f.replace(/\b\w/g,function(c){return c.toUpperCase()})});
+}
 function tastingParts(notes){
   var out={},rest=[],keys=[['nose',/\b(nose|aromas?|aromatics?|bouquet|smells?)\b/i],['palate',/\b(palate|flavou?rs?|tastes?|mouth|tannins?|acidity|body|bodied)\b/i],['finish',/\b(finish(es)?|aftertaste|lingers?|lingering|length)\b/i],['pair',/\b(pairs?|pairing|serve with|enjoy (it )?with|match(es)? with|alongside|cheeses?|grilled|roast|seafood|pasta|steak|chicken|pork|lamb|salmon|dishes?)\b/i]];
   String(notes||'').replace(/\s+/g,' ').split(/(?<=[.!?;])\s+/).forEach(function(sn){
@@ -5702,22 +5722,29 @@ function wineViewHTML(s){
   var sub=[w.producer,w.vintage].filter(Boolean).join(' · ');
   var price=+w.price?'$'+(+w.price).toFixed(2).replace(/\.00$/,''):'';
   var value=+w.price&&qty>1?'$'+Math.round(+w.price*qty).toLocaleString():'';
-  var tp=tastingParts(w.notes),hasNotes=tp.nose||tp.palate||tp.finish||tp.pair;
+  var tp=tastingParts(w.notes);
+  var noteText=[tp.nose,tp.palate,tp.finish,tp.rest].filter(Boolean).join(' ');
+  var flav=wineFlavours(w.notes);
+  var title=(w.vintage&&String(w.name).indexOf(String(w.vintage))<0?w.vintage+' ':'')+w.name;
+  var where=[w.producer&&normPlaceName(w.name).indexOf(normPlaceName(w.producer))<0?w.producer:'',w.region].filter(Boolean).join(' · ')||t[1];
   return '<div class="wvd">'+
-    '<div class="sheet-head"><div class="wvtop"><h2 id="sheetTitle" class="wvtitle">'+esc(w.name)+'</h2>'+(sub?'<p class="wvsub">'+esc(sub)+'</p>':'')+'</div>'+
+    '<div class="sheet-head"><h2 id="sheetTitle" class="wvkick">Cellar detail</h2>'+
       '<div class="wvhead"><button class="btn small" data-action="cellar-edit" data-id="'+w.id+'">Edit</button>'+
       '<button class="btn icon" data-action="close" aria-label="Close">'+I.x+'</button></div></div>'+
     '<div class="wvstage">'+'<span class="wvfloor" aria-hidden="true"></span>'+(imgs.length?'<div class="wvhero'+(imgs.length===1?' one':'')+'">'+imgs.map(function(u){
         return '<img src="'+esc(u)+'" alt="'+esc(w.name)+'" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display=\'none\'">';
-      }).join('')+'</div>':'<div class="wvhero one"><div class="wvph">'+bottleSVG(t[2])+'</div></div>')+
-      '<div class="wvtags"><span class="wvchip"><i style="background:'+t[2]+'"></i>'+esc(t[1])+'</span>'+(price?'<span class="wvchip price">'+price+'</span>':'')+
-      (+w.rating?'<span class="wvchip stars" aria-label="'+w.rating+' out of 5">'+'★★★★★'.slice(0,+w.rating)+'</span>':'')+(qty?'':'<span class="wvchip">Finished</span>')+'</div></div>'+
-    '<div class="wvqtyrow"><div><span>In your cellar</span><b>'+plural(qty,'bottle')+'</b></div>'+
-      '<div class="wvqbtns"><button class="btn small" data-action="cellar-dec" data-id="'+w.id+'"'+(qty?'':' disabled')+' aria-label="Remove a bottle">− Opened one</button>'+
+      }).join('')+'</div>':'<div class="wvhero one"><div class="wvph">'+bottleSVG(t[2])+'</div></div>')+'</div>'+
+    '<h3 class="wvname">'+esc(title)+'</h3>'+
+    '<p class="wvsub"><i style="background:'+t[2]+'"></i>'+esc(where)+'</p>'+
+    '<div class="wvstats"><div class="wvstat">'+(+w.abv?'<b>'+esc(String(+w.abv))+'%</b>ABV':'<b>\u2014</b>ABV')+'</div>'+
+      (+w.rating?'<div class="wvcirc" aria-label="Your rating '+w.rating+' out of 5"><b>'+(+w.rating)+'</b><small>of 5</small></div>':'<div class="wvcirc t"><b>'+esc(t[1])+'</b></div>')+
+      '<div class="wvstat"><b>'+qty+'</b>'+(qty===1?'Bottle':'Bottles')+'</div></div>'+
+    '<div class="wvqtyrow"><div><span>'+(qty?'In your cellar':'Finished')+'</span>'+(price?'<b>'+price+' a bottle</b>':'')+'</div>'+
+      '<div class="wvqbtns"><button class="btn small" data-action="cellar-dec" data-id="'+w.id+'"'+(qty?'':' disabled')+' aria-label="Remove a bottle">\u2212 Opened one</button>'+
       '<button class="btn small" data-action="cellar-inc" data-id="'+w.id+'" aria-label="Add a bottle">+ Add</button></div></div>'+
-    (hasNotes||tp.rest?'<h3 class="wvsec">Tasting notes</h3><div class="wvlist">'+
-      wvNote('nose','Nose',tp.nose)+wvNote('palate','Palate',tp.palate)+wvNote('finish','Finish',tp.finish)+wvNote('pair','Pairs with',tp.pair)+
-      (tp.rest?'<div class="wvrow tall"><div class="wvtext"><p>'+esc(tp.rest)+'</p></div></div>':'')+'</div>':'')+
+    (noteText||tp.pair?'<h3 class="wvnh">Tasting Notes</h3>'+(noteText?'<p class="wvnp">'+esc(noteText)+'</p>':'')+
+      (tp.pair?'<p class="wvpair"><b>Pairs with:</b> '+esc(tp.pair.replace(/^(it |this wine |this )?(pairs?|goes|is great|is perfect|enjoy( it)?|serve( it)?)( \w+ly)? (beautifully |nicely |well |perfectly )?(with|alongside)\s+/i,'').replace(/^./,function(c){return c.toUpperCase()}))+'</p>':'')+
+      (flav.length?'<div class="wvflav">'+flav.map(function(f){return '<span>'+esc(f)+'</span>'}).join('')+'</div>':''):'')+
     '<h3 class="wvsec">Details</h3><div class="wvlist">'+
       wvRow('grapes','Grapes',w.grapes)+wvRow('region','Region',w.region)+wvRow('abv','Alcohol',w.abv?w.abv+'%':'')+
       wvRow('price','Price per bottle',price)+wvRow('value','Value in cellar',value)+
