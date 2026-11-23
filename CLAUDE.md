@@ -17,6 +17,7 @@ The owner is not a programmer: explain changes in plain language, and push finis
 
 ## Features worth knowing
 - Flight Challenge votes are saved in the `reviews` collection as `place: "flight-<category>"`, `text: <place id>`, doc id `flight-<category>_<uid>` (chosen so it should fit the existing reviews rules; not yet confirmed with a real signed-in vote). Review lists and counts skip `flight-` entries.
+- `privacy.html` and `terms.html` copy the text of `LEGAL_PRIVACY` / `LEGAL_TERMS` and `LEGAL_DATE` in index.html. When the policy changes, update index.html first, then rebuild those two pages from it.
 - Side menu style: `var MENU_STYLE='solid'` in index.html. The owner chose solid but wants the see-through frosted-glass version kept; set it to `'glass'` to switch.
 - Badges, the Secret Sip and the passport are worked out on the phone from the visitor's stamps; nothing extra is stored online.
 
