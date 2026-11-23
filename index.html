@@ -5449,7 +5449,14 @@ function fuzzyScore(words,hay,nameHay){
   }
   return score;
 }
-function placeHay(w){return foldText(w.name+' '+w.address+' '+(w.area||''))}
+/* what the place search looks through: name, address (street and city), region, the full province or state name, and the kind of place */
+var TYPE_WORDS={winery:'winery wineries wine vineyard',brewery:'brewery breweries beer brewing craft beer',distillery:'distillery distilleries spirits',cidery:'cidery cideries cider'};
+function placeHay(w){
+  if(w._hay&&w._hayK===w.name+w.address+w.area)return w._hay;
+  var pc='';try{pc=provinceOf(w.area);pc=pc&&pc!=='all'?provName(pc):''}catch(e){}
+  w._hayK=w.name+w.address+w.area;
+  return w._hay=foldText(w.name+' '+w.address+' '+(w.area||'')+' '+pc+' '+(TYPE_WORDS[w.type||'winery']||''));
+}
 function placeNameHay(w){return foldText(w.name)}
 /* ===== Open now: checks the closest places' live hours from Google (shown only, never saved) ===== */
 var OPENNOW={max:40,run:0,timer:null};
