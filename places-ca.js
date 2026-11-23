@@ -1792,4 +1792,6 @@
 ["YellowBelly Brewery","288 Water St, St John's, NL A1C 5J9","Newfoundland and Labrador, NL","709-757-3780","yellowbellybrewery.com",47.5622,-52.709668,"ovt",0,"brewery","cif5ukq"],
 ["Bannerman Brewing Co.","90 Duckworth St, St John's, NL A1C 1E7","Newfoundland and Labrador, NL","709-747-2337","bannermanbrewing.com",47.570427,-52.701046,"ovt",0,"brewery","cwlm3zj"],
 ["Bonavista Brewing Taproom","29 Church St #27, Bonavista, NL A0C 1B0","Newfoundland and Labrador, NL","709-300-0636","bonavistabrewing.com",48.654049,-53.112155,"ovt",0,"brewery","c1j6k7k"]
+,["Wild Goose Winery","2145 Sun Valley Way, Okanagan Falls, BC V0H 1R2","Okanagan Valley, BC","250-497-8919","wildgoosewinery.ca",49.321996,-119.555782,"winebc",0,"winery","c223u9k"]
+,["Coyote's Run Estate Winery","485 Concession 5 Road, Niagara-on-the-Lake, ON L0S 1J0","Niagara-on-the-Lake, ON","905-682-8310","www.coyotesrunwinery.com",43.168589,-79.12199,"niagaraguide",0,"winery","cykljkm"]
 ];

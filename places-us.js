@@ -17483,4 +17483,13 @@
 ["Redbeard Brewing Co","120 S Lewis St, Staunton, VA 24401","Charlottesville & Monticello, VA","540-430-3532","redbeardbrews.com",38.147407,-79.074515,"obdb",0,"brewery","c0if037"],
 ["Redlight Redlight Beer Parlour and Brewery","2810 Corrine Dr, Orlando, FL 32803","Orlando & Central Florida, FL","407-893-9832","redlightredlightbeerparlour.com",28.567899,-81.348518,"obdb",0,"brewery","cm8a5xh"],
 ["Revelation Craft Brewing Co","19841 Central Ave, Rehoboth Beach, DE 19971","Delaware Beaches, DE","302-212-5674","revbeer.com",38.71517,-75.09865,"obdb",0,"brewery","cv7flyn"]
+,["Preston Farm And Winery","9282 W Dry Creek Rd, Healdsburg, CA 95448","Sonoma County, CA","707-433-3372","prestonfarmandwinery.com",38.704924,-122.973136,"ovt",0,"winery","cpmdtsv"]
+,["Dragon Run Brewing","1401 Centerville Rd, Shacklefords, VA 23156","Richmond, VA","804-286-0821","dragonrun.beer",37.548988,-76.735017,"ovt",0,"brewery","cu55if3"]
+,["Costa De Oro Winery","1331 Nicholson Ave, Santa Maria, CA 93454","San Luis Obispo, CA","805-922-1468","costadeorowines.com",34.937215,-120.417319,"ovt",0,"winery","cikxbv1"]
+,["Brigadoon Wine Co","25167 Ferguson Rd, Junction City, OR 97448","Eugene, OR","541-998-2600","brigadoonwineco.com",44.252578,-123.357362,"ovt",0,"winery","cnbzchw"]
+,["Friends and Neighbors Brewing","10991 NE State Hwy 104, Kingston, WA 98346","Seattle, WA","360-881-0452","fanbrewing.com",47.801182,-122.500068,"ovt",0,"brewery","cjgjwjp"]
+,["Chaumette Vineyards & Winery","24345 State Route WW, Ste Genevieve, MO 63670","Southeast Missouri, MO","573-747-1000","www.chaumette.com",37.763275,-90.159444,"ovt",0,"winery","cembv78"]
+,["Charbay Distillery","3001 S State St, Ukiah, CA 95482","Mendocino & Lake County, CA","707-462-2249","charbay.com",39.111362,-123.195975,"ovt",0,"distillery","ckw1jmc"]
+,["Cana Vineyards and Winery","38600 Little River Tpke, Middleburg, VA 20117","Loudoun Wine Country, VA","703-348-2458","www.canavineyards.com",38.978577,-77.668674,"ovt",0,"winery","cauv4dq"]
+,["West County Cider","208 Peckville Rd, Shelburne Falls, MA 01370","Pioneer Valley, MA","413-768-9318","westcountycider.com",42.623397,-72.660023,"ovt",0,"cidery","cuyrxf4"]
 ];
