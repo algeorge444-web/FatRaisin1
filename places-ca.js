@@ -1415,7 +1415,7 @@
 ["401 Cider Brewery","262 Orchard Rd, Cramahe, ON K0K 1S0","Northumberland, ON","905-355-2574","401cidercompany.com",44.02215,-77.905908,"ovt",0,"brewery","cj2cso3"],
 ["Bancroft Brewing Co.","59 Hastings St N, Bancroft, ON K0L 1C0","Haliburton Highlands, ON","613-334-8154","bancroftbrew.ca",45.058221,-77.854123,"ovt",0,"brewery","cfca3a1"],
 ["Spiritueux Alpha Tango","237 7e Rue, Val-d'Or, QC J9P 0G5","Quebec, QC","819-824-2212","alphatango.ca",48.062085,-77.793185,"ovt",0,"distillery","cdj35y5"],
-["Belmont Lake Brewery Page","54 Fire Route 19B, Havelock-Belmont-Methuen, ON K0L 1Z0","Peterborough & the Kawarthas, ON","705-803-3001","belmontlakebrewery.com",44.5325,-77.82002,"ovt",0,"brewery","c4t2sn7"],
+["Belmont Lake Brewery","54 Fire Route 19B, Havelock-Belmont-Methuen, ON K0L 1Z0","Peterborough & the Kawarthas, ON","705-803-3001","belmontlakebrewery.com",44.5325,-77.82002,"ovt",0,"brewery","c4t2sn7"],
 ["Celtic Brews","31 Kent St, Trent Hills, ON K0L 1L0","Peterborough & the Kawarthas, ON","705-661-2337","celticbrews.com",44.310582,-77.802468,"ovt",0,"brewery","c68clgr"],
 ["Hillier Creek Estates Winery","46 Stapleton Rd, Prince Edward, ON K0K 2J0","Prince Edward County, ON","613-399-5114","hilliercreekwinery.ca",43.971033,-77.463034,"ovt",0,"winery","cuz1yxx"],
 ["Morandin Wines","18055 Loyalist Pkwy, Prince Edward, ON K0K 3L0","Prince Edward County, ON","416-948-0746","morandinwines.ca",43.955599,-77.429691,"ovt",0,"winery","ctom7gc"],
