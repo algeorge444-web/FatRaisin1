@@ -1,0 +1,48 @@
+name: Data guard
+# After any change to the place files, and once a day: make sure removed places are really gone from them
+# (including places deleted in the app, read from the shared online data) and that the data version is bumped,
+# so every phone and every new visitor sees the change.
+on:
+  push:
+    branches: [main]
+    paths:
+      - places-us.js
+      - places-ca.js
+      - place-lists.js
+      - place-media.js
+      - data-version.js
+      - tools/data-guard.mjs
+      - .github/workflows/data-guard.yml
+  schedule:
+    - cron: '17 9 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: data-guard
+  cancel-in-progress: false
+
+jobs:
+  guard:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Check and fix the place files
+        run: node tools/data-guard.mjs --shared
+      - name: Save any fixes
+        run: |
+          if git diff --quiet; then echo "Nothing to fix."; exit 0; fi
+          git config user.name "fatraisin-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add places-us.js places-ca.js place-lists.js place-media.js data-version.js
+          git commit -m "Data guard: remove leftover removed places and bump the data version"
+          for i in 1 2 3; do
+            git pull --rebase origin main && git push origin HEAD:main && exit 0
+            sleep 10
+          done
+          exit 1

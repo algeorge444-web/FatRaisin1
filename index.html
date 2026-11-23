@@ -4693,7 +4693,9 @@ function ensureFirebase(){
       FB.auth.onAuthStateChanged(function(user){
         FB.settled=true;FB.attempting=false;
         S.fbUser=user;S.fbReady=true;S.fbErr='';
-        if(user){fbPull(user.uid);setTimeout(function(){try{catBackfill()}catch(e){}},2500)}
+        if(user){fbPull(user.uid);setTimeout(function(){try{catBackfill()}catch(e){}},2500);
+          /* places the owner deleted while signed out go out to everyone now */
+          setTimeout(function(){try{if(isOwner()&&Object.keys(S.ghours).some(function(k){return S.ghours[k]&&S.ghours[k].closed&&!(SHARED[k]&&SHARED[k].hc)}))sharedFbPublish()}catch(e){}},6000)}
         renderSoon();
       });
     }catch(e){
@@ -10627,7 +10629,13 @@ document.addEventListener('click',function(ev){
     case 'edit-event':S.sheet={kind:'event',id:id};renderSheet();break;
     case 'save-winery':saveWinery();break;
     case 'save-event':saveEvent();break;
-    case 'del-winery':(function(){var dw=winery(id);if(dw&&dw.shared&&/^p/.test(id)&&S.confirm==='w:'+id&&isOwner())catDb().then(function(db){return db.collection('places').doc(id).delete()}).catch(function(){})})();if(armConfirm('w:'+id)){delete S.photos[id];savePhotos();S.route=S.route.filter(function(x){return x!==id});saveRoute();S.favorites=S.favorites.filter(function(x){return x!==id});saveFavorites();S.wineries=S.wineries.filter(function(w){return w.id!==id});S.events=S.events.filter(function(e){return e.wid!==id});if(S.selWinery===id)S.selWinery=null;S.confirm=null;save();syncMarkers();render();toast('Winery deleted')}break;
+    case 'del-winery':(function(){var dw=winery(id);if(dw&&dw.shared&&/^p/.test(id)&&S.confirm==='w:'+id&&isOwner())catDb().then(function(db){return db.collection('places').doc(id).delete()}).catch(function(){})})();if(armConfirm('w:'+id)){delete S.photos[id];savePhotos();S.route=S.route.filter(function(x){return x!==id});saveRoute();S.favorites=S.favorites.filter(function(x){return x!==id});saveFavorites();S.wineries=S.wineries.filter(function(w){return w.id!==id});S.events=S.events.filter(function(e){return e.wid!==id});if(S.selWinery===id)S.selWinery=null;S.confirm=null;
+      /* a built-in place deleted by the owner is removed for everyone: it's marked closed in the shared data every phone reads,
+         and GitHub's daily data check then takes it out of the place files for good */
+      var everyone=false;
+      if(/^c/.test(id)&&isOwner()){S.ghours[id]=Object.assign({},S.ghours[id]||{},{closed:true});try{var rmL=removedIds();if(rmL.indexOf(id)<0){rmL.push(id);localStorage.setItem(RMKEY,JSON.stringify(rmL))}}catch(e){}saveGHours();everyone=!!S.fbUser}
+      save();syncMarkers();render();
+      toast(everyone?'Removed for everyone':(/^c/.test(id)&&isOwner()?'Removed on this phone. Sign in to remove it for everyone.':(/^p/.test(id)&&isOwner()?'Removed for everyone':'Removed')))}break;
     case 'del-event':if(armConfirm('e:'+id)){evUnpublish(id);S.events=S.events.filter(function(e){return e.id!==id});S.confirm=null;save();render();toast('Event deleted')}break;
     case 'gowinery':S.tab='wineries';S.wSearch='';S.wArea='all';S.wProvince='all';S.wType='all';render();(function(){var el=document.getElementById('w-'+id);if(el){el.scrollIntoView({block:'center'});el.classList.add('flash')}})();break;
     case 'viewplace':S.detailEventId=null;S.detailId=id;S.detailBack=S.tab;render();window.scrollTo(0,0);break;
