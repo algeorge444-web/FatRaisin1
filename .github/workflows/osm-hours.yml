@@ -11,6 +11,7 @@ on:
       - 'tools/osm-hours.mjs'
       - 'tools/osm-extract.mjs'
       - '.github/workflows/osm-hours.yml'
+      - 'tools/osm-regions-only.txt'
 permissions:
   contents: write
 concurrency:
@@ -34,23 +35,32 @@ jobs:
           CA="alberta british-columbia manitoba new-brunswick newfoundland-and-labrador northwest-territories nova-scotia nunavut ontario prince-edward-island quebec saskatchewan yukon"
           US="alabama alaska arizona arkansas california colorado connecticut delaware district-of-columbia florida georgia hawaii idaho illinois indiana iowa kansas kentucky louisiana maine maryland massachusetts michigan minnesota mississippi missouri montana nebraska nevada new-hampshire new-jersey new-mexico new-york north-carolina north-dakota ohio oklahoma oregon pennsylvania rhode-island south-carolina south-dakota tennessee texas utah vermont virginia washington west-virginia wisconsin wyoming"
           get() {
-            for try in 1 2 3; do curl -sSfL --retry 3 -o in.pbf "https://download.geofabrik.de/north-america/$1-latest.osm.pbf" && return 0; sleep 30; done; return 1
+            for try in 1 2 3; do curl -sSfL --retry 3 -A "FatRaisin-hours/1.0 (monthly, github.com/algeorge444-web/FatRaisin1)" -o in.pbf "https://download.geofabrik.de/north-america/$1-latest.osm.pbf" && return 0; sleep 30; done; return 1
           }
-          for r in $(for p in $CA; do echo canada/$p; done) $(for s in $US; do echo us/$s; done); do
-            n=$(basename $r)
-            if get $r; then
-              if osmium tags-filter -O -o hours.pbf in.pbf nwr/opening_hours &&
-                 osmium tags-filter -O -o keep.pbf hours.pbf nwr/craft nwr/industrial=brewery,winery,distillery nwr/tourism=wine_cellar nwr/microbrewery nwr/brewery nwr/amenity=pub,bar,restaurant,biergarten,cafe nwr/shop=wine,alcohol,beverages &&
-                 osmium export -O -f geojsonseq -o "$n.geojsonseq" keep.pbf; then
-                echo "$r: $(wc -l < $n.geojsonseq) places" | tee -a "$RUNNER_TEMP/regions.txt"
-              else
-                rm -f "$n.geojsonseq"; echo "$r: could not be read" | tee -a "$RUNNER_TEMP/regions.txt"
-              fi
+          ALL="$(for p in $CA; do echo canada/$p; done) $(for s in $US; do echo us/$s; done)"
+          # tools/osm-regions-only.txt (if there) limits this run to the regions listed in it; it is removed afterwards
+          if [ -s "$GITHUB_WORKSPACE/tools/osm-regions-only.txt" ]; then ALL="$(cat "$GITHUB_WORKSPACE/tools/osm-regions-only.txt")"; fi
+          one() {
+            r=$1; n=$(basename $r)
+            if ! get $r; then return 2; fi
+            if osmium tags-filter -O -o hours.pbf in.pbf nwr/opening_hours &&
+               osmium tags-filter -O -o keep.pbf hours.pbf nwr/craft nwr/industrial=brewery,winery,distillery nwr/tourism=wine_cellar nwr/microbrewery nwr/brewery nwr/amenity=pub,bar,restaurant,biergarten,cafe nwr/shop=wine,alcohol,beverages &&
+               osmium export -O -f geojsonseq -o "$n.geojsonseq" keep.pbf; then
+              echo "$r: $(wc -l < $n.geojsonseq) places" | tee -a "$RUNNER_TEMP/regions.txt"
             else
-              echo "$r: could not be downloaded" | tee -a "$RUNNER_TEMP/regions.txt"
+              rm -f "$n.geojsonseq"; echo "$r: could not be read" | tee -a "$RUNNER_TEMP/regions.txt"
             fi
             rm -f in.pbf hours.pbf keep.pbf
+          }
+          FAILED=""
+          for r in $ALL; do one $r || FAILED="$FAILED $r"; sleep 5; done
+          # the download site sometimes turns requests away for a while: wait, then try the missed regions again, slowly
+          for pass in 1 2; do
+            [ -z "$FAILED" ] && break
+            echo "trying again later:$FAILED"; sleep 600
+            LEFT=""; for r in $FAILED; do one $r || LEFT="$LEFT $r"; sleep 60; done; FAILED="$LEFT"
           done
+          for r in $FAILED; do echo "$r: could not be downloaded" | tee -a "$RUNNER_TEMP/regions.txt"; done
           df -h . | tail -1 | tee -a "$RUNNER_TEMP/regions.txt"
           ls -la *.geojsonseq | awk '{s+=$5} END {print "downloaded places files: " s/1e6 " MB"}' | tee -a "$RUNNER_TEMP/regions.txt"
           node --max-old-space-size=6000 "$GITHUB_WORKSPACE/tools/osm-extract.mjs" "$RUNNER_TEMP/osm.json" *.geojsonseq 2>&1 | tee -a "$RUNNER_TEMP/regions.txt"
@@ -65,6 +75,7 @@ jobs:
             git fetch -q origin main && git reset -q --hard origin/main
             node tools/osm-hours.mjs --file "$RUNNER_TEMP/osm.json"
             { echo; echo "Regions:"; cat "$RUNNER_TEMP/regions.txt"; } >> tools/osm-hours-last-run.txt
+            git rm -q --ignore-unmatch tools/osm-regions-only.txt
             git add place-media.js place-lists.js data-version.js tools/osm-hours-last-run.txt
             git diff --cached --quiet && exit 0
             git commit -q -m "Opening hours from OpenStreetMap: $(cat tools/.osm-hours-summary) added"
