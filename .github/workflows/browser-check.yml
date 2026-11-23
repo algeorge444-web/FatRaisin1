@@ -1,0 +1,66 @@
+name: Check websites in a real browser
+# Runs when tools/browser-check-list.json changes (or by hand). Opens each listed website in a real
+# browser (for sites that block simple checks) and saves tools/browser-check-result.json. Changes no place data.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'tools/browser-check-list.json'
+      - 'tools/browser-check.mjs'
+permissions:
+  contents: write
+concurrency:
+  group: browser-check
+  cancel-in-progress: true
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [0, 1, 2, 3, 4, 5, 6, 7]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install the browser
+        run: |
+          npm install --no-save playwright@1.49.1
+          npx playwright install --with-deps chromium
+      - name: Open this job's share of the websites
+        run: SHARD=${{ matrix.shard }} SHARDS=8 node tools/browser-check.mjs || echo "{}" > parts/b-${{ matrix.shard }}.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: browser-part-${{ matrix.shard }}
+          path: parts/
+  save:
+    needs: check
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          path: parts
+      - name: Join the results and save them
+        run: |
+          node -e "
+            const fs=require('fs'),path=require('path');const out={};
+            const walk=d=>fs.readdirSync(d).forEach(f=>{const p=path.join(d,f);fs.statSync(p).isDirectory()?walk(p):Object.assign(out,JSON.parse(fs.readFileSync(p,'utf8')))});
+            walk('parts');fs.writeFileSync('tools/browser-check-result.json',JSON.stringify(out));console.log(Object.keys(out).length,'saved');"
+          git config user.name "FatRaisin website check"
+          git config user.email "actions@users.noreply.github.com"
+          for try in 1 2 3; do
+            cp tools/browser-check-result.json "$RUNNER_TEMP/r.json"
+            git fetch -q origin main && git reset -q --hard origin/main
+            cp "$RUNNER_TEMP/r.json" tools/browser-check-result.json
+            git add tools/browser-check-result.json
+            git diff --cached --quiet && exit 0
+            git commit -q -m "Browser website check results"
+            git push -q origin HEAD:main && exit 0
+            sleep 15
+          done
+          exit 1
