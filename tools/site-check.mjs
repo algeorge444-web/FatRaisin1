@@ -18,14 +18,20 @@ async function get(u) {
       const ctl = new AbortController();
       const t = setTimeout(() => ctl.abort(), 20000);
       const r = await fetch(url, { headers: { 'User-Agent': UA, 'Accept': 'text/html,*/*', 'Accept-Language': 'en-US,en' }, redirect: 'follow', signal: ctl.signal });
-      const html = (await r.text()).slice(0, 300000);
+      let html = '';
+      if (r.body) {
+        const rd = r.body.getReader(); const dec = new TextDecoder();
+        while (html.length < 300000) { const { done, value } = await rd.read(); if (done) break; html += dec.decode(value, { stream: true }); }
+        try { await rd.cancel(); } catch (e) {}
+      }
+      html = html.slice(0, 300000);
       clearTimeout(t);
       const text = html.replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>/gi, ' ').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ');
       const title = (html.match(/<title[^>]*>([^<]*)/i) || [, ''])[1].trim().slice(0, 80);
       const s = SALE.exec(r.url + ' ' + title + ' ' + text.slice(0, 6000)) || SALE.exec(html.slice(0, 20000));
       const c = CLOSED.exec(text);
-      return { st: r.status, final: r.url, title, sale: s ? s[0] : '', closed: c ? text.slice(Math.max(0, c.index - 100), c.index + 120) : '' };
-    } catch (e) { /* try plain http next */ }
+      return { st: r.status, final: r.url, title, sale: s ? s[0] : '', closed: c ? text.slice(Math.max(0, c.index - 100), c.index + 120) : '', size: html.length };
+    } catch (e) { if (typeof t !== 'undefined') clearTimeout(t); /* try plain http next */ }
   }
   return { st: 0 };
 }
