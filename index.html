@@ -1423,11 +1423,16 @@ function personalPlaces(){
   var removed=Object.keys(seed).filter(function(id){return !have[id]&&SEED_REMOVED.indexOf(seed[id].name)<0});
   return {mine:mine,edits:edits,removed:removed};
 }
-function save(){HASUS_C.arr=null;
-  try{var p=personalPlaces();localStorage.setItem(PKEY2,JSON.stringify({v:SEED_VERSION,mine:p.mine,edits:p.edits,removed:p.removed,events:S.events.filter(function(e){return !e.seed})}));
+/* background saves made while the app is opening are grouped into one, a moment later */
+var SSOON=null;
+function saveSoon(localOnly){if(SSOON)return;SSOON=setTimeout(function(){SSOON=null;saveLocal()},800)}
+function save(){saveLocal();fbPushDebounced()}
+var SAVED_P2='';
+function saveLocal(){HASUS_C.arr=null;
+  try{var p=personalPlaces(),str=JSON.stringify({v:SEED_VERSION,mine:p.mine,edits:p.edits,removed:p.removed,events:S.events.filter(function(e){return !e.seed})});
+    if(str!==SAVED_P2){localStorage.setItem(PKEY2,str);SAVED_P2=str}
     if(localStorage.getItem(KEY))localStorage.removeItem(KEY);   /* the old full copy: no longer needed, frees space */
-  }catch(e){}
-  fbPushDebounced()}
+  }catch(e){}}
 function savePhotos(){try{localStorage.setItem(PKEY,JSON.stringify(S.photos));return true}catch(e){return false}}
 /* storage keys used while starting up; declared here so they exist before init runs */
 var CLKEY='cellardoor:cellar:v1',CPHKEY='cellardoor:cellarphotos:v1',CPH={},RMKEY='cellardoor:removed:v1',ATKEY='cellardoor:attending:v1';
@@ -1539,7 +1544,6 @@ function savePinOk(){try{localStorage.setItem(PINOKKEY,JSON.stringify(PINOK))}ca
   try{S.pinMiss=JSON.parse(localStorage.getItem(PMKEY))||{}}catch(e){S.pinMiss={}}
   try{S.ghours=JSON.parse(localStorage.getItem(GHKEY))||{}}catch(e){S.ghours={}}
   try{var sp=JSON.parse(localStorage.getItem(SPKEY)||'null');if(sp&&sp.pins)SHARED=cleanShared(sp.pins)}catch(e){SHARED={}}
-  try{localStorage.setItem(SPKEY,JSON.stringify({pins:SHARED,at:Date.now()}))}catch(e){}
   dedupeWineries();
   try{dedupeByAddress()}catch(e){}
   try{removeClosedPlaces()}catch(e){}
@@ -1573,8 +1577,7 @@ function savePinOk(){try{localStorage.setItem(PINOKKEY,JSON.stringify(PINOK))}ca
 })();
 function dedupeWineries(){
   if(S.wineries.some(function(w){return ALWAYS_REMOVE.indexOf(w.name)>-1})){S.wineries=S.wineries.filter(function(w){return ALWAYS_REMOVE.indexOf(w.name)<0});try{save()}catch(e){}}
-  var freshWs=seedWineries();
-  var freshByName={};freshWs.forEach(function(w){freshByName[w.name]=w.id});
+  var si=seedIndex(),freshByName={};Object.keys(si).forEach(function(id){freshByName[si[id].name]=id});
   var seenSeedNames={},idMap={},kept=[],changed=false;
   S.wineries.forEach(function(w){
     var canonical=freshByName[w.name];
@@ -1598,7 +1601,16 @@ function addrKey(w){
   var a=String(w.address||'').toLowerCase().replace(/[\u2019']/g,'').replace(/\bstreet\b/g,'st').replace(/\broad\b/g,'rd').replace(/\bavenue\b/g,'ave').replace(/\bdrive\b/g,'dr').replace(/\bhighway\b/g,'hwy').replace(/[.,]/g,' ').replace(/\s+/g,' ').trim();
   return /^\d/.test(a)?a+'|'+(w.type||'winery'):'';
 }
+/* the address check finds nothing new unless the places changed, so it remembers when it last came up empty */
+var DDKEY='cellardoor:dedupeok:v1';
+function dedupeKey(){var p='';try{p=String((localStorage.getItem(PKEY2)||'').length)}catch(e){}return SEED_VERSION+'|'+S.wineries.length+'|'+p}
 function dedupeByAddress(){
+  try{if(localStorage.getItem(DDKEY)===dedupeKey())return []}catch(e){}
+  var r=dedupeByAddress0();
+  if(!r.length)try{localStorage.setItem(DDKEY,dedupeKey())}catch(e){}
+  return r;
+}
+function dedupeByAddress0(){
   var groups={};
   S.wineries.forEach(function(w){var k=addrKey(w);if(k)(groups[k]=groups[k]||[]).push(w)});
   var drop={},idMap={},removed=[];
@@ -1871,19 +1883,23 @@ document.addEventListener('visibilitychange',function(){
     try{navigator.permissions.query({name:'geolocation'}).then(function(r){if(r.state==='granted'){S.locPerm='granted';locate(null,true)}else if(r.state!==S.locPerm){S.locPerm=r.state;if(!S.sheet)render()}}).catch(function(){})}catch(e){}
   }
 });
+/* background updates (photos, events, shared data, sign-in, location) arrive one after another while the app opens;
+   they share one redraw a moment later instead of each rebuilding the page */
+var RSOON=null;
+function renderSoon(){if(RSOON)return;RSOON=setTimeout(function(){RSOON=null;try{render()}catch(e){}},120)}
 function initLocPerm(){
   try{S.locDismissed=localStorage.getItem(LDKEY)==='1'}catch(e){}
   if(location.protocol==='file:'){S.locPerm='file';render();return}
   if(!navigator.geolocation){S.locPerm='unsupported';render();return}
   if(window.isSecureContext===false){S.locPerm='insecure';render();return}
-  S.locPerm='prompt';render();
+  S.locPerm='prompt';renderSoon();
   try{
     if(navigator.permissions&&navigator.permissions.query){
       navigator.permissions.query({name:'geolocation'}).then(function(res){
         var apply=function(){
           S.locPerm=res.state;
           if(res.state==='granted'&&!S.me&&!S.meBusy)locate(null,true);
-          else if(!S.sheet)render();
+          else if(!S.sheet)renderSoon();
         };
         apply();res.onchange=apply;
       }).catch(function(){});
@@ -2320,7 +2336,7 @@ function sharedFbLoad(){
     var changed=JSON.stringify(pins)!==JSON.stringify(SHARED);
     SHARED=pins;SHFB.last=x.updated||0;
     try{localStorage.setItem(SPKEY,JSON.stringify({pins:pins,at:Date.now(),src:'firebase'}))}catch(e){}
-    if(changed){var gone=[];try{gone=removeClosedPlaces()}catch(e){}applyPins();save();try{refreshMarkerPositions()}catch(e){}if(!S.sheet)render()}
+    if(changed){var gone=[];try{gone=removeClosedPlaces()}catch(e){}applyPins();saveSoon();try{refreshMarkerPositions()}catch(e){}if(!S.sheet)renderSoon()}
   }).catch(function(){});
 }
 /* owner: save everything to Firebase (a few seconds after any change, or straight away from the button) */
@@ -2387,6 +2403,8 @@ function sharedFbBlockHTML(){
 }
 function loadSharedPins(){
   if(location.protocol.indexOf('http')!==0){setTimeout(sharedFbLoad,1500);return}
+  /* the Firebase copy is newer than pins.json; once this phone has it, go straight to Firebase */
+  try{var sp0=JSON.parse(localStorage.getItem(SPKEY)||'null');if(sp0&&sp0.src==='firebase'){sharedFbLoad();return}}catch(e){}
   fetch('pins.json?ts='+Date.now(),{cache:'no-store'}).then(function(r){if(!r.ok)throw new Error('none');return r.json()}).then(function(j){
     var pins=j&&j.pins;
     if(!pins||typeof pins!=='object')return;
@@ -2397,7 +2415,7 @@ function loadSharedPins(){
     try{localStorage.setItem(SPKEY,JSON.stringify({pins:pins,at:Date.now()}))}catch(e){}
     var gone=[];try{gone=removeClosedPlaces()}catch(e){}
     try{if(applyGFields())changed=true}catch(e){}
-    if(changed||gone.length){applyPins();save();refreshMarkerPositions();if(!S.sheet)render()}
+    if(changed||gone.length){applyPins();saveSoon();refreshMarkerPositions();if(!S.sheet)renderSoon()}
   }).catch(function(){}).then(function(){sharedFbLoad()});
 }
 function pinsExportObj(includeAll){
@@ -4172,7 +4190,7 @@ function loadMedia(){
     if(M.LOGOS)LOGOS=Object.assign({},M.LOGOS,FRL.LOGOS||{});
     if(M.HOURS)HOURS=Object.assign({},M.HOURS,FRL.HOURS||{});
     if(M.TAGS)TAGS=M.TAGS;
-    MEDIA_READY=true;try{render();if(S.sheet)renderSheet()}catch(e){}};
+    MEDIA_READY=true;try{renderSoon();if(S.sheet)renderSheet()}catch(e){}};
   sc.onerror=function(){window.__mediaLoading=0};
   document.head.appendChild(sc);
 }
@@ -4190,8 +4208,8 @@ function mergeEventData(){
 }
 function loadEventData(){
   if(window.__evDataLoading)return;window.__evDataLoading=1;
-  var sc=document.createElement('script');sc.src='events-data.js?t='+Math.floor(Date.now()/36e5);sc.async=true;
-  sc.onload=function(){try{if(mergeEventData()&&!S.sheet)render()}catch(e){}};
+  var sc=document.createElement('script');sc.src='events-data.js?t='+Math.floor(Date.now()/864e5);sc.async=true;
+  sc.onload=function(){try{if(mergeEventData()&&!S.sheet)renderSoon()}catch(e){}};
   sc.onerror=function(){window.__evDataLoading=0};
   document.head.appendChild(sc);
 }
@@ -4258,6 +4276,25 @@ function queueGPhoto(id){
   if(GPH[id])return;
   var w=winery(id);if(!wantsGPhoto(w))return;
   GPH[id]={busy:true};GPH_Q.push(id);gphPump();
+}
+/* place photos load as they come into view: a row of cards wakes up all at once when the row is on screen,
+   the top photo of a place or event page straight away, everything else as you scroll near it */
+var LZ_OBS=null;
+function lazyBg(html){return String(html).replace(/--img:url\(&quot;/g,'--lz:url(&quot;')}
+function wakeBg(el){var v=el.style.getPropertyValue('--lz');if(v){el.style.setProperty('--img',v);el.style.removeProperty('--lz')}}
+function wakeBgs(){
+  if(LZ_OBS)LZ_OBS.disconnect();
+  var app=$('#app');if(!app)return;
+  var els=[].slice.call(app.querySelectorAll('[style*="--lz:"]'));if(!els.length)return;
+  if(!('IntersectionObserver' in window)){els.forEach(wakeBg);return}
+  LZ_OBS=new IntersectionObserver(function(entries){entries.forEach(function(en){if(!en.isIntersecting)return;LZ_OBS.unobserve(en.target);
+    if(en.target.classList.contains('hgrid'))[].forEach.call(en.target.querySelectorAll('[style*="--lz:"]'),wakeBg);else wakeBg(en.target)})},{rootMargin:'500px 0px'});
+  var rows=[];
+  els.forEach(function(el){
+    if(el.classList.contains('detailhero')){wakeBg(el);return}
+    var row=el.closest('.hgrid');
+    if(row){if(rows.indexOf(row)<0){rows.push(row);LZ_OBS.observe(row)}}else LZ_OBS.observe(el);
+  });
 }
 function observeCardPhotos(){
   if(GPH_OBS)GPH_OBS.disconnect();
@@ -4596,7 +4633,7 @@ function ensureFirebase(){
         FB.settled=true;FB.attempting=false;
         S.fbUser=user;S.fbReady=true;S.fbErr='';
         if(user){fbPull(user.uid);setTimeout(function(){try{catBackfill()}catch(e){}},2500)}
-        render();
+        renderSoon();
       });
     }catch(e){
       FB.settled=true;FB.attempting=false;
@@ -5444,7 +5481,13 @@ function cleanDuplicateEvents(quiet){
     .then(function(){if(!quiet)toast(plural(extra.length,'duplicate event')+' removed for everyone');if(S.sheet&&S.sheet.kind==='data')renderSheet();return extra.length})
     .catch(function(){return extra.length});
 }
-function homeEventsSection(){
+/* the two heaviest Home sections are only worked out again when something they show has changed */
+var HMEMO={};
+function homeMemo(name,key,fn){var k=key.join('|');if(HMEMO[name]&&HMEMO[name].k===k)return HMEMO[name].h;var h=fn();HMEMO[name]={k:k,h:h};return h}
+function homeMemoBase(){return [todayStr(),S.events.length,S.wineries.length,S.country,MEDIA_READY?1:0,S.me?Math.round(S.me.lat*50)+','+Math.round(S.me.lng*50):'-',
+  Object.keys(S.visited||{}).length,S.favorites.join(','),(S.attending||[]).join(','),(S.profile&&S.profile.home)||'',S.evProv||'',SEED_VERSION,Object.keys(S.photos||{}).length]}
+function homeEventsSection(){return homeMemo('ev',homeMemoBase().concat([evProvince()]),homeEventsSection0)}
+function homeEventsSection0(){
   var p=evProvince(),today=todayStr(),wk=new Date(Date.now()+7*864e5).toISOString().slice(0,10),later=new Date(Date.now()+30*864e5).toISOString().slice(0,10);
   var pool=dedupeEvents(S.events.filter(function(e){return e.date>=today&&eventInProv(e,p)&&!(e.shared&&e.src!=='owner'&&isRoutineEv(e))})).sort(function(a,b){return (a.date+(a.time||'')).localeCompare(b.date+(b.time||''))});
   var list=pool.filter(function(e){return e.date<=wk}),title='This week';
@@ -5460,7 +5503,8 @@ function homeEventsSection(){
 /* places you haven't stamped yet that are worth the drive: not the ones already in "Closest to you", a mix of
    wineries, breweries, cideries and distilleries, favouring places with an event coming up, a real photo or extras
    (food, patio, music...), and a fresh pick each day */
-function homeNextStampSection(){
+function homeNextStampSection(){return homeMemo('ns',homeMemoBase(),homeNextStampSection0)}
+function homeNextStampSection0(){
   var near={};
   if(S.me)S.wineries.filter(hasCoord).slice().sort(function(a,b){return haversineKm(S.me,a)-haversineKm(S.me,b)}).slice(0,8).forEach(function(w){near[w.id]=1});
   var cand=S.wineries.filter(function(w){return hasCoord(w)&&!isVisited(w.id)&&!near[w.id]});
@@ -5478,7 +5522,7 @@ function homeNextStampSection(){
   var scored=cand.map(function(w){
     var t=w.type||'winery',img=placeImg(w),sc=rnd()*3;
     if(evAt[w.id])sc+=3;
-    if(img&&img!==gen[t]&&img!==sceneURL(w))sc+=2;
+    if(S.photos[w.id]||DEFAULT_PHOTOS[w.name]||webPhoto(w)||placeLogo(w))sc+=2;   /* has a real photo (same answer, without drawing a placeholder) */
     if(placeTags(w))sc+=Math.min(2,placeTags(w).length*0.5);
     if(FEATURED[t]&&FEATURED[t].indexOf(w.name)>-1)sc+=1.5;
     sc+=Math.max(0,1.5-(typeN[t]||0)*0.3);
@@ -7488,7 +7532,7 @@ function evPublish(list){
   });
 }
 function evUnpublish(id){if(!isOwner())return;catDb().then(function(db){return db.collection('events').doc(id).delete()}).catch(function(){})}
-function saveEventsLocal(){try{localStorage.setItem(KEY,JSON.stringify({wineries:placesForSaving(),events:S.events.filter(function(e){return !e.seed})}))}catch(e){}}
+function saveEventsLocal(){saveSoon(true)}
 /* everyone: load upcoming shared events and merge them in */
 function sharedEventsLoad(){
   /* only events the owner has added are read from Firebase; everything found automatically on websites and calendars
@@ -7511,8 +7555,8 @@ function sharedEventsLoad(){
     if(n<1500){var today=todayStr(),before=S.events.length;
       S.events=S.events.filter(function(e){return !(e.shared&&e.date>=today&&!live[e.id])&&!(e.shared&&(isRoutineEv(e)||isAutoEventDull(e.src||'',e.title)))});
       if(S.events.length!==before)changed++}
-    try{if(mergeEventData())changed++}catch(e){}
-    if(changed){saveEventsLocal();if(!S.sheet&&(S.tab==='events'||S.tab==='home'))render()}
+    var webN=0;try{webN=mergeEventData()}catch(e){}
+    if(changed||webN){if(changed)saveEventsLocal();if(!S.sheet&&(S.tab==='events'||S.tab==='home'))renderSoon()}
   }).catch(function(){});
 }
 /* owner: find events on every place's website, through the helper */
@@ -10117,14 +10161,14 @@ function render(){
     add.style.display='none';
     $('#mapTab').hidden=true;
     $('#app').hidden=false;
-    $('#app').innerHTML=detailHTML(winery(S.detailId));
+    $('#app').innerHTML=lazyBg(detailHTML(winery(S.detailId)));
     (function(id){var dw=winery(id);if(dw&&!GLIVE[id])gLive(dw).then(function(){if(S.detailId===id&&!S.sheet){var y=window.scrollY;render();window.scrollTo(0,y)}});
       if(dw&&!REV[id])loadReviews(dw).then(function(){if(S.detailId===id&&!S.sheet){var y=window.scrollY;render();window.scrollTo(0,y)}})})(S.detailId);
   }else if(S.detailEventId){
     add.style.display='none';
     $('#mapTab').hidden=true;
     $('#app').hidden=false;
-    $('#app').innerHTML=eventDetailHTML(S.events.find(function(x){return x.id===S.detailEventId}));
+    $('#app').innerHTML=lazyBg(eventDetailHTML(S.events.find(function(x){return x.id===S.detailEventId})));
   }else if(S.tab==='map'){
     $('#app').hidden=true;
     var mt=$('#mapTab');mt.hidden=false;
@@ -10148,7 +10192,7 @@ function render(){
     $('#mapTab').hidden=true;
     $('#app').hidden=false;
     var body=S.tab==='home'?homeHTML():S.tab==='events'?eventsHTML():S.tab==='account'?accountHTML():S.tab==='favorites'?favoritesHTML():S.tab==='cellar'?cellarHTML():wineriesHTML();
-    $('#app').innerHTML=(S.tab==='account'||S.tab==='favorites'||S.tab==='cellar'?'':locPromptHTML())+(S.tab==='home'||S.tab==='account'||S.tab==='favorites'||S.tab==='cellar'?'':bannerHTML())+body;
+    $('#app').innerHTML=lazyBg((S.tab==='account'||S.tab==='favorites'||S.tab==='cellar'?'':locPromptHTML())+(S.tab==='home'||S.tab==='account'||S.tab==='favorites'||S.tab==='cellar'?'':bannerHTML())+body);
   }
   var rb=$('#routeBtn');
   if(S.route.length){rb.classList.add('on');rb.innerHTML=I.route+'<span>Plan route \u00b7 '+S.route.length+'</span>'}
@@ -10158,6 +10202,7 @@ function render(){
   syncPinPlaceUI();
   syncPageZoomLock();
   navPage(y0);
+  try{wakeBgs()}catch(e){}
   try{observeCardPhotos()}catch(e){}
   try{revealCards()}catch(e){}
   if(!REDUCED){var pageKey=S.tab+'|'+(S.detailId||'')+'|'+(S.detailEventId||'');if(render.lastPage!==pageKey){render.lastPage=pageKey;var ap=$('#app');ap.classList.remove('pagein');void ap.offsetWidth;ap.classList.add('pagein')}}
@@ -10845,7 +10890,9 @@ setTimeout(function(){try{sharedEventsLoad()}catch(e){}},1500);
 setTimeout(function(){try{sharedPlacesLoad()}catch(e){}},1200);
 setTimeout(function(){try{loadMedia()}catch(e){}},250);
 setTimeout(function(){try{loadEventData()}catch(e){}},2200);
-setTimeout(function(){try{loadMapLibre().then(function(){try{fetch(MAP_STYLE_URL)}catch(e){}})}catch(e){}},2500);
+(function(){var c=navigator.connection||{};if(c.saveData||/(^|-)2g|3g/.test(c.effectiveType||''))return;
+  var go=function(){try{loadMapLibre().then(function(){try{fetch(MAP_STYLE_URL)}catch(e){}})}catch(e){}};
+  setTimeout(function(){if(window.requestIdleCallback)requestIdleCallback(go,{timeout:6000});else go()},7000)})();
 setTimeout(function(){try{refineVisibleMarkers()}catch(e){}},4000);
 })();
 </script>
