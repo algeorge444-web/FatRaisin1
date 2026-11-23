@@ -1,0 +1,41 @@
+name: Recheck failed websites
+# Runs when tools/site-recheck-list.json changes (or by hand). For places whose website failed the
+# website check: looks up the domain, reads the page and searches the web for the place's current
+# site. Saves tools/site-recheck-result.json. Changes no place data.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'tools/site-recheck-list.json'
+      - 'tools/site-recheck.mjs'
+permissions:
+  contents: write
+concurrency:
+  group: site-recheck
+  cancel-in-progress: true
+jobs:
+  recheck:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node tools/site-recheck.mjs
+      - name: Save the results
+        run: |
+          git config user.name "FatRaisin website check"
+          git config user.email "actions@users.noreply.github.com"
+          for try in 1 2 3; do
+            cp tools/site-recheck-result.json "$RUNNER_TEMP/r.json"
+            git fetch -q origin main && git reset -q --hard origin/main
+            cp "$RUNNER_TEMP/r.json" tools/site-recheck-result.json
+            git add tools/site-recheck-result.json
+            git diff --cached --quiet && exit 0
+            git commit -q -m "Website recheck results"
+            git push -q origin HEAD:main && exit 0
+            sleep 15
+          done
+          exit 1
