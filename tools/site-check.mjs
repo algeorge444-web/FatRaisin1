@@ -5,7 +5,11 @@
 //   home: for a "page not found" link, the status of the site's home page and its address
 import fs from 'node:fs';
 
-const LIST = JSON.parse(fs.readFileSync('tools/site-check-list.json', 'utf8'));
+const ALL = JSON.parse(fs.readFileSync('tools/site-check-list.json', 'utf8'));
+// Optional slice (FROM/TO env) so big lists can be split across several runs; OUT env = output file.
+const FROM = +(process.env.FROM || 0), TO = +(process.env.TO || ALL.length);
+const LIST = ALL.slice(FROM, TO);
+const OUTFILE = process.env.OUT || 'tools/site-check-result.json';
 const UA = 'Mozilla/5.0 (iPhone; CPU iPhone OS 18_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.1 Mobile/15E148 Safari/604.1';
 const SALE = /(domain (name )?(is |may be )?for sale|buy this domain|this (website|domain) is for sale|hugedomains|afternic|dan\.com|sedoparking|parkingcrew|bodis\.com|domain has expired|website expired|account (has been )?suspended|parked free|\/lander\b)/i;
 const CLOSED = /(permanently closed|closed permanently|we have (officially |permanently )?closed|closed for good|closed (our|its) doors|ceased operations|no longer (open|operating|in business)|out of business)/i;
@@ -50,7 +54,7 @@ async function worker() {
     out[p.id] = r;
   }
 }
-await Promise.all(Array.from({ length: 48 }, worker));
-fs.writeFileSync('tools/site-check-result.json', JSON.stringify(out));
+await Promise.all(Array.from({ length: 32 }, worker));
+fs.writeFileSync(OUTFILE, JSON.stringify(out));
 const n = Object.values(out);
 console.log(n.length, 'checked;', n.filter(x => x.st && x.st < 400).length, 'ok;', n.filter(x => !x.st).length, 'unreachable;', n.filter(x => x.sale).length, 'for sale');
