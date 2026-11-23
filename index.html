@@ -987,6 +987,32 @@ button.gtk{cursor:pointer}button.gtk[aria-pressed="true"]{background:var(--accen
 .pchips{flex-wrap:nowrap!important;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;padding-bottom:2px}
 .pchips::-webkit-scrollbar{display:none}
 .pchips button{flex:0 0 auto}
+
+/* ===== place page, refreshed: gold-and-wine cards to match the header and the cellar bottle page ===== */
+.detailhero{height:250px;border-radius:22px;padding:18px 18px 20px;box-shadow:0 14px 30px -18px rgba(60,8,24,.55)}
+.detailhero::after{background:linear-gradient(180deg,rgba(40,6,18,0) 35%,rgba(40,6,18,.55) 62%,rgba(40,6,18,.92) 100%)}
+.detailhero h2{font-size:27px;line-height:1.12;text-shadow:0 2px 10px rgba(0,0,0,.35)}
+.detailhero h2::after{content:"";display:block;width:44px;height:2px;margin:9px 0 7px;background:linear-gradient(90deg,#E6C27A,#A47424);border-radius:2px}
+.detailhero p{color:#F1D9A4;font-size:13.5px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;margin-top:0}
+.daddr a{color:var(--ink)}.daddr .i{color:#A47424}
+.dicons .ibtn .i,.dicons .ibtn svg{color:#A47424}
+.dcard{background:var(--surface);border:1px solid rgba(92,16,39,.08);border-radius:18px;padding:14px 16px 12px;margin:14px 0;box-shadow:0 6px 18px -14px rgba(60,8,24,.45)}
+.detailsec{margin:14px 0;background:var(--surface);border:1px solid rgba(92,16,39,.08);border-radius:18px;padding:14px 16px;box-shadow:0 6px 18px -14px rgba(60,8,24,.45)}
+.detailsec>h3,.dcard>h3{font-family:var(--serif);font-size:20px;color:#5C1027;text-transform:none;letter-spacing:0;margin-bottom:10px;display:flex;align-items:center;gap:10px}
+.detailsec>h3::after,.dcard>h3::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,rgba(164,116,36,.55),rgba(164,116,36,0))}
+.detailsec .note{font-size:12.5px}
+.dcard .hourslist{border:0;border-radius:0;background:none;max-width:none;margin:0}
+.dcard .hourslist .hrow{padding:8px 4px;font-size:14.5px;border-radius:10px}
+.dcard .hourslist .hrow+.hrow{border-top:1px dashed rgba(92,16,39,.12)}
+.dcard .hourslist .hrow span:last-child{color:var(--muted)}
+.dcard .hourslist .hrow.today{background:linear-gradient(90deg,rgba(201,151,62,.16),rgba(201,151,62,.04));border-top-color:transparent;padding-left:10px;box-shadow:inset 3px 0 0 #A47424}
+.dcard .hourslist .hrow.today+.hrow{border-top-color:transparent}
+.dcard .hourslist .hrow.today span{color:#5C1027;font-weight:700}
+.dcard .hourslist .hrow .cl{color:#B07A86!important}
+.dcard .note{font-size:12px;margin:8px 0 0!important}
+.revs .empty2{border:0!important;background:none!important;padding:6px 0 2px!important}
+.detailsec.dmanage{background:none;border:0;box-shadow:none;padding:4px 2px}
+.detailsec.dmanage>h3{font-size:15px;color:var(--muted)}
 </style>
 </head>
 <body>
@@ -3707,10 +3733,10 @@ function hoursDetailHTML(w){
   if(g&&g.closed)return '<p class="hours" style="color:#B3261E">'+I.clock+' This place is listed as permanently closed.</p>';
   if(g&&g.week){
     var today=todayHoursLine(g.week);
-    return '<div class="hourslist">'+g.week.map(function(line){
+    return '<div class="dcard dhours"><h3>Opening hours</h3><div class="hourslist">'+g.week.map(function(line){
       var t=String(line).replace(/^[^:]+:\s*/,'');var isToday=t===today&&String(line).toLowerCase().indexOf(new Date().toLocaleDateString(undefined,{weekday:'long'}).toLowerCase())===0;
-      return '<div class="hrow'+(isToday?' today':'')+'"><span>'+esc(String(line).split(':')[0])+'</span><span>'+esc(t)+'</span></div>';
-    }).join('')+'</div><p class="note" style="margin-top:4px">Hours from the place\u2019s website or OpenStreetMap. Holiday and seasonal hours can differ, so check before you go.</p>';
+      return '<div class="hrow'+(isToday?' today':'')+'"><span>'+esc(String(line).split(':')[0])+(isToday?' \u00b7 today':'')+'</span><span'+(/closed/i.test(t)?' class="cl"':'')+'>'+esc(t)+'</span></div>';
+    }).join('')+'</div><p class="note">Hours from the place\u2019s website or OpenStreetMap. Holiday and seasonal hours can differ, so check before you go.</p></div>';
   }
   return w.hours?'<p class="hours">'+I.clock+' '+esc(w.hours)+'</p>':'';
 }
@@ -4222,7 +4248,7 @@ function eventDetailHTML(e){
       (w?'<button class="btn" data-action="viewplace" data-id="'+w.id+'">'+I.pin+'<span>About '+esc(w.name)+'</span></button>':'')+
       (w&&hasCoord(w)?'<button class="btn" data-action="directions" data-id="'+w.id+'">'+I.route+'<span>Directions</span></button>':'')+
     '</div>'+
-    (isOwner()?'<div class="detailsec"><h3>Manage</h3><div class="rowend">'+
+    (isOwner()?'<div class="detailsec dmanage"><h3>Manage</h3><div class="rowend">'+
     '<button class="link" data-action="edit-event" data-id="'+e.id+'">Edit</button>'+
     '<button class="link danger" data-action="del-event" data-id="'+e.id+'">'+(S.confirm==='e:'+e.id?'Tap again to delete':'Delete')+'</button>'+
     '</div></div>':'');
@@ -5432,7 +5458,7 @@ function detailHTML(w){
     igSectionHTML(w)+
     reviewsSectionHTML(w)+
     (fine.length?'<p class="fine dfine">'+esc(fine.join(' '))+'</p>':'')+
-    '<div class="detailsec"><h3>Manage</h3><div class="rowend">'+
+    '<div class="detailsec dmanage"><h3>Manage</h3><div class="rowend">'+
     '<button class="link" data-action="photo" data-id="'+w.id+'">'+(hasPhoto?'Change photo':'Add photo')+'</button>'+(hasPhoto?'<button class="link" data-action="rmphoto" data-id="'+w.id+'">Remove photo</button>':'')+
     (isOwner()?(hasCoord(w)?'<button class="link" data-action="pin-fix" data-id="'+w.id+'">Fix pin</button>':'')+'<button class="link" data-action="edit-winery" data-id="'+w.id+'">Edit</button><button class="link danger" data-action="del-winery" data-id="'+w.id+'">'+(S.confirm==='w:'+w.id?'Tap again to delete':'Delete')+'</button>':'')+'</div></div>';
 }
