@@ -155,7 +155,7 @@
 ["Gray Monk Estate Winery","1055 Camp Rd, Lake Country, BC V4V 2H4","Okanagan Valley, BC","250-999-1294","graymonk.com",50.053414,-119.442351,"memory",0,"winery","clbu6a8"],
 ["Burrowing Owl Estate Winery","500 Burrowing Owl Pl, Oliver, BC V0H 1T0","Okanagan Valley, BC","250-498-0620","burrowingowlwine.ca",49.101357,-119.531311,"memory",0,"winery","ctt3vko"],
 ["Tinhorn Creek Vineyards","537 Tinhorn Creek Rd, Oliver, BC V0H 1T0","Okanagan Valley, BC","250-498-3743","tinhorn.com",49.149639,-119.585847,"memory",0,"winery","c15kuvj"],
-["Hester Creek Estate Winery","877 Road 8, Oliver, BC V0H 1T1","Okanagan Valley, BC","250-498-4435","hestercreek.com",49.143504,-119.597009,"memory",0,"winery","cgsj19"],
+["Hester Creek Estate Winery","877 Road 8, Oliver, BC V0H 1T1","Okanagan Valley, BC","250-498-4435","www.hestercreek.com",49.143504,-119.597009,"memory",0,"winery","cgsj19"],
 ["Nk’Mip Cellars","1400 Rancher Creek Rd, Osoyoos, BC V0H 1V6","Okanagan Valley, BC","250-495-2985","nkmipcellars.com",49.039212,-119.43341,"memory",0,"winery","c484dw9"],
 ["Blue Mountain Vineyard & Cellars","2385 Allendale Rd, Okanagan Falls, BC V0H 1R0","Okanagan Valley, BC","250-497-8244","bluemountainwinery.com",49.319157,-119.531158,"memory",0,"winery","c8bvcx5"],
 ["Painted Rock Estate Winery","400 Smythe Dr, Penticton, BC V2A 8W6","Okanagan Valley, BC","250-493-6809","paintedrock.com",49.428444,-119.570585,"memory",0,"winery","co6c4x6"],
