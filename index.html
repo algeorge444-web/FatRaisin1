@@ -1131,6 +1131,28 @@ button.gtk{cursor:pointer}button.gtk[aria-pressed="true"]{background:var(--accen
 .mlb{flex:1;min-width:0;font-size:14.5px;font-weight:500}
 .mnum{flex:none;min-width:24px;padding:1px 8px;border-radius:999px;background:rgba(92,16,39,.07);color:#5C1027;font-size:12px;font-weight:700;text-align:center}
 .mfoot{font-size:12px;color:var(--muted);text-align:center;margin:16px 0 0}
+
+/* ===== cellar top, refreshed ===== */
+.ctop{padding-bottom:6px}
+.csum{display:grid;grid-template-columns:1fr 1fr 1fr auto;align-items:center;width:100%;margin:0 0 10px;padding:14px 12px;border:0;border-radius:20px;cursor:pointer;font:inherit;text-align:center;color:#F6E7C8;background:radial-gradient(120% 120% at 0% 0%,#7A1A36 0%,#5C1027 60%,#45091D 100%);box-shadow:0 12px 26px -18px rgba(60,8,24,.6);position:relative;overflow:hidden}
+.csum::after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;background:linear-gradient(90deg,#A47424,#E6C27A 50%,#A47424)}
+.csum>span{display:flex;flex-direction:column;gap:1px}
+.csum>span+span{border-left:1px solid rgba(230,194,122,.25)}
+.csum b{font-family:var(--serif);font-size:24px;font-weight:700;color:#fff;line-height:1.1}
+.csum small{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:#E6C27A}
+.csum .csumgo{flex-direction:row;align-items:center;gap:2px;padding:0 2px 0 10px;font-size:13px;font-weight:600;color:#F6E7C8;border-left:0!important}
+.csum .csumgo .i{width:15px;height:15px}
+.cfillbar{display:flex;align-items:center;gap:8px;width:100%;margin:0 0 12px;padding:9px 12px;border-radius:14px;border:1px dashed rgba(164,116,36,.55);background:rgba(201,151,62,.1);font:inherit;font-size:13.5px;color:var(--ink);cursor:pointer;text-align:left}
+.cfillbar span{flex:1;color:var(--muted)}.cfillbar b{color:#8A5F1A;font-weight:700}
+/* ===== buttons: one main style (wine) and one secondary style (white) everywhere ===== */
+.btn{border-color:rgba(92,16,39,.14);box-shadow:0 2px 8px -6px rgba(60,8,24,.35)}
+.btn:hover{border-color:rgba(92,16,39,.14)}
+@media (hover:hover){.btn:hover{border-color:rgba(92,16,39,.35)}}
+.btn:not(.primary):not(.appleid):not(.visited):not(.going):not(.hhghost) .i,
+.btn:not(.primary):not(.appleid):not(.visited):not(.going):not(.hhghost)>svg{color:#A47424}
+.top .btn.icon .i,.top .btn.icon>svg{color:inherit!important}
+.btn.gold{border:1px solid rgba(92,16,39,.14);box-shadow:0 2px 8px -6px rgba(60,8,24,.35)}
+.btn.primary{box-shadow:0 6px 14px -8px rgba(92,16,39,.7)}
 </style>
 </head>
 <body>
@@ -2009,11 +2031,11 @@ function deleteAccount(){
 /* ===== welcome tour: three screens the first time the app opens (after the age check) ===== */
 var TOURKEY='cellardoor:tour:v1';
 var TOUR=[
-  {img:'img/tour-places.jpg',kick:'Discover',title:'Find wineries, breweries & more',text:'Thousands of places across Canada and the US. Search, filter by type or what\u2019s open now, and see photos, hours and directions.'},
-  {img:'img/tour-trails.jpg',kick:'Plan',title:'One-tap trails for a day out',text:'Start a ready-made trail, wineries only or mixed with breweries and cideries, and FatRaisin puts the stops in the best driving order.'},
-  {img:'img/tour-events.jpg',kick:'What\u2019s on',title:'Never miss a harvest dinner',text:'Tastings, releases, dinners and music near you. Tap I\u2019m going and add a reminder to your calendar.'},
-  {img:'img/tour-passport.jpg',kick:'Collect',title:'Stamp your passport',text:'Mark the places you visit and collect an inked stamp for each, then share your passport card with friends.'},
-  {img:'img/tour-cellar.jpg',kick:'Your cellar',title:'Snap a label, keep your cellar',text:'Photograph a bottle and FatRaisin reads the label for you. See what you have, what it\u2019s worth and what to drink soon.'}
+  {img:'img/tour-places.jpg?v=2',kick:'Discover',title:'Find wineries, breweries & more',text:'Thousands of places across Canada and the US. Search, filter by type or what\u2019s open now, and see photos, hours and directions.'},
+  {img:'img/tour-trails.jpg?v=2',kick:'Plan',title:'One-tap trails for a day out',text:'Start a ready-made trail, wineries only or mixed with breweries and cideries, and FatRaisin puts the stops in the best driving order.'},
+  {img:'img/tour-events.jpg?v=2',kick:'What\u2019s on',title:'Never miss a harvest dinner',text:'Tastings, releases, dinners and music near you. Tap I\u2019m going and add a reminder to your calendar.'},
+  {img:'img/tour-passport.jpg?v=2',kick:'Collect',title:'Stamp your passport',text:'Mark the places you visit and collect an inked stamp for each, then share your passport card with friends.'},
+  {img:'img/tour-cellar.jpg?v=2',kick:'Your cellar',title:'Snap a label, keep your cellar',text:'Photograph a bottle and FatRaisin reads the label for you. See what you have, what it\u2019s worth and what to drink soon.'}
 ];
 function showTour(force){
   try{if(!force&&localStorage.getItem(TOURKEY))return}catch(e){}
@@ -5883,7 +5905,10 @@ function cellarStatsHTML(){
 function cellarHTML(){
   var all=S.cellar||[],f=S.cFilter||'all',q=(S.cSearch||'').trim().toLowerCase(),sort=S.cSort||'recent';
   var bottles=0,value=0;all.forEach(function(w){var n=+w.qty||0;bottles+=n;if(+w.price)value+=n*(+w.price)});
-  var h='<div class="hero" style="padding-bottom:8px"><div style="display:flex;align-items:center;justify-content:space-between;gap:10px"><h2>My cellar</h2>'+(all.length?'<div style="display:flex;gap:6px">'+((all.some(wineNeeds))?'<button class="btn small" data-action="cfill-all">\u2728 <span>Fill in details</span></button>':'')+'<button class="btn small" data-action="cstats-open">\ud83d\udcca <span>Stats</span></button></div>':'')+'</div><p>'+(all.length?plural(bottles,'bottle')+' \u00b7 '+plural(all.length,'wine')+(value?' \u00b7 about $'+Math.round(value).toLocaleString()+' total':''):'Keep track of the bottles you own. Scan the barcode on the label to add one.')+'</p></div>'+
+  var needN=all.filter(wineNeeds).length;
+  var h='<div class="hero ctop"><h2>My cellar</h2>'+(all.length?'':'<p>Keep track of the bottles you own. Scan the barcode on the label to add one.</p>')+'</div>'+
+    (all.length?'<button class="csum" data-action="cstats-open" aria-label="See cellar stats"><span><b>'+bottles.toLocaleString()+'</b><small>bottle'+(bottles===1?'':'s')+'</small></span><span><b>'+all.length.toLocaleString()+'</b><small>wine'+(all.length===1?'':'s')+'</small></span><span><b>'+(value?'$'+Math.round(value).toLocaleString():'—')+'</b><small>value</small></span><span class="csumgo">Stats'+I.r+'</span></button>'+
+      (needN?'<button class="cfillbar" data-action="cfill-all">✨<span>'+plural(needN,'wine')+' could use more details</span><b>Fill in</b></button>':''):'')+
     '<div class="cactions"><button class="btn primary" data-action="cellar-label">'+CAM_ICON+'<span>Snap the label</span></button><button class="btn primary" data-action="cellar-scan">'+BARCODE_ICON+'<span>Scan barcode</span></button></div>'+
     '<div class="csub"><button class="btn" data-action="cellar-add">'+I.plus+'<span>Add by hand</span></button><button class="btn" data-action="cat-open">'+BOOK_ICON+'<span>Browse catalogue</span></button></div>';
   if(!all.length)return h+emptyHTML('glass','Your cellar is empty','Snap a bottle\u2019s label and FatRaisin fills in the name, producer, vintage and type for you. You can also scan a barcode or browse the catalogue.','');
