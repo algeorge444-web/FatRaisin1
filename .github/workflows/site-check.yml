@@ -1,0 +1,41 @@
+name: Check places' websites
+# Runs when tools/site-check-list.json changes (or by hand). Opens each listed website from GitHub's
+# normal internet connection and saves what it found in tools/site-check-result.json. Changes no place data.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'tools/site-check-list.json'
+      - 'tools/site-check.mjs'
+permissions:
+  contents: write
+concurrency:
+  group: site-check
+  cancel-in-progress: false
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Open each website
+        run: node tools/site-check.mjs
+      - name: Save the results
+        run: |
+          git config user.name "FatRaisin website check"
+          git config user.email "actions@users.noreply.github.com"
+          for try in 1 2 3; do
+            cp tools/site-check-result.json "$RUNNER_TEMP/r.json"
+            git fetch -q origin main && git reset -q --hard origin/main
+            cp "$RUNNER_TEMP/r.json" tools/site-check-result.json
+            git add tools/site-check-result.json
+            git diff --cached --quiet && exit 0
+            git commit -q -m "Website check results"
+            git push -q origin HEAD:main && exit 0
+            sleep 15
+          done
+          exit 1
