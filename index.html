@@ -2853,7 +2853,8 @@ function drawRouteLineRM(r){
     })
     .catch(function(){if(token!==RM.token)return;RT.fail=true;updateRouteInfoEls()});
 }
-function routeInfoText(){return RT.info?('About '+RT.info.km+' km \u00b7 '+RT.info.min+' min driving'):''}
+function fmtDrive(m){m=Math.round(+m||0);return m<60?m+' min':Math.floor(m/60)+' h'+(m%60?' '+(m%60)+' min':'')}
+function routeInfoText(){return RT.info?('About '+RT.info.km+' km \u00b7 '+fmtDrive(RT.info.min)+' driving'):''}
 function updateRouteInfoEls(){
   var el=$('#routeInfo');if(el)el.textContent=routeInfoText()||(RT.fail?'Straight-line path shown':'Working out the distance\u2026');
   if(LM.ready)renderMapBottom();
@@ -2950,7 +2951,7 @@ function routeBarHTML(){
   return trailBar+routeBarHTML2(n);
 }
 function routeBarHTML2(n){
-  return '<div class="routebar"><div><b>Route</b> \u00b7 '+plural(n,'stop')+(RT.info?' \u00b7 '+RT.info.km+' km \u00b7 '+RT.info.min+' min':'')+'</div>'+
+  return '<div class="routebar"><div><b>Route</b> \u00b7 '+plural(n,'stop')+(RT.info?' \u00b7 '+RT.info.km+' km \u00b7 '+fmtDrive(RT.info.min):'')+'</div>'+
     '<div class="rb-actions"><button class="btn small" data-action="route-open">Reorder</button>'+(n>1?'<button class="btn small primary" data-action="route-best">Best order</button>':'')+'</div>'+
     '</div>';
 }
@@ -9677,7 +9678,7 @@ function renderSheet(){
       (!s.id?'<p class="note" style="margin:-4px 0 12px">A street address, phone number and website are required for every new place.</p>':'')+
       field('f-hours','Hours (optional)',w.hours||'',{ph:'e.g. Daily 10am\u20136pm, or Mon\u2013Fri 11\u20135, Sat\u2013Sun 10\u20136'})+
       field('f-insta','Instagram (optional)',w.instagram||'',{ph:'@winery or instagram.com/winery'})+
-      field('f-coord','Map coordinates (optional)',hasCoord(w)?w.lat+', '+w.lng:'',{ph:'Leave blank to let Google find it',inputmode:'text',hint:'Leave this blank and Google will place the pin from the address when you save. Only fill it in to override Google.'})+
+      field('f-coord','Map coordinates (optional)',hasCoord(w)?w.lat+', '+w.lng:'',{ph:'Leave blank to place it from the address',inputmode:'text',hint:'Leave this blank and the app will place the pin from the address when you save. Only fill it in to put the pin somewhere else.'})+
       '<div class="err" id="err" role="alert"></div><div class="sheet-actions"><button class="btn" data-action="close">Cancel</button><button class="btn primary" data-action="save-winery">Save</button></div>';
   }else if(s.kind==='event'){
     var e=s.id?S.events.find(function(x){return x.id===s.id}):{};
