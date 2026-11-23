@@ -10702,7 +10702,7 @@
 ["LXV Wine & Pairings Downtown Tasting Room","1306 Pine St B, Paso Robles, CA 93446","Paso Robles, CA","805-296-1902","lxvwine.com",35.628241,-120.688872,"ovt",0,"winery","cajmwkp"],
 ["California Coast Beer Co.","1346 Railroad St, Paso Robles, CA 93446","Paso Robles, CA","805-369-2347","calcoastbeer.com",35.628711,-120.68826,"ovt",0,"brewery","clqrxn1"],
 ["Eberle Winery","3810 Hwy 46 East, Paso Robles, CA 93446, United States, Paso Robles, CA 93446","Paso Robles, CA","805-238-9607","eberlewinery.com",35.642351,-120.6867,"ovt",0,"winery","cx1siyq"],
-["Allegretto Vineyard Tour","2700 Buena Vista Dr Ste 101, Paso Robles, CA 93446","Paso Robles, CA","805-369-2526","allegrettovineyardresort.com",35.647373,-120.669878,"ovt",0,"winery","cwe484r"],
+["Allegretto Vineyard Resort","2700 Buena Vista Dr Ste 101, Paso Robles, CA 93446","Paso Robles, CA","805-369-2526","allegrettovineyardresort.com",35.647373,-120.669878,"ovt",0,"winery","cwe484r"],
 ["Calcareous Vineyard","1606 Windstar Ct, Paso Robles, CA 93446","Paso Robles, CA","805-239-0289","calcareous.com/Visit/Contact-Us",35.63636,-120.66943,"ovt",0,"winery","cks2rgl"],
 ["Timshel Vineyards","825 Riverside Ave #1, Paso Robles, CA 93446","Paso Robles, CA","805-286-4311","timshelvineyards.com",35.623694,-120.687048,"ovt",0,"winery","cj5p3bh"],
 ["Sol De Paso","825 Riverside Ave, Paso Robles, CA 93446","Paso Robles, CA","805-286-4496","Soldepaso.com",35.622662,-120.686724,"ovt",0,"winery","cu9tsez"],
