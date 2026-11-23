@@ -14841,7 +14841,7 @@
 ["Olds River Inn Restaurant & Brewery","32233 Pasagshak Rd, Kodiak, AK 99615","Kenai Peninsula, AK","907-486-6040","oldsriverinn.com",57.580903,-152.452727,"ovt",0,"brewery","cwsmrpi"],
 ["Ravens Ring Brewing Company","12150 Industry Way Unit Q-1, Anchorage, AK 99515","Anchorage & Mat-Su, AK","907-336-5003","ravensring.hrpos.heartland.us/menu",61.110743,-149.861813,"ovt",0,"brewery","c1jjchs"],
 ["Alaska Distillery","1540 N Shoreline Dr Wasilla AK 99654, Wasilla, AK 99654","Anchorage & Mat-Su, AK","907-357-6723","1.alaskadistillery.com",61.596232,-149.339602,"ovt",0,"distillery","c4lnuha"],
-["Moose's Tooth Brewing Co.","2021 Spar Ave, Anchorage, AK 99501","Anchorage & Mat-Su, AK","907-278-4999","brokentoothbrewing.com",61.22256,-149.84277,"ovt",0,"brewery","cud1f8i"],
+["Moose's Tooth Brewing Co.","2021 Spar Ave, Anchorage, AK 99501","Anchorage & Mat-Su, AK","907-278-4999","moosestooth.net",61.22256,-149.84277,"ovt",0,"brewery","cud1f8i"],
 ["Buzzed Beetle","3024 Mountain View Dr, Anchorage, AK 99501","Anchorage & Mat-Su, AK","715-257-0175","buzzedbeetle.com",61.219583,-149.822531,"ovt",0,"brewery","c4lszwo"],
 ["Hoarfrost Distilling","3501 Lathrop St Ste F, Fairbanks, AK 99701","Fairbanks & Interior, AK","907-479-6128","hoarfrost.vodka",64.813326,-147.742616,"ovt",0,"distillery","c51vl5x"],
 ["Iron Hand Brewing","206 State St, Mobile, AL 36603","Mobile & Gulf Coast, AL","251-725-6912","ironhandbrewing.com",30.695492,-88.04535,"ovt",0,"brewery","cdyv5lk"],
