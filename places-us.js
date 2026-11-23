@@ -18208,7 +18208,7 @@
 ["Black Bottle Brewery","1611 S College Ave Ste STE1609, Fort Collins, CO 80525","Fort Collins & Northern Colorado, CO","970-493-2337","blackbottlebrewery.com",40.566174,-105.077131,"obdb",0,"brewery","cw5uqq5"],
 ["Black Eagle Brewery","1600 25th Ave NE, Black Eagle, MT 59414","Great Falls & North Central, MT","406-868-1866","pitstopblackeagle.com",47.528243,-111.279526,"obdb",0,"brewery","cacm9tz"],
 ["Black Mesa Brewing Company","3901 N Flood Ave, Norman, OK 73069","Norman & Central, OK","405-408-1848","carolinatradingpostsc.com/product-page/hand-bags-pillows",35.276114,-97.48192,"obdb",0,"brewery","cxv3slf"],
-["Blackhorse Pub and Brewery – Knoxville","4429 Kingston Pike, Knoxville, TN 37919","Knoxville, TN","865-249-8511","berkshire-flyer.com/mahjong138",35.925972,-84.044363,"obdb",0,"brewery","cr3rooj"],
+["Blackhorse Pub and Brewery – Knoxville","4429 Kingston Pike, Knoxville, TN 37919","Knoxville, TN","865-249-8511","blackhorsebrews.com",35.925972,-84.044363,"obdb",0,"brewery","cr3rooj"],
 ["Blasted Barley Beer Company","404 S Mill Ave Ste 101, Tempe, AZ 85281","Scottsdale & East Valley, AZ","480-967-5887","blastedbarley.com",33.426546,-111.94007,"obdb",0,"brewery","cs68niw"],
 ["Blue Blaze Brewing","528 S Turner Ave, Charlotte, NC 28208","Charlotte, NC","980-859-2586","blueblazebrewing.com",35.241388,-80.867108,"obdb",0,"brewery","cpmgtl2"],
 ["Blue Blood Brewing Company","925 Robbers Cave Rd, Lincoln, NE 68502","Lincoln, NE","402-477-2337","smilewithcaredentalcolorado.com",40.779996,-96.707014,"obdb",0,"brewery","cn44xy5"],
