@@ -1280,7 +1280,22 @@ div.eirow{cursor:default}
 document.write('<script src="data-version.js?t='+Date.now()+'"><\/script>');
 </script>
 <script>
-(function(){var v=window.FR_DV||Math.floor(Date.now()/6e5);window.FR_DV=v;['place-lists.js','places-ca.js','places-us.js'].forEach(function(f){document.write('<script src="'+f+'?v='+encodeURIComponent(v)+'"><\/script>')})})();
+/* Canada's list is loaded first. The bigger US list is loaded straight away only when it's needed to start
+   (you're looking at the USA, or this phone still has the very old way of saving); otherwise it follows in the
+   background a moment after the app is showing. */
+(function(){var v=window.FR_DV||Math.floor(Date.now()/6e5);window.FR_DV=v;
+  var needUS=false;
+  try{
+    var man=sessionStorage.getItem('cellardoor:country:v1'),loc=localStorage.getItem('cellardoor:countryloc:v1');
+    if(man==='US'||(!man&&loc==='US'))needUS=true;
+    else if(!man&&!loc){
+      var langs=(navigator.languages||[navigator.language||'']).join(' '),tz='';try{tz=Intl.DateTimeFormat().resolvedOptions().timeZone||''}catch(e){}
+      if(!/-CA\b/i.test(langs)&&!(/^America\/(Toronto|Vancouver|Edmonton|Winnipeg|Halifax|St_Johns|Regina|Montreal|Moncton|Glace_Bay|Whitehorse|Yellowknife|Iqaluit|Dawson_Creek|Swift_Current|Thunder_Bay|Nipigon|Rainy_River|Atikokan|Goose_Bay|Inuvik|Creston|Fort_Nelson|Dawson|Rankin_Inlet|Cambridge_Bay|Resolute|Pangnirtung)$/.test(tz))&&(/-US\b/i.test(langs)||/^(America\/(New_York|Chicago|Denver|Los_Angeles|Phoenix|Anchorage|Detroit|Boise|Indiana|Kentucky|Menominee|North_Dakota|Juneau|Sitka|Nome|Adak|Metlakatla|Yakutat)|Pacific\/Honolulu)/.test(tz)))needUS=true;
+    }
+    if(!localStorage.getItem('cellardoor:mine:v1')&&(localStorage.getItem('cellardoor:v2')||localStorage.getItem('cellardoor:v1')))needUS=true;
+  }catch(e){needUS=true}
+  window.FR_US_LATER=!needUS;
+  (needUS?['place-lists.js','places-ca.js','places-us.js']:['place-lists.js','places-ca.js']).forEach(function(f){document.write('<script src="'+f+'?v='+encodeURIComponent(v)+'"><\/script>')})})();
 </script>
 <script>
 (function(){
@@ -1327,6 +1342,8 @@ var I={
         memory = well-known winery entered from general knowledge; please confirm before visiting */
 var FRD=window.FR_DATA||{},FRL=FRD.lists||{};
 /* place data now lives in place-lists.js, places-ca.js and places-us.js (loaded before this script) */
+/* true while the US list is still on its way (it loads in the background for people viewing Canada) */
+var US_PENDING=!!window.FR_US_LATER&&!(FRD.US&&FRD.US.length);
 var CA_ROWS=(FRD.CA||[]).concat(FRD.US||[]),BREW_ROWS=[],DIST_ROWS=[],CIDER_ROWS=[];
 var INSTAGRAM=FRL.INSTAGRAM||{};
 var IG_PREV=FRL.IG_PREV||{};
@@ -1428,7 +1445,8 @@ var SSOON=null;
 function saveSoon(localOnly){if(SSOON)return;SSOON=setTimeout(function(){SSOON=null;saveLocal()},800)}
 function save(){saveLocal();fbPushDebounced()}
 var SAVED_P2='';
-function saveLocal(){HASUS_C.arr=null;
+var SAVE_PENDING=false;
+function saveLocal(){if(US_PENDING){SAVE_PENDING=true;return}HASUS_C.arr=null;
   try{var p=personalPlaces(),str=JSON.stringify({v:SEED_VERSION,mine:p.mine,edits:p.edits,removed:p.removed,events:S.events.filter(function(e){return !e.seed})});
     if(str!==SAVED_P2){localStorage.setItem(PKEY2,str);SAVED_P2=str}
     if(localStorage.getItem(KEY))localStorage.removeItem(KEY);   /* the old full copy: no longer needed, frees space */
@@ -1523,7 +1541,7 @@ function savePinOk(){try{localStorage.setItem(PINOKKEY,JSON.stringify(PINOK))}ca
       ws=ws.concat(mine);
       evs=evs.concat(old.events.filter(function(e){return !e.sample&&mine.some(function(w){return w.id===e.wid})}));
     }
-    S.wineries=ws;S.events=evs;save();
+    S.wineries=ws.filter(function(w){return SEED_REMOVED.indexOf(w.name)<0});S.events=evs;save();
     try{localStorage.setItem(SVKEY,String(SEED_VERSION))}catch(ex){}
   }
   /* places merged into another listing: favourites, route stops, stamps and events follow to the listing that stays */
@@ -1550,8 +1568,7 @@ function savePinOk(){try{localStorage.setItem(PINOKKEY,JSON.stringify(PINOK))}ca
   try{purgeStoredGoogleData()}catch(e){}
   applyPins();
   try{glocLoad();applyGLoc()}catch(e){}
-  S.route=S.route.filter(function(id){return S.wineries.some(function(w){return w.id===id})});
-  S.favorites=S.favorites.filter(function(id){return S.wineries.some(function(w){return w.id===id})});
+  if(!US_PENDING)tidyFavRoute();
   try{S.fbConfigText=localStorage.getItem(FBKEY)||''}catch(e){S.fbConfigText=''}
   if(!S.fbConfigText){fbSaveConfig(DEFAULT_FB_CONFIG_TEXT)}
   try{if(/^AIzaSyDCw8H2FtWCkA1GMg5ktEj7ULjDMXUi0RM$/.test(getStoredKey()||''))setStoredKey('')}catch(e){}
@@ -1658,6 +1675,7 @@ function removeClosedPlaces(){
   save();saveFavorites();saveRoute();savePhotos();
   return names;
 }
+function tidyFavRoute(){var h={};S.wineries.forEach(function(w){h[w.id]=1});S.route=S.route.filter(function(id){return h[id]});S.favorites=S.favorites.filter(function(id){return h[id]})}
 function saveRoute(){try{localStorage.setItem(RKEY,JSON.stringify(S.route))}catch(e){}}
 function saveFavorites(){try{localStorage.setItem(FKEY,JSON.stringify(S.favorites))}catch(e){}fbPushDebounced()}
 function isFav(id){return S.favorites.indexOf(id)>-1}
@@ -2244,15 +2262,18 @@ function checkOwnerHash(){
   }else if(location.hash.indexOf('#r=')===0){
     var rr=location.hash.slice(3);
     try{history.replaceState(history.state,'',location.pathname+location.search)}catch(e){}
+    if(US_PENDING){US_HASH='#r='+rr;return}
     openSharedRoute(rr);
   }else if(location.hash.indexOf('#p=')===0){
     var pid=decodeURIComponent(location.hash.slice(3));pid=(typeof placeAlias==='function'?placeAlias(pid):pid);
     try{history.replaceState(history.state,'',location.pathname+location.search)}catch(e){}
     if(winery(pid)){S.detailEventId=null;S.detailId=pid;S.detailBack='home';render();window.scrollTo(0,0)}
+    else if(US_PENDING)US_HASH='#p='+encodeURIComponent(pid);
   }else if(location.hash.indexOf('#e=')===0){
     var id=decodeURIComponent(location.hash.slice(3));
     try{history.replaceState(history.state,'',location.pathname+location.search)}catch(e){}
     if(S.events.some(function(x){return x.id===id})){S.tab='events';S.detailEventId=id;render();window.scrollTo(0,0)}
+    else if(US_PENDING)US_HASH='#e='+encodeURIComponent(id);
   }
 }
 window.addEventListener('hashchange',checkOwnerHash);
@@ -4206,6 +4227,46 @@ function mergeEventData(){
     S.events.push({id:x[0],wid:w.id,wname:w.name,title:x[2],date:x[3],time:x[4]||'',type:x[5]||'Other',desc:x[6]||'',link:x[7]||'',ticketLink:x[8]||'',cost:x[9]||'',src:'web',prov:provOf(w),area:'',lat:null,lng:null,seed:true});n++});
   return n;
 }
+/* ----- the US list, loaded in the background for people viewing Canada ----- */
+var US_HASH='';
+function loadUSLater(){
+  if(!US_PENDING||window.__usLoading)return;window.__usLoading=1;
+  var sc=document.createElement('script');sc.src='places-us.js?v='+encodeURIComponent(window.FR_DV||Math.floor(Date.now()/6e5));sc.async=true;
+  sc.onload=function(){try{mergeUS()}catch(e){US_PENDING=false;try{console.error(e)}catch(x){}}};
+  sc.onerror=function(){window.__usLoading=0;setTimeout(loadUSLater,15000)};   /* try again in a moment (no signal, for example) */
+  document.head.appendChild(sc);
+}
+function mergeUS(){
+  if(!US_PENDING)return;
+  var rows=((window.FR_DATA||{}).US)||[];if(!rows.length){US_PENDING=false;return}
+  var usIds={};rows.forEach(function(r){usIds[r[10]]=1});
+  CA_ROWS=CA_ROWS.concat(rows);HASUS_C.arr=null;
+  /* this phone's own changes to US places, kept exactly as the start-up does for Canadian ones */
+  var p2=null;try{p2=JSON.parse(localStorage.getItem(PKEY2)||'null')}catch(e){p2=null}
+  var rm={},ed={},newer=false,FILE_KEYS={name:1,type:1,website:1,phone:1,address:1,area:1};
+  if(p2){(p2.removed||[]).forEach(function(id){rm[id]=1});ed=p2.edits||{};newer=(+p2.v||0)<SEED_VERSION}
+  var have={};S.wineries.forEach(function(w){have[w.id]=1});
+  seedWineries().forEach(function(w){
+    if(!usIds[w.id]||have[w.id]||rm[w.id]||SEED_REMOVED.indexOf(w.name)>-1)return;
+    var e=ed[w.id];if(e)Object.keys(e).forEach(function(k){if(newer&&FILE_KEYS[k])return;if(!staleEdit(k,e[k],w))w[k]=e[k]});
+    S.wineries.push(w);have[w.id]=1;
+  });
+  US_PENDING=false;
+  try{removeClosedPlaces()}catch(e){}
+  try{dedupeByAddress()}catch(e){}
+  try{applyPins()}catch(e){}
+  try{applyGLoc()}catch(e){}
+  try{applyGFields()}catch(e){}
+  tidyFavRoute();
+  try{mergeEventData()}catch(e){}
+  if(SAVE_PENDING){SAVE_PENDING=false;saveLocal()}
+  if(PUSH_PENDING){PUSH_PENDING=false;fbPushDebounced()}
+  try{syncMarkers()}catch(e){}
+  try{applyClustering()}catch(e){}
+  try{applyLocationCountry()}catch(e){}
+  if(US_HASH){try{history.replaceState(history.state,'',location.pathname+location.search+US_HASH)}catch(e){}US_HASH='';checkOwnerHash()}
+  renderSoon();if(S.sheet)try{renderSheet()}catch(e){}
+}
 function loadEventData(){
   if(window.__evDataLoading)return;window.__evDataLoading=1;
   var sc=document.createElement('script');sc.src='events-data.js?t='+Math.floor(Date.now()/864e5);sc.async=true;
@@ -4660,13 +4721,15 @@ function fbApplyCloud(data){
   if(data.ghours){Object.keys(data.ghours).forEach(function(k){S.ghours[k]=data.ghours[k]});try{localStorage.setItem(GHKEY,JSON.stringify(S.ghours))}catch(e){}}
   if(data.pins){Object.keys(data.pins).forEach(function(k){if(data.pins[k]&&data.pins[k].src==='manual')S.pins[k]=data.pins[k]});try{localStorage.setItem(PNKEY,JSON.stringify(S.pins))}catch(e){}applyPins()}
   try{purgeStoredGoogleData()}catch(e){}
-  try{localStorage.setItem(KEY,JSON.stringify({wineries:placesForSaving(),events:S.events.filter(function(e){return !e.seed})}))}catch(e){}
+  saveLocal();
   try{localStorage.setItem(FKEY,JSON.stringify(S.favorites))}catch(e){}
   syncMarkers();render();
 }
 var fbPushTimer=null;
+var PUSH_PENDING=false;
 function fbPushNow(){
   if(!FB.db||!FB.auth||!FB.auth.currentUser)return;
+  if(US_PENDING){PUSH_PENDING=true;return}
   var idv=FB.auth.currentUser.uid;
   FB.db.collection('users').doc(idv).set({
     favorites:S.favorites,
@@ -9443,6 +9506,7 @@ function secretPlan(){
   var key=weekNo()+'|'+Math.round(a.lat*2)+','+Math.round(a.lng*2);
   var cur=secretState();
   /* keep this week's trail while you travel around it; start a new one only in a new week or far away */
+  if(US_PENDING&&cur.stops&&cur.stops.length&&String(cur.key).split('|')[0]===weekNo())return cur;
   if(cur.stops&&cur.stops.length&&cur.stops.every(function(id){return winery(id)})&&String(cur.key).split('|')[0]===weekNo()&&
      (cur.key===key||haversineKm(a,winery(cur.stops[Math.min(cur.at||0,cur.stops.length-1)]))<80))return cur;
   var rnd=seededRand(key);
@@ -10889,6 +10953,7 @@ if(S.fbConfigText)setTimeout(function(){try{ensureFirebase()}catch(e){}},800);
 setTimeout(function(){try{sharedEventsLoad()}catch(e){}},1500);
 setTimeout(function(){try{sharedPlacesLoad()}catch(e){}},1200);
 setTimeout(function(){try{loadMedia()}catch(e){}},250);
+setTimeout(function(){try{loadUSLater()}catch(e){}},400);
 setTimeout(function(){try{loadEventData()}catch(e){}},2200);
 (function(){var c=navigator.connection||{};if(c.saveData||/(^|-)2g|3g/.test(c.effectiveType||''))return;
   var go=function(){try{loadMapLibre().then(function(){try{fetch(MAP_STYLE_URL)}catch(e){}})}catch(e){}};
