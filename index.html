@@ -1013,6 +1013,15 @@ button.gtk{cursor:pointer}button.gtk[aria-pressed="true"]{background:var(--accen
 .revs .empty2{border:0!important;background:none!important;padding:6px 0 2px!important}
 .detailsec.dmanage{background:none;border:0;box-shadow:none;padding:4px 2px}
 .detailsec.dmanage>h3{font-size:15px;color:var(--muted)}
+
+.detailshare{top:14px;right:58px;z-index:1}
+.detailshare svg{width:18px;height:18px}
+.wc-icons.dicons{flex-wrap:wrap;overflow:visible}
+.revnone{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.revnone span{color:var(--muted);font-size:14px;flex:1;min-width:150px}
+.dnear .hgrid{margin:0 -2px}
+.dnear .featcard{flex-basis:58%}
+.dnear .featcard h3{font-family:var(--serif);font-size:15px;color:#fff;text-transform:none;letter-spacing:0;margin:0 0 2px;text-shadow:0 1px 6px rgba(0,0,0,.45)}
 </style>
 </head>
 <body>
@@ -1803,6 +1812,14 @@ function applySharedRoute(mode){
   render();renderSheet();routeChanged({fit:true});
   toast('Route added. Directions start from your location.');
 }
+function sharePlace(id){
+  var w=winery(id);if(!w)return;
+  var url=OFFICIAL_URL+'#p='+encodeURIComponent(w.id);
+  var data={title:w.name,text:w.name+(w.area?' \u00b7 '+w.area:'')+' on FatRaisin',url:url};
+  if(navigator.share){navigator.share(data).catch(function(){});return}
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(url).then(function(){toast('Link copied')},function(){toast(url)});return}
+  toast(url);
+}
 function shareApp(){
   var url=OFFICIAL_URL;
   var data={title:'FatRaisin',text:'Find wineries, breweries, distilleries and cideries near you.',url:url};
@@ -1995,7 +2012,7 @@ document.addEventListener('click',function(ev){
    actually hosted (so it's right whatever the GitHub repository is called); the fixed address is only a fallback. */
 var OFFICIAL_URL=(function(){
   try{if(/^https:$/.test(location.protocol)&&!/claude|localhost/.test(location.hostname))return location.origin+location.pathname.replace(/[^\/]*$/,'')}catch(e){}
-  return 'https://algeorge444-web.github.io/FatRaisin/';
+  return 'https://algeorge444-web.github.io/FatRaisin1/';
 })();
 function checkOwnerHash(){
   if(location.hash==='#admin'){
@@ -2005,6 +2022,10 @@ function checkOwnerHash(){
     var rr=location.hash.slice(3);
     try{history.replaceState(history.state,'',location.pathname+location.search)}catch(e){}
     openSharedRoute(rr);
+  }else if(location.hash.indexOf('#p=')===0){
+    var pid=decodeURIComponent(location.hash.slice(3));pid=(typeof placeAlias==='function'?placeAlias(pid):pid);
+    try{history.replaceState(history.state,'',location.pathname+location.search)}catch(e){}
+    if(winery(pid)){S.detailEventId=null;S.detailId=pid;S.detailBack='home';render();window.scrollTo(0,0)}
   }else if(location.hash.indexOf('#e=')===0){
     var id=decodeURIComponent(location.hash.slice(3));
     try{history.replaceState(history.state,'',location.pathname+location.search)}catch(e){}
@@ -4980,8 +5001,9 @@ function reviewsSectionHTML(w){
   if(!list)return head+skel(2,{label:'Loading reviews'})+'</div>';
   var st=revStats(list),mine=S.fbUser&&list.filter(function(r){return r.uid===S.fbUser.uid})[0];
   return head+
-    (st.n?'<div class="revsum">'+starsHTML(st.avg,22)+'<b>'+st.avg.toFixed(1)+'</b><span class="note">from '+plural(st.n,'review')+'</span></div>':emptyHTML('star','No reviews yet','Been here? Be the first to share how your visit went.','',true))+
-    '<div class="sheet-actions" style="justify-content:flex-start;margin:6px 0 10px"><button class="btn small primary" data-action="rev-write" data-id="'+w.id+'">'+(mine?'Edit my review':'\u2605 Write a review')+'</button></div>'+
+    (st.n?'<div class="revsum">'+starsHTML(st.avg,22)+'<b>'+st.avg.toFixed(1)+'</b><span class="note">from '+plural(st.n,'review')+'</span></div>'+
+      '<div class="sheet-actions" style="justify-content:flex-start;margin:6px 0 10px"><button class="btn small primary" data-action="rev-write" data-id="'+w.id+'">'+(mine?'Edit my review':'\u2605 Write a review')+'</button></div>'
+     :'<div class="revnone"><span>No reviews yet. Been here? Be the first.</span><button class="btn small primary" data-action="rev-write" data-id="'+w.id+'">\u2605 Write a review</button></div>')+
     st.vis.slice(0,30).map(function(r){
       var own=S.fbUser&&r.uid===S.fbUser.uid;
       var av=/^av:/.test(r.avatar||'')?avatarSVG(r.avatar.slice(3)):'<span style="font-weight:700">'+esc(String(r.name||'?').charAt(0).toUpperCase())+'</span>';
@@ -5404,6 +5426,14 @@ function wcard(w){
     '</div>'+
   '</article>';
 }
+/* "Also nearby": the closest other places, so people can plan a day out */
+function nearbySectionHTML(w){
+  if(!hasCoord(w))return '';
+  var list=S.wineries.filter(function(x){return x.id!==w.id&&hasCoord(x)}).map(function(x){return {w:x,d:haversineKm(w,x)}})
+    .filter(function(o){return o.d<=40}).sort(function(a,b){return a.d-b.d}).slice(0,6);
+  if(!list.length)return '';
+  return '<div class="detailsec dnear"><h3>Also nearby</h3><div class="hgrid">'+list.map(function(o){return featCard(o.w,fmtDist(o.d))}).join('')+'</div></div>';
+}
 function detailHTML(w){
   if(!w)return '<p class="empty"><p>That place couldn\u2019t be found. It may have been removed.</p></p>'+
     '<button class="btn primary" data-action="back-detail">'+I.l+'<span>Back</span></button>';
@@ -5420,6 +5450,7 @@ function detailHTML(w){
   return '<button class="detailback" data-action="back-detail">'+I.l+'<span>Back</span></button>'+
     '<div class="detailhero" style="--img:url(&quot;'+esc(img)+'&quot;)'+(typeof w!=='undefined'&&w?photoFrame(w):'')+'">'+gCreditHTML(w)+
       '<button class="favbtn detailfav'+(isFav(w.id)?' on':'')+'" data-action="fav-toggle" data-id="'+w.id+'" aria-label="'+(isFav(w.id)?'Remove from favourites':'Add to favourites')+'" aria-pressed="'+isFav(w.id)+'">'+(isFav(w.id)?I.heartFill:I.heart)+'</button>'+
+      '<button class="favbtn detailshare" data-action="share-place" data-id="'+w.id+'" aria-label="Share this place">'+I.share+'</button>'+
       '<h2>'+esc(w.name)+'</h2>'+(w.area?'<p>'+esc(w.area)+'</p>':'')+
     '</div>'+
     (function(){
@@ -5457,6 +5488,7 @@ function detailHTML(w){
     flightSectionHTML(w)+
     igSectionHTML(w)+
     reviewsSectionHTML(w)+
+    nearbySectionHTML(w)+
     (fine.length?'<p class="fine dfine">'+esc(fine.join(' '))+'</p>':'')+
     '<div class="detailsec dmanage"><h3>Manage</h3><div class="rowend">'+
     '<button class="link" data-action="photo" data-id="'+w.id+'">'+(hasPhoto?'Change photo':'Add photo')+'</button>'+(hasPhoto?'<button class="link" data-action="rmphoto" data-id="'+w.id+'">Remove photo</button>':'')+
@@ -9998,6 +10030,7 @@ document.addEventListener('click',function(ev){
     case 'tab':go(t.dataset.tab);break;
     case 'add':if(S.tab==='cellar'){openWineSheet(null);break}S.sheet=S.tab==='events'?{kind:'event',date:S.sel}:{kind:'winery',wtype:S.wType!=='all'?S.wType:'winery'};renderSheet();break;
     case 'more':S.sheet={kind:'more'};renderSheet();break;
+    case 'share-place':sharePlace(id);break;
     case 'share-app':closeDrawer();shareApp();break;
     case 'install-app':closeDrawer();installApp();break;
     case 'install-dismiss':S.installDismissed=true;try{localStorage.setItem(IDKEY,'1')}catch(e){}render();break;
