@@ -5490,10 +5490,19 @@ function wineryListInner(){
     return true;
   });
   /* search: exact first; if that finds nothing, forgiving matches (typos, missing accents) */
-  var fuzzyNote='';
+  var fuzzyNote='',nameHit=null;
   if(q){
-    var fq=foldText(q),exact=list.filter(function(w){return placeHay(w).indexOf(fq)>-1});
-    if(exact.length)list=exact;
+    /* every word typed narrows the list: each one must start a word in the name, town or address, in any order
+       ("acre 100", "pel est"); then the same with words found anywhere; then forgiving matches */
+    var fq=foldText(q),qw=fq.split(' ').filter(Boolean);
+    function allWords(w,starts){var h=' '+placeHay(w);return qw.every(function(x){return h.indexOf(starts?' '+x:x)>-1})}
+    var exact=list.filter(function(w){return allWords(w,true)});
+    if(!exact.length)exact=list.filter(function(w){return allWords(w,false)});
+    if(exact.length){
+      /* places whose own name has all the words come first */
+      var inName=function(w){var h=' '+placeNameHay(w);return qw.every(function(x){return h.indexOf(' '+x)>-1})};
+      nameHit={};exact.forEach(function(w){if(inName(w))nameHit[w.id]=1});list=exact;
+    }
     else{
       var words=fq.split(' ').filter(Boolean),scored=[];
       list.forEach(function(w){var sc=fuzzyScore(words,placeHay(w),placeNameHay(w));if(sc>=0)scored.push([sc,w])});
@@ -5508,7 +5517,7 @@ function wineryListInner(){
       return da-db||a.name.localeCompare(b.name);
     });
   }else if(!fuzzyNote){
-    list.sort(function(a,b){return a.name.localeCompare(b.name)});
+    list.sort(function(a,b){return (nameHit?(nameHit[a.id]?0:1)-(nameHit[b.id]?0:1):0)||a.name.localeCompare(b.name)});
   }
   var openNote='';
   if(S.wOpenNow){
