@@ -1186,10 +1186,14 @@ function savePinOk(){try{localStorage.setItem(PINOKKEY,JSON.stringify(PINOK))}ca
   if(p2&&p2.mine){
     var base=seedWineries(),rm={};(p2.removed||[]).forEach(function(id){rm[id]=1});
     var ed=p2.edits||{};
-    S.wineries=base.filter(function(w){return !rm[w.id]}).map(function(w){var e=ed[w.id];if(e)Object.keys(e).forEach(function(k){if(!staleEdit(k,e[k],w))w[k]=e[k]});return w});
+    /* when the place files are newer than this device's saved copy, the files win for the details Claude keeps up to date
+       (name, kind, website, phone, address, area), so fixes and the owner tools' numbers always match the latest data */
+    var newer=(+p2.v||0)<SEED_VERSION,FILE_KEYS={name:1,type:1,website:1,phone:1,address:1,area:1};
+    S.wineries=base.filter(function(w){return !rm[w.id]}).map(function(w){var e=ed[w.id];if(e)Object.keys(e).forEach(function(k){if(newer&&FILE_KEYS[k])return;if(!staleEdit(k,e[k],w))w[k]=e[k]});return w});
     var seen={};S.wineries.forEach(function(w){seen[w.id]=1});
-    (p2.mine||[]).forEach(function(w){if(!seen[w.id]){S.wineries.push(w);seen[w.id]=1}});
-    S.wineries=S.wineries.filter(function(w){return !(SEED_REMOVED.indexOf(w.name)>-1&&/^c[a-z0-9]+$/.test(w.id))});
+    (p2.mine||[]).forEach(function(w){if(!seen[w.id]&&!SEED_ID_MOVES[w.id]){S.wineries.push(w);seen[w.id]=1}});
+    /* removed places stay removed, including ones added by hand on this device */
+    S.wineries=S.wineries.filter(function(w){return SEED_REMOVED.indexOf(w.name)<0});
     S.events=p2.events||[];
     try{S.favorites=JSON.parse(localStorage.getItem(FKEY))||[]}catch(ex){S.favorites=[]}
     try{S.route=JSON.parse(localStorage.getItem(RKEY))||[]}catch(ex){S.route=[]}
@@ -1258,6 +1262,19 @@ function savePinOk(){try{localStorage.setItem(PINOKKEY,JSON.stringify(PINOK))}ca
     S.wineries=ws;S.events=evs;save();
     try{localStorage.setItem(SVKEY,String(SEED_VERSION))}catch(ex){}
   }
+  /* places merged into another listing: favourites, route stops, stamps and events follow to the listing that stays */
+  try{(function(){
+    var mv=SEED_ID_MOVES,ks=Object.keys(mv);if(!ks.length)return;var to=function(id){var n=0;while(mv[id]&&n++<5)id=mv[id];return id};
+    var uniq=function(a){return a.filter(function(x,i){return a.indexOf(x)===i})};
+    var f2=uniq(S.favorites.map(to)),r2=S.route.map(to);
+    if(JSON.stringify(f2)!==JSON.stringify(S.favorites)){S.favorites=f2;saveFavorites()}
+    if(JSON.stringify(r2)!==JSON.stringify(S.route)){S.route=r2;saveRoute()}
+    var ch=false;S.events.forEach(function(e){if(mv[e.wid]){e.wid=to(e.wid);ch=true}});
+    var vv=JSON.parse(localStorage.getItem(VISKEY)||'{}'),vc=false;
+    Object.keys(vv).forEach(function(k){if(mv[k]){var t=to(k);vv[t]=vv[t]||vv[k];delete vv[k];vc=true}});
+    if(vc)localStorage.setItem(VISKEY,JSON.stringify(vv));
+    if(ch)save();
+  })()}catch(e){}
   try{S.photos=JSON.parse(localStorage.getItem(PKEY))||{}}catch(e){S.photos={}}
   try{S.pins=JSON.parse(localStorage.getItem(PNKEY))||{}}catch(e){S.pins={}}
   try{S.pinMiss=JSON.parse(localStorage.getItem(PMKEY))||{}}catch(e){S.pinMiss={}}
@@ -1573,6 +1590,20 @@ function locate(after,silent,onFail){
   };
   navigator.geolocation.getCurrentPosition(onOk,function(err){onFail(err,false)},{enableHighAccuracy:true,timeout:8000,maximumAge:60000});
 }
+/* newer place data on GitHub than the copy this page loaded: check when the app comes back to the front and when
+   the owner tools open. Reload straight away if nothing is open, otherwise offer an "Update now" button. */
+var DVNEW=0;
+function checkDataVersion(cb){
+  if(location.protocol.indexOf('http')!==0){cb&&cb(false);return}
+  fetch('data-version.js?t='+Date.now(),{cache:'no-store'}).then(function(r){return r.ok?r.text():''}).then(function(t){
+    var m=/FR_DV\s*=\s*(\d+)/.exec(t||''),v=m?+m[1]:0;
+    if(v>SEED_VERSION){DVNEW=v;cb&&cb(true)}else cb&&cb(false);
+  }).catch(function(){cb&&cb(false)});
+}
+document.addEventListener('visibilitychange',function(){
+  if(document.visibilityState!=='visible')return;
+  checkDataVersion(function(n){if(!n)return;if(!S.sheet&&!S.detailId)location.reload();else if(S.sheet&&S.sheet.kind==='data')renderSheet()});
+});
 document.addEventListener('visibilitychange',function(){
   if(document.visibilityState!=='visible'||S.meBusy||location.protocol==='file:'||!navigator.geolocation)return;
   var stale=!S.me||Date.now()-(S.meAt||0)>5*60000;
@@ -9680,6 +9711,7 @@ function renderSheet(){
   }else{
     if(!isOwner()){h=ownerLockHTML();sh.innerHTML=h;ov.classList.add('on');return}
     h='<div class="sheet-head"><h2 id="sheetTitle">Owner tools</h2><button class="btn icon" data-action="close" aria-label="Close">'+I.x+'</button></div>'+ownerNoticeHTML()+
+      (DVNEW>SEED_VERSION?'<div class="weblook" style="margin-bottom:14px"><p class="note" style="margin:0 0 8px"><b>Newer place data is ready</b> (version '+DVNEW+'; this screen shows version '+SEED_VERSION+'). Update so every number below is current.</p><div class="sheet-actions" style="justify-content:flex-start;margin:0"><button class="btn primary" data-action="dv-reload">Update now</button></div></div>':'')+
       ownerGlanceHTML()+
       '<div class="sheet-actions" style="justify-content:flex-start;flex-wrap:wrap;margin-bottom:6px"><button class="btn primary" data-action="cimp-open">Add wines to the catalogue</button>'+
       '<button class="btn" data-action="sug-open">Suggested places'+(SUG.list&&SUG.list.length?' ('+SUG.list.length+')':'')+'</button>'+
@@ -9921,7 +9953,8 @@ document.addEventListener('click',function(ev){
     case 'share-app':shareApp();break;
     case 'install-app':installApp();break;
     case 'install-dismiss':S.installDismissed=true;try{localStorage.setItem(IDKEY,'1')}catch(e){}render();break;
-    case 'data':openOwnerTools();break;
+    case 'data':openOwnerTools();checkDataVersion(function(n){if(n&&S.sheet&&S.sheet.kind==='data')renderSheet()});break;
+    case 'dv-reload':location.reload();break;
     case 'owner-signin':S.sheet=null;renderSheet();go('account');break;
     case 'open-navmenu':S.menuSec='';openDrawer();break;
     case 'close-navdrawer':closeDrawer();break;

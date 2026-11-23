@@ -3,7 +3,7 @@
    The app page is always fetched fresh when online (so updates show straight away),
    with the saved copy used only when offline. Maps, Google, Firebase and other
    outside services are never cached here. */
-const CACHE = 'fatraisin-v3';
+const CACHE = 'fatraisin-v4';
 const FILES = ['./', './index.html', './manifest.json', './icon-192.png', './icon-512.png', './icon-maskable-512.png',
   './privacy.html', './terms.html', './support.html',
   './img/logo.png', './img/logo-dark.png', './img/vineyard.jpg', './img/distillery.jpg', './img/peller.jpg',
@@ -22,7 +22,17 @@ self.addEventListener('fetch', e => {
   if (req.method !== 'GET') return;
   const url = new URL(req.url);
   if (url.origin !== self.location.origin) return;           /* outside services: straight to the network */
-  if (/\/(pins\.json)$/.test(url.pathname)) return;           /* shared data: always fresh */
+  if (/\/(pins\.json|data-version\.js)$/.test(url.pathname)) return;   /* shared data and the data version: always fresh */
+  /* place and event data files (loaded with ?v=<data version>): network first, one saved copy each for offline use,
+     so a new data version always reaches the phone and old versions don't pile up */
+  if (/\.js$/.test(url.pathname) && url.search) {
+    const key = url.origin + url.pathname;
+    e.respondWith(fetch(req).then(res => {
+      if (res.ok) { const copy = res.clone(); caches.open(CACHE).then(c => c.put(key, copy)).catch(() => {}); }
+      return res;
+    }).catch(() => caches.match(key)));
+    return;
+  }
   const isPage = req.mode === 'navigate' || /\/(index\.html)?$/.test(url.pathname);
   if (isPage) {
     /* the app page: network first, saved copy when offline */
