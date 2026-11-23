@@ -18196,7 +18196,7 @@
 ["Beltway Brewing Company","22620 Davis Dr Ste 110, Sterling, VA 20164","Northern Virginia, VA","571-989-2739","beltwaybrewco.com",38.991429,-77.417288,"obdb",0,"brewery","ckdzh3q"],
 ["Bent Brewstillery","1744 Terrace Dr, Roseville, MN 55113","Minneapolis–St. Paul, MN","844-879-2368","bentbrewstillery.com",45.025578,-93.173649,"obdb",0,"brewery","c8psv22"],
 ["Big Blue Brewing","4721 SE 10th Pl, Cape Coral, FL 33904","Fort Myers & Naples, FL","973-769-3294","bigbluebrewing.com",26.564459,-81.952426,"obdb",0,"brewery","co5sqan"],
-["Big River Grille & Brewing Works - Disney","2101 Epcot Resorts Blvd, Lake Buena Vista, FL 32830","Orlando & Central Florida, FL","407-560-0253","craftworksrestaurants.com",28.372575,-81.554631,"obdb",0,"brewery","c3xtlso"],
+["Big River Grille & Brewing Works - Disney","2101 Epcot Resorts Blvd, Lake Buena Vista, FL 32830","Orlando & Central Florida, FL","407-560-0253","bigrivergrille.com",28.372575,-81.554631,"obdb",0,"brewery","c3xtlso"],
 ["Big Thorn Farm and Brewery","14274 E 600 North Rd, Georgetown, IL 61846","Champaign & East Central, IL","217-597-0156","bigthornfarm.com",39.954074,-87.668381,"obdb",0,"brewery","ctd5mul"],
 ["Birravino","183 Riverside Ave, Red Bank, NJ 07701","Jersey Shore, NJ","732-842-5990","birravino.com",40.353526,-74.075362,"obdb",0,"brewery","chhvk2y"],
 ["Bistronomy B2B Craft Brewery","3118 Central Ave SE, Albuquerque, NM 87106","Albuquerque, NM","505-262-2222","bistronomyb2b.com",35.080354,-106.610215,"obdb",0,"brewery","c4mcntr"],
