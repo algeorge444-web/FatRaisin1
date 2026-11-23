@@ -7554,6 +7554,7 @@ function roughSpot(area,address){
 function discSave(){
   var s=S.sheet;if(!s||s.kind!=='discadd')return;discKeep();var d=s.draft;
   if(!d.name||!d.address||!d.area){s.err='Name, address and area are needed.';renderSheet();return}
+  if(notAPlace(d.name)){s.err='FatRaisin only lists wineries, breweries, cideries and distilleries that make their own drinks and welcome visitors \u2014 not shops, bars, restaurants or tours.';renderSheet();return}
   /* every place added for everyone needs a street address, a phone number and a website */
   if(!hasStreet(d.address)){s.err='Enter the full street address, with the street number (for example 123 Vine Rd, Town).';renderSheet();return}
   if(String(d.phone||'').replace(/\D/g,'').length<10){s.err='Enter a phone number with the area code.';renderSheet();return}
@@ -7575,6 +7576,10 @@ function discSave(){
     S.sheet={kind:'discover'};renderSheet();toast(w.name+' added for everyone');
   }).catch(function(e){s.saving=false;s.err='Couldn\u2019t save: '+catErrMsg(e)+' (check the Firestore rules include the places section)';renderSheet()});
 }
+/* places that aren't somewhere that makes its own drinks: liquor and bottle shops, bars, clubs, tours, trails, offices */
+var NOT_A_PLACE=/\b(liquor|lcbo|saq|total wine|bevmo|binny.s|spec.s wine|beer store|bottle ?shop|wine (store|shop|merchants?|club|bar|tours?)|wineshop|package store|growlers?\b(?! ?(brew|winery))|growler (fill|station|shop)|taphouse|tap house|ale house|alehouse|beer (bar|hall|market|depot)|craft beer (bar|store|shop|market)|enoteca|biergarten|beer garden|tavern|saloon|sports bar|pizzeria|restaurant|bistro|grill|cafe|deli|grocery|market|wine trail|ale trail|beer trail|tourism|visitors? (center|centre|bureau)|chamber of commerce|association|alliance|guild|custom crush|crush services|wine services|importers?|imports|distributors?|wholesale|consult|compliance|offices?|headquarters|production facility|limo|shuttle|tours?\b|festival|fest\b|museum|golf|hotel|motel|inn\b|resort)\b/i;
+var MAKES_DRINKS=/brew|winer|vineyard|cider|cidery|distill|meadery|vignoble|domaine|cellars|estate winery|brasserie|microbrasserie|cidrerie|spirits co/i;
+function notAPlace(name){name=String(name||'');return NOT_A_PLACE.test(name)&&!MAKES_DRINKS.test(name)}
 /* everyone: places you've added load from Firebase */
 function sharedPlacesLoad(){
   catDb().then(function(db){return db.collection('places').limit(3000).get()}).then(function(snap){
@@ -7585,6 +7590,8 @@ function sharedPlacesLoad(){
     snap.forEach(function(d){
       var x=d.data();if(!x||!x.name||!isFinite(x.lat))return;
       if(builtIn[key(x.name)])return;
+      /* shared places are held to the same rules as the built-in list: removed names and shops, bars or tours stay hidden */
+      if((typeof SEED_REMOVED!=='undefined'&&SEED_REMOVED.indexOf&&SEED_REMOVED.indexOf(x.name)>=0)||notAPlace(x.name))return;
       live[d.id]=1;
       var w=winery(d.id),rec={id:d.id,name:x.name,address:x.address||'',area:x.area||'',phone:x.phone||'',website:x.website||'',instagram:x.instagram||'',lat:+x.lat,lng:+x.lng,approx:!!x.approx,type:x.type||'winery',src:'owner',shared:true};
       if(x.gid&&!(S.ghours[d.id]&&S.ghours[d.id].gid)){S.ghours[d.id]=Object.assign(S.ghours[d.id]||{},{gid:x.gid})}
