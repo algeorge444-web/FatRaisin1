@@ -1022,6 +1022,36 @@ button.gtk{cursor:pointer}button.gtk[aria-pressed="true"]{background:var(--accen
 .dnear .hgrid{margin:0 -2px}
 .dnear .featcard{flex-basis:58%}
 .dnear .featcard h3{font-family:var(--serif);font-size:15px;color:#fff;text-transform:none;letter-spacing:0;margin:0 0 2px;text-shadow:0 1px 6px rgba(0,0,0,.45)}
+
+/* ===== events page, refreshed ===== */
+.evtop{flex-wrap:nowrap;align-items:center;gap:8px;margin:0 0 10px}
+.evtop .evprov{position:relative}
+.evtop .evprov>.i{position:absolute;left:12px;top:50%;transform:translateY(-50%);width:18px;height:18px;color:#A47424;pointer-events:none}
+.evtop .evprov select{min-height:44px;border-radius:999px;padding:8px 14px 8px 36px;border:1px solid rgba(92,16,39,.12);box-shadow:0 4px 12px -8px rgba(60,8,24,.4);font-size:15px;color:#5C1027}
+.evtop .evloc{width:44px;height:44px;min-height:44px;flex:none;border-radius:50%;color:#A47424;box-shadow:0 4px 12px -8px rgba(60,8,24,.4)}
+.evtop .evmode{box-shadow:0 4px 12px -8px rgba(60,8,24,.4)}
+.evchips{margin-bottom:8px}
+.evplace{position:relative;display:flex;align-items:center;margin:0 0 14px}
+.evplace>.i{position:absolute;left:12px;width:17px;height:17px;color:#A47424;pointer-events:none}
+.evplace select{width:100%;min-height:40px;border:1px dashed rgba(92,16,39,.22);border-radius:999px;background:transparent;color:var(--muted);padding:6px 14px 6px 36px;font:inherit;font-size:14px}
+.evplace.on select{border-style:solid;background:#5C1027;color:#F6E7C8;border-color:#5C1027}
+.evplace.on>.i{color:#E6C27A}
+.calwrap{border:1px solid rgba(92,16,39,.08);border-radius:22px;box-shadow:0 10px 26px -18px rgba(60,8,24,.5);padding:16px 12px 12px;position:relative;overflow:hidden}
+.calwrap::before{content:"";position:absolute;left:0;right:0;top:0;height:3px;background:linear-gradient(90deg,#A47424,#E6C27A 50%,#A47424)}
+.cal-head2 h2{color:#5C1027}.cal-head2 h2 span{color:#A47424;font-weight:500}
+.cday.today{box-shadow:inset 0 0 0 2px #C9973E}
+.cday.today .cn{color:#A47424;font-weight:700}
+.cdow span.we{color:#A47424}
+.section-title.evsec h2{color:#5C1027;display:flex;align-items:center;gap:10px;flex:1}
+.section-title.evsec h2::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,rgba(164,116,36,.55),rgba(164,116,36,0))}
+.locprompt.slim{align-items:center;gap:10px;padding:8px 8px 8px 10px;border-radius:999px;margin:0 0 12px;border-color:rgba(92,16,39,.1);box-shadow:0 4px 12px -9px rgba(60,8,24,.4)}
+.locprompt.slim .lp-ic{width:30px;height:30px;color:#A47424;background:rgba(201,151,62,.14)}
+.locprompt.slim .lp-ic .i{width:17px;height:17px}
+.locprompt.slim p{flex:1;margin:0;font-size:13.5px;color:var(--muted);line-height:1.3}
+.locprompt.slim p b{font-size:13.5px;color:var(--ink)}
+.locprompt.slim .btn{flex:none}
+.locprompt.slim .lp-x{flex:none;width:30px;height:30px;border:0;background:none;color:var(--muted);display:flex;align-items:center;justify-content:center;cursor:pointer;border-radius:50%}
+.locprompt.slim .lp-x .i{width:16px;height:16px}
 </style>
 </head>
 <body>
@@ -2040,7 +2070,7 @@ function locPromptHTML(){
   else if(st==='insecure'){title='Location needs a secure page';body='Browsers only allow location on secure (https://) pages.'}
   else if(st==='unsupported'){title='Location isn\u2019t available';body='This browser doesn\u2019t support location.'}
   else if(st==='denied'){title='Location is turned off';body=locHelp();btn='<button class="btn primary small" data-action="loc-enable">Try again</button>'}
-  else{title='Turn on location';body='See how far each place is and start routes from where you are. Your browser will ask for permission.';btn='<button class="btn primary small" data-action="loc-enable">Enable location</button>'}
+  else{return '<div class="locprompt slim"><div class="lp-ic">'+I.pin+'</div><p><b>Turn on location</b> for distances</p><button class="btn primary small" data-action="loc-enable">Turn on</button><button class="lp-x" data-action="loc-dismiss" aria-label="Not now">'+I.x+'</button></div>'}
   return '<div class="locprompt"><div class="lp-ic">'+I.pin+'</div><div class="lp-tx"><b>'+title+'</b><p>'+esc(body)+'</p><div class="lp-act">'+btn+'<button class="btn small" data-action="loc-dismiss">Not now</button></div></div></div>';
 }
 function inRoute(id){return S.route.indexOf(id)>-1}
@@ -2956,8 +2986,7 @@ function evProvHTML(){
   h+='<optgroup label="Provinces">'+PROVS.filter(function(x){return pc[x[0]]||x[0]===p}).map(function(x){return opt(x[0],x[1])}).join('')+'</optgroup>';
   var usl=Object.keys(US_STATES).filter(function(k){return pc[k]||k===p});if(usl.length)h+='<optgroup label="States">'+usl.map(function(k){return opt(k,US_STATES[k])}).join('')+'</optgroup>';
   h+=opt('all',hasUS()?'All places':'All of Canada');
-  return '<div class="evprov"><label for="evProv">Events</label><select id="evProv">'+h+'</select></div>'+
-    (!S.me?'<p class="note" style="margin:-4px 0 10px"><button class="link" data-action="ev-locate">Use my location</button> to see events near you.</p>':'');
+  return '<div class="evprov"><label for="evProv">Events</label>'+I.pin+'<select id="evProv">'+h+'</select></div>';
 }
 /* the next step out: 50 → 100 → 200 km → your province → all of Canada */
 function nextScope(p){
@@ -3014,6 +3043,7 @@ function goingBtn(e,big){
 /* ===== event cards: the place's picture, a coloured type tag, tickets and "Going" ===== */
 var EV_TYPE_COLOR={'Dinner':'#8E1B3A','Live music':'#5B3FA0','Tasting':'#B36A12','Release':'#24578C','Harvest':'#3E7A2C','Class':'#1F7A73','Other':'#6B5B63'};
 function evTypeTag(t){var c=EV_TYPE_COLOR[t]||EV_TYPE_COLOR.Other;return '<span class="evtype" style="--tc:'+c+'">'+esc(t||'Other')+'</span>'}
+function evDescShort(t){return String(t||'').replace(/\b(?:https?:\/\/|www\.)\S+/gi,'').replace(/\s{2,}/g,' ').trim()}
 function evItem(e,showDate){
   var w=winery(e.wid),c=color(w),d=parseYmd(e.date);
   var img=w?placeImg(w):'',tix=safeUrl(e.ticketLink),going=isGoing(e.id);
@@ -3028,7 +3058,7 @@ function evItem(e,showDate){
       '<div class="ev-meta">'+evTypeTag(e.type)+(e.time?'<span class="ev2-time">'+I.clock+fmtTime(e.time)+'</span>':'')+(e.sample?'<span class="tag sample">Sample</span>':'')+'</div>'+
       '<h3>'+esc(e.title)+'</h3>'+
       '<p class="ev-w">'+(w?'<button data-action="gowinery" data-id="'+w.id+'">'+I.pin+esc(placeName)+'</button>':esc(placeName||''))+'</p>'+
-      (e.desc?'<p class="ev-desc">'+esc(e.desc)+'</p>':'')+
+      (evDescShort(e.desc)?'<p class="ev-desc">'+esc(evDescShort(e.desc))+'</p>':'')+
       '<div class="ev2-acts">'+goingBtn(e,false)+(going?'<button class="btn small" data-action="cal-pick" data-id="'+e.id+'" aria-label="Add to my calendar">'+I.cal+'<span>Remind me</span></button>':'')+(tix?'<a class="btn small gold" href="'+esc(tix)+'" target="_blank" rel="noopener noreferrer" data-action="noop">Buy tickets</a>':'')+'</div>'+
       (isOwner()?'<div class="rowend"><button class="link" data-action="edit-event" data-id="'+e.id+'">Edit</button>'+
       '<button class="link danger" data-action="del-event" data-id="'+e.id+'">'+(S.confirm==='e:'+e.id?'Tap again to delete':'Delete')+'</button></div>':'')+
@@ -5325,9 +5355,9 @@ function eventsHTML(){
   /* the top: area and Month/List on one line, event types as chips, an optional place filter */
   var opts='<option value="all">All places</option>'+S.wineries.filter(function(w){return evp==='all'||w.id===S.fWinery||eventInProv({wid:w.id},evp)}).sort(function(a,b){return a.name.localeCompare(b.name)}).map(function(w){return '<option value="'+w.id+'"'+(S.fWinery===w.id?' selected':'')+'>'+esc(w.name)+'</option>'}).join('');
   var chip=function(t,label){var on=S.fType===t,c=t==='all'?'':(EV_TYPE_COLOR[t]||EV_TYPE_COLOR.Other);return '<button data-action="evtype" data-val="'+esc(t)+'" aria-pressed="'+on+'">'+(c?'<i style="background:'+c+'"></i>':'')+esc(label)+'</button>'};
-  var h='<div class="evtop">'+evProvHTML()+'<div class="seg evmode" role="group" aria-label="View"><button data-action="mode" data-mode="month" aria-pressed="'+(S.evMode==='month')+'">Month</button><button data-action="mode" data-mode="list" aria-pressed="'+(S.evMode==='list')+'">List</button></div></div>'+
+  var h='<div class="evtop">'+evProvHTML()+(!S.me?'<button class="btn icon evloc" data-action="ev-locate" aria-label="Use my location to see events near you">'+'<svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="2.2"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg>'+'</button>':'')+'<div class="seg evmode" role="group" aria-label="View"><button data-action="mode" data-mode="month" aria-pressed="'+(S.evMode==='month')+'">Month</button><button data-action="mode" data-mode="list" aria-pressed="'+(S.evMode==='list')+'">List</button></div></div>'+
     '<div class="pchips evchips" role="group" aria-label="Event type">'+chip('all','All')+TYPES.map(function(t){return chip(t,t)}).join('')+'</div>'+
-    '<div class="pfilters"><select id="fWinery" aria-label="Filter by place">'+opts+'</select></div>';
+    '<div class="evplace'+(S.fWinery!=='all'?' on':'')+'">'+I.search+'<select id="fWinery" aria-label="Filter by place">'+opts.replace('>All places<','>Any place<')+'</select></div>';
   var evs=filteredEvents(),t=todayStr();
   if(S.evMode==='list'){
     var up=evs.filter(function(e){return e.date>=t}).sort(cmpEv);
@@ -5335,7 +5365,7 @@ function eventsHTML(){
     var out='',last='';
     up.forEach(function(e){
       var mk=parseYmd(e.date).toLocaleDateString(undefined,{month:'long',year:'numeric'});
-      if(mk!==last){out+=(last?'</div>':'')+'<div class="section-title"><h2>'+mk+'</h2></div><div class="evlist">';last=mk}
+      if(mk!==last){out+=(last?'</div>':'')+'<div class="section-title evsec"><h2>'+mk+'</h2></div><div class="evlist">';last=mk}
       out+=evItem(e,true);
     });
     return h+out+'</div>'+evMoreHTML();
@@ -5361,11 +5391,11 @@ function eventsHTML(){
   var below;
   if(S.selPicked){
     var dl=(by[S.sel]||[]).slice().sort(cmpEv);
-    below='<div class="section-title"><h2>'+fmtLong(S.sel)+'</h2><button class="hlink" data-action="evday-clear">Coming up</button></div>'+
+    below='<div class="section-title evsec"><h2>'+fmtLong(S.sel)+'</h2><button class="hlink" data-action="evday-clear">Coming up</button></div>'+
       (dl.length?'<div class="evlist">'+dl.map(function(e){return evItem(e,false)}).join('')+'</div>':emptyHTML('calendar','Nothing on this day','Tap a highlighted day to see what\u2019s on.','<button class="btn" data-action="evday-clear">See what\u2019s coming up</button>',true));
   }else{
     var next=evs.filter(function(e){return e.date>=t}).sort(cmpEv).slice(0,6);
-    below='<div class="section-title"><h2>Coming up</h2>'+(next.length?'<button class="hlink" data-action="mode" data-mode="list">See all</button>':'')+'</div>'+
+    below='<div class="section-title evsec"><h2>Coming up</h2>'+(next.length?'<button class="hlink" data-action="mode" data-mode="list">See all</button>':'')+'</div>'+
       (next.length?'<div class="evlist">'+next.map(function(e){return evItem(e,true)}).join('')+'</div>':emptyHTML('calendar','No events coming up here yet','Try a wider area above, or check back soon. New events are added every week.','',true));
   }
   return h+cal+below+evMoreHTML();
@@ -5478,7 +5508,7 @@ function detailHTML(w){
         var tix=safeUrl(e.ticketLink);
         return '<article class="ev evlink" style="--c:'+color(w)+'" data-action="viewevent" data-id="'+e.id+'" role="button" tabindex="0" aria-label="'+esc(e.title)+', see details"><div class="ev-date"><b>'+parseYmd(e.date).getDate()+'</b><span>'+parseYmd(e.date).toLocaleDateString(undefined,{month:'short'})+'</span></div>'+
           '<div class="ev-main"><h3>'+esc(e.title)+'</h3><div class="ev-meta">'+(e.time?'<span>'+fmtTime(e.time)+'</span>':'')+'<span class="tag">'+esc(e.type)+'</span></div>'+
-          (e.desc?'<p class="ev-desc">'+esc(e.desc)+'</p>':'')+
+          (evDescShort(e.desc)?'<p class="ev-desc">'+esc(evDescShort(e.desc))+'</p>':'')+
           '<div class="ev-btns">'+(tix?'<a class="btn small gold" href="'+esc(tix)+'" target="_blank" rel="noopener noreferrer" data-action="noop">Buy tickets</a>':'')+
           '<span class="btn small">Details '+I.r+'</span></div></div></article>';
       }).join('')+'</div>':emptyHTML('calendar','No upcoming events','Check back soon, or tap the heart to keep this place in your favourites.','',true))+
