@@ -16,7 +16,7 @@ async function get(u) {
   for (const url of [withScheme(u), withScheme(u).replace(/^https:/, 'http:')]) {
     try {
       const ctl = new AbortController();
-      const t = setTimeout(() => ctl.abort(), 25000);
+      const t = setTimeout(() => ctl.abort(), 20000);
       const r = await fetch(url, { headers: { 'User-Agent': UA, 'Accept': 'text/html,*/*', 'Accept-Language': 'en-US,en' }, redirect: 'follow', signal: ctl.signal });
       const html = (await r.text()).slice(0, 300000);
       clearTimeout(t);
@@ -44,7 +44,7 @@ async function worker() {
     out[p.id] = r;
   }
 }
-await Promise.all(Array.from({ length: 24 }, worker));
+await Promise.all(Array.from({ length: 48 }, worker));
 fs.writeFileSync('tools/site-check-result.json', JSON.stringify(out));
 const n = Object.values(out);
 console.log(n.length, 'checked;', n.filter(x => x.st && x.st < 400).length, 'ok;', n.filter(x => !x.st).length, 'unreachable;', n.filter(x => x.sale).length, 'for sale');
