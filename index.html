@@ -1153,6 +1153,45 @@ button.gtk{cursor:pointer}button.gtk[aria-pressed="true"]{background:var(--accen
 .top .btn.icon .i,.top .btn.icon>svg{color:inherit!important}
 .btn.gold{border:1px solid rgba(92,16,39,.14);box-shadow:0 2px 8px -6px rgba(60,8,24,.35)}
 .btn.primary{box-shadow:0 6px 14px -8px rgba(92,16,39,.7)}
+
+/* ===== event page, pop-up banners and sign-in prompt ===== */
+.evhero .ev2-date{left:16px;top:16px}
+.evhero .gcredit{left:auto;right:14px;max-width:55%}
+.evacts{display:flex;flex-wrap:wrap;gap:8px;margin:4px 0 6px}
+.evinfo{padding:4px 6px}
+.eirow{display:flex;align-items:center;gap:12px;width:100%;padding:11px 8px;background:none;border:0;font:inherit;color:var(--ink);text-align:left;text-decoration:none;cursor:pointer}
+.eirow+.eirow{border-top:1px solid rgba(92,16,39,.07)}
+div.eirow{cursor:default}
+.eirtx{flex:1;min-width:0}.eirtx b{display:block;font-weight:600;font-size:15px}
+.eirtx small{display:block;font-size:13px;color:var(--muted);margin-top:1px;overflow-wrap:anywhere}
+.evdesc{margin:0;font-size:15px;line-height:1.55;color:var(--ink)}
+.dnear .hgrid .featcard:only-child{flex-basis:100%}
+.sbanner{display:flex;gap:12px;align-items:flex-start;background:radial-gradient(120% 120% at 0% 0%,#7A1A36 0%,#5C1027 60%,#45091D 100%);color:#F3E3C3;border-radius:18px;padding:14px;margin:0 0 14px;position:relative;overflow:hidden}
+.sbanner::after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;background:linear-gradient(90deg,#A47424,#E6C27A 50%,#A47424)}
+.sbanner.gold{background:radial-gradient(120% 120% at 0% 0%,#B8862F 0%,#8A5F1A 60%,#6B4A12 100%);color:#FFF4DC}
+.sbanner>span{font-size:30px;line-height:1;flex:none}
+.sbanner p{margin:0;font-size:14px;line-height:1.45}.sbanner b{color:#fff}
+.sbanner>div{flex:1;min-width:0}
+.sbprog{height:7px;border-radius:4px;background:rgba(255,255,255,.18);margin:10px 0 4px;overflow:hidden}
+.sbprog i{display:block;height:100%;background:linear-gradient(90deg,#E6C27A,#C9973E);border-radius:4px}
+.sbanner small{font-size:12.5px;color:#E6C27A}
+.flcat{background:var(--surface);border:1px solid rgba(92,16,39,.08);border-radius:16px;padding:12px 14px;margin:0 0 10px;box-shadow:0 6px 16px -14px rgba(60,8,24,.45)}
+.flcat h3{font-family:var(--serif);font-size:18px;color:#5C1027;margin:0 0 6px}
+.bsub,.sheet .wvh{font-family:var(--serif);color:#5C1027;display:flex;align-items:center;gap:10px}
+.bsub::after,.sheet .wvh::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,rgba(164,116,36,.55),rgba(164,116,36,0))}
+.sheet .pstats{background:radial-gradient(120% 120% at 0% 0%,#7A1A36 0%,#5C1027 60%,#45091D 100%);color:#F6E7C8;border-radius:18px;padding:12px 6px;position:relative;overflow:hidden}
+.sheet .pstats::after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;background:linear-gradient(90deg,#A47424,#E6C27A 50%,#A47424)}
+.sheet .pstats>div{background:none!important;border:0!important;box-shadow:none!important}
+.sheet .pstats b{color:#fff}.sheet .pstats span{color:#E6C27A}
+.signprompt{text-align:center;background:radial-gradient(120% 100% at 50% 0%,#7A1A36 0%,#5C1027 60%,#45091D 100%);color:#F3E3C3;border-radius:20px;padding:18px 16px 16px;margin:2px 0 6px;position:relative;overflow:hidden}
+.signprompt::after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;background:linear-gradient(90deg,#A47424,#E6C27A 50%,#A47424)}
+.signprompt img{height:54px;width:auto;display:block;margin:0 auto 6px}
+.signprompt b{display:block;font-family:var(--serif);font-size:20px;color:#fff;margin-bottom:4px}
+.signprompt p{margin:0 0 12px;font-size:14px;color:#F3E3C3}
+.signprompt .sheet-actions{justify-content:center;margin:0 0 10px}
+.signprompt .sheet-actions .btn:not(.primary){background:rgba(255,255,255,.12);border-color:rgba(230,194,122,.45);color:#F6E7C8}
+.signprompt .sheet-actions .btn.primary{background:#C9973E;border-color:#E6C27A;color:#3A0A18;font-weight:700}
+.signprompt small{display:block;font-size:12px;color:#E6C27A}
 </style>
 </head>
 <body>
@@ -1992,7 +2031,7 @@ function supportSheetHTML(){
 function delAcctSheetHTML(s){
   var head='<div class="sheet-head"><h2 id="sheetTitle">Delete my account</h2><button class="btn icon" data-action="close" aria-label="Close">'+I.x+'</button></div>';
   if(s.done)return head+'<p><b>Your account has been deleted.</b> Thank you for using FatRaisin. You can keep browsing without an account.</p><div class="sheet-actions"><button class="btn primary" data-action="close">Close</button></div>';
-  if(!S.fbUser)return head+'<p>You\u2019re not signed in.</p><div class="sheet-actions"><button class="btn primary" data-action="close">Close</button></div>';
+  if(!S.fbUser)return head+signinPromptHTML('You\u2019re not signed in, so there\u2019s no account to delete.');
   return head+
     '<p style="margin-top:0">This permanently deletes the FatRaisin account <b>'+esc(S.fbUser.email||'')+'</b> and everything saved to it: your favourites, route, events you\u2019re going to and your wine cellar. This can\u2019t be undone.</p>'+
     '<p class="note">Wines you added to the shared catalogue stay there without your name, and suggestions you sent stay with the owner unless you ask for them to be removed.</p>'+
@@ -4380,27 +4419,36 @@ function googleCalUrl(e,w){
     '&details='+encodeURIComponent(details)+(w?'&location='+encodeURIComponent(w.name+', '+w.address):'');
   return 'https://calendar.google.com/calendar/render?'+qs;
 }
+/* one friendly "please sign in" card for pop-ups that need an account */
+function signinPromptHTML(why){
+  return '<div class="signprompt"><img src="img/logo-dark.png" alt="" aria-hidden="true"><b>Sign in to continue</b><p>'+why+'</p>'+
+    '<div class="sheet-actions"><button class="btn" data-action="close">Not now</button><button class="btn primary" data-action="owner-signin">Sign in</button></div>'+
+    '<small>It\u2019s free, and keeps your favourites and cellar on all your devices.</small></div>';
+}
 function eventDetailHTML(e){
   if(!e)return '<button class="detailback" data-action="back-detail-event">'+I.l+'<span>Back</span></button><div class="empty"><p>That event couldn\u2019t be found. It may have been removed.</p></div>';
   var w=winery(e.wid);
   var d=parseYmd(e.date);
   var link=safeUrl(e.link),tix=safeUrl(e.ticketLink);
   var img=w?placeImg(w):'';
+  var when=d.toLocaleDateString(undefined,{weekday:'long',month:'long',day:'numeric'})+(e.time?' · '+fmtTime(e.time):'');
+  var irow=function(icon,main,sub,href,act){var inner='<span class="setic">'+icon+'</span><span class="eirtx"><b>'+main+'</b>'+(sub?'<small>'+sub+'</small>':'')+'</span>';
+    return href?'<a class="eirow" href="'+esc(href)+'" target="_blank" rel="noopener noreferrer">'+inner+'<span class="setch">'+I.r+'</span></a>':act?'<button class="eirow" '+act+'>'+inner+'<span class="setch">'+I.r+'</span></button>':'<div class="eirow">'+inner+'</div>'};
   return '<button class="detailback" data-action="back-detail-event">'+I.l+'<span>Back</span></button>'+
-    (w?'<div class="detailhero" style="--img:url(&quot;'+esc(img)+'&quot;)'+(typeof w!=='undefined'&&w?photoFrame(w):'')+'"><h2>'+esc(e.title)+'</h2><p>'+esc(w.name)+'</p></div>':'<h2 style="margin:10px 0 4px">'+esc(e.title)+'</h2>')+
-    '<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:6px"><span class="tag">'+esc(e.type)+'</span>'+(e.sample?'<span class="tag sample">Sample</span>':'')+'</div>'+
-    '<p class="addr">'+esc(d.toLocaleDateString(undefined,{weekday:'long',month:'long',day:'numeric',year:'numeric'}))+(e.time?' \u00b7 '+esc(fmtTime(e.time)):'')+'</p>'+
-    (w?'<p class="addr"><a href="'+esc(mapsSearch(w))+'">'+esc(w.address)+'</a></p>':'')+
-    (e.desc?'<p style="margin:10px 0">'+esc(e.desc)+'</p>':'')+
-    '<div class="actions" style="margin-top:12px">'+
-      (tix?'<a class="btn primary" href="'+esc(tix)+'" target="_blank" rel="noopener noreferrer">'+I.plus+'<span>Buy tickets</span></a>':'')+
-      goingBtn(e,true)+
-      '<button class="btn gold" data-action="cal-pick" data-id="'+e.id+'">'+I.cal+'<span>Add to Calendar</span></button>'+
-      '<button class="btn" data-action="share-event" data-id="'+e.id+'">'+I.share+'<span>Share event</span></button>'+
-      (link?'<a class="btn" href="'+esc(link)+'" target="_blank" rel="noopener noreferrer">'+I.globe+'<span>Event website</span></a>':'')+
-      (w?'<button class="btn" data-action="viewplace" data-id="'+w.id+'">'+I.pin+'<span>About '+esc(w.name)+'</span></button>':'')+
-      (w&&hasCoord(w)?'<button class="btn" data-action="directions" data-id="'+w.id+'">'+I.route+'<span>Directions</span></button>':'')+
+    (w?'<div class="detailhero evhero" style="--img:url(&quot;'+esc(img)+'&quot;)'+(typeof w!=='undefined'&&w?photoFrame(w):'')+'">'+gCreditHTML(w)+
+      '<div class="ev2-date"><span>'+d.toLocaleDateString(undefined,{weekday:'short'})+'</span><b>'+d.getDate()+'</b><span>'+d.toLocaleDateString(undefined,{month:'short'})+'</span></div>'+
+      '<h2>'+esc(e.title)+'</h2><p>'+esc(w.name)+'</p></div>':'<h2 style="margin:10px 0 4px">'+esc(e.title)+'</h2>')+
+    '<div class="dbadges"><span class="tag">'+esc(e.type)+'</span>'+(e.sample?'<span class="tag sample">Sample</span>':'')+'</div>'+
+    '<div class="evacts">'+(tix?'<a class="btn primary" href="'+esc(tix)+'" target="_blank" rel="noopener noreferrer">'+I.plus+'<span>Buy tickets</span></a>':'')+goingBtn(e,true)+
+      '<button class="btn" data-action="cal-pick" data-id="'+e.id+'">'+I.cal+'<span>Add to calendar</span></button>'+
+      '<button class="btn" data-action="share-event" data-id="'+e.id+'">'+I.share+'<span>Share</span></button></div>'+
+    '<div class="dcard evinfo">'+
+      irow(I.cal,esc(when),esc(String(d.getFullYear())))+
+      (w?irow(I.pin,esc(w.name),esc(w.address),w&&hasCoord(w)?'':mapsSearch(w),w&&hasCoord(w)?'data-action="directions" data-id="'+w.id+'"':''):'')+
+      (link?irow(I.globe,'Event website',esc(host(link)),link):'')+
     '</div>'+
+    (e.desc?'<div class="detailsec"><h3>About this event</h3><p class="evdesc">'+esc(e.desc)+'</p></div>':'')+
+    (w?'<div class="detailsec dnear"><h3>The place</h3><div class="hgrid">'+featCard(w)+'</div></div>':'')+
     (isOwner()?'<div class="detailsec dmanage"><h3>Manage</h3><div class="rowend">'+
     '<button class="link" data-action="edit-event" data-id="'+e.id+'">Edit</button>'+
     '<button class="link danger" data-action="del-event" data-id="'+e.id+'">'+(S.confirm==='e:'+e.id?'Tap again to delete':'Delete')+'</button>'+
@@ -4622,8 +4670,7 @@ function suggestSheetHTML(s){
   var head='<div class="sheet-head"><h2 id="sheetTitle">Suggest a place</h2><button class="btn icon" data-action="close" aria-label="Close">'+I.x+'</button></div>';
   if(s.sent)return head+'<p><b>Thank you!</b> Your suggestion for <b>'+esc(s.sent)+'</b> has been sent. I\u2019ll take a look and add it to FatRaisin.</p>'+
     '<div class="sheet-actions" style="justify-content:flex-start;flex-wrap:wrap"><button class="btn" data-action="suggest-open">Suggest another</button><button class="btn primary" data-action="close">Done</button></div>';
-  if(!S.fbUser)return head+'<p>Please sign in first, so I can follow up if I have a question about the place.</p>'+
-    '<div class="sheet-actions" style="justify-content:flex-start"><button class="btn primary" data-action="owner-signin">Sign in</button><button class="btn" data-action="close">Close</button></div>';
+  if(!S.fbUser)return head+signinPromptHTML('So I can follow up if I have a question about the place you suggest.');
   var d=s.draft||{},t=d.type||'winery';
   return head+'<p class="note" style="margin-top:0">Fill in what you know. Only the name and town are needed.</p>'+
     '<div class="seg" role="group" aria-label="Type" style="margin-bottom:14px;flex-wrap:wrap">'+
@@ -4743,7 +4790,7 @@ function squarePhoto(file,size){
   })});
 }
 function profileSheetHTML(s){
-  var u=S.fbUser;if(!u)return '<div class="sheet-head"><h2 id="sheetTitle">Edit profile</h2><button class="btn icon" data-action="close" aria-label="Close">'+I.x+'</button></div><p>Sign in first.</p>';
+  var u=S.fbUser;if(!u)return '<div class="sheet-head"><h2 id="sheetTitle">Edit profile</h2><button class="btn icon" data-action="close" aria-label="Close">'+I.x+'</button></div>'+signinPromptHTML('Sign in to set your name and picture.');
   var d=s.draft||(s.draft={name:profileName(u)===u.email?'':profileName(u),avatar:(S.profile&&S.profile.avatar)||'',home:(S.profile&&S.profile.home)||''});
   var pw=!(u.providerData&&u.providerData[0]&&/google|apple/.test(u.providerData[0].providerId));
   var provs='<option value="">Wherever I am (uses my location)</option>'+PROVS.map(function(x){return '<option value="'+x[0]+'"'+(d.home===x[0]?' selected':'')+'>'+x[1]+'</option>'}).join('');
@@ -5149,7 +5196,7 @@ function reviewsSectionHTML(w){
 function reviewSheetHTML(s){
   var w=winery(s.id),head='<div class="sheet-head"><h2 id="sheetTitle">'+(s.existing?'Edit your review':'Write a review')+'</h2><button class="btn icon" data-action="close" aria-label="Close">'+I.x+'</button></div>';
   if(!w)return head;
-  if(!S.fbUser)return head+'<p>Sign in to rate and review places, so your review shows with your name.</p><div class="sheet-actions" style="justify-content:flex-start"><button class="btn primary" data-action="owner-signin">Sign in</button><button class="btn" data-action="close">Close</button></div>';
+  if(!S.fbUser)return head+signinPromptHTML('So your review shows with your name.');
   var d=s.draft||(s.draft={rating:s.existing?s.existing.rating:0,text:s.existing?s.existing.text:''});
   return head+'<p style="margin-top:0"><b>'+esc(w.name)+'</b></p>'+
     '<div class="starpick" role="radiogroup" aria-label="Your rating">'+[1,2,3,4,5].map(function(i){return '<button data-action="rev-star" data-val="'+i+'" role="radio" aria-checked="'+(d.rating===i)+'" aria-label="'+i+' star'+(i>1?'s':'')+'" class="'+(d.rating>=i?'on':'')+'">\u2605</button>'}).join('')+'</div>'+
@@ -9287,8 +9334,8 @@ function badgesSheetHTML(){
   var main=list.filter(function(b){return !b.region}),reg=list.filter(function(b){return b.region});
   main.sort(function(a,b){return (b.done-a.done)||((b.have/b.goal)-(a.have/a.goal))});
   return STAMP_DEFS+'<div class="sheet-head"><h2 id="sheetTitle">'+esc(greatPourName())+'</h2><button class="btn icon" data-action="close" aria-label="Close">'+I.x+'</button></div>'+
-    '<p style="margin-top:0">Collect stamps at wineries, breweries, cideries and distilleries to earn badges and finish regional challenges. Tap <b>Been here</b> on a place to stamp it.</p>'+
-    '<p class="note"><b>'+done+' of '+list.length+'</b> badges earned</p>'+
+    '<div class="sbanner"><span aria-hidden="true">\ud83c\udfc5</span><div><p>Collect stamps at wineries, breweries, cideries and distilleries to earn badges and finish regional challenges. Tap <b>Been here</b> on a place to stamp it.</p>'+
+      '<div class="sbprog"><i style="width:'+Math.max(Math.round(done*100/list.length),2)+'%"></i></div><small><b>'+done+' of '+list.length+'</b> badges earned</small></div></div>'+
     '<h3 class="bsub">Badges</h3><div class="badges">'+main.map(card).join('')+'</div>'+
     '<h3 class="bsub">Regional challenges</h3><div class="badges">'+reg.map(card).join('')+'</div>'+
     '<div class="sheet-actions" style="margin-top:12px"><button class="btn" data-action="passport-open">My passport</button><button class="btn primary" data-action="close">Close</button></div>';
@@ -9434,10 +9481,10 @@ function flightVote(id,cat){
 }
 function flightSheetHTML(s){
   var head='<div class="sheet-head"><h2 id="sheetTitle">Ultimate Flight Challenge</h2><button class="btn icon" data-action="close" aria-label="Close">'+I.x+'</button></div>';
-  if(s&&s.needSignin&&!S.fbUser)return head+'<p>Sign in to vote, so there’s one vote per person.</p><div class="sheet-actions" style="justify-content:flex-start"><button class="btn primary" data-action="owner-signin">Sign in</button><button class="btn" data-action="close">Close</button></div>';
+  if(s&&s.needSignin&&!S.fbUser)return head+signinPromptHTML('So there\u2019s one vote per person.');
   if(!FLIGHT.list){flightLoad();return head+skel(3,{label:'Loading votes'})}
   var mine=flightMine();
-  return head+'<p style="margin-top:0">Try a flight at the places you visit, then vote for your favourite red, white, cider, IPA and stout. Open a place you’ve stamped and tap a <b>Best…</b> button to vote.</p>'+
+  return head+'<div class="sbanner gold"><span aria-hidden="true">\ud83c\udfc6</span><p>Try a flight at the places you visit, then vote for your favourite red, white, cider, IPA and stout. Open a place you\u2019ve stamped and tap a <b>Best\u2026</b> button to vote.</p></div>'+
     FLIGHT_CATS.map(function(c){var top=flightTally(c[0]).filter(function(x){return inCountry(winery(x[0]))}).slice(0,5),my=mine[c[0]]&&winery(mine[c[0]]);
       return '<div class="flcat"><h3>'+c[2]+' '+esc(c[1])+'</h3>'+
         (top.length?'<ol class="trailstops">'+top.map(function(x){var w=winery(x[0]);return '<li><button class="hlink" data-action="viewplace" data-id="'+w.id+'" style="margin:0;text-align:left">'+esc(w.name)+'</button><span class="note">'+plural(x[1],'vote')+' · '+esc(String(w.area||'').replace(/,\s*[A-Z]{2}$/,''))+'</span></li>'}).join('')+'</ol>':'<p class="note">No votes yet in '+(S.country==='US'?'the US':'Canada')+'. Be the first!</p>')+
