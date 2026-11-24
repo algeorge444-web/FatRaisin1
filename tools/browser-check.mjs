@@ -2,6 +2,7 @@
 // simple checks. Records whether the page says closed / for sale, and the phone numbers it shows
 // (also from contact/visit/about pages when asked). Changes no place data.
 // Input tools/browser-check-list.json [{id,name,url,phone,city,blocked,phonecheck}]
+// wanttext: also save the page's words, picture labels and title (txt) so the name can be matched.
 // SHARD/SHARDS env pick a slice. Output parts/b-<shard>.json {id:{st,final,title,challenge,sale,closed,phones}}
 import fs from 'node:fs';
 import { chromium } from 'playwright';
@@ -22,8 +23,9 @@ async function look(page, url) {
     let text = await page.evaluate(() => document.body ? document.body.innerText : '').catch(() => '');
     if (CHAL.test(title + ' ' + text.slice(0, 400))) { await page.waitForTimeout(9000); title = await page.title().catch(() => ''); text = await page.evaluate(() => document.body ? document.body.innerText : '').catch(() => ''); }
     const tels = await page.evaluate(() => [...document.querySelectorAll('a[href^="tel:"]')].map(a => a.getAttribute('href'))).catch(() => []);
-    return { st: resp ? resp.status() : 0, final: page.url(), title: title.slice(0, 90), text, tels };
-  } catch (e) { return { st: 0, err: String(e.message || e).slice(0, 80), text: '', tels: [] }; }
+    const alts = await page.evaluate(() => [...document.querySelectorAll('img[alt],[aria-label]')].map(e => e.getAttribute('alt') || e.getAttribute('aria-label')).concat([...document.querySelectorAll('meta[property="og:site_name"],meta[property="og:title"],meta[name="description"]')].map(m => m.content)).join(' | ').slice(0, 2000)).catch(() => '');
+    return { st: resp ? resp.status() : 0, final: page.url(), title: title.slice(0, 90), text, tels, alts };
+  } catch (e) { return { st: 0, err: String(e.message || e).slice(0, 80), text: '', tels: [], alts: '' }; }
 }
 const phonesIn = (text, tels) => { const s = new Set(); for (const t of [text, ...tels]) for (const m of (t || '').matchAll(PH)) s.add(m[1] + '-' + m[2] + '-' + m[3]); return [...s]; };
 async function one(ctx, p) {
@@ -33,6 +35,7 @@ async function one(ctx, p) {
   o.challenge = CHAL.test((r.title || '') + ' ' + (r.text || '').slice(0, 400));
   const s = SALE.exec((r.title || '') + ' ' + (r.text || '').slice(0, 6000)); o.sale = s ? s[0] : '';
   const c = CLOSED.exec(r.text || ''); o.closed = c ? r.text.slice(Math.max(0, c.index - 120), c.index + 140).replace(/\s+/g, ' ') : '';
+  if (p.wanttext) o.txt = ((r.title || '') + ' | ' + (r.alts || '') + ' | ' + (r.text || '')).replace(/\s+/g, ' ').slice(0, 6000);
   if (p.phonecheck) {
     let phones = phonesIn(r.text, r.tels);
     const want = (p.phone || '').replace(/\D/g, '').slice(-10);
