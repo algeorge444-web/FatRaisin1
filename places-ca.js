@@ -141,7 +141,7 @@
 ["50th Parallel Estate","17101 Terrace View Road, Lake Country, BC V4V 1B9","Okanagan Valley, BC","+1-250-766-3408","50thparallel.com",50.130287,-119.448464,"winebc",0,"winery","cy7oio2"],
 ["8th Generation Vineyard","6807 Highway 97, Summerland, BC V0H 1Z9","Okanagan Valley, BC","250-494-1783","8thgeneration.com",49.575529,-119.631464,"winebc",0,"winery","cthjm5v"],
 ["99 South Vineyards","4218 King George Blvd, Surrey, BC V3S 0L2","Fraser Valley, BC","604-307-8171","99southvineyards.com",49.080105,-122.820442,"winebc",0,"winery","cb36sk5"],
-["Aasha Wines","1660 Naramata Rd, Penticton, BC V2A 8T8","Okanagan Valley, BC","647-924-9487","aashawines.com",49.544387,-119.568945,"winebc",0,"winery","co9tdjn"],
+["Aasha Wines","1660 Naramata Rd, Penticton, BC V2A 8T8","Okanagan Valley, BC","","aashawines.com",49.544387,-119.568945,"winebc",0,"winery","co9tdjn"],
 ["Adega on 45th Estate Winery","7311 45th St, Osoyoos, BC V0H 1V0","Okanagan Valley, BC","250-495-6243","adegaon45.com",49.03417,-119.43327,"winebc",0,"winery","cy5893g"],
 ["Mission Hill Family Estate","1730 Mission Hill Rd, West Kelowna, BC V4T 2E4","Okanagan Valley, BC","250-768-6400","missionhillwinery.com",49.835596,-119.587515,"memory",0,"winery","c8lsacb"],
 ["Quails’ Gate Winery","3303 Boucherie Rd, West Kelowna, BC V1Z 2H3","Okanagan Valley, BC","250-769-4451","quailsgate.com",49.843613,-119.565744,"memory",0,"winery","cqzvb0p"],
