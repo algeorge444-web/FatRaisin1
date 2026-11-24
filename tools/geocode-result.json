@@ -1,125 +1,27 @@
 {
- "ch6yesb": [],
- "cqupl92": [
+ "cfl1jsv": [
   {
    "src": "osm",
-   "q": "3100 Concession Road 3, Adjala-Tosorontio, Ontario",
-   "lat": 44.0448097,
-   "lng": -79.9405055,
-   "label": "3100, Concession Road 3, Adjala–Tosorontio, Simcoe County, Central Ontario, Ontario, L0G 1L0, Canada",
-   "type": "house"
-  }
- ],
- "cueqz6o": [],
- "cgb636c": [
-  {
-   "src": "osm",
-   "q": "Eataly, 55 Bloor Street West, Toronto",
-   "lat": 43.6696714,
-   "lng": -79.3887524,
-   "label": "Eataly Toronto, 55, Bloor Street West, Yorkville, Downtown, Annex, University—Rosedale, Toronto, Ontario, M4W 1A6, Canada",
-   "type": "grocery"
+   "q": "2250 E Hwy 290, Dripping Springs, TX 78620",
+   "lat": 30.2005748,
+   "lng": -98.1073728,
+   "label": "Old Highway 290, Dripping Springs, Hays County, Texas, 78620, United States",
+   "type": "tertiary"
   },
   {
    "src": "osm",
-   "q": "55 Bloor Street West, Toronto",
-   "lat": 43.6696714,
-   "lng": -79.3887524,
-   "label": "Eataly Toronto, 55, Bloor Street West, Yorkville, Downtown, Annex, University—Rosedale, Toronto, Ontario, M4W 1A6, Canada",
-   "type": "restaurant"
+   "q": "2250 E Hwy 290, Dripping Springs, TX 78620",
+   "lat": 30.1952082,
+   "lng": -98.0557756,
+   "label": "East US Highway 290, Dripping Springs, Hays County, Texas, United States",
+   "type": "trunk"
   },
   {
-   "src": "osm",
-   "q": "55 Bloor Street West, Toronto",
-   "lat": 43.6696084,
-   "lng": -79.3885899,
-   "label": "55, Bloor Street West, Yorkville, Downtown, Annex, University—Rosedale, Toronto, Ontario, M4W 3B8, Canada",
-   "type": "house"
-  },
-  {
-   "src": "osm",
-   "q": "55 Bloor Street West, Toronto",
-   "lat": 43.6687519,
-   "lng": -79.3879316,
-   "label": "Citymarket, 55, Bloor Street West, Yorkville, Downtown, Annex, University—Rosedale, Toronto, Ontario, M4W 1A5, Canada",
-   "type": "supermarket"
-  }
- ],
- "cjjv1zq": [
-  {
-   "src": "osm",
-   "q": "2001 County Road 3, Carrying Place, ON K0K 1L0",
-   "lat": 44.0612192,
-   "lng": -77.5623472,
-   "label": "Rednersville Road, Carrying Place, Prince Edward County, Central Ontario, Ontario, K0K 1L0, Canada",
-   "type": "secondary"
-  },
-  {
-   "src": "osm",
-   "q": "2001 County Road 3, Prince Edward, Ontario",
-   "lat": 44.1013378,
-   "lng": -77.4894714,
-   "label": "2001, Rednersville Road, Prince Edward County, Central Ontario, Ontario, K0K 3W0, Canada",
-   "type": "house"
-  }
- ],
- "cmpjiow": [
-  {
-   "src": "osm",
-   "q": "1701 Coursier Avenue, Revelstoke",
-   "lat": 50.9766159,
-   "lng": -118.1731782,
-   "label": "Coursier Avenue, Revelstoke, Columbia-Shuswap Regional District, British Columbia, V0E 2S1, Canada",
-   "type": "residential"
-  }
- ],
- "cjq1mpx": [],
- "c8f7kww": [
-  {
-   "src": "osm",
-   "q": "5 Newport Drive, Johnstown, ON K0E 1T1",
-   "lat": 44.7254204,
-   "lng": -75.4876598,
-   "label": "Newport Drive, Johnstown, Edwardsburgh/Cardinal, Leeds and Grenville Counties, Eastern Ontario, Ontario, K0E 1T1, Canada",
-   "type": "residential"
-  }
- ],
- "c5kw6p5": [
-  {
-   "src": "osm",
-   "q": "66 Gilead Road, Prince Edward, Ontario",
-   "lat": 43.994105,
-   "lng": -77.2683682,
-   "label": "66, Gilead Road, Prince Edward County, Central Ontario, Ontario, K0K 1G0, Canada",
-   "type": "house"
-  }
- ],
- "c1a2qrl": [
-  {
-   "src": "osm",
-   "q": "Left Field Cider Co",
-   "lat": 50.3615097,
-   "lng": -120.8031353,
-   "label": "Left Field Cider Co., Highway 97C, Area M (Beautiful Nicola Valley - North), Thompson-Nicola Regional District, British Columbia, Canada",
-   "type": "brewery"
-  }
- ],
- "csjxbz9": [
-  {
-   "src": "osm",
-   "q": "Caledonia, Prince Edward Island",
-   "lat": 46.0604671,
-   "lng": -62.7108017,
-   "label": "Caledonia, Queens County, Prince Edward Island, Canada",
-   "type": "administrative"
-  },
-  {
-   "src": "osm",
-   "q": "Caledonia, Prince Edward Island",
-   "lat": 46.0493559,
-   "lng": -62.6946746,
-   "label": "Caledonia, Kings County, Prince Edward Island, Canada",
-   "type": "administrative"
+   "src": "census",
+   "q": "2250 E Hwy 290, Dripping Springs, TX 78620",
+   "lat": 30.195055560081,
+   "lng": -98.052569678814,
+   "label": "2250 E HWY 290, DRIPPING SPRINGS, TX, 78620"
   }
  ]
 }
