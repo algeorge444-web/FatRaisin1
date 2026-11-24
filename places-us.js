@@ -9345,7 +9345,7 @@
 ["Dueces Wild Brewery","660 Peterson Rd, Colorado Springs, CO 80915","Colorado Springs, CO","719-394-4811","dwbbrewery.com",38.841499,-104.702453,"ovt",0,"brewery","cob06q6"],
 ["Private Label Distillery","1405 Selix Grv, Colorado Springs, CO 80915","Colorado Springs, CO","720-878-7353","privatelabeldistillery.com/tasting-room",38.849058,-104.688663,"ovt",0,"distillery","cik2vox"],
 ["Wackadoo Brewing","5158 Centennial Blvd, Colorado Springs, CO 80919","Colorado Springs, CO","719-375-1831","Wackadoobrewing.com",38.905241,-104.863906,"ovt",0,"brewery","c2dfxfz"],
-["Cobble Ridge Distillery","555 Avacado Rd, Oroville, CA 95966","Chico & North Valley, CA","530-407-0891","cobbleridgedistillery.com",39.4936,-121.4851,"ovt",1,"distillery","ch6yesb"],
+["Cobble Ridge Distillery","555 Avacado Rd, Oroville, CA 95966","Chico & North Valley, CA","530-407-0891","cobbleridgedistillery.com",39.401216,-121.418197,"ovt",0,"distillery","ch6yesb"],
 ["Goat Patch Brewing Company - Northgate","12245 Voyager Pkwy Ste 100, Colorado Springs, CO 80921","Colorado Springs, CO","719-300-8870","goatpatchbrewing.com",39.010917,-104.807062,"ovt",0,"brewery","c16atqk"],
 ["Lost Friend Brewing Company","2458 Montebello Square Dr, Colorado Springs, CO 80918","Colorado Springs, CO","719-694-8501","lostfriendbrewing.com",38.908833,-104.782362,"ovt",0,"brewery","clwvaal"],
 ["Black Forest Brewing Company East","10610 Maltese Point, Peyton, CO 80831","Colorado Springs, CO","719-888-9501","blackforestbrewingco.com",38.940118,-104.631139,"ovt",0,"brewery","cfgidqa"],
