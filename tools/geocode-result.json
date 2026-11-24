@@ -1,62 +1,50 @@
 {
- "cqfezh7": [
-  {
-   "src": "census",
-   "q": "28120 Hunters Ridge Blvd Suite 11, Bonita Springs, FL 34135",
-   "lat": 26.329804110263,
-   "lng": -81.746458603568,
-   "label": "28120 HUNTERS RIDGE BLVD, BONITA SPRINGS, FL, 34135"
-  }
- ],
  "ch6yesb": [],
- "c6us3mw": [
+ "cqupl92": [
   {
    "src": "osm",
-   "q": "813 Main St, Napa, CA 94559",
-   "lat": 38.2978863,
-   "lng": -122.2845419,
-   "label": "813, Main Street, Napa Abajo, Napa, Napa County, California, 94559, United States",
+   "q": "3100 Concession Road 3, Adjala-Tosorontio, Ontario",
+   "lat": 44.0448097,
+   "lng": -79.9405055,
+   "label": "3100, Concession Road 3, Adjala–Tosorontio, Simcoe County, Central Ontario, Ontario, L0G 1L0, Canada",
    "type": "house"
-  },
-  {
-   "src": "census",
-   "q": "813 Main St, Napa, CA 94559",
-   "lat": 38.297859126722,
-   "lng": -122.284480000108,
-   "label": "813 MAIN ST, NAPA, CA, 94559"
-  }
- ],
- "cqupl92": [],
- "ctk8abd": [
-  {
-   "src": "osm",
-   "q": "70665 B Line, Grand Bend, ON N0M 1T0",
-   "lat": 43.3112094,
-   "lng": -81.7308868,
-   "label": "Dark Horse Estate Winery, 70665, B Line, South Huron, Huron County, Southwestern Ontario, Ontario, N0M 1T0, Canada",
-   "type": "winery"
-  },
-  {
-   "src": "osm",
-   "q": "Dark Horse Estate Winery,  Grand Bend, ON N0M 1T0",
-   "lat": 43.3112094,
-   "lng": -81.7308868,
-   "label": "Dark Horse Estate Winery, 70665, B Line, South Huron, Huron County, Southwestern Ontario, Ontario, N0M 1T0, Canada",
-   "type": "winery"
-  }
- ],
- "coacetg": [
-  {
-   "src": "osm",
-   "q": "LaStella Winery,  Osoyoos, BC V0H 1V2",
-   "lat": 49.0545449,
-   "lng": -119.4976419,
-   "label": "La Stella Winery, 8123, 148th Avenue, Area A (Osoyoos Lake), Regional District of Okanagan-Similkameen, British Columbia, V0H 1V2, Canada",
-   "type": "alcohol"
   }
  ],
  "cueqz6o": [],
- "cgb636c": [],
+ "cgb636c": [
+  {
+   "src": "osm",
+   "q": "Eataly, 55 Bloor Street West, Toronto",
+   "lat": 43.6696714,
+   "lng": -79.3887524,
+   "label": "Eataly Toronto, 55, Bloor Street West, Yorkville, Downtown, Annex, University—Rosedale, Toronto, Ontario, M4W 1A6, Canada",
+   "type": "grocery"
+  },
+  {
+   "src": "osm",
+   "q": "55 Bloor Street West, Toronto",
+   "lat": 43.6696714,
+   "lng": -79.3887524,
+   "label": "Eataly Toronto, 55, Bloor Street West, Yorkville, Downtown, Annex, University—Rosedale, Toronto, Ontario, M4W 1A6, Canada",
+   "type": "restaurant"
+  },
+  {
+   "src": "osm",
+   "q": "55 Bloor Street West, Toronto",
+   "lat": 43.6696084,
+   "lng": -79.3885899,
+   "label": "55, Bloor Street West, Yorkville, Downtown, Annex, University—Rosedale, Toronto, Ontario, M4W 3B8, Canada",
+   "type": "house"
+  },
+  {
+   "src": "osm",
+   "q": "55 Bloor Street West, Toronto",
+   "lat": 43.6687519,
+   "lng": -79.3879316,
+   "label": "Citymarket, 55, Bloor Street West, Yorkville, Downtown, Annex, University—Rosedale, Toronto, Ontario, M4W 1A5, Canada",
+   "type": "supermarket"
+  }
+ ],
  "cjjv1zq": [
   {
    "src": "osm",
@@ -65,19 +53,26 @@
    "lng": -77.5623472,
    "label": "Rednersville Road, Carrying Place, Prince Edward County, Central Ontario, Ontario, K0K 1L0, Canada",
    "type": "secondary"
-  }
- ],
- "cua4sqm": [
+  },
   {
    "src": "osm",
-   "q": "Field House Brewing – Chilliwack,  Chilliwack, BC",
-   "lat": 49.1711559,
-   "lng": -121.9517152,
-   "label": "Field House Brewing Co., Woolly Dog Alley, District 1881, Chilliwack, Kent, Fraser Valley Regional District, British Columbia, V2P 2P2, Cana",
-   "type": "pub"
+   "q": "2001 County Road 3, Prince Edward, Ontario",
+   "lat": 44.1013378,
+   "lng": -77.4894714,
+   "label": "2001, Rednersville Road, Prince Edward County, Central Ontario, Ontario, K0K 3W0, Canada",
+   "type": "house"
   }
  ],
- "cmpjiow": [],
+ "cmpjiow": [
+  {
+   "src": "osm",
+   "q": "1701 Coursier Avenue, Revelstoke",
+   "lat": 50.9766159,
+   "lng": -118.1731782,
+   "label": "Coursier Avenue, Revelstoke, Columbia-Shuswap Regional District, British Columbia, V0E 2S1, Canada",
+   "type": "residential"
+  }
+ ],
  "cjq1mpx": [],
  "c8f7kww": [
   {
@@ -89,7 +84,42 @@
    "type": "residential"
   }
  ],
- "c5kw6p5": [],
- "c1a2qrl": [],
- "csjxbz9": []
+ "c5kw6p5": [
+  {
+   "src": "osm",
+   "q": "66 Gilead Road, Prince Edward, Ontario",
+   "lat": 43.994105,
+   "lng": -77.2683682,
+   "label": "66, Gilead Road, Prince Edward County, Central Ontario, Ontario, K0K 1G0, Canada",
+   "type": "house"
+  }
+ ],
+ "c1a2qrl": [
+  {
+   "src": "osm",
+   "q": "Left Field Cider Co",
+   "lat": 50.3615097,
+   "lng": -120.8031353,
+   "label": "Left Field Cider Co., Highway 97C, Area M (Beautiful Nicola Valley - North), Thompson-Nicola Regional District, British Columbia, Canada",
+   "type": "brewery"
+  }
+ ],
+ "csjxbz9": [
+  {
+   "src": "osm",
+   "q": "Caledonia, Prince Edward Island",
+   "lat": 46.0604671,
+   "lng": -62.7108017,
+   "label": "Caledonia, Queens County, Prince Edward Island, Canada",
+   "type": "administrative"
+  },
+  {
+   "src": "osm",
+   "q": "Caledonia, Prince Edward Island",
+   "lat": 46.0493559,
+   "lng": -62.6946746,
+   "label": "Caledonia, Kings County, Prince Edward Island, Canada",
+   "type": "administrative"
+  }
+ ]
 }
