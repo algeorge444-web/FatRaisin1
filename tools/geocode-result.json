@@ -1,0 +1,95 @@
+{
+ "cqfezh7": [
+  {
+   "src": "census",
+   "q": "28120 Hunters Ridge Blvd Suite 11, Bonita Springs, FL 34135",
+   "lat": 26.329804110263,
+   "lng": -81.746458603568,
+   "label": "28120 HUNTERS RIDGE BLVD, BONITA SPRINGS, FL, 34135"
+  }
+ ],
+ "ch6yesb": [],
+ "c6us3mw": [
+  {
+   "src": "osm",
+   "q": "813 Main St, Napa, CA 94559",
+   "lat": 38.2978863,
+   "lng": -122.2845419,
+   "label": "813, Main Street, Napa Abajo, Napa, Napa County, California, 94559, United States",
+   "type": "house"
+  },
+  {
+   "src": "census",
+   "q": "813 Main St, Napa, CA 94559",
+   "lat": 38.297859126722,
+   "lng": -122.284480000108,
+   "label": "813 MAIN ST, NAPA, CA, 94559"
+  }
+ ],
+ "cqupl92": [],
+ "ctk8abd": [
+  {
+   "src": "osm",
+   "q": "70665 B Line, Grand Bend, ON N0M 1T0",
+   "lat": 43.3112094,
+   "lng": -81.7308868,
+   "label": "Dark Horse Estate Winery, 70665, B Line, South Huron, Huron County, Southwestern Ontario, Ontario, N0M 1T0, Canada",
+   "type": "winery"
+  },
+  {
+   "src": "osm",
+   "q": "Dark Horse Estate Winery,  Grand Bend, ON N0M 1T0",
+   "lat": 43.3112094,
+   "lng": -81.7308868,
+   "label": "Dark Horse Estate Winery, 70665, B Line, South Huron, Huron County, Southwestern Ontario, Ontario, N0M 1T0, Canada",
+   "type": "winery"
+  }
+ ],
+ "coacetg": [
+  {
+   "src": "osm",
+   "q": "LaStella Winery,  Osoyoos, BC V0H 1V2",
+   "lat": 49.0545449,
+   "lng": -119.4976419,
+   "label": "La Stella Winery, 8123, 148th Avenue, Area A (Osoyoos Lake), Regional District of Okanagan-Similkameen, British Columbia, V0H 1V2, Canada",
+   "type": "alcohol"
+  }
+ ],
+ "cueqz6o": [],
+ "cgb636c": [],
+ "cjjv1zq": [
+  {
+   "src": "osm",
+   "q": "2001 County Road 3, Carrying Place, ON K0K 1L0",
+   "lat": 44.0612192,
+   "lng": -77.5623472,
+   "label": "Rednersville Road, Carrying Place, Prince Edward County, Central Ontario, Ontario, K0K 1L0, Canada",
+   "type": "secondary"
+  }
+ ],
+ "cua4sqm": [
+  {
+   "src": "osm",
+   "q": "Field House Brewing – Chilliwack,  Chilliwack, BC",
+   "lat": 49.1711559,
+   "lng": -121.9517152,
+   "label": "Field House Brewing Co., Woolly Dog Alley, District 1881, Chilliwack, Kent, Fraser Valley Regional District, British Columbia, V2P 2P2, Cana",
+   "type": "pub"
+  }
+ ],
+ "cmpjiow": [],
+ "cjq1mpx": [],
+ "c8f7kww": [
+  {
+   "src": "osm",
+   "q": "5 Newport Drive, Johnstown, ON K0E 1T1",
+   "lat": 44.7254204,
+   "lng": -75.4876598,
+   "label": "Newport Drive, Johnstown, Edwardsburgh/Cardinal, Leeds and Grenville Counties, Eastern Ontario, Ontario, K0E 1T1, Canada",
+   "type": "residential"
+  }
+ ],
+ "c5kw6p5": [],
+ "c1a2qrl": [],
+ "csjxbz9": []
+}
