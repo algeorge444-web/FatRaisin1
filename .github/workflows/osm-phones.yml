@@ -1,0 +1,83 @@
+name: Phone numbers from OpenStreetMap
+# Runs when tools/osm-phone-regions.txt changes (or by hand). Downloads the free OpenStreetMap files (Geofabrik) for
+# the listed provinces/states and saves the drinks places that list a phone number in tools/osm-phones.json.
+# Changes no place data; used to check that each location has its own phone number.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'tools/osm-phone-regions.txt'
+      - 'tools/osm-phones.mjs'
+permissions:
+  contents: write
+concurrency:
+  group: osm-phones
+  cancel-in-progress: true
+jobs:
+  get:
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [0, 1, 2, 3]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install osmium
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq osmium-tool
+      - name: Download this job's share of the regions and keep drinks places with a phone
+        run: |
+          set +e
+          mkdir -p "$RUNNER_TEMP/osm" parts; cd "$RUNNER_TEMP/osm"
+          i=0
+          for r in $(cat "$GITHUB_WORKSPACE/tools/osm-phone-regions.txt"); do
+            if [ $((i % 4)) -eq ${{ matrix.shard }} ]; then
+              n=$(basename $r)
+              for try in 1 2 3; do curl -sSfL --retry 3 -A "FatRaisin-phones/1.0 (github.com/algeorge444-web/FatRaisin1)" -o in.pbf "https://download.geofabrik.de/north-america/$r-latest.osm.pbf" && break; sleep 60; done
+              osmium tags-filter -O -o ph.pbf in.pbf nwr/phone nwr/contact:phone &&
+              osmium tags-filter -O -o keep.pbf ph.pbf nwr/craft nwr/industrial=brewery,winery,distillery nwr/tourism=wine_cellar nwr/microbrewery nwr/brewery nwr/amenity=pub,bar,restaurant,biergarten nwr/shop=wine,alcohol,beverages,farm &&
+              osmium export -O -f geojsonseq -o "$n.geojsonseq" keep.pbf
+              echo "$r: $(wc -l < $n.geojsonseq 2>/dev/null) places"
+              rm -f in.pbf ph.pbf keep.pbf
+              sleep 10
+            fi
+            i=$((i+1))
+          done
+          node "$GITHUB_WORKSPACE/tools/osm-phones.mjs" "$GITHUB_WORKSPACE/parts/p-${{ matrix.shard }}.json" *.geojsonseq
+          exit 0
+      - uses: actions/upload-artifact@v4
+        with:
+          name: osmph-${{ matrix.shard }}
+          path: parts/
+  save:
+    needs: get
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          path: parts
+      - name: Join and save
+        run: |
+          node -e "
+            const fs=require('fs'),path=require('path');let out=[];
+            const walk=d=>fs.readdirSync(d).forEach(f=>{const p=path.join(d,f);fs.statSync(p).isDirectory()?walk(p):out=out.concat(JSON.parse(fs.readFileSync(p,'utf8')))});
+            walk('parts');fs.writeFileSync('tools/osm-phones.json',JSON.stringify(out));console.log(out.length,'places with a phone');"
+          git config user.name "FatRaisin phone search"
+          git config user.email "actions@users.noreply.github.com"
+          for try in 1 2 3; do
+            cp tools/osm-phones.json "$RUNNER_TEMP/r.json"
+            git fetch -q origin main && git reset -q --hard origin/main
+            cp "$RUNNER_TEMP/r.json" tools/osm-phones.json
+            git add tools/osm-phones.json
+            git diff --cached --quiet && exit 0
+            git commit -q -m "OpenStreetMap phone numbers"
+            git push -q origin HEAD:main && exit 0
+            sleep 15
+          done
+          exit 1
