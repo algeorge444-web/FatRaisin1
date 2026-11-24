@@ -16641,7 +16641,7 @@
 ["A.W. Craft Distillery","274 Buck Bend Ste B, Georgetown, TX 78628","Austin, TX","512-677-5287","awcraftdistillery.com",30.585348,-97.750854,"ovt",0,"distillery","cxoq27u"],
 ["The Vineyard at Florence","111 Via Francesco, Florence, TX 76527","Austin, TX","512-572-7000","campsite.bio/thevineyardatflorence",30.843543,-97.729141,"ovt",0,"winery","ca5jgal"],
 ["Barking Armadillo Brewing","507 River Bend Dr, Georgetown, TX 78628","Austin, TX","512-240-5137","barking-armadillo-brewing.printify.me/products",30.660678,-97.691,"ovt",0,"brewery","cle4p31"],
-["Deep Eddy Distillery","2250 E Hwy 290, Dripping Springs, TX 78620","Austin, TX","512-994-3534","deepeddyvodka.com",30.2018,-98.0436,"ovt",1,"distillery","cfl1jsv"],
+["Deep Eddy Distillery","2250 E Hwy 290, Dripping Springs, TX 78620","Austin, TX","512-994-3534","deepeddyvodka.com",30.195056,-98.05257,"ovt",0,"distillery","cfl1jsv"],
 ["Water 2 Wine – Round Rock","2000 S Interstate 35, Round Rock, TX 78681","Austin, TX","512-310-9463","water2wine.com/roundrock",30.489861,-97.68045,"ovt",0,"winery","c2i38qw"],
 ["Banner Distilling Co.","13201 Jacobson Rd Ste 11, Manor, TX 78653","Austin, TX","512-815-2326","bannerdistilling.com",30.391368,-97.490246,"ovt",0,"distillery","cy4ftgz"],
 ["Rum Central","3280 FM 112, Taylor, TX 76574","Austin, TX","855-786-8477","rumcentral.com",30.564383,-97.358715,"ovt",0,"distillery","cxbv1od"],
