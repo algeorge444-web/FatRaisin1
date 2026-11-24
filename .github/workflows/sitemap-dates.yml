@@ -1,0 +1,71 @@
+name: When each website was last changed
+# Runs when tools/sitemap-dates.mjs changes (or by hand). Reads each place's sitemap (hidden page list with
+# last-changed dates) to see how recently the website was updated. Saves tools/sitemap-dates.json.
+# Changes no place data.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'tools/sitemap-dates.mjs'
+permissions:
+  contents: write
+concurrency:
+  group: sitemap-dates
+  cancel-in-progress: true
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 150
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Open this job's share of the websites
+        run: |
+          N=$(node -e "console.log(JSON.parse(require('fs').readFileSync('tools/booking-list.json','utf8')).length)")
+          PER=$(( (N + 9) / 10 )); START=$(( ${{ matrix.shard }} * PER )); END=$(( START + PER )); [ $END -gt $N ] && END=$N
+          mkdir -p parts; i=$START
+          while [ $i -lt $END ]; do
+            j=$(( i + 300 )); [ $j -gt $END ] && j=$END
+            FROM=$i TO=$j OUT=parts/p-$i.json node --max-old-space-size=3000 tools/sitemap-dates.mjs || echo "{}" > parts/p-$i.json
+            i=$j
+          done
+      - uses: actions/upload-artifact@v4
+        with:
+          name: part-${{ matrix.shard }}
+          path: parts/
+  save:
+    needs: check
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          path: parts
+      - name: Join the results and save them
+        run: |
+          node -e "
+            const fs=require('fs'),path=require('path');const out={};
+            const walk=d=>fs.readdirSync(d).forEach(f=>{const p=path.join(d,f);fs.statSync(p).isDirectory()?walk(p):Object.assign(out,JSON.parse(fs.readFileSync(p,'utf8')))});
+            walk('parts');fs.writeFileSync('tools/sitemap-dates.json',JSON.stringify(out));
+            const v=Object.values(out);console.log(Object.keys(out).length,'sites with a date');"
+          git config user.name "FatRaisin sitemap dates"
+          git config user.email "actions@users.noreply.github.com"
+          for try in 1 2 3; do
+            cp tools/sitemap-dates.json "$RUNNER_TEMP/r.json"
+            git fetch -q origin main && git reset -q --hard origin/main
+            cp "$RUNNER_TEMP/r.json" tools/sitemap-dates.json
+            git add tools/sitemap-dates.json
+            git diff --cached --quiet && exit 0
+            git commit -q -m "Website last-changed dates"
+            git push -q origin HEAD:main && exit 0
+            sleep 15
+          done
+          exit 1
