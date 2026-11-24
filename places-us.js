@@ -9793,7 +9793,7 @@
 ["Holus Bolus","2902 San Marcos Ave Ste B, Los Olivos, CA 93441","Santa Barbara & Santa Ynez, CA","805-637-1005","thejoyfantastic.com",34.665687,-120.113629,"ovt",0,"winery","csm9qoz"],
 ["Stolpman Vineyards","2434 Alamo Pintado Ave, Los Olivos, CA 93441","Santa Barbara & Santa Ynez, CA","805-688-0400","stolpmanvineyards.com",34.665417,-120.114273,"ovt",0,"winery","cs1v0j9"],
 ["SAMsARA Wine Co.","2446 Alamo Pintado Ave, Los Olivos, CA 93441","Santa Barbara & Santa Ynez, CA","805-688-8689","samsarawine.com",34.665428,-120.113962,"ovt",0,"winery","cp90kto"],
-["Figueroa Mountain Brewery","2446 Alamo Pintado, Los Olivos, CA 93441","Santa Barbara & Santa Ynez, CA","805-694-2252","figmtnbrew.com",34.665319,-120.114046,"ovt",0,"brewery","c0kl4yl"],
+["Figueroa Mountain Brewery","2446 Alamo Pintado, Los Olivos, CA 93441","Santa Barbara & Santa Ynez, CA","805-697-7601","figmtnbrew.com",34.665319,-120.114046,"ovt",0,"brewery","c0kl4yl"],
 ["Coquelicot Estate Vineyard Tasting Room","2884 Grand Ave, Los Olivos, CA 93441","Santa Barbara & Santa Ynez, CA","805-688-1500","coquelicotwines.com",34.665186,-120.114846,"ovt",0,"winery","c16tu09"],
 ["Prodigal Wines","2880 Grand Ave, Los Olivos, CA 93441","Santa Barbara & Santa Ynez, CA","805-688-0476","prodigalwines.com",34.665074,-120.114922,"ovt",0,"winery","cr0p293"],
 ["Blair Fox Cellars","2477 Alamo Pintado Ave, Los Olivos, CA 93441","Santa Barbara & Santa Ynez, CA","805-691-1678","blairfoxcellars.com",34.66567,-120.1134,"ovt",0,"winery","cqp8emd"],
