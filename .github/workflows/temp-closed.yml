@@ -1,0 +1,72 @@
+name: Temporarily closed notices
+# Runs when tools/temp-closed-list.json changes (or by hand). Looks on each US place's website for a
+# "temporarily closed / closed for the season" notice. Saves tools/temp-closed-result.json. Changes no place data.
+#
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'tools/temp-closed-list.json'
+      - 'tools/temp-closed.mjs'
+permissions:
+  contents: write
+concurrency:
+  group: temp-closed
+  cancel-in-progress: true
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 150
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Open this job's share of the websites
+        run: |
+          N=$(node -e "console.log(JSON.parse(require('fs').readFileSync('tools/temp-closed-list.json','utf8')).length)")
+          PER=$(( (N + 9) / 10 )); START=$(( ${{ matrix.shard }} * PER )); END=$(( START + PER )); [ $END -gt $N ] && END=$N
+          mkdir -p parts; i=$START
+          while [ $i -lt $END ]; do
+            j=$(( i + 300 )); [ $j -gt $END ] && j=$END
+            FROM=$i TO=$j OUT=parts/p-$i.json node --max-old-space-size=3000 tools/temp-closed.mjs || echo "{}" > parts/p-$i.json
+            i=$j
+          done
+      - uses: actions/upload-artifact@v4
+        with:
+          name: part-${{ matrix.shard }}
+          path: parts/
+  save:
+    needs: check
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          path: parts
+      - name: Join the results and save them
+        run: |
+          node -e "
+            const fs=require('fs'),path=require('path');const out={};
+            const walk=d=>fs.readdirSync(d).forEach(f=>{const p=path.join(d,f);fs.statSync(p).isDirectory()?walk(p):Object.assign(out,JSON.parse(fs.readFileSync(p,'utf8')))});
+            walk('parts');fs.writeFileSync('tools/temp-closed-result.json',JSON.stringify(out));
+            const v=Object.values(out);console.log(Object.keys(out).length,'with a notice');"
+          git config user.name "FatRaisin temp-closed search"
+          git config user.email "actions@users.noreply.github.com"
+          for try in 1 2 3; do
+            cp tools/temp-closed-result.json "$RUNNER_TEMP/r.json"
+            git fetch -q origin main && git reset -q --hard origin/main
+            cp "$RUNNER_TEMP/r.json" tools/temp-closed-result.json
+            git add tools/temp-closed-result.json
+            git diff --cached --quiet && exit 0
+            git commit -q -m "Temporary closure search results"
+            git push -q origin HEAD:main && exit 0
+            sleep 15
+          done
+          exit 1
