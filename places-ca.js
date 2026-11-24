@@ -1299,7 +1299,7 @@
 ["Colio Estate Wines of Canada","5900 Ambler Dr, Mississauga, ON L4W 2N3","Toronto Area, ON","905-896-8512","coliowinery.com",43.64182,-79.647584,"ovt",0,"winery","ccyo2p5"],
 ["Inniskillin Wines","441 Courtneypark Dr E, Mississauga, ON L5T 2V3","Toronto Area, ON","905-564-6900","inniskillin.com",43.646911,-79.68592,"ovt",0,"winery","cnbruw2"],
 ["High Park Brewery","839 Runnymede Rd, Toronto, ON M6N 3V8","Toronto Area, ON","647-398-9336","highparkbrewery.com",43.669846,-79.483431,"ovt",0,"brewery","c6wwb7g"],
-["Lost Craft Brewery","837 Runnymede Rd, Toronto, ON M6N 3V8","Toronto Area, ON","647-398-9336","lostcraft.ca",43.669907,-79.48341,"ovt",0,"brewery","cas9jjv"],
+["Lost Craft Brewery","837 Runnymede Rd, Toronto, ON M6N 3V8","Toronto Area, ON","416-587-6753","lostcraft.ca",43.669907,-79.48341,"ovt",0,"brewery","cas9jjv"],
 ["Elora Brewing Company","107 Geddes St, Centre Wellington, ON N0B 1S0","Waterloo Region, ON","519-805-2829","elorabrewingcompany.ca",43.68338,-80.430184,"ovt",0,"brewery","c7zaqey"],
 ["Elora Distilling Company","102 Metcalfe St Unit 4, Centre Wellington, ON N0B 1S0","Waterloo Region, ON","226-384-7777","eloradistillingcompany.com",43.682048,-80.430317,"ovt",0,"distillery","c0xerxn"],
 ["Silver Fox Distillery","7999 Wellington County Rd 109, Wellington North, ON N0G 1A0","Waterloo Region, ON","519-848-3235","silverfoxdistillery.ca",43.82724,-80.531926,"ovt",0,"distillery","cay83rj"],
