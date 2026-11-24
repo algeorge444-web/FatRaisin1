@@ -1,0 +1,38 @@
+name: Make photo previews
+# Runs when tools/photo-thumb-list.json changes (or by hand). Makes small previews of candidate place photos
+# for the owner to approve, saved in tools/photo-thumbs.json. Changes no place data.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'tools/photo-thumb-list.json'
+      - 'tools/photo-thumbs.py'
+permissions:
+  contents: write
+jobs:
+  vet:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install pillow==11.0.0
+      - run: python tools/photo-thumbs.py
+      - name: Save the results
+        run: |
+          git config user.name "FatRaisin photo check"
+          git config user.email "actions@users.noreply.github.com"
+          for try in 1 2 3; do
+            cp tools/photo-thumbs.json "$RUNNER_TEMP/r.json"
+            git fetch -q origin main && git reset -q --hard origin/main
+            cp "$RUNNER_TEMP/r.json" tools/photo-thumbs.json
+            git add tools/photo-thumbs.json
+            git diff --cached --quiet && exit 0
+            git commit -q -m "Photo previews"
+            git push -q origin HEAD:main && exit 0
+            sleep 15
+          done
+          exit 1
