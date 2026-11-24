@@ -1,0 +1,72 @@
+name: Deeper website check
+# Runs when tools/site-match-list.json changes (or by hand). Opens each place's website from GitHub and checks
+# that it really belongs to the place (name, phone, town). Saves tools/site-match-result.json. Changes no place data.
+# The list is split across 10 jobs, 300 sites at a time.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'tools/site-match-list.json'
+      - 'tools/site-match.mjs'
+permissions:
+  contents: write
+concurrency:
+  group: site-match
+  cancel-in-progress: true
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 150
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Open this job's share of the websites
+        run: |
+          N=$(node -e "console.log(JSON.parse(require('fs').readFileSync('tools/site-match-list.json','utf8')).length)")
+          PER=$(( (N + 9) / 10 )); START=$(( ${{ matrix.shard }} * PER )); END=$(( START + PER )); [ $END -gt $N ] && END=$N
+          mkdir -p parts; i=$START
+          while [ $i -lt $END ]; do
+            j=$(( i + 300 )); [ $j -gt $END ] && j=$END
+            FROM=$i TO=$j OUT=parts/p-$i.json node --max-old-space-size=3000 tools/site-match.mjs || echo "{}" > parts/p-$i.json
+            i=$j
+          done
+      - uses: actions/upload-artifact@v4
+        with:
+          name: part-${{ matrix.shard }}
+          path: parts/
+  save:
+    needs: check
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          path: parts
+      - name: Join the results and save them
+        run: |
+          node -e "
+            const fs=require('fs'),path=require('path');const out={};
+            const walk=d=>fs.readdirSync(d).forEach(f=>{const p=path.join(d,f);fs.statSync(p).isDirectory()?walk(p):Object.assign(out,JSON.parse(fs.readFileSync(p,'utf8')))});
+            walk('parts');fs.writeFileSync('tools/site-match-result.json',JSON.stringify(out));
+            const v=Object.values(out);console.log(v.length,'checked;',v.filter(x=>x.st&&x.st<400).length,'ok;',v.filter(x=>!x.st).length,'unreachable;',v.filter(x=>x.nm>=0.5&&(x.ph||x.tw)).length,'match');"
+          git config user.name "FatRaisin deeper website check"
+          git config user.email "actions@users.noreply.github.com"
+          for try in 1 2 3; do
+            cp tools/site-match-result.json "$RUNNER_TEMP/r.json"
+            git fetch -q origin main && git reset -q --hard origin/main
+            cp "$RUNNER_TEMP/r.json" tools/site-match-result.json
+            git add tools/site-match-result.json
+            git diff --cached --quiet && exit 0
+            git commit -q -m "Deeper website check results"
+            git push -q origin HEAD:main && exit 0
+            sleep 15
+          done
+          exit 1
