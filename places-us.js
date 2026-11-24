@@ -10630,7 +10630,6 @@
 ["Due Ruscelli Vineyards & Winery","994 Limerick Ln, Healdsburg, CA 95448","Sonoma County, CA","707-473-8089","dueruscelli.com",38.587412,-122.831278,"ovt",0,"winery","clopuve"],
 ["Limerick Lane Cellars","1023 Limerick Ln, Healdsburg, CA 95448","Sonoma County, CA","707-433-9211","limericklanewines.com",38.588102,-122.829972,"ovt",0,"winery","ckzmnn6"],
 ["Aperture","12291 Old Redwood Hwy, Healdsburg, CA 95448, Healdsburg, CA 95448","Sonoma County, CA","707-200-7891","aperture-cellars.com",38.580306,-122.83896,"ovt",0,"winery","ckrfx2j"],
-["Bevill Vineyard Management","11910 Old Redwood Hwy, Healdsburg, CA 95448","Sonoma County, CA","707-433-1101","bevillvineyard.com",38.57889,-122.84207,"ovt",0,"winery","czupjyr"],
 ["Rack and Riddle Alexander Valley","4001 CA-128, Geyserville, CA 95441","Sonoma County, CA","707-433-8400","rackandriddle.com",38.688887,-122.848714,"ovt",0,"winery","cbfemq6"],
 ["Mila Family Vineyards","2433 Wilson Rd, Geyserville, CA 95441","Sonoma County, CA","440-388-4218","milafamilyvineyards.com",38.696356,-122.838255,"ovt",0,"winery","cg5mgsa"],
 ["Garden Creek Ranch Vineyards Winery","2335 Geysers Rd, Geyserville, CA 95441","Sonoma County, CA","707-433-8345","gardencreekvineyards.com",38.699095,-122.829297,"ovt",0,"winery","cjf8xf8"],
