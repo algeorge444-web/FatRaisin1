@@ -100,10 +100,13 @@ async function check(p) {
       if (ph && tw) break;
     }
   }
+  const yrs = [...(text + ' ' + (r.html.match(/datetime=["'](20\d\d)/gi) || []).join(' ')).matchAll(/\b(20[0-2]\d)\b/g)].map(m => +m[1]).filter(y => y >= 2005 && y <= 2027);
+  const ny = yrs.length ? Math.max(...yrs) : 0;
+  const cy = ((text.match(/(?:©|&copy;|copyright)\s*(?:\d{4}\s*[-–]\s*)?(20\d\d)/i) || [])[1]) || '';
   const sale = SALE.exec(r.final + ' ' + title + ' ' + text.slice(0, 6000));
   const c = CLOSED.exec(text), sp = SPAM.exec(title + ' ' + text);
   return { st: r.st, final: r.final.slice(0, 200), title, og, desc, nm, ph, tw, pg, size: r.html.length,
-    sale: sale ? sale[0] : '', closed: c ? text.slice(Math.max(0, c.index - 80), c.index + 100) : '', spam: sp ? sp[0] : '', soon: SOON.test(title + ' ' + text.slice(0, 3000)) && text.length < 4000 ? 1 : 0 };
+    sale: sale ? sale[0] : '', closed: c ? text.slice(Math.max(0, c.index - 80), c.index + 100) : '', spam: sp ? sp[0] : '', ny, cy: +cy || 0, soon: SOON.test(title + ' ' + text.slice(0, 3000)) && text.length < 4000 ? 1 : 0 };
 }
 
 const out = {};
