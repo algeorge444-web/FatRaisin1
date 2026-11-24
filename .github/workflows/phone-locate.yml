@@ -1,0 +1,72 @@
+name: Find each location's own phone
+# Runs when tools/phone-locate-list.json changes (or by hand). For places sharing a phone number with another
+# location, looks on their websites for the phone printed next to each address. Saves tools/phone-locate-result.json.
+# Changes no place data.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'tools/phone-locate-list.json'
+      - 'tools/phone-locate.mjs'
+permissions:
+  contents: write
+concurrency:
+  group: phone-locate
+  cancel-in-progress: true
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 150
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Open this job's share of the websites
+        run: |
+          N=$(node -e "console.log(JSON.parse(require('fs').readFileSync('tools/phone-locate-list.json','utf8')).length)")
+          PER=$(( (N + 9) / 10 )); START=$(( ${{ matrix.shard }} * PER )); END=$(( START + PER )); [ $END -gt $N ] && END=$N
+          mkdir -p parts; i=$START
+          while [ $i -lt $END ]; do
+            j=$(( i + 200 )); [ $j -gt $END ] && j=$END
+            FROM=$i TO=$j OUT=parts/p-$i.json node --max-old-space-size=3000 tools/phone-locate.mjs || echo "{}" > parts/p-$i.json
+            i=$j
+          done
+      - uses: actions/upload-artifact@v4
+        with:
+          name: part-${{ matrix.shard }}
+          path: parts/
+  save:
+    needs: check
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          path: parts
+      - name: Join the results and save them
+        run: |
+          node -e "
+            const fs=require('fs'),path=require('path');const out={};
+            const walk=d=>fs.readdirSync(d).forEach(f=>{const p=path.join(d,f);fs.statSync(p).isDirectory()?walk(p):Object.assign(out,JSON.parse(fs.readFileSync(p,'utf8')))});
+            walk('parts');fs.writeFileSync('tools/phone-locate-result.json',JSON.stringify(out));
+            const v=Object.values(out);console.log(v.length,'places');"
+          git config user.name "FatRaisin phone search"
+          git config user.email "actions@users.noreply.github.com"
+          for try in 1 2 3; do
+            cp tools/phone-locate-result.json "$RUNNER_TEMP/r.json"
+            git fetch -q origin main && git reset -q --hard origin/main
+            cp "$RUNNER_TEMP/r.json" tools/phone-locate-result.json
+            git add tools/phone-locate-result.json
+            git diff --cached --quiet && exit 0
+            git commit -q -m "Location phone search results"
+            git push -q origin HEAD:main && exit 0
+            sleep 15
+          done
+          exit 1
