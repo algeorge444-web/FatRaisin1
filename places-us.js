@@ -3529,7 +3529,7 @@
 ["TEN20 Anchorage Taproom","11505 Park Rd, Louisville, KY 40223","Louisville, KY","502-384-8714","ten20brewery.com",38.265697,-85.540404,"ovt",0,"brewery","cbbs9gt"],
 ["J. W. Rutledge Distillery","12700 Townepark Way, Middletown, KY 40243","Louisville, KY","502-244-4122","jwrutledge.com",38.24261,-85.52089,"ovt",0,"distillery","cxyq24k"],
 ["Last Stop Brewing","525 Main St, Shelbyville, KY 40065","Louisville, KY","502-437-0024","laststopbrewingky.com",38.211176,-85.216486,"ovt",0,"brewery","c07d0yu"],
-["Bulleit Visitor Experience","3464 Benson Pike, Shelbyville, KY 40065","Louisville, KY","502-647-5799","bulleit.com",38.21831,-85.15517,"ovt",0,"distillery","cplhwfb"],
+["Bulleit Distillery","3464 Benson Pike, Shelbyville, KY 40065","Louisville, KY","502-647-5799","bulleit.com",38.21831,-85.15517,"ovt",0,"distillery","cplhwfb"],
 ["Neeley Family Distillery","4360 KY-1130, Sparta, KY 41086","Northern Kentucky, KY","859-609-3641","neeleyfamilydistillery.com",38.707283,-84.945371,"ovt",0,"distillery","c7jqexk"],
 ["Schoolyard Winery","14923 Walton Verona Rd, Verona, KY 41092","Northern Kentucky, KY","859-814-4126","schoolyardwinery.com",38.818946,-84.657303,"ovt",0,"winery","c4l1vmb"],
 ["Brianza Gardens & Winery","14611 Salem Creek Rd, Verona, KY 41030","Northern Kentucky, KY","859-445-9369","brianzagardens.com",38.828661,-84.619626,"ovt",0,"winery","cv316nl"],
