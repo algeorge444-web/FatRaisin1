@@ -12,7 +12,8 @@ const LIST = ALL.slice(FROM, TO);
 const OUTFILE = process.env.OUT || 'tools/site-check-result.json';
 const UA = 'Mozilla/5.0 (iPhone; CPU iPhone OS 18_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.1 Mobile/15E148 Safari/604.1';
 const SALE = /(domain (name )?(is |may be )?for sale|buy this domain|this (website|domain) is for sale|hugedomains|afternic|dan\.com|sedoparking|parkingcrew|bodis\.com|domain has expired|website expired|account (has been )?suspended|parked free|\/lander\b)/i;
-const CLOSED = /(permanently closed|closed permanently|we have (officially |permanently )?closed|closed for good|closed (our|its) doors|ceased operations|no longer (open|operating|in business)|out of business)/i;
+const CLOSED = /(permanently closed|closed permanently|we have (officially |permanently )?closed|closed for good|closed (our|its) doors( for good| permanently)?|ceased operations|no longer (open|operating|in business)|out of business|(the )?difficult decision to close|decided to close (our|the) (doors|taproom|tasting room|brewery|winery|distillery)|final (day|pour|service)s? (is|was|will be)|last day of (service|operation|business)|farewell (party|celebration|to (our|the) (taproom|brewery|winery))|thank you for (\d+|many|all (the|these)) (wonderful |amazing |great )?years.{0,60}clos|ferm[ée]e? (d[ée]finitivement|pour de bon)|a? ?cess[ée] (ses|nos) activit[ée]s|fermeture d[ée]finitive|nous avons ferm[ée])/i;
+const SPAM = /(slot ?gacor|situs (slot|judi|togel)|togel|judi online|sabung ayam|bandar (togel|judi)|link slot|slot88|maxwin|pragmatic play|online casino|casino online|best online casinos|bonus (de )?casino|apuestas deportivas|bahis|kasyno|[^a-z]porn|viagra|cialis|payday loan|乐鱼|体育官方|博彩|娱乐城)/i;
 
 const withScheme = u => (/^https?:\/\//i.test(u) ? u : 'https://' + u);
 
@@ -34,7 +35,8 @@ async function get(u) {
       const title = (html.match(/<title[^>]*>([^<]*)/i) || [, ''])[1].trim().slice(0, 80);
       const s = SALE.exec(r.url + ' ' + title + ' ' + text.slice(0, 6000)) || SALE.exec(html.slice(0, 20000));
       const c = CLOSED.exec(text);
-      return { st: r.status, final: r.url, title, sale: s ? s[0] : '', closed: c ? text.slice(Math.max(0, c.index - 100), c.index + 120) : '', size: html.length };
+      const sp = SPAM.exec(title + ' ' + text);
+      return { st: r.status, final: r.url, title, sale: s ? s[0] : '', closed: c ? text.slice(Math.max(0, c.index - 100), c.index + 120) : '', spam: sp ? text.slice(Math.max(0, sp.index - 60), sp.index + 80) || sp[0] : '', size: html.length };
     } catch (e) { if (typeof t !== 'undefined') clearTimeout(t); /* try plain http next */ }
   }
   return { st: 0 };
