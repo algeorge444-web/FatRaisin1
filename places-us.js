@@ -5509,7 +5509,6 @@
 ["Ben's Tune Up","195 Hilliard Ave, Asheville, NC 28801","Asheville & Western NC, NC","828-407-0436","benstuneup.com",35.591358,-82.555719,"ovt",0,"brewery","ctx9l5s"],
 ["Asheville Brewing Company","77 Coxe Ave, Asheville, NC 28801","Asheville & Western NC, NC","828-255-4077","ashevillebrewing.com",35.591725,-82.555183,"ovt",0,"brewery","cfhuivs"],
 ["Green Man Brewery","27 Buxton Ave, Asheville, NC 28801","Asheville & Western NC, NC","828-989-7453","greenmanbrewery.com",35.58864,-82.552606,"ovt",0,"brewery","cbx3qll"],
-["Dirty Jack's","23 Buxton Ave, Asheville, NC 28801","Asheville & Western NC, NC","828-989-7453","greenmanbrewery.com",35.588603,-82.553364,"ovt",0,"brewery","ctwobm4"],
 ["Ginger's Revenge - South Slope Lounge","32 Banks Ave, Asheville, NC 28801","Asheville & Western NC, NC","828-417-7248","gingersrevenge.com",35.589067,-82.553527,"ovt",0,"brewery","cxb09sd"],
 ["Archetype Brewing and Kitchen","39 Banks Ave, Asheville, NC 28801","Asheville & Western NC, NC","828-505-1783","archetypebrewing.com",35.589437,-82.553276,"ovt",0,"brewery","cj9m8dy"],
 ["Twin Leaf Brewery","144 Coxe Ave, Asheville, NC 28801","Asheville & Western NC, NC","828-774-5000","twinleafbrewery.com",35.589481,-82.554615,"ovt",0,"brewery","c8ykkoh"],
