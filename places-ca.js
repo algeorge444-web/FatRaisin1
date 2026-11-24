@@ -1056,7 +1056,6 @@
 ["Route 1 Distillery","7410 Dallas Dr, Kamloops, BC V2C 6X2","Thompson-Shuswap, BC","250-214-3388","route1distillery.ca",50.661243,-120.126919,"ovt",0,"distillery","chi2cex"],
 ["Red Bridge Distilling","1445 McGill Rd #11, Kamloops, BC V2C 6K7","Thompson-Shuswap, BC","778-362-2555","RedBridgeDistilling.ca",50.674186,-120.377007,"ovt",0,"distillery","czb6hd8"],
 ["Wine Kitz Kamloops","1150 Hillside Dr, Kamloops, BC V2E 2N1","Thompson-Shuswap, BC","250-314-9641","winekitzkamloops.com",50.658343,-120.37046,"ovt",0,"winery","cp2kzag"],
-["KMK Living","6-2045 Trans Canada Hwy W, Kamloops, BC V1S 1C7","Thompson-Shuswap, BC","250-879-0853","mabelbrewing.ca",50.660165,-120.364818,"ovt",0,"brewery","c36b5nw"],
 ["Monashee Spirits Craft Distillery","307 MacKenzie Ave, Revelstoke, BC V0E 2S0","Kootenay Rockies, BC","250-814-7299","monasheespirits.com",50.99805,-118.196493,"ovt",0,"distillery","cd55qzm"],
 ["After Dark Distillery","1201 Shuswap Ave, Sicamous, BC V0E 2V1","Shuswap, BC","250-836-5187","afterdarkdistillery.com",50.836012,-118.98592,"ovt",0,"distillery","c5akkff"],
 ["Crannóg Ales","706 Elson Rd, Sorrento, BC V0E 2W0","Shuswap, BC","250-558-2635","crannogales.com",50.880923,-119.5065,"ovt",0,"brewery","c5fkvpc"],
