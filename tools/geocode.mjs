@@ -24,6 +24,7 @@ for (const p of LIST) {
   res.push(...await nomi(p.addr));
   res.push(...await nomi(p.name + ', ' + town));
   if (/\b[A-Z]{2} \d{5}\b/.test(p.addr)) res.push(...await census(p.addr));
+  for (const q of p.alt || []) res.push(...await nomi(q));
   out[p.id] = res;
 }
 fs.writeFileSync('tools/geocode-result.json', JSON.stringify(out, null, 1));
